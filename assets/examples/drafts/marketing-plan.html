@@ -308,10 +308,13 @@ body.grid .slide{position:relative;visibility:visible;zoom:.2;cursor:pointer}
 <div id="hint">&larr; &rarr; move &middot; N notes &middot; G grid &middot; P print</div>
 <script>
 const stage=document.getElementById('stage'),slides=[...document.querySelectorAll('.slide')],notes=document.getElementById('notes');
-let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+/* sandboxed previews (claude.ai, about:srcdoc) forbid touching the URL: remembering the slide is optional */
+function readHash(){try{return parseInt(location.hash.slice(1))||1}catch(e){return 1}}
+function writeHash(n){try{if(location.protocol!=='about:')history.replaceState(null,'','#'+n)}catch(e){}}
+let i=Math.max(0,Math.min(slides.length-1,readHash()-1));
 function fit(){if(document.body.classList.contains('grid'))return;stage.style.transform=`scale(${Math.min(innerWidth/1920,innerHeight/1080)})`;}
 function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';history.replaceState(null,'','#'+(i+1));
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';writeHash(i+1);
   const t=slides[i].querySelector('template.notes');notes.innerHTML=`<b>Slide ${i+1} of ${slides.length}</b>`+(t?t.innerHTML:'');}
 /* step text down to the floor sizes, then flag what still does not fit */
 function px(el,v){return parseFloat(getComputedStyle(el).getPropertyValue(v))}

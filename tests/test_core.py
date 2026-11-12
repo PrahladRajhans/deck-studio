@@ -108,5 +108,34 @@ class Builders(unittest.TestCase):
             self.assertEqual(re.findall(r'(?:width|height)="-', svg), [], kind)
 
 
+class Sandbox(unittest.TestCase):
+    def test_draft_runs_in_a_sandboxed_preview(self):
+        """claude.ai previews HTML in a sandboxed about:srcdoc frame, where touching the URL throws."""
+        import html as _html
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            self.skipTest("playwright not installed")
+        out = os.path.join(tempfile.mkdtemp(), "d.html")
+        spec = os.path.join(HERE, "..", "assets", "examples", "personal-story.json")
+        subprocess.run([sys.executable, os.path.join(SCRIPTS, "build_html.py"), spec, "-o", out],
+                       check=True, capture_output=True)
+        doc = open(out, encoding="utf-8").read()
+        with sync_playwright() as p:
+            b = p.chromium.launch()
+            pg = b.new_page()
+            errors = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.set_content('<iframe sandbox="allow-scripts" srcdoc="%s"></iframe>' % _html.escape(doc, quote=True))
+            pg.wait_for_timeout(1200)
+            frame = pg.frames[1]
+            frame.evaluate("window.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight'}))")
+            pg.wait_for_timeout(200)
+            idx = frame.evaluate("[...document.querySelectorAll('.slide')].findIndex(s=>s.classList.contains('active'))")
+            b.close()
+        self.assertEqual(errors, [])
+        self.assertEqual(idx, 1)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -48,6 +48,8 @@ measured: don't quote a figure. Settle content, visuals and the slide skeleton h
    reported with exit code 3.
 3. Show the user the HTML file (it previews inline and opens in any browser) and the contact
    sheet. In the browser, arrows move, N shows notes, G shows the grid, P prints a PDF.
+   It also runs inside sandboxed previews (claude.ai shows HTML in an `about:srcdoc` frame); there
+   it simply skips remembering the slide number in the address.
 4. Iterate: edit the spec, rebuild, re-render. To compare looks, run `preview_directions.py`
    (HTML by default).
 

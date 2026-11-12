@@ -131,10 +131,13 @@ p,li{font:400 34px/1.4 var(--body)}
 <script>
 /* === RUNTIME: scale, navigate, print === */
 const stage=document.getElementById('stage'), slides=[...document.querySelectorAll('.slide')];
-let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+/* sandboxed previews (claude.ai, about:srcdoc) forbid touching the URL: remembering the slide is optional */
+function readHash(){try{return parseInt(location.hash.slice(1))||1}catch(e){return 1}}
+function writeHash(n){try{if(location.protocol!=='about:')history.replaceState(null,'','#'+n)}catch(e){}}
+let i=Math.max(0,Math.min(slides.length-1,readHash()-1));
 function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${s})`;}
 function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';history.replaceState(null,'','#'+(i+1));}
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';writeHash(i+1);}
 addEventListener('resize',fit);
 addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
   if(['ArrowLeft','PageUp'].includes(e.key))show(i-1); if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);

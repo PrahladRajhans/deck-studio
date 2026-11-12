@@ -1,4 +1,4 @@
-# Slide library (44 types)
+# Slide library (44 types plus `custom`)
 
 For each type: use it when / avoid it when / content limits / notes. Field reference:
 `build_deck.py --schema`. Visual reference: `assets/examples/*-preview.png` and the showcase spec
@@ -8,7 +8,15 @@ Global limits (Kalmstrom, johnnyknocke, office-kit): ≤ 7 bullets or ≤ 6 tile
 per visual group · document titles ≤ 2 lines (~15 words) · talk titles ≤ 55 characters · line length
 ≤ 75 characters · card body ≤ ~60 characters per bullet · process step ≤ ~50 characters ·
 timeline/milestone label ≤ ~30 characters · statement ≤ ~100 characters · one emphasis per slide.
-Over the limit: split the slide, cut words, or move detail to the notes. Never shrink below the floors.
+Over the limit (the overflow rule): first remove redundancy, then restructure, split, or move supporting
+detail to the notes or an appendix. Reduce type only within the floors. Never hide overflow or silently
+drop evidence. The HTML draft flags any slide whose text cannot fit or falls below 9pt.
+
+Every type carries a semantic contract as well as a geometric one: a `compare` uses the same criteria,
+units and time horizon on both sides; a `waterfall`'s steps reconcile to its totals; an `options`
+scorecard uses weights the user agreed (never invented ones); a `process` arrow means a real sequence;
+a `big_number` has its denominator and period. A balanced-looking slide that breaks its contract
+misleads.
 
 ## Openers, structure, closers
 
@@ -81,7 +89,8 @@ not editable data: keep the numbers in `facts`, give alt text, say so if editabi
 | `gallery` | 2-6 pictures with captions | unrelated images | portfolios, events, product range |
 | `code` | code, prompt, command | executives who don't code | monospaced on a dark panel + 2-3 points |
 | `bullets` | nothing else fits | more than 6 items | ask first why no exhibit fits |
-| `references` | sources slide | invented sources | numbered; vary completeness as real sources do |
+| `references` | sources slide | invented sources | numbered; consistent, complete citations (publisher, title, date, locator) |
+| `custom` | no type fits without distorting the idea (a map, a dependency network, an annotated schematic) | a standard type would do | `html` body on the deck's CSS tokens, reproducible from the spec; say why no type fits; the PPTX needs a hand build of the slide (placeholder fails lint until done) |
 
 ## Variants worth knowing
 
@@ -91,4 +100,4 @@ not editable data: keep the numbers in `facts`, give alt text, say so if editabi
 - Accent words in titles: `^^7x^^` (once per slide at most).
 - Talk build-up: show a diagram growing over 3-5 slides (duplicate the slide, add one element each).
 - False ending and reversal, objection-then-rebuttal, an honest limitation slide: staging devices
-  for talks (office-kit); use at least two per talk, from real material.
+  for talks (office-kit); use them when real material supports them, never manufactured.

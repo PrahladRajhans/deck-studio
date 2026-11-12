@@ -12,7 +12,7 @@ say what is missing.
 
 ## 2. Ghost deck
 
-Only titles, in order, before any design. Answer first (document) or question-led (talk). The
+Only titles, in order, before any design. Answer first or progressive reveal, chosen by purpose (writing.md §2). The
 deck's titles, read top to bottom, are its executive summary (document) or its plot (talk).
 Agree it with the user before building anything longer than ~10 slides when they are available.
 

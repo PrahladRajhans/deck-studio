@@ -4,14 +4,45 @@ Every new deck goes through route E (the HTML draft) first. Routes A-D and F are
 builds, used only after the user approves the draft or explicitly skips it (SKILL.md, "Draft
 first"). Editing an attached deck goes straight to its own format (route B, editing).
 
+## Fidelity contract: what each final route promises
+
+The approved draft is the design reference. Every final route falls into one of three classes.
+Tell the user which one before approval, so "approved" means the same thing to both of you.
+
+| Class | Promise | Routes |
+|---|---|---|
+| **Faithful reconstruction** | Same spec, same layouts, same tokens and fonts; slide order, wording, figures, exhibits and hierarchy preserved. Not pixel-identical: fitting and native charts are re-measured | B (PPTX builder), F (HTML final) |
+| **Controlled adaptation** | Content, order and hierarchy preserved; layout adjusted to the tool's components; every adjustment disclosed | A (Slides artifact), D (Canva editing an existing design) |
+| **Redesign** | The tool reinterprets the approved content in its own templates; the user agrees to that scope first; content reconciled afterwards | C (Gamma generation), D (Canva AI generation) |
+
+Any material departure from the approved draft (a dropped exhibit, a changed claim, a different
+chart form) goes back to the user before delivery.
+
+## Destination capabilities (check before approving a design)
+
+| Capability | B PPTX builder | A Slides artifact | C Gamma | D Canva | F HTML |
+|---|---|---|---|---|---|
+| Native editable charts | yes (11 kinds) | per the type's instructions | its own chart blocks | limited | SVG, not editable as charts |
+| Exact fonts | Office fonts named by the direction | the type's theme fonts | its theme fonts | brand or template fonts | any web font |
+| Custom shapes / custom slides | yes, by hand build | limited | no | yes, by hand | yes |
+| Speaker notes | yes | per the type | yes | yes | yes (N key) |
+| Animation | none added | per the type | its own | its own | CSS (reduced-motion respected) |
+| Facts model enforced in the final file | yes (`--strict`) | figures computed before writing | no: read back and reconcile | no: read back and reconcile | yes |
+
+Observations about Gamma and Canva below (template IDs, credit costs, plan limits, network
+limits) were recorded in Nov 2026. Treat them as dated notes and re-check when using the
+connector; capabilities change.
+
 ## E. HTML draft (`scripts/build_html.py`): always first
 
-Why: a draft in HTML takes seconds and a small fraction of the tokens of a PPTX, Gamma or Canva
-build, and the look changes with one field. Settle content, visuals and the slide skeleton here.
+Why: a draft in HTML renders in seconds and the look changes with one field, so iterating here keeps
+the final build (and, for generators, their credits) out of the loop. The saving is expected, not
+measured: don't quote a figure. Settle content, visuals and the slide skeleton here.
 
 1. `build_html.py spec.json -o out/deck.html` renders the same spec the PPTX builder uses: all 44
-   slide types, all 22 directions, the facts model, checks and tokens. It also prints the
-   builder's warnings and the `voice` lines (human-voice.md).
+   slide types plus `custom`, all 22 directions, the facts model, checks and tokens. It also prints
+   the validation (`check`/`note`), the builder's warnings and the `style` prompts (human-voice.md).
+   It does not need python-pptx.
 2. `render_html.py out/deck.html out/render` takes screenshots of every slide (Playwright) and a
    contact sheet. Text that cannot fit at the floor sizes is flagged on the slide in red and
    reported with exit code 3.
@@ -20,7 +51,7 @@ build, and the look changes with one field. Settle content, visuals and the slid
 4. Iterate: edit the spec, rebuild, re-render. To compare looks, run `preview_directions.py`
    (HTML by default).
 
-Fidelity: the draft uses the direction's tokens, the same layouts and the same Office fonts, with
+Fidelity (faithful reconstruction for routes B and F): the draft uses the direction's tokens, the same layouts and the same Office fonts, with
 metric-compatible web fallbacks (Carlito, Caladea, Liberation). Expect the final PPTX to match it
 closely but not pixel for pixel. Native charts, tables and fitting are measured again by the PPTX
 builder, so final QA always runs on the final file. `html_fonts` (spec.md) swaps in web fonts.
@@ -40,15 +71,25 @@ instructions for the data format; translate a direction's tokens into its theme.
 ## B. PPTX builder (`scripts/build_deck.py`)
 
 After approval: for a .pptx request, offline submission, Google Slides (it opens .pptx), or
-whenever the numbers must tie out. The approved draft's spec builds as-is. See `spec.md`. Exit codes: 0 built · 2 spec or fact-check error (nothing
+whenever the numbers must tie out. The approved draft's spec builds as-is with `--strict` (the
+release gate, spec.md). Exit codes: 0 built · 2 spec, fact-check or release-blocker error (nothing
 written) · 3 built but some text could not fit within floors (shorten or split, never shrink).
 
 Commands: `--schema` (fields), `--outline` (Gate 1 headline track), `--direction X --only 1,4`
 (previews), `-o out.pptx`. Then `render.py`, `lint_deck.py`.
 
-Need a layout the builder lacks (a map, an S-curve with phase bands, an org chart): build the deck,
-open it with python-pptx, add shapes on the same grid with the direction's tokens, re-render,
-re-lint. For chart forms PowerPoint lacks, use route G.
+Need a layout the builder lacks (a map, an S-curve with phase bands, an org chart): it is a `custom`
+slide in the draft. Build the deck, open it with python-pptx, replace the `[CUSTOM LAYOUT]`
+placeholder with shapes on the same grid and tokens, re-render, re-lint (the placeholder fails lint
+until replaced). For chart forms PowerPoint lacks, use route G.
+
+### Working from a supplied template (profile before you fill)
+
+Before putting content into a client or brand template, profile it: list its slide layouts and
+placeholders (python-pptx `prs.slide_layouts`), fonts, colours, and which evidence shapes each
+layout can hold (title + chart, two columns, table, full image). Map each approved draft slide to a
+compatible layout; where none fits, say so and propose the nearest, or build that slide on the
+template's master with native shapes. Record the profile next to the spec so later rounds reuse it.
 
 ### Editing someone's existing deck (keep the look vs restyle)
 
@@ -61,7 +102,9 @@ Version before any destructive edit: `deck_v01.pptx`, `deck_v02.pptx`.
 
 ## C. Gamma (connector)
 
-After approval: send the approved draft's titles, figures and notes as the prompt (below).
+After approval, as a redesign route (fidelity contract): send the approved draft's titles, figures,
+notes and, per slide, the intended exhibit form and emphasis as the prompt (below). Gamma will not
+reproduce the draft's layouts; reconcile the result against the approved spec slide by slide.
 What works (verified): `generate_from_template` with official template IDs on a paid plan;
 reading/duplicating official templates returns 404. ~20 credits per card. Output fabricates
 sources and numbers → always read back (`read_gamma`/outline) and fix with `edit_gamma`.
@@ -109,7 +152,8 @@ Gamma Design Playbook, so the playbook gets more precise with use.
 
 ## D. Canva (connector)
 
-After approval. The connector can read and edit the user's own designs, generate new designs with Canva AI,
+After approval. Editing an existing design is controlled adaptation; Canva AI generation is a
+redesign (fidelity contract). The connector can read and edit the user's own designs, generate new designs with Canva AI,
 resize, and export to PPTX/PDF/images. It cannot browse Canva's public template library, and this
 account has no Brand Kits or Brand Templates. Workflow: user opens a Canva template and clicks "Customize this template" → you find
 it with `search-designs` → read it → edit text/images with the edit tools (load the

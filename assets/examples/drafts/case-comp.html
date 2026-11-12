@@ -328,6 +328,8 @@ function fitAll(){const b=document.body,floor=px(b,'--floor'),tfloor=px(b,'--tit
       const anyOver=()=>kids().some(over)||[...body.children].some(c=>c.getBoundingClientRect().bottom>body.getBoundingClientRect().bottom+2);
       while(anyOver()&&f>floor&&guard++<40){f-=1;body.style.fontSize=f+'px';}
       if(anyOver())probs.push('body text below floor');}
+    s.querySelectorAll('.body *').forEach(e=>{if(e.closest('svg')||!e.offsetParent||e.children.length)return;
+      if(e.textContent.trim()&&parseFloat(getComputedStyle(e).fontSize)<17.5&&!probs.includes('text below 9pt'))probs.push('text below 9pt');});
     const r=s.getBoundingClientRect();
     s.querySelectorAll('h1,h2,h3,p,li,td,span,b,div').forEach(e=>{if(!e.offsetParent||e.closest('.bleed,.cy-ring'))return;const q=e.getBoundingClientRect();
       if(q.width&&(q.right>r.right+1||q.bottom>r.bottom+1||q.left<r.left-1)&&!probs.includes('off slide'))probs.push('off slide');});

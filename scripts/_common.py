@@ -261,13 +261,21 @@ def _pil_font(family: str, bold: bool, size_px: int):
     from PIL import ImageFont
     key = (family.lower(), bold)
     candidates = [_FONT_FILES.get(key), _FONT_FILES.get(("calibri", bold)), "DejaVuSans.ttf"]
-    for c in candidates:
+    for i, c in enumerate(candidates):
         if not c:
             continue
         path = _find_font_file(c)
         if path:
+            if i > 0 and key not in FONT_FALLBACKS:
+                FONT_FALLBACKS[key] = os.path.basename(path)
             return ImageFont.truetype(path, size_px)
+    FONT_FALLBACKS[key] = "Pillow default bitmap font (fit estimates unreliable)"
     return ImageFont.load_default()
+
+
+# fonts whose metrics were not available here: (family, bold) -> font actually used for measuring.
+# Builders report these, because text fitting is only as good as the font it measures with.
+FONT_FALLBACKS: dict = {}
 
 
 def text_width_pt(text: str, family: str, size_pt: float, bold: bool = False) -> float:
@@ -373,22 +381,49 @@ def _cumsum(xs):
     return out
 
 
+def _same_len(name, a, b):
+    if len(a) != len(b):
+        raise SpecError(f"{name}: lists have different lengths ({len(a)} vs {len(b)}); nothing is silently dropped")
+
+
 def _vadd(a, b):
+    _same_len("vadd", a, b)
     return [x + y for x, y in zip(a, b)]
 
 
 def _vsub(a, b):
+    _same_len("vsub", a, b)
     return [x - y for x, y in zip(a, b)]
+
+
+def _wavg(vals, wts):
+    _same_len("wavg", vals, wts)
+    if any(w < 0 for w in wts) or sum(wts) == 0:
+        raise SpecError("wavg: weights must be non-negative and not all zero")
+    return sum(v * w for v, w in zip(vals, wts)) / float(sum(wts))
+
+
+def _avg(xs):
+    if not xs:
+        raise SpecError("avg of an empty list")
+    return sum(xs) / len(xs)
+
+
+def _first_at_least(xs, x):
+    """Index of the first element >= x, or None when the threshold is never reached.
+    None cannot be used as an index or in arithmetic, so 'never reached' can't become a valid year;
+    test it with reached(...) in checks."""
+    return next((i for i, v in enumerate(xs) if v >= x), None)
 
 
 _FUNCS = {"sum": sum, "min": min, "max": max, "len": len, "abs": abs, "round": round,
           "approx": _approx, "pct": _pct, "cagr": _cagr, "cumsum": _cumsum,
-          "vadd": _vadd, "vsub": _vsub, "avg": lambda xs: sum(xs) / len(xs),
+          "vadd": _vadd, "vsub": _vsub, "avg": _avg, "reached": lambda i: i is not None,
           "share": lambda part, whole: part / whole * 100.0, "all": all, "any": any,
-          "wavg": lambda vals, wts: sum(v * w for v, w in zip(vals, wts)) / float(sum(wts)),
+          "wavg": _wavg,
           "list": list,
           # index of the first element meeting a threshold, e.g. payback year: first_at_least(cumsum(profit), 0)
-          "first_at_least": lambda xs, x: next((i for i, v in enumerate(xs) if v >= x), -1),
+          "first_at_least": _first_at_least,
           # S-curve values: logistic(n, cap, mid, k) -> n points rising to cap, steepest at index mid
           "logistic": lambda n, cap, mid, k=1.0: [round(cap / (1 + 2.718281828 ** (-k * (i - mid))), 4)
                                                 for i in range(int(n))],
@@ -410,7 +445,10 @@ def safe_eval(expr: str, facts: dict):
                 return node.id == "True"
             raise SpecError(f"unknown fact '{node.id}' in expression: {expr}")
         if isinstance(node, ast.BinOp) and type(node.op) in _BIN:
-            return _BIN[type(node.op)](ev(node.left), ev(node.right))
+            lv, rv = ev(node.left), ev(node.right)
+            if lv is None or rv is None:
+                raise SpecError(f"arithmetic on a 'not reached' (None) value in: {expr}")
+            return _BIN[type(node.op)](lv, rv)
         if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.USub, ast.UAdd)):
             v = ev(node.operand)
             return -v if isinstance(node.op, ast.USub) else v
@@ -421,6 +459,8 @@ def safe_eval(expr: str, facts: dict):
             left = ev(node.left)
             for op, comp in zip(node.ops, node.comparators):
                 right = ev(comp)
+                if left is None or right is None:
+                    raise SpecError(f"comparison with a 'not reached' (None) value in: {expr}; use reached(...)")
                 if type(op) not in _CMP or not _CMP[type(op)](left, right):
                     return False
                 left = right
@@ -432,7 +472,10 @@ def safe_eval(expr: str, facts: dict):
                 lo = ev(sl.lower) if sl.lower else None
                 hi = ev(sl.upper) if sl.upper else None
                 return target[lo:hi]
-            return target[ev(sl)]
+            idx = ev(sl)
+            if idx is None:
+                raise SpecError(f"index is 'not reached' (None) in: {expr}; guard it with reached(...)")
+            return target[idx]
         if isinstance(node, ast.List):
             return [ev(e) for e in node.elts]
         if isinstance(node, ast.Tuple):
@@ -448,6 +491,8 @@ _TOKEN = re.compile(r"\{=([^{}|]+)(?:\|([^{}]+))?\}")
 
 
 def _fmt(value, spec: str | None) -> str:
+    if value is None:
+        raise SpecError("a 'not reached' (None) value cannot be printed on a slide; guard it with reached(...)")
     if spec is None:
         if isinstance(value, float):
             return f"{value:,.1f}".rstrip("0").rstrip(".") if abs(value) < 1e15 else str(value)
@@ -486,7 +531,7 @@ _VERBISH = re.compile(
     r"starts?|begins?|launch(es)?|matters?|works?|fits?|offsets?|lands?|covers?|beats?|gets?|"
     r"wins?|fails?|helps?|lifts?|drops?|slips?|shifts?|runs?|ran|comes?|came|goes|went|"
     r"[a-z]{3,}ed)\b|\b(not|no|only|than|vs)\b", re.I)
-PLACEHOLDER = re.compile(r"\[(CONFIRM|TBD|TODO|VERIFY|INSERT|IMAGE NEEDED)[^\]]*\]|lorem|ipsum|\bx{3,}\b|"
+PLACEHOLDER = re.compile(r"\[(CONFIRM|TBD|TODO|VERIFY|INSERT|IMAGE NEEDED|CUSTOM LAYOUT)[^\]]*\]|lorem|ipsum|\bx{3,}\b|"
                          r"click to (add|edit)|\[insert", re.I)
 NUMBER = re.compile(r"(?<![A-Za-z])[-+]?\d[\d,]*(?:\.\d+)?\s?(%|x|bn|mn|m|k|cr|lakh|pp|bps)?", re.I)
 
@@ -521,8 +566,9 @@ def has_figures(text: str) -> bool:
 
 
 # --------------------------------------------------------------------------------------
-# Human voice: phrases that make slide text read as machine-written (references/human-voice.md).
-# These are density signals, not proof; a hit is a prompt to rewrite with the specific fact.
+# Style review (references/human-voice.md): stock phrasing and rhythm that make slides read as generated.
+# Editorial prompts, not proof of authorship: rewrite only when the new wording is clearer, more specific
+# or better evidenced; otherwise keep the phrase and record it in voice_ok.
 # --------------------------------------------------------------------------------------
 _AI_WORDS = (
     r"delve[sd]?|delving|tapestry|vibrant|crucial|pivotal|seamless(?:ly)?|robust|holistic|multifaceted|"
@@ -555,15 +601,30 @@ _AI_FORMULAS = [
 _EMOJI = re.compile("[\U0001F000-\U0001FAFF\uFE0F]")  # pictographic emoji; typographic glyphs (★ ✓ →) are fine
 
 
-def ai_tells(text: str) -> list[tuple[str, str]]:
-    """Return (code, snippet) for each machine-voice signal in one piece of slide text."""
+# literal or technical uses that are not stock phrasing (checked in a window around the match)
+_TECHNICAL = re.compile(
+    r"robust (?:standard error|regression|estimat|check|control|to )|robustness|"
+    r"(?:financial|operating|net|gross|balance[- ]sheet) leverage|leverage (?:ratio|of \d)|leveraged (?:buyout|loan|financ)|"
+    r"landscape (?:photo|orientation|mode|architect|painting|design)|(?:slide|page) landscape|"
+    r"leverage (?:at|of|rose|fell|increased|decreased|is|was) \d", re.I)
+
+
+def ai_tells(text: str, keep=()) -> list[tuple[str, str]]:
+    """Return (code, snippet) style prompts for one piece of slide text.
+    These are editorial prompts, not evidence of AI authorship. Technical uses (robust standard errors,
+    financial leverage, landscape orientation) and words in `keep` (voice_ok) are skipped."""
     text = strip_markup(text or "")
+    keep = {k.lower() for k in keep}
     out = []
     for m in _AI_WORD_RE.finditer(text):
-        out.append(("ai_word", m.group(0).strip()))
+        word = m.group(0).strip()
+        window = text[max(0, m.start() - 25): m.end() + 25]
+        if word.lower() in keep or _TECHNICAL.search(window):
+            continue
+        out.append(("stock_word", word))
     for code, rx in _AI_FORMULAS:
         m = rx.search(text)
-        if m:
+        if m and not any(k in m.group(0).lower() for k in keep):
             out.append((code, m.group(0).strip()[:60]))
     if "—" in text and text.strip() != "—":  # a lone dash in a table cell means "none"
         out.append(("em_dash", "— (use a comma, colon or full stop)"))
@@ -595,7 +656,8 @@ def deck_voice(titles: list[str], list_lengths: list[int]) -> list[str]:
 
 
 _VOICE_SKIP = {"notes", "quote", "code", "path", "image", "photo", "alt", "id", "type", "style", "kind",
-               "direction", "frame", "source", "credit", "icon", "state", "status", "number_format"}
+               "direction", "frame", "source", "credit", "icon", "state", "status", "number_format",
+               "_raw", "_raw_text", "data_status", "voice_ok", "role", "question"}
 
 
 def slide_strings(s, skip=_VOICE_SKIP):
@@ -626,12 +688,17 @@ def list_lengths(s) -> list[int]:
 
 
 def voice_report(spec: dict) -> list[str]:
-    """Human-voice findings for a whole spec: per-slide tells plus deck-level rhythm."""
+    """Style prompts for a whole spec: per-slide phrasing plus deck-level rhythm. `voice_ok` (deck or slide
+    level) lists words or phrases kept on purpose; they are reported once as kept, not flagged."""
     msgs, lens, titles = [], [], []
+    deck_keep = spec.get("voice_ok", [])
+    if deck_keep:
+        msgs.append(f"kept on purpose (voice_ok): {', '.join(deck_keep)}")
     for i, s in enumerate(spec.get("slides", []), 1):
         seen = set()
+        keep = list(deck_keep) + list(s.get("voice_ok", []))
         for txt in slide_strings(s):
-            for code, snip in ai_tells(txt):
+            for code, snip in ai_tells(txt, keep):
                 key = (code, snip.lower())
                 if key not in seen:
                     seen.add(key)
@@ -640,3 +707,18 @@ def voice_report(spec: dict) -> list[str]:
         if s.get("type") not in ("cover", "divider", "closing", "agenda", "quote"):
             titles.append(s.get("title", ""))
     return msgs + deck_voice(titles, lens)
+
+
+LIGHT_TYPES = ("cover", "divider", "agenda", "closing")
+
+
+def slide_seconds(spec: dict, s: dict):
+    """Time budget per slide from deck `minutes`, shared by both builders: light slides (cover, divider,
+    agenda, closing) get ~8 s, the rest share the slot after a 10% reserve for overrun and changeover."""
+    mins = spec.get("minutes")
+    if not mins:
+        return None
+    n_body = sum(1 for sl in spec["slides"] if sl.get("type") not in LIGHT_TYPES)
+    n_light = len(spec["slides"]) - n_body
+    budget = mins * 60 * 0.9 - n_light * 8
+    return 8 if s.get("type") in LIGHT_TYPES else max(10, int(round(budget / max(1, n_body) / 5.0) * 5))

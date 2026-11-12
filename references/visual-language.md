@@ -83,6 +83,18 @@ full-width neutral hairline only in the `classic`/`rail` frames; no rule in `cle
 | Source, footnotes, page | 9-10pt | 10pt+ | 12pt+ |
 | Hero number | 96-110pt | 110pt+ | 120pt+ |
 
+Treat the floors as starting ranges, then test on representative slides: room size, screen,
+script and density all move the right size.
+
+**Fonts are a deployment constraint, not just a pairing.** Pick for readability, brand fit,
+language and glyph coverage (₹, Devanagari, accents) and reliable rendering. Before trusting fit,
+run `env_check.py`: it shows which file each font is measured with (metric clone, close clone or
+substitute). When substitution happens anywhere (here, in the browser, on the machine that opens
+the deck), recheck wrapping, table alignment and chart labels. Use tabular figures in tables.
+Embedding a font in the PPTX depends on its licence; when unsure, stay with fonts the destination
+has. A familiar font with clear hierarchy beats a distinctive one that breaks the deck: don't
+reject a font only because it is common.
+
 Two typefaces max (a third only for code). Three sizes per slide. Left-align body; centre only
 single lines (covers, big numbers, quotes). Authored line breaks at meaning boundaries; no 1-3
 character last lines.
@@ -103,15 +115,33 @@ Shadows: at most one or two elevated surfaces per slide, subtle (the builder's `
 
 ## 7. Imagery and icons
 
-- Real photographs of the actual subject > simple glyph badges > nothing > AI art. Crop, never
-  stretch; alt text always; credit lines on photos you did not take.
-- Never AI-generated faces or fake product photos presented as real; never photos of public figures
-  pulled from the web; never text baked into images.
+- Purpose test: add a visual element only when it explains, evidences, identifies or orients.
+- Real photographs of the actual subject > simple glyph badges > nothing > generic stock or AI art.
+  Crop, never stretch; alt text always; credit lines and permitted use recorded for assets you did
+  not make.
+- Screenshots, source figures, historical documents and product interfaces are fine when they are
+  the evidence: add a readable label, the source and alt text that explains them. Authored slide
+  text stays editable, never flattened into a picture.
+- Keep apart, and label: documentary photos vs illustrations, real interfaces vs mockups, technical
+  diagrams vs decoration, verified charts vs illustrative ones. A clearly labelled conceptual
+  illustration is fine; AI imagery presented as a real facility, person, customer, product or
+  result never is. Never photos of public figures pulled from the web.
 - Icons: glyph badges (▲ ▼ ✓ ✗ ★ → ! ◎ ●) in a filled circle render in every Office font; no emoji
   (they render inconsistently). `columns` and `cards` take `icon` names: up, down, check, cross,
   star, arrow, warn, plus, minus, question, dot, diamond, money, rupee, percent, time, target.
 - One visual motif repeated across the deck (rounded photo frames, glyph badges, the highlight bar):
   never a decorative colour stripe (Anthropic).
+- A richer icon set (one consistent SVG family with semantic names, stroke weight, size rules and
+  licence notes) is not bundled yet; until it is, use glyph badges or none rather than mixing icon
+  styles from different sources.
+
+**Theme, composition and visual language are different levers.** A direction sets the theme
+(colours, fonts, corners). Composition decides what dominates and where information sits; visual
+language decides whether the deck speaks through photography, diagrams, typography, documents or
+real work (campaign creative, interface screens, site photos). Narrative rhythm decides how density
+and emphasis change across the deck. When a deck needs a genuinely different feel, change
+composition and visual language, not just the palette; use `custom` slides for compositions the
+standard types can't make.
 
 ## 8. Charts and tables
 
@@ -138,7 +168,7 @@ centred body text; 14pt body under a 16pt title (no hierarchy). Content: topic-l
 numbers that disagree, invented sources or fictional institutes, uniformly-shaped case studies,
 the same closing clause on every slide, a "Thank you" close with no ask.
 
-## 10. Signature moves (each deck carries at least two)
+## 10. Signature moves (use them when the material supports them; never manufacture one)
 
 One signature exhibit the room will describe afterwards (a sharp waterfall, a mekko, a
 one-number slide) · a human hook (a real person, quote or moment, not a market statistic) · one

@@ -120,7 +120,8 @@
       ],
       "notes": {
         "say": "Four points carry the recommendation. The market is attractive, the shelf has a gap, the hybrid option wins, and the numbers work inside the budget."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "agenda",
@@ -211,7 +212,8 @@
       "notes": {
         "say": "We scored three options on four weighted criteria. Option B wins because it builds the brand without lease risk."
       },
-      "id": "options"
+      "id": "options",
+      "data_status": "illustrative"
     },
     {
       "type": "table",
@@ -274,7 +276,8 @@
       "notes": {
         "say": "Every number on this page comes from one model, so the summary, chart and table agree."
       },
-      "id": "pnl"
+      "id": "pnl",
+      "data_status": "illustrative"
     },
     {
       "type": "timeline",
@@ -396,5 +399,37 @@
         "say": "To close: one decision, one budget, one clear payback year."
       }
     }
-  ]
+  ],
+  "fact_meta": {
+    "years": {
+      "kind": "illustrative"
+    },
+    "rev": {
+      "kind": "illustrative"
+    },
+    "channel": {
+      "kind": "illustrative"
+    },
+    "marketing": {
+      "kind": "illustrative"
+    },
+    "fixed": {
+      "kind": "illustrative"
+    },
+    "budget": {
+      "kind": "illustrative"
+    },
+    "weights": {
+      "kind": "illustrative"
+    },
+    "sc_a": {
+      "kind": "illustrative"
+    },
+    "sc_b": {
+      "kind": "illustrative"
+    },
+    "sc_c": {
+      "kind": "illustrative"
+    }
+  }
 }

@@ -21,12 +21,12 @@
       "type": "cover",
       "eyebrow": "Final round · Product strategy",
       "title": "I turn messy customer problems into products people come back to",
-      "subtitle": "Asha Rao · three stories, one way of working",
+      "subtitle": "Asha Rao · one story, one way of working",
       "meta": [
         "Fictional candidate for this template"
       ],
       "notes": {
-        "say": "Thank you for having me. I'll tell you three short stories and what they say about how I'd work here."
+        "say": "Thank you for having me. I'll tell you one story in detail and what it says about how I'd work here."
       }
     },
     {
@@ -97,7 +97,7 @@
       ],
       "highlight": 0,
       "notes": {
-        "say": "Across all three stories the method was the same. Listen first, size the problem, ship something small, and measure."
+        "say": "The pharmacy finder used four steps, and I've used the same four on every project since. Listen first, size the problem, ship something small, and measure."
       },
       "so_what": "The pharmacy finder's live stock feed came out of interview 14."
     },
@@ -125,5 +125,16 @@
         "say": "That's my way of working. I'd love to bring it to your team. Happy to take questions."
       }
     }
-  ]
+  ],
+  "fact_meta": {
+    "users_before": {
+      "kind": "illustrative"
+    },
+    "users_after": {
+      "kind": "illustrative"
+    },
+    "weeks": {
+      "kind": "illustrative"
+    }
+  }
 }

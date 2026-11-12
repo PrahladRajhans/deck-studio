@@ -39,32 +39,40 @@ ignores it; it keeps the reasoning next to the deck).
 | Accessibility | Low vision, colour blindness, captions, non-native audience | Large hall: 24pt floor |
 | Tone | Rigorous, warm, bold, playful | Rigorous with one human hook |
 | Tolerance | How dense, how much motion the audience accepts | Dense OK, no animation |
+| Purpose | Inform, teach, persuade, diagnose, secure a decision, report progress | Secure a decision |
+| Consumption | Live, read alone, workshop, hybrid | Live, then circulated as PDF |
+| Domain | Which domain pack applies (domain-packs.md) | Consumer goods / marketing |
+| Voice | Presenter stance, formality, relationship, claim strength (human-voice.md §1) | Peer adviser, professional, claims measured |
 
-If you cannot write the governing thought, stop: the material is not ready. Offer a one-page
-issue summary instead of a deck.
+**Evidence inventory** (beside the canvas): each fact you will use, where it sits (file, page,
+cell, URL), its kind (observed, estimate, forecast, assumption, target, illustrative) and whether
+it is verified. This becomes `facts`, `fact_meta` and `evidence` in the spec (spec.md).
+
+If you cannot write the governing thought yet, choose one: frame the deck around an explicit open
+question plus the evidence plan that would answer it (an exploratory or research deck is
+legitimate), or say the material is not ready and offer a one-page issue summary instead.
 
 ## 2. Decision framework: from material to argument
 
 1. **Governing thought** in one sentence, at the confidence the evidence supports.
 2. **Structure** the support (pick per decision-trees.md T4):
-   - *Pyramid (Minto)*: governing thought → 3 key lines (all reasons OR all steps, never mixed) →
+   - *Pyramid (Minto)*: governing thought → the distinct key lines, usually 2-5 (all reasons OR all steps, never mixed) →
      evidence under each. Key lines are MECE: no overlaps, no gaps a judge would spot.
    - *SCQA*: Situation (agreed facts) → Complication (what changed) → Question (what should we do?) →
      Answer. Give only the situation the reader needs.
    - *Sparkline (Duarte)*: alternate "what is" and "what could be", end with a call to action and
      the "new bliss"; the audience is the hero, the presenter the mentor.
    - *Problem-agitate-solve* for rooms that already feel the pain.
-3. **Rhetoric balance** (AI-Business-Tools beamer patterns; tone, not slide allocation):
+3. **Rhetorical emphasis** (qualitative; no percentages, since nothing measures them):
 
-| Context | Logos | Ethos | Pathos |
-|---|---|---|---|
-| MBA / executive readout | 50% | 25% | 25% |
-| Business-school teaching | 45% | 15% | 40% |
-| Professional audience | 40% | 25% | 35% |
-| Consulting workshop | 30% | 25% | 45% |
-| Working deck | 55% | 25% | 20% |
+| Emphasis | What leads | Typical rooms |
+|---|---|---|
+| Evidence-led | data, analysis, method; stories only as illustration | executive readouts, working decks, research |
+| Demonstration-led | the product, prototype or worked example shown | pitches, product reviews, technical teaching |
+| Story-supported | a real case or person carries the argument; data proves it | interviews, change programmes, marketing |
+| Participation-led | questions, exercises, the room's own input | workshops, teaching, facilitation |
 
-   Logos = data and frameworks; ethos = method, limits, devil's advocate; pathos = stories, stakes.
+   Every emphasis still needs credibility (method, limits, a devil's advocate slide).
 4. **Devil's advocate**: write the strongest objection to the governing thought. Either it gets a
    slide (limits, risks, "what would change our mind") or the notes carry the answer.
 5. **Ghost deck**: one line per slide, in order. Lines may be premises, facts or questions as well
@@ -143,10 +151,13 @@ sources, likely questions with short answers.
 | Repeated phrasing (machine tell) | `repeated_phrase`; vary sentence shape, not a new stock phrase | lint |
 | Uniform case studies (machine tell) | vary depth and resolution; one may stay unresolved | review |
 | Placeholders shipped | `[TBD]`, `[IMAGE NEEDED]`, lorem, xxx fail lint | lint (exit 1) |
-| Self-grading | fresh-eye reviewer who has not seen the build | qa.md §5 |
+| Self-grading | fresh-eye reviewer who has not seen the build; zero findings allowed | qa.md §6 |
 | Time overrun | timing notes from `minutes`; read-aloud test | builder, rehearsal |
 | A slide nobody needs | Gate 2: every title serves the spine; else appendix | review |
-| Machine-sounding text | human-voice.md rules; `voice` lines; `ai_voice` / `ai_rhythm` | builders, lint, read-aloud |
+| Headline overstates its exhibit; counts or promises not kept | semantic review (qa.md §3); count check in `spec_io.py` | review, validator |
+| Unverified or unclassified evidence reaching the final file | `fact_meta`, `evidence`, `data_status`; `--strict` release gate | validator, Stage 6 |
+| Arithmetic that silently drops data | vector and weighted helpers reject unequal lengths; "not reached" cannot index a year | facts model |
+| Machine-sounding text | human-voice.md rules; `style` prompts; `style_review` / `style_rhythm` | builders, lint, read-aloud |
 | Expensive rework | final format built only after the draft is approved | Gate 5 |
 | Draft promises what the final can't do | draft uses the final direction and fonts; final QA on the real file | routes.md §E, Stage 6 |
 

@@ -1,6 +1,26 @@
 # Writing: headlines, body, numbers, notes, sources
 
-## 1. Document headlines (assertions)
+## 1. Headlines by slide role, at the strength the evidence allows
+
+| Slide role | Headline does this | Example |
+|---|---|---|
+| Recommendation | states the action and the reason | "Reduce changeover delays before adding production capacity" |
+| Evidence | states what the evidence supports, no more | "Service costs explain most of the margin decline" |
+| Teaching | states the concept or asks a purposeful question | "Why does a waterfall start at zero?" |
+| Investigation | separates observation, interpretation and hypothesis | "Churn doubled in March; onboarding is the leading suspect" |
+| Workshop | gives the room a task | "Rank these five risks by likelihood" |
+| Transition | orients | "Where can we win?" |
+| Closing | states the decision, action or takeaway | "Approve ₹1.8 crore by 20 May" |
+
+Claim strength follows the evidence. Weak: "Operational excellence opportunities". Overstated: "The
+campaign caused higher sales". Calibrated: "Sales rose during the campaign; the data does not
+establish that the campaign caused it". Use the verbs the evidence earns: observed (rose, fell),
+estimated (about, an estimated), forecast (is forecast to), hypothesis (may, the leading
+explanation), recommendation (should, we propose). Assertion titles (Alley's assertion-evidence
+pattern) suit substantive evidence slides; questions and labels are right when they serve a
+teaching, transition or facilitation purpose on purpose.
+
+## 1a. Document headlines (assertions)
 
 - Test 1: can a reader answer "I disagree"? If the only response is "I see what this is about",
   it is a label. Rewrite.
@@ -10,7 +30,7 @@
 - Specific nouns, real names, numbers, and verbs that say what happened (grew, fell, overtook,
   stopped), not "there is", "shows", "provides", "leverages".
 - Put a count in a headline only when the number is the point; "three reasons" is not a claim.
-  Any number in a headline must match the body.
+  Any number in a headline must match the body (`spec_io.py` checks counts against the list).
 - No topic label before a colon ("Market: ..."); the topic lives in the kicker.
 - A headline stands alone: no "this", "as above", "here".
 - Peer slides in one chapter share a grammatical form; different chapters may differ.
@@ -24,8 +44,10 @@
   screenshot is the star; a plain statement for a finding; an exclamation for a surprise; the
   audience's inner voice; a question for dividers; a cut-off line as a bridge. All-same forms read
   as machine-made; look for the same pattern three slides running.
-- Don't give the answer first; no agenda, no "today I'll cover three things". Reveal one step at a
-  time. When a slide asks, the next slide answers.
+- Choose the reveal by purpose: progressive (one step at a time, the answer last) when the room must
+  be brought along; answer first when it is senior, time-poor or deciding, even live. An agenda
+  belongs where it reduces uncertainty (workshops, teaching, long sessions); in a short persuasive
+  talk, question dividers usually orient better. When a slide asks, the next slide answers.
 - Dividers voice the audience's next question; one every 3-6 body slides; never the same question
   twice; the answer is complete before the next divider.
 - Introduce a concept in three steps: what it is → what it improves (before/after) → a one-line
@@ -67,7 +89,8 @@
 - Invented targets must add up: goal × people × periods fits the stated target; list the basis in
   `assumptions`.
 - Units always: in the exhibit label, the axis or the header. Same decimals within a column.
-- Timelines start after today; monthly milestones cover every month or say why not.
+- Proposed activity starts after today; retrospective and in-progress timelines are labelled as such.
+  Monthly milestones cover every month or say why not.
 
 ## 5. Notes (write them first)
 
@@ -89,8 +112,9 @@ from the slides and a 10-minute version from the notes. Objection answers: claim
 - Never invent a source, institute, quote, logo or person. Missing: "Source: to be added".
 - For external data cite real bodies (a national statistics office, IMF, a named research firm);
   for a fictional or illustrative case, label figures illustrative on the slide.
-- Vary citation form as real decks do (a department, a report title with date, a named person);
-  a uniform hyper-precise format on every slide is itself a tell (office-kit).
+- Cite consistently and sufficiently for the audience: publisher or body, title, date, and the
+  locator (page, table) where a reader would check. Completeness beats variety; never thin out a
+  citation to look less machine-made.
 - Footnotes (method, assumptions) are numbered and tied to ¹ ² ³ markers; the source line is
   separate.
 - Talk decks: sources in the notes, except claims about someone else's product when the deck will

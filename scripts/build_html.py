@@ -23,8 +23,8 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _common import SpecError, resolve_theme, slide_strings, strip_markup, is_label_title, voice_report  # noqa: E402
-from build_deck import load_spec  # noqa: E402  (facts, checks, tokens, hand-typed figure check)
+from _common import SpecError, resolve_theme, slide_seconds, slide_strings, strip_markup, is_label_title, voice_report  # noqa: E402
+from spec_io import load_spec, report as spec_report  # noqa: E402  (facts, checks, tokens, validation)
 
 GLYPHS = {"up": "▲", "down": "▼", "check": "✓", "cross": "✗", "star": "★", "arrow": "→", "warn": "!",
           "plus": "+", "minus": "−", "question": "?", "dot": "●", "diamond": "◆", "money": "$", "rupee": "₹",
@@ -214,11 +214,7 @@ class HtmlDeck:
         return f'<template class="notes">{"".join(bits) or "<p class=muted>No notes yet.</p>"}</template>'
 
     def seconds(self, s) -> int:
-        body = [x for x in self.spec["slides"] if x.get("type") not in ("cover", "divider", "closing")]
-        total = float(self.spec.get("minutes", 0)) * 60
-        if s.get("type") in ("cover", "divider", "closing"):
-            return 15
-        return int(round(max(10, (total - 15 * (len(self.spec["slides"]) - len(body))) / max(1, len(body))) / 5) * 5)
+        return slide_seconds(self.spec, s)  # shared with the PPTX builder
 
     def dark(self, s, inner, extra_cls="", style="", count=False) -> str:
         """Full-bleed dark slide without the standard chrome (cover, divider, closing...).
@@ -710,6 +706,16 @@ class HtmlDeck:
             self.warn("more than six bullets: split the slide or choose a structured type")
         return self.chrome(s, self.with_side(s, ul(items, "bullets")))
 
+    def s_custom(self, s):
+        """Hand-composed body (spec `html`), inside the standard chrome and tokens. The HTML lives in the
+        spec, so the draft stays reproducible; keep it to the deck's CSS variables (var(--accent) etc.)."""
+        if not s.get("html"):
+            raise SpecError(f"slide {self.cur}: custom slide needs an 'html' body")
+        if re.search(r"<script|on\w+=", s["html"], re.I):
+            raise SpecError(f"slide {self.cur}: custom html may not contain scripts or event handlers")
+        self.warn("custom layout: say why no standard type fits; the PPTX needs a hand build of this slide")
+        return self.chrome(s, f'<div class="custom">{s["html"]}</div>')
+
     def s_references(self, s):
         return self.chrome(s, '<ol class="refs">' + "".join(f"<li>{md(x)}</li>" for x in s.get("items", [])) + "</ol>")
 
@@ -724,7 +730,8 @@ class HtmlDeck:
             if fn is None:
                 raise SpecError(f"slide {i}: unknown type '{typ}' (see build_deck.py --schema)")
             if typ == "agenda" and self.talk:
-                self.warn("agenda in talk mode: use question dividers instead")
+                self.warn("agenda in talk mode: keep it only if it orients (workshop, long or teaching session); "
+                          "for a short persuasive talk, question dividers usually work better")
             if self.spec.get("mode", "document") == "document" and typ not in NOT_CONTENT \
                     and s.get("title") and is_label_title(s["title"]):
                 self.warn(f"title is a label, not a claim: '{strip_markup(s['title'])}'")
@@ -736,7 +743,8 @@ class HtmlDeck:
                     self.warn(f"{words} words on a talk slide (aim under 40): move detail to the notes")
             run = (run + [typ])[-3:]
             if len(run) == 3 and len(set(run)) == 1 and typ not in ("divider",):
-                self.warn(f"'{typ}' three times running: vary the layout")
+                self.warn(f"'{typ}' three times running: fine for like-for-like comparisons; change it if the "
+                          "communication task changed")
             slides.append(fn(s))
             if s.get("id"):
                 self.pages_seen[s["id"]] = self.page
@@ -863,8 +871,9 @@ def chart_svg(ch, t, side=False, warn=print) -> str:
             if len(se["values"]) != len(cats):
                 raise SpecError(f"series '{se.get('name')}' has {len(se['values'])} values for {len(cats)} categories")
         if stacked:
-            sums = [sum(float(se["values"][i]) for se in series) for i in range(len(cats))]
-            lo, hi = min(0, min(sums)), max(sums)
+            pos = [sum(max(0.0, float(se["values"][i])) for se in series) for i in range(len(cats))]
+            neg = [sum(min(0.0, float(se["values"][i])) for se in series) for i in range(len(cats))]
+            lo, hi = min(0, min(neg)), max(0, max(pos))  # positives stack up, negatives stack down
         else:
             allv = [float(v) for se in series for v in se["values"]]
             lo, hi = min(allv), max(allv)
@@ -897,16 +906,22 @@ def chart_svg(ch, t, side=False, warn=print) -> str:
                 txt(X(high[i]) + 8, y + bh / 2 + 8, fmt_num(high[i], lf), "start", 22, C["muted"])
                 continue
             acc = X(max(lo, 0))
+            accp = accn = 0.0
             k = len(series)
             for si, se in enumerate(series):
                 v = float(se["values"][i])
                 col = (C["accent"] if i in hl_idx else (C["grey"] if hl_idx else C["primary"])) if not multi else palette[si % 5]
                 if stacked:
-                    w = X(v) - X(0)
-                    out.append(f'<rect x="{acc:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bh:.1f}" fill="{col}"/>')
+                    a0 = accp if v >= 0 else accn
+                    x0_, x1_ = sorted((X(a0), X(a0 + v)))
+                    w = x1_ - x0_
+                    out.append(f'<rect x="{x0_:.1f}" y="{y:.1f}" width="{w:.1f}" height="{bh:.1f}" fill="{col}"/>')
                     if w > 60:
-                        txt(acc + w / 2, y + bh / 2 + 8, fmt_num(v, nf), size=22, fill=C["ink"] if _lum(col) > 0.55 else "#FFFFFF", weight=700)
-                    acc += w
+                        txt(x0_ + w / 2, y + bh / 2 + 8, fmt_num(v, nf), size=22, fill=C["ink"] if _lum(col) > 0.55 else "#FFFFFF", weight=700)
+                    if v >= 0:
+                        accp += v
+                    else:
+                        accn += v
                 else:
                     hh = bh / k
                     yy = y + si * hh
@@ -961,16 +976,21 @@ def chart_svg(ch, t, side=False, warn=print) -> str:
             k = len(series)
             for i in range(n):
                 x = L + i * band + (band - bw) / 2
-                acc = base
+                accp = accn = 0.0
                 for si, se in enumerate(series):
                     v = float(se["values"][i])
                     col = (C["accent"] if i in hl_idx else (C["grey"] if hl_idx else C["primary"])) if not multi else palette[si % 5]
                     if stacked:
-                        h = base - Y(v)
-                        out.append(f'<rect x="{x:.1f}" y="{acc - h:.1f}" width="{bw:.1f}" height="{h:.1f}" fill="{col}"/>')
+                        a0 = accp if v >= 0 else accn
+                        y0_, y1_ = sorted((Y(a0), Y(a0 + v)))
+                        h = y1_ - y0_
+                        out.append(f'<rect x="{x:.1f}" y="{y0_:.1f}" width="{bw:.1f}" height="{h:.1f}" fill="{col}"/>')
                         if h > 34:
-                            txt(x + bw / 2, acc - h / 2 + 8, fmt_num(v, nf), size=22, fill=C["ink"] if _lum(col) > 0.55 else "#FFFFFF", weight=700)
-                        acc -= h
+                            txt(x + bw / 2, y0_ + h / 2 + 8, fmt_num(v, nf), size=22, fill=C["ink"] if _lum(col) > 0.55 else "#FFFFFF", weight=700)
+                        if v >= 0:
+                            accp += v
+                        else:
+                            accn += v
                     else:
                         ww = bw / k
                         xx = x + si * ww
@@ -1312,6 +1332,8 @@ function fitAll(){const b=document.body,floor=px(b,'--floor'),tfloor=px(b,'--tit
       const anyOver=()=>kids().some(over)||[...body.children].some(c=>c.getBoundingClientRect().bottom>body.getBoundingClientRect().bottom+2);
       while(anyOver()&&f>floor&&guard++<40){f-=1;body.style.fontSize=f+'px';}
       if(anyOver())probs.push('body text below floor');}
+    s.querySelectorAll('.body *').forEach(e=>{if(e.closest('svg')||!e.offsetParent||e.children.length)return;
+      if(e.textContent.trim()&&parseFloat(getComputedStyle(e).fontSize)<17.5&&!probs.includes('text below 9pt'))probs.push('text below 9pt');});
     const r=s.getBoundingClientRect();
     s.querySelectorAll('h1,h2,h3,p,li,td,span,b,div').forEach(e=>{if(!e.offsetParent||e.closest('.bleed,.cy-ring'))return;const q=e.getBoundingClientRect();
       if(q.width&&(q.right>r.right+1||q.bottom>r.bottom+1||q.left<r.left-1)&&!probs.includes('off slide'))probs.push('off slide');});
@@ -1376,12 +1398,11 @@ def main(argv=None):
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(page)
     print(f"built {out}  ({len(spec['slides'])} slides, direction {deck.t['name']}, {spec.get('mode', 'document')} mode)")
-    for w in spec.get("_handtyped", []):
-        print(f"  check {w}")
+    spec_report(spec, False)
     for w in deck.warnings:
         print(f"  warn  {w}")
     for w in voice_report(spec):
-        print(f"  voice {w}")
+        print(f"  style {w}")
     return 0
 
 

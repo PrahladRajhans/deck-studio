@@ -47,6 +47,10 @@ Is this an edit of a deck the user attached?
 Hybrid is allowed: analytical core in the builder, narrative opener/closer in Gamma or HTML.
 ```
 
+Tell the user the route's fidelity class with the recommendation (routes.md: faithful
+reconstruction, controlled adaptation, or redesign), and check the destination's capabilities
+before approving effects it can't reproduce.
+
 ## T2 · Document mode or talk mode?
 
 ```
@@ -90,10 +94,10 @@ What must the room DO after the deck?
 ## T4 · Which story structure?
 
 ```
-Is the audience senior, time-poor, deciding?          → PYRAMID / SCQA: answer first, 3 reasons, evidence
+Is the audience senior, time-poor, deciding?          → PYRAMID / SCQA: answer first, the distinct reasons (2-5), evidence
 Is the audience neutral-to-sceptical, live?           → SPARKLINE (Duarte): what is ↔ what could be, CTA, new bliss
 Is it a problem the room already feels?               → PROBLEM-AGITATE-SOLVE: their pain → why it persists → fix
-Is it a journey or a person?                          → CHAPTERS: 3-4 stories, each with a number and a lesson
+Is it a journey or a person?                          → CHAPTERS: one deep story or a few short ones, each with a lesson
 Is it a finding from research?                        → QUESTION-METHOD-FINDINGS-IMPLICATIONS-LIMITS
 Is it teaching?                                       → WONDER-EXPLORE-DISCOVER-PRACTISE-REFLECT
 Is it a status update?                                → SCORECARD → WHAT MOVED → RISKS → ASKS
@@ -117,7 +121,11 @@ Is it a pitch?                                        → Sequoia/YC order (deck
 
 ## T6 · Which slide type? (the exhibit chooser; run per slide)
 
-Ask in this order; take the first match. Detection words help you notice the shape of the content.
+Start from the audience's question for this slide and the relationship that answers it. The table
+generates candidates: detection words help you notice the shape of the content, they don't decide.
+When two rows fit, pick the form that makes the answer easiest to see without hiding variation or
+uncertainty, and say why in a line (a trend could also be a cohort comparison or a distribution).
+Use a table when exact lookup is the job, and a sentence when a visual adds nothing.
 
 | # | Question about the content | Words that signal it | Slide type |
 |---|---|---|---|
@@ -167,8 +175,11 @@ Ask in this order; take the first match. Detection words help you notice the sha
 Overrides:
 - Talk mode avoids document devices on one slide (four thin cards, hubs with 8 spokes): split into
   several slides or a build-up sequence instead.
-- Never the same type three slides running (the builder warns).
-- Chart a data series once; summaries state conclusions in words or KPIs.
+- Same type three slides running: fine when the slides compare like with like (the reader learns the
+  layout once); change it when the communication task changes. The builders flag it as a prompt.
+- Chart a data series again only when the second view shows a different relationship; summaries
+  state conclusions in words or KPIs.
+- Nothing fits without distorting the idea → `custom` slide on the deck's tokens (slide-library.md).
 
 ## T7 · Which chart form? (Zelazny's five comparisons + the extras)
 
@@ -184,6 +195,11 @@ Overrides:
 | Structure × size | who holds what share of which segment? | mekko (image) | nested pies |
 | Two-period change by item | who moved most? | slope (image) | clustered bars with 8 pairs |
 | Progress to target | how close? | bullet or dumbbell (image) | gauges |
+| Distribution with spread | does the average hide variation? | histogram, box plot or the individual points (image or `custom`) | an average alone |
+| Dependencies | what must happen before what? | dependency or network diagram (`custom`); `timeline` only if order is all that matters | a Gantt that hides the links |
+| Location | does geography explain it? | map (image), only when place carries the argument | a map as decoration |
+| Mechanism | how does it work? | annotated schematic (image or `custom`), labelled as technical evidence | decorative illustration |
+| Exact lookup | what is the value for X? | `table`, numbers right-aligned | a chart nobody can read values from |
 
 Hygiene for every chart: headline says what it means; units in the exhibit label or axis; axis at
 zero for bars (say so on the slide if a line axis is not); direct labels instead of legends when
@@ -228,14 +244,21 @@ possible; highlight one thing, grey the rest; never two scales on one axis (spli
 ## T10 · Imagery
 
 ```
+Does the image explain, evidence, identify or orient? If it only fills space, leave it out.
 Do you have real photographs of the actual thing (product, place, people, event)?
 ├─ Yes → use them: image_full for the hook, split cover, gallery for evidence; credit and alt text
 └─ No
+   ├─ Is it a screenshot, source figure or document that IS the evidence? → use it as is; add a readable
+   │   label, the source and alt text that explains it (authored slide text stays editable)
    ├─ Is the point a number or a structure? → no image; the exhibit is the visual
    ├─ Is the slide abstract (vision, values)? → a typographic statement or quote beats stock art
+   ├─ Would a conceptual illustration help? → only if clearly labelled as illustrative
    └─ Is an image truly needed? → ask the user for one, or leave [IMAGE NEEDED: what] (it fails lint)
-Never: AI-generated faces or fake product shots presented as real; photos of public figures pulled
-from the web; stretched images (the builder crops); text baked into images.
+Keep apart: documentary photos vs illustrations, real interfaces vs mockups, technical diagrams vs
+decoration, verified charts vs illustrative ones.
+Never: AI-generated imagery presented as a real facility, person, customer, product or result;
+photos of public figures pulled from the web; stretched images (the builder crops); authored slide
+text flattened into a picture.
 ```
 
 ## T11 · When to ask the user, when to proceed

@@ -1,839 +1,886 @@
 {
- "title": "Showcase: every new slide type",
- "direction": "modern-teal",
- "mode": "document",
- "footer": "Showcase · synthetic data for layout testing",
- "sources": [
-  "Synthetic test data"
- ],
- "facts": {
-  "visits": 120000,
-  "signups": 18000,
-  "trials": 5400,
-  "paid": 1350,
-  "adopt": "=logistic(8, 60, 4, 1.1)",
-  "years": [
-   "2024",
-   "2025",
-   "2026",
-   "2027",
-   "2028",
-   "2029",
-   "2030",
-   "2031"
-  ]
- },
- "checks": [
-  "paid < trials < signups < visits"
- ],
- "slides": [
-  {
-   "type": "cover",
-   "style": "gradient",
-   "eyebrow": "Layout test",
-   "title": "Every slide type, rendered on one grid",
-   "subtitle": "Synthetic data; checks layout, not argument",
-   "figure": {
-    "value": "44",
-    "label": "slide types"
-   },
-   "meta": [
-    "deck-studio test"
-   ],
-   "notes": {
-    "say": "Cover."
-   }
-  },
-  {
-   "type": "big_number",
-   "kicker": "Scale",
-   "title": "One in nine visitors starts a paid plan within 30 days",
-   "value": "11%",
-   "label": "of free-trial users convert to paid",
-   "context": "Up from 7% a year ago after the onboarding redesign",
-   "points": [
-    "Onboarding cut from 9 steps to 4",
-    "Day-3 nudge email added",
-    "Pricing page simplified"
-   ],
-   "source": "Synthetic",
-   "notes": {
-    "say": "Big number."
-   }
-  },
-  {
-   "type": "data_contrast",
-   "kicker": "Tension",
-   "title": "Usage grew while satisfaction fell: growth is hiding a service problem",
-   "items": [
-    {
-     "label": "Weekly active users",
-     "value": "+38%",
-     "detail": "Driven by the free tier and two campus partnerships"
-    },
-    {
-     "label": "Satisfaction (CSAT)",
-     "value": "−9 pts",
-     "detail": "Ticket backlog doubled; first reply now 31 hours"
-    }
-   ],
-   "highlight": 1,
-   "source": "Synthetic",
-   "notes": {
-    "say": "Contrast."
-   }
-  },
-  {
-   "type": "funnel",
-   "kicker": "Acquisition",
-   "title": "The leak is between sign-up and trial, not at payment",
-   "exhibit": "Monthly funnel (users)",
-   "stages": [
-    {
-     "label": "Visits",
-     "value": "=visits"
-    },
-    {
-     "label": "Sign-ups",
-     "value": "=signups"
-    },
-    {
-     "label": "Trials",
-     "value": "=trials",
-     "note": "Biggest drop: 70% never start"
-    },
-    {
-     "label": "Paid",
-     "value": "=paid"
-    }
-   ],
-   "highlight": 2,
-   "source": "Synthetic",
-   "notes": {
-    "say": "Funnel."
-   }
-  },
-  {
-   "type": "pyramid",
-   "kicker": "Priorities",
-   "title": "Reliability is the base everything else stands on",
-   "exhibit": "Product priorities",
-   "levels": [
-    {
-     "label": "Delight",
-     "detail": "Personalised study plans"
-    },
-    {
-     "label": "Engagement",
-     "detail": "Streaks, peer groups"
-    },
-    {
-     "label": "Usability",
-     "detail": "Four-step onboarding"
-    },
-    {
-     "label": "Reliability",
-     "detail": "99.9% uptime, sub-second search"
-    }
-   ],
-   "highlight": 3,
-   "notes": {
-    "say": "Pyramid."
-   }
-  },
-  {
-   "type": "cycle",
-   "kicker": "Flywheel",
-   "title": "Each new campus makes the next one cheaper to win",
-   "steps": [
-    {
-     "heading": "More students",
-     "body": "Peer referrals"
-    },
-    {
-     "heading": "More notes",
-     "body": "User-generated"
-    },
-    {
-     "heading": "Better search",
-     "body": "Ranking improves"
-    },
-    {
-     "heading": "Higher retention",
-     "body": "Weekly habit"
-    },
-    {
-     "heading": "Lower CAC",
-     "body": "Word of mouth"
-    }
-   ],
-   "center": "Campus flywheel",
-   "highlight": 0,
-   "side": {
-    "heading": "Why it compounds",
-    "points": [
-     "Content is reused across campuses",
-     "Referral share rose to 41%"
+  "title": "Showcase: every new slide type",
+  "direction": "modern-teal",
+  "mode": "document",
+  "footer": "Showcase · synthetic data for layout testing",
+  "sources": [
+    "Synthetic test data"
+  ],
+  "facts": {
+    "visits": 120000,
+    "signups": 18000,
+    "trials": 5400,
+    "paid": 1350,
+    "adopt": "=logistic(8, 60, 4, 1.1)",
+    "years": [
+      "2024",
+      "2025",
+      "2026",
+      "2027",
+      "2028",
+      "2029",
+      "2030",
+      "2031"
     ]
-   },
-   "notes": {
-    "say": "Cycle."
-   }
   },
-  {
-   "type": "hub",
-   "kicker": "Enablers",
-   "title": "Five capabilities must be in place before the national launch",
-   "center": "National launch",
-   "spokes": [
+  "checks": [
+    "paid < trials < signups < visits"
+  ],
+  "slides": [
     {
-     "heading": "Payments",
-     "body": "UPI autopay"
-    },
-    {
-     "heading": "Content ops",
-     "body": "Moderation at scale"
-    },
-    {
-     "heading": "Support",
-     "body": "24h first reply"
-    },
-    {
-     "heading": "Partnerships",
-     "body": "10 universities"
-    },
-    {
-     "heading": "Data",
-     "body": "Cohort dashboards"
-    }
-   ],
-   "highlight": 2,
-   "notes": {
-    "say": "Hub."
-   }
-  },
-  {
-   "type": "issue_tree",
-   "kicker": "Diagnosis",
-   "title": "Profit fell because of price mix and service cost, not volume",
-   "exhibit": "Why did operating profit fall 18%?",
-   "root": "Why did operating profit fall 18% in FY26?",
-   "branches": [
-    {
-     "label": "Revenue fell",
-     "leaves": [
-      "Volume flat (ruled out)",
-      "Price mix shifted to discounts"
-     ]
-    },
-    {
-     "label": "Costs rose",
-     "leaves": [
-      "Service cost per user +22%",
-      "Marketing flat"
-     ]
-    },
-    {
-     "label": "One-offs",
-     "leaves": [
-      "Migration write-off"
-     ]
-    }
-   ],
-   "highlight": 1,
-   "notes": {
-    "say": "Issue tree."
-   }
-  },
-  {
-   "type": "swot",
-   "kicker": "Position",
-   "title": "Strong content moat, but service gaps open the door to rivals",
-   "strengths": [
-    "Largest notes library",
-    "Campus ambassadors"
-   ],
-   "weaknesses": [
-    "Support backlog",
-    "Single payment rail"
-   ],
-   "opportunities": [
-    "Tier-2 universities",
-    "Exam-prep bundles"
-   ],
-   "threats": [
-    "Free AI tutors",
-    "Platform fee changes"
-   ],
-   "highlight": "weaknesses",
-   "notes": {
-    "say": "SWOT."
-   }
-  },
-  {
-   "type": "venn",
-   "kicker": "Positioning",
-   "title": "We win where affordable, trusted and peer-made overlap",
-   "sets": [
-    {
-     "label": "Affordable",
-     "detail": "Under ₹199/month"
-    },
-    {
-     "label": "Trusted",
-     "detail": "Verified by toppers"
-    },
-    {
-     "label": "Peer-made",
-     "detail": "Students teach students"
-    }
-   ],
-   "overlap": "Our sweet spot",
-   "notes": {
-    "say": "Venn."
-   }
-  },
-  {
-   "type": "framework",
-   "kicker": "Strategy",
-   "title": "Win two campuses deep before going broad",
-   "points": [
-    {
-     "heading": "Depth over breadth",
-     "body": "Two campuses at 40% penetration beat ten at 5%"
-    },
-    {
-     "heading": "Service before scale",
-     "body": "First reply under 24 hours before any new launch"
-    },
-    {
-     "heading": "Earn the referral",
-     "body": "Every feature measured by referral rate"
-    }
-   ],
-   "notes": {
-    "say": "Framework rail."
-   }
-  },
-  {
-   "type": "columns",
-   "kicker": "Plan",
-   "title": "Three workstreams, each with one owner and one number",
-   "columns": [
-    {
-     "icon": "check",
-     "heading": "Fix service",
-     "points": [
-      "Hire 6 agents",
-      "Macros for top 20 tickets"
-     ]
-    },
-    {
-     "icon": "up",
-     "heading": "Grow campuses",
-     "points": [
-      "2 new universities",
-      "Ambassador kit v2"
-     ]
-    },
-    {
-     "icon": "target",
-     "heading": "Lift conversion",
-     "points": [
-      "Day-3 nudge",
-      "Annual plan discount"
-     ]
-    }
-   ],
-   "highlight": 0,
-   "notes": {
-    "say": "Columns."
-   }
-  },
-  {
-   "type": "team",
-   "kicker": "Team",
-   "title": "A team that has built and scaled ed-tech before",
-   "people": [
-    {
-     "name": "Asha Rao",
-     "role": "CEO",
-     "line": "Scaled a tutoring app to 2M users"
-    },
-    {
-     "name": "Vikram Shah",
-     "role": "CTO",
-     "line": "Ex-search engineer, 8 years"
-    },
-    {
-     "name": "Meera Iyer",
-     "role": "Growth",
-     "line": "Ran campus marketing at a fintech",
-     "photo": "test-photo.jpg"
-    },
-    {
-     "name": "Dev Patel",
-     "role": "Ops",
-     "line": "Built a 40-person support team"
-    }
-   ],
-   "notes": {
-    "say": "Team."
-   }
-  },
-  {
-   "type": "pricing",
-   "kicker": "Offer",
-   "title": "The annual plan is the one most students should buy",
-   "tiers": [
-    {
-     "name": "Free",
-     "price": "₹0",
-     "period": "forever",
-     "features": [
-      "5 notes a day",
-      "Community"
-     ]
-    },
-    {
-     "name": "Annual",
-     "price": "₹1,499",
-     "period": "per year",
-     "features": [
-      "Unlimited notes",
-      "Exam bundles",
-      "Priority support"
-     ]
-    },
-    {
-     "name": "Monthly",
-     "price": "₹199",
-     "period": "per month",
-     "features": [
-      "Unlimited notes",
-      "Exam bundles"
-     ]
-    }
-   ],
-   "recommended": 1,
-   "notes": {
-    "say": "Pricing."
-   }
-  },
-  {
-   "type": "roadmap",
-   "kicker": "Roadmap",
-   "title": "Service fixes come first; national launch waits for them",
-   "lanes": [
-    {
-     "heading": "Now · Q1",
-     "items": [
-      {
-       "heading": "Support hires",
-       "body": "6 agents"
+      "type": "cover",
+      "style": "gradient",
+      "eyebrow": "Layout test",
+      "title": "Every slide type, rendered on one grid",
+      "subtitle": "Synthetic data; checks layout, not argument",
+      "figure": {
+        "value": "44",
+        "label": "slide types"
       },
-      {
-       "heading": "Ticket macros"
+      "meta": [
+        "deck-studio test"
+      ],
+      "notes": {
+        "say": "Cover."
       }
-     ]
     },
     {
-     "heading": "Next · Q2",
-     "items": [
-      {
-       "heading": "2 new campuses"
+      "type": "big_number",
+      "kicker": "Scale",
+      "title": "One in four free-trial users now pays within 30 days",
+      "value": "{=share(paid,trials)|.0f}%",
+      "label": "of free-trial users convert to a paid plan",
+      "context": "Up from 7% of trials a year ago, after the onboarding redesign",
+      "points": [
+        "Onboarding cut from 9 steps to 4",
+        "Day-3 nudge email added",
+        "Pricing page simplified"
+      ],
+      "source": "Synthetic",
+      "notes": {
+        "say": "Big number."
       },
-      {
-       "heading": "UPI autopay"
-      }
-     ]
+      "data_status": "illustrative",
+      "tag": "Illustrative"
     },
     {
-     "heading": "Later · H2",
-     "items": [
-      {
-       "heading": "National launch"
+      "type": "data_contrast",
+      "kicker": "Tension",
+      "title": "Usage grew while satisfaction fell: growth is hiding a service problem",
+      "items": [
+        {
+          "label": "Weekly active users",
+          "value": "+38%",
+          "detail": "Driven by the free tier and two campus partnerships"
+        },
+        {
+          "label": "Satisfaction (CSAT)",
+          "value": "−9 pts",
+          "detail": "Ticket backlog doubled; first reply now 31 hours"
+        }
+      ],
+      "highlight": 1,
+      "source": "Synthetic",
+      "notes": {
+        "say": "Contrast."
       },
-      {
-       "heading": "Exam bundles"
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "funnel",
+      "kicker": "Acquisition",
+      "title": "The leak is between sign-up and trial, not at payment",
+      "exhibit": "Monthly funnel (users)",
+      "stages": [
+        {
+          "label": "Visits",
+          "value": "=visits"
+        },
+        {
+          "label": "Sign-ups",
+          "value": "=signups"
+        },
+        {
+          "label": "Trials",
+          "value": "=trials",
+          "note": "Biggest drop: 70% never start"
+        },
+        {
+          "label": "Paid",
+          "value": "=paid"
+        }
+      ],
+      "highlight": 2,
+      "source": "Synthetic",
+      "notes": {
+        "say": "Funnel."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "pyramid",
+      "kicker": "Priorities",
+      "title": "Reliability is the base everything else stands on",
+      "exhibit": "Product priorities",
+      "levels": [
+        {
+          "label": "Delight",
+          "detail": "Personalised study plans"
+        },
+        {
+          "label": "Engagement",
+          "detail": "Streaks, peer groups"
+        },
+        {
+          "label": "Usability",
+          "detail": "Four-step onboarding"
+        },
+        {
+          "label": "Reliability",
+          "detail": "99.9% uptime, sub-second search"
+        }
+      ],
+      "highlight": 3,
+      "notes": {
+        "say": "Pyramid."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "cycle",
+      "kicker": "Flywheel",
+      "title": "Each new campus makes the next one cheaper to win",
+      "steps": [
+        {
+          "heading": "More students",
+          "body": "Peer referrals"
+        },
+        {
+          "heading": "More notes",
+          "body": "User-generated"
+        },
+        {
+          "heading": "Better search",
+          "body": "Ranking improves"
+        },
+        {
+          "heading": "Higher retention",
+          "body": "Weekly habit"
+        },
+        {
+          "heading": "Lower CAC",
+          "body": "Word of mouth"
+        }
+      ],
+      "center": "Campus flywheel",
+      "highlight": 0,
+      "side": {
+        "heading": "Why it compounds",
+        "points": [
+          "Content is reused across campuses",
+          "Referral share rose to 41%"
+        ]
+      },
+      "notes": {
+        "say": "Cycle."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "hub",
+      "kicker": "Enablers",
+      "title": "Five capabilities must be in place before the national launch",
+      "center": "National launch",
+      "spokes": [
+        {
+          "heading": "Payments",
+          "body": "UPI autopay"
+        },
+        {
+          "heading": "Content ops",
+          "body": "Moderation at scale"
+        },
+        {
+          "heading": "Support",
+          "body": "24h first reply"
+        },
+        {
+          "heading": "Partnerships",
+          "body": "10 universities"
+        },
+        {
+          "heading": "Data",
+          "body": "Cohort dashboards"
+        }
+      ],
+      "highlight": 2,
+      "notes": {
+        "say": "Hub."
       }
-     ]
+    },
+    {
+      "type": "issue_tree",
+      "kicker": "Diagnosis",
+      "title": "Profit fell because of price mix and service cost, not volume",
+      "exhibit": "Why did operating profit fall 18%?",
+      "root": "Why did operating profit fall 18% in FY26?",
+      "branches": [
+        {
+          "label": "Revenue fell",
+          "leaves": [
+            "Volume flat (ruled out)",
+            "Price mix shifted to discounts"
+          ]
+        },
+        {
+          "label": "Costs rose",
+          "leaves": [
+            "Service cost per user +22%",
+            "Marketing flat"
+          ]
+        },
+        {
+          "label": "One-offs",
+          "leaves": [
+            "Migration write-off"
+          ]
+        }
+      ],
+      "highlight": 1,
+      "notes": {
+        "say": "Issue tree."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "swot",
+      "kicker": "Position",
+      "title": "Strong content moat, but service gaps open the door to rivals",
+      "strengths": [
+        "Largest notes library",
+        "Campus ambassadors"
+      ],
+      "weaknesses": [
+        "Support backlog",
+        "Single payment rail"
+      ],
+      "opportunities": [
+        "Tier-2 universities",
+        "Exam-prep bundles"
+      ],
+      "threats": [
+        "Free AI tutors",
+        "Platform fee changes"
+      ],
+      "highlight": "weaknesses",
+      "notes": {
+        "say": "SWOT."
+      }
+    },
+    {
+      "type": "venn",
+      "kicker": "Positioning",
+      "title": "We win where affordable, trusted and peer-made overlap",
+      "sets": [
+        {
+          "label": "Affordable",
+          "detail": "Under ₹199/month"
+        },
+        {
+          "label": "Trusted",
+          "detail": "Verified by toppers"
+        },
+        {
+          "label": "Peer-made",
+          "detail": "Students teach students"
+        }
+      ],
+      "overlap": "Our sweet spot",
+      "notes": {
+        "say": "Venn."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "framework",
+      "kicker": "Strategy",
+      "title": "Win two campuses deep before going broad",
+      "points": [
+        {
+          "heading": "Depth over breadth",
+          "body": "Two campuses at 40% penetration beat ten at 5%"
+        },
+        {
+          "heading": "Service before scale",
+          "body": "First reply under 24 hours before any new launch"
+        },
+        {
+          "heading": "Earn the referral",
+          "body": "Every feature measured by referral rate"
+        }
+      ],
+      "notes": {
+        "say": "Framework rail."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "columns",
+      "kicker": "Plan",
+      "title": "Three workstreams, each with one owner and one number",
+      "columns": [
+        {
+          "icon": "check",
+          "heading": "Fix service",
+          "points": [
+            "Hire 6 agents",
+            "Macros for top 20 tickets"
+          ]
+        },
+        {
+          "icon": "up",
+          "heading": "Grow campuses",
+          "points": [
+            "2 new universities",
+            "Ambassador kit v2"
+          ]
+        },
+        {
+          "icon": "target",
+          "heading": "Lift conversion",
+          "points": [
+            "Day-3 nudge",
+            "Annual plan discount"
+          ]
+        }
+      ],
+      "highlight": 0,
+      "notes": {
+        "say": "Columns."
+      }
+    },
+    {
+      "type": "team",
+      "kicker": "Team",
+      "title": "A team that has built and scaled ed-tech before",
+      "people": [
+        {
+          "name": "Asha Rao",
+          "role": "CEO",
+          "line": "Scaled a tutoring app to 2M users"
+        },
+        {
+          "name": "Vikram Shah",
+          "role": "CTO",
+          "line": "Ex-search engineer, 8 years"
+        },
+        {
+          "name": "Meera Iyer",
+          "role": "Growth",
+          "line": "Ran campus marketing at a fintech",
+          "photo": "test-photo.jpg"
+        },
+        {
+          "name": "Dev Patel",
+          "role": "Ops",
+          "line": "Built a 40-person support team"
+        }
+      ],
+      "notes": {
+        "say": "Team."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "pricing",
+      "kicker": "Offer",
+      "title": "The annual plan is the one most students should buy",
+      "tiers": [
+        {
+          "name": "Free",
+          "price": "₹0",
+          "period": "forever",
+          "features": [
+            "5 notes a day",
+            "Community"
+          ]
+        },
+        {
+          "name": "Annual",
+          "price": "₹1,499",
+          "period": "per year",
+          "features": [
+            "Unlimited notes",
+            "Exam bundles",
+            "Priority support"
+          ]
+        },
+        {
+          "name": "Monthly",
+          "price": "₹199",
+          "period": "per month",
+          "features": [
+            "Unlimited notes",
+            "Exam bundles"
+          ]
+        }
+      ],
+      "recommended": 1,
+      "notes": {
+        "say": "Pricing."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "roadmap",
+      "kicker": "Roadmap",
+      "title": "Service fixes come first; national launch waits for them",
+      "lanes": [
+        {
+          "heading": "Now · Q1",
+          "items": [
+            {
+              "heading": "Support hires",
+              "body": "6 agents"
+            },
+            {
+              "heading": "Ticket macros"
+            }
+          ]
+        },
+        {
+          "heading": "Next · Q2",
+          "items": [
+            {
+              "heading": "2 new campuses"
+            },
+            {
+              "heading": "UPI autopay"
+            }
+          ]
+        },
+        {
+          "heading": "Later · H2",
+          "items": [
+            {
+              "heading": "National launch"
+            },
+            {
+              "heading": "Exam bundles"
+            }
+          ]
+        }
+      ],
+      "highlight": 0,
+      "notes": {
+        "say": "Roadmap."
+      }
+    },
+    {
+      "type": "journey",
+      "kicker": "Experience",
+      "title": "Students drop off in week one, when the library feels overwhelming",
+      "stages": [
+        {
+          "name": "Discover",
+          "feeling": 0.6,
+          "doing": "Hears from a friend",
+          "thinking": "This could save me hours",
+          "pain": "—",
+          "opportunity": "Referral link with a starter pack"
+        },
+        {
+          "name": "Sign up",
+          "feeling": 0.3,
+          "doing": "Creates account",
+          "thinking": "Quick enough",
+          "pain": "OTP delays",
+          "opportunity": "Google sign-in"
+        },
+        {
+          "name": "Week one",
+          "feeling": -0.7,
+          "doing": "Searches notes",
+          "thinking": "Too much, where do I start?",
+          "pain": "No guidance",
+          "opportunity": "Course-based starter path"
+        },
+        {
+          "name": "Exam week",
+          "feeling": 0.8,
+          "doing": "Revises daily",
+          "thinking": "This saved me",
+          "pain": "Peak-time slowness",
+          "opportunity": "Pre-cache exam bundles"
+        }
+      ],
+      "notes": {
+        "say": "Journey."
+      }
+    },
+    {
+      "type": "before_after",
+      "kicker": "Onboarding",
+      "title": "Four steps instead of nine doubled trial starts",
+      "before": {
+        "label": "Before",
+        "heading": "Nine-step sign-up",
+        "points": [
+          "Profile, college, course, year",
+          "Email and phone OTP",
+          "Empty home screen"
+        ]
+      },
+      "after": {
+        "label": "After",
+        "heading": "Four-step sign-up",
+        "points": [
+          "Google sign-in",
+          "Pick your course",
+          "Starter path on day one"
+        ]
+      },
+      "notes": {
+        "say": "Before after."
+      }
+    },
+    {
+      "type": "faq",
+      "kicker": "Objections",
+      "title": "The three objections we hear most each have a proven answer",
+      "items": [
+        {
+          "q": "Won't free AI tutors replace you?",
+          "a": "Students trust notes from toppers on their own syllabus more than generic answers.",
+          "proof": "62% cite 'my college's notes' as the reason they pay"
+        },
+        {
+          "q": "Is this legal for universities?",
+          "a": "Notes are student-owned and moderated against copyrighted material within 24 hours.",
+          "proof": "Zero takedown notices in 2026"
+        },
+        {
+          "q": "Why will students pay?",
+          "a": "They pay in exam weeks when time is short; the annual plan prices that need.",
+          "proof": "68% of upgrades happen in the 3 weeks before exams"
+        }
+      ],
+      "notes": {
+        "say": "FAQ."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "question",
+      "kicker": "Think about it",
+      "title": "What would make you open the app on a day without an exam?",
+      "options": [
+        "A study streak with friends",
+        "A daily 5-minute quiz",
+        "Notes from tomorrow's lecture"
+      ],
+      "prompt": "Vote with a show of hands; we answer on the next slide.",
+      "notes": {
+        "say": "Question."
+      }
+    },
+    {
+      "type": "milestones",
+      "kicker": "Timeline",
+      "title": "Launch in four steps, with the service fix first",
+      "milestones": [
+        {
+          "date": "Jan 2027",
+          "label": "Support team hired",
+          "state": "done"
+        },
+        {
+          "date": "Mar 2027",
+          "label": "First reply under 24h",
+          "state": "now"
+        },
+        {
+          "date": "Jun 2027",
+          "label": "Two new campuses live",
+          "state": "next"
+        },
+        {
+          "date": "Oct 2027",
+          "label": "National launch decision",
+          "state": "next"
+        }
+      ],
+      "notes": {
+        "say": "Milestones."
+      }
+    },
+    {
+      "type": "actions",
+      "kicker": "Next steps",
+      "title": "Four actions start this month, each with a named owner",
+      "rows": [
+        {
+          "action": "Approve support hiring plan",
+          "owner": "CEO",
+          "date": "15 Jan",
+          "status": "on_track"
+        },
+        {
+          "action": "Sign partnership with University B",
+          "owner": "Partnerships",
+          "date": "31 Jan",
+          "status": "at_risk"
+        },
+        {
+          "action": "Ship Google sign-in",
+          "owner": "CTO",
+          "date": "20 Jan",
+          "status": "done"
+        },
+        {
+          "action": "Launch day-3 nudge",
+          "owner": "Growth",
+          "date": "25 Jan",
+          "status": "not_started"
+        }
+      ],
+      "notes": {
+        "say": "Actions."
+      }
+    },
+    {
+      "type": "risks",
+      "kicker": "Risks",
+      "title": "Two risks need action before launch; the rest we can watch",
+      "rows": [
+        {
+          "risk": "Support backlog returns at scale",
+          "likelihood": "H",
+          "impact": "H",
+          "mitigation": "Hire ahead of demand; macros; weekly SLA review",
+          "owner": "Ops"
+        },
+        {
+          "risk": "Payment platform fee rise",
+          "likelihood": "M",
+          "impact": "M",
+          "mitigation": "Add a second rail (cards) by Q2",
+          "owner": "CTO"
+        },
+        {
+          "risk": "Copyright complaints",
+          "likelihood": "L",
+          "impact": "H",
+          "mitigation": "24h moderation; takedown playbook",
+          "owner": "Legal"
+        }
+      ],
+      "notes": {
+        "say": "Risks."
+      }
+    },
+    {
+      "type": "chart",
+      "kicker": "Valuation",
+      "title": "All four methods put the business between ₹40 and ₹70 crore",
+      "exhibit": "Valuation range by method (₹ crore)",
+      "chart": {
+        "kind": "range",
+        "categories": [
+          "Trading comparables",
+          "Precedent deals",
+          "DCF (base case)",
+          "Revenue multiple"
+        ],
+        "low": [
+          42,
+          48,
+          40,
+          45
+        ],
+        "high": [
+          61,
+          70,
+          58,
+          64
+        ],
+        "highlight": 2
+      },
+      "so_what": "Anchor the round at ₹55 crore: inside every method's range.",
+      "source": "Synthetic",
+      "notes": {
+        "say": "Football field."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "chart",
+      "kicker": "Adoption",
+      "title": "Adoption follows an S-curve: the steep years are 2027 to 2029",
+      "exhibit": "Share of target students using the app (%)",
+      "chart": {
+        "kind": "line",
+        "categories": "=years",
+        "series": [
+          {
+            "name": "Adoption",
+            "values": "=adopt"
+          }
+        ],
+        "smooth": true,
+        "target": 40,
+        "target_label": "Plan",
+        "number_format": "0",
+        "show_values": false
+      },
+      "source": "Synthetic",
+      "notes": {
+        "say": "S-curve."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "chart",
+      "kicker": "Portfolio",
+      "title": "Campus B is the only one with high usage and low cost to serve",
+      "exhibit": "Usage vs cost to serve by campus",
+      "chart": {
+        "kind": "scatter",
+        "points": [
+          {
+            "label": "Campus A",
+            "x": 2.1,
+            "y": 34
+          },
+          {
+            "label": "Campus B",
+            "x": 1.2,
+            "y": 52
+          },
+          {
+            "label": "Campus C",
+            "x": 3.4,
+            "y": 28
+          },
+          {
+            "label": "Campus D",
+            "x": 2.8,
+            "y": 45
+          }
+        ],
+        "highlight": 1,
+        "x_title": "Cost to serve per user (₹)",
+        "y_title": "Weekly active (%)"
+      },
+      "source": "Synthetic",
+      "notes": {
+        "say": "Scatter."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "code",
+      "kicker": "How it works",
+      "title": "Search ranks notes by syllabus match before popularity",
+      "code": "score = 0.6 * syllabus_match(note, course)\n      + 0.3 * peer_rating(note)\n      + 0.1 * recency(note)\n\nif note.flagged:\n    score = 0",
+      "points": [
+        "Syllabus first: relevance beats popularity",
+        "Flagged notes never surface"
+      ],
+      "notes": {
+        "say": "Code."
+      }
+    },
+    {
+      "type": "gallery",
+      "kicker": "Campus",
+      "title": "Ambassador events filled every venue this term",
+      "images": [
+        {
+          "path": "test-photo.jpg",
+          "caption": "Orientation stall, Campus A"
+        },
+        {
+          "path": "test-photo.jpg",
+          "caption": "Exam-prep night, Campus B"
+        },
+        {
+          "path": "test-photo.jpg",
+          "caption": "Toppers panel, Campus C"
+        }
+      ],
+      "notes": {
+        "say": "Gallery."
+      }
+    },
+    {
+      "type": "image_full",
+      "kicker": "Story",
+      "title": "Priya passed her finals using notes from a senior she never met",
+      "subtitle": "That is the product: students helping students across years",
+      "path": "test-photo.jpg",
+      "alt": "Synthetic test image",
+      "credit": "Photo: synthetic test image",
+      "notes": {
+        "say": "Story card."
+      }
+    },
+    {
+      "type": "references",
+      "title": "Sources",
+      "items": [
+        "Company analytics, Jan 2027 export",
+        "Student survey, n=1,240, Dec 2026",
+        "Industry report (illustrative)",
+        "Interviews with 18 campus ambassadors"
+      ],
+      "notes": {
+        "say": "Sources."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Fix service, win two campuses deep, then launch nationally",
+      "ask": "Decision today: approve 6 support hires and the two-campus plan",
+      "figure": {
+        "value": "₹55 cr",
+        "label": "valuation anchor for the round"
+      },
+      "notes": {
+        "say": "Close."
+      },
+      "data_status": "illustrative",
+      "tag": "Illustrative"
     }
-   ],
-   "highlight": 0,
-   "notes": {
-    "say": "Roadmap."
-   }
-  },
-  {
-   "type": "journey",
-   "kicker": "Experience",
-   "title": "Students drop off in week one, when the library feels overwhelming",
-   "stages": [
-    {
-     "name": "Discover",
-     "feeling": 0.6,
-     "doing": "Hears from a friend",
-     "thinking": "This could save me hours",
-     "pain": "—",
-     "opportunity": "Referral link with a starter pack"
+  ],
+  "fact_meta": {
+    "visits": {
+      "kind": "illustrative"
     },
-    {
-     "name": "Sign up",
-     "feeling": 0.3,
-     "doing": "Creates account",
-     "thinking": "Quick enough",
-     "pain": "OTP delays",
-     "opportunity": "Google sign-in"
+    "signups": {
+      "kind": "illustrative"
     },
-    {
-     "name": "Week one",
-     "feeling": -0.7,
-     "doing": "Searches notes",
-     "thinking": "Too much, where do I start?",
-     "pain": "No guidance",
-     "opportunity": "Course-based starter path"
+    "trials": {
+      "kind": "illustrative"
     },
-    {
-     "name": "Exam week",
-     "feeling": 0.8,
-     "doing": "Revises daily",
-     "thinking": "This saved me",
-     "pain": "Peak-time slowness",
-     "opportunity": "Pre-cache exam bundles"
+    "paid": {
+      "kind": "illustrative"
+    },
+    "years": {
+      "kind": "illustrative"
     }
-   ],
-   "notes": {
-    "say": "Journey."
-   }
-  },
-  {
-   "type": "before_after",
-   "kicker": "Onboarding",
-   "title": "Four steps instead of nine doubled trial starts",
-   "before": {
-    "label": "Before",
-    "heading": "Nine-step sign-up",
-    "points": [
-     "Profile, college, course, year",
-     "Email and phone OTP",
-     "Empty home screen"
-    ]
-   },
-   "after": {
-    "label": "After",
-    "heading": "Four-step sign-up",
-    "points": [
-     "Google sign-in",
-     "Pick your course",
-     "Starter path on day one"
-    ]
-   },
-   "notes": {
-    "say": "Before after."
-   }
-  },
-  {
-   "type": "faq",
-   "kicker": "Objections",
-   "title": "The three objections we hear most each have a proven answer",
-   "items": [
-    {
-     "q": "Won't free AI tutors replace you?",
-     "a": "Students trust notes from toppers on their own syllabus more than generic answers.",
-     "proof": "62% cite 'my college's notes' as the reason they pay"
-    },
-    {
-     "q": "Is this legal for universities?",
-     "a": "Notes are student-owned and moderated against copyrighted material within 24 hours.",
-     "proof": "Zero takedown notices in 2026"
-    },
-    {
-     "q": "Why will students pay?",
-     "a": "They pay in exam weeks when time is short; the annual plan prices that need.",
-     "proof": "68% of upgrades happen in the 3 weeks before exams"
-    }
-   ],
-   "notes": {
-    "say": "FAQ."
-   }
-  },
-  {
-   "type": "question",
-   "kicker": "Think about it",
-   "title": "What would make you open the app on a day without an exam?",
-   "options": [
-    "A study streak with friends",
-    "A daily 5-minute quiz",
-    "Notes from tomorrow's lecture"
-   ],
-   "prompt": "Vote with a show of hands; we answer on the next slide.",
-   "notes": {
-    "say": "Question."
-   }
-  },
-  {
-   "type": "milestones",
-   "kicker": "Timeline",
-   "title": "Launch in four steps, with the service fix first",
-   "milestones": [
-    {
-     "date": "Jan 2027",
-     "label": "Support team hired",
-     "state": "done"
-    },
-    {
-     "date": "Mar 2027",
-     "label": "First reply under 24h",
-     "state": "now"
-    },
-    {
-     "date": "Jun 2027",
-     "label": "Two new campuses live",
-     "state": "next"
-    },
-    {
-     "date": "Oct 2027",
-     "label": "National launch decision",
-     "state": "next"
-    }
-   ],
-   "notes": {
-    "say": "Milestones."
-   }
-  },
-  {
-   "type": "actions",
-   "kicker": "Next steps",
-   "title": "Five actions start this month, each with a named owner",
-   "rows": [
-    {
-     "action": "Approve support hiring plan",
-     "owner": "CEO",
-     "date": "15 Jan",
-     "status": "on_track"
-    },
-    {
-     "action": "Sign partnership with University B",
-     "owner": "Partnerships",
-     "date": "31 Jan",
-     "status": "at_risk"
-    },
-    {
-     "action": "Ship Google sign-in",
-     "owner": "CTO",
-     "date": "20 Jan",
-     "status": "done"
-    },
-    {
-     "action": "Launch day-3 nudge",
-     "owner": "Growth",
-     "date": "25 Jan",
-     "status": "not_started"
-    }
-   ],
-   "notes": {
-    "say": "Actions."
-   }
-  },
-  {
-   "type": "risks",
-   "kicker": "Risks",
-   "title": "Two risks need action before launch; the rest we can watch",
-   "rows": [
-    {
-     "risk": "Support backlog returns at scale",
-     "likelihood": "H",
-     "impact": "H",
-     "mitigation": "Hire ahead of demand; macros; weekly SLA review",
-     "owner": "Ops"
-    },
-    {
-     "risk": "Payment platform fee rise",
-     "likelihood": "M",
-     "impact": "M",
-     "mitigation": "Add a second rail (cards) by Q2",
-     "owner": "CTO"
-    },
-    {
-     "risk": "Copyright complaints",
-     "likelihood": "L",
-     "impact": "H",
-     "mitigation": "24h moderation; takedown playbook",
-     "owner": "Legal"
-    }
-   ],
-   "notes": {
-    "say": "Risks."
-   }
-  },
-  {
-   "type": "chart",
-   "kicker": "Valuation",
-   "title": "All four methods put the business between ₹40 and ₹70 crore",
-   "exhibit": "Valuation range by method (₹ crore)",
-   "chart": {
-    "kind": "range",
-    "categories": [
-     "Trading comparables",
-     "Precedent deals",
-     "DCF (base case)",
-     "Revenue multiple"
-    ],
-    "low": [
-     42,
-     48,
-     40,
-     45
-    ],
-    "high": [
-     61,
-     70,
-     58,
-     64
-    ],
-    "highlight": 2
-   },
-   "so_what": "Anchor the round at ₹55 crore: inside every method's range.",
-   "source": "Synthetic",
-   "notes": {
-    "say": "Football field."
-   }
-  },
-  {
-   "type": "chart",
-   "kicker": "Adoption",
-   "title": "Adoption follows an S-curve: the steep years are 2027 to 2029",
-   "exhibit": "Share of target students using the app (%)",
-   "chart": {
-    "kind": "line",
-    "categories": "=years",
-    "series": [
-     {
-      "name": "Adoption",
-      "values": "=adopt"
-     }
-    ],
-    "smooth": true,
-    "target": 40,
-    "target_label": "Plan",
-    "number_format": "0",
-    "show_values": false
-   },
-   "source": "Synthetic",
-   "notes": {
-    "say": "S-curve."
-   }
-  },
-  {
-   "type": "chart",
-   "kicker": "Portfolio",
-   "title": "Campus B is the only one with high usage and low cost to serve",
-   "exhibit": "Usage vs cost to serve by campus",
-   "chart": {
-    "kind": "scatter",
-    "points": [
-     {
-      "label": "Campus A",
-      "x": 2.1,
-      "y": 34
-     },
-     {
-      "label": "Campus B",
-      "x": 1.2,
-      "y": 52
-     },
-     {
-      "label": "Campus C",
-      "x": 3.4,
-      "y": 28
-     },
-     {
-      "label": "Campus D",
-      "x": 2.8,
-      "y": 45
-     }
-    ],
-    "highlight": 1,
-    "x_title": "Cost to serve per user (₹)",
-    "y_title": "Weekly active (%)"
-   },
-   "source": "Synthetic",
-   "notes": {
-    "say": "Scatter."
-   }
-  },
-  {
-   "type": "code",
-   "kicker": "How it works",
-   "title": "Search ranks notes by syllabus match before popularity",
-   "code": "score = 0.6 * syllabus_match(note, course)\n      + 0.3 * peer_rating(note)\n      + 0.1 * recency(note)\n\nif note.flagged:\n    score = 0",
-   "points": [
-    "Syllabus first: relevance beats popularity",
-    "Flagged notes never surface"
-   ],
-   "notes": {
-    "say": "Code."
-   }
-  },
-  {
-   "type": "gallery",
-   "kicker": "Campus",
-   "title": "Ambassador events filled every venue this term",
-   "images": [
-    {
-     "path": "test-photo.jpg",
-     "caption": "Orientation stall, Campus A"
-    },
-    {
-     "path": "test-photo.jpg",
-     "caption": "Exam-prep night, Campus B"
-    },
-    {
-     "path": "test-photo.jpg",
-     "caption": "Toppers panel, Campus C"
-    }
-   ],
-   "notes": {
-    "say": "Gallery."
-   }
-  },
-  {
-   "type": "image_full",
-   "kicker": "Story",
-   "title": "Priya passed her finals using notes from a senior she never met",
-   "subtitle": "That is the product: students helping students across years",
-   "path": "test-photo.jpg",
-   "alt": "Synthetic test image",
-   "credit": "Photo: synthetic test image",
-   "notes": {
-    "say": "Story card."
-   }
-  },
-  {
-   "type": "references",
-   "title": "Sources",
-   "items": [
-    "Company analytics, Jan 2027 export",
-    "Student survey, n=1,240, Dec 2026",
-    "Industry report (illustrative)",
-    "Interviews with 18 campus ambassadors"
-   ],
-   "notes": {
-    "say": "Sources."
-   }
-  },
-  {
-   "type": "closing",
-   "title": "Fix service, win two campuses deep, then launch nationally",
-   "ask": "Decision today: approve 6 support hires and the two-campus plan",
-   "figure": {
-    "value": "₹55 cr",
-    "label": "valuation anchor for the round"
-   },
-   "notes": {
-    "say": "Close."
-   }
   }
- ]
 }

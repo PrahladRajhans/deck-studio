@@ -5,21 +5,48 @@ and interviewers now spot the pattern in seconds and discount everything after i
 the single home for voice rules. It adapts the BeHuman and Unslop skills (both built on Wikipedia's
 "Signs of AI writing" field guide) to slides, where text is short, fragmentary and spoken over.
 
-These are density signals, not a ban on words. One "robust" in a statistics appendix is fine. Five
-stock words, three "-ing" tails and every list in threes on one slide is a signature.
+These are density signals, not a ban on words, and a check that fires is not evidence of AI
+authorship. One "robust" in a statistics appendix is fine. Five stock words, three "-ing" tails and
+every list in threes on one slide is a signature. Rewrite only when the new wording is clearer, more
+specific, better evidenced or a better fit for the room.
 
-## 1. How to work
+Avoiding stock phrases is half the job. The other half is sounding like this presenter.
+
+## 1. The voice brief (fill it in Stage 1; infer it when the material makes it clear)
+
+| Field | Example |
+|---|---|
+| Presenter stance | analyst, teacher, founder, practitioner, candidate |
+| Formality | conversational, professional, formal |
+| Relationship to the audience | peer, adviser, examiner, customer, student |
+| Claim strength | observed, estimated, proposed, uncertain (writing.md §1) |
+| Vocabulary | the room's terms and the technical words that must stay |
+| Samples | a few headlines or notes the presenter actually wrote, when available |
+
+Match the presenter's register and relationship with the audience. Prefer concrete nouns,
+accountable actors ("the analyst approves", not "approval is obtained") and claims bounded by the
+evidence. Never manufacture anecdotes, quotations, emotional detail, slang or irregular rhythm to
+simulate a person.
+
+## 1a. How to work
 
 1. **Write with the rules on.** Draft headlines and notes without the patterns below; don't plan
    to clean up later.
 2. **Say it out loud as the presenter, to this room.** If you would not say the sentence to that
    partner, judge or interviewer across a table, rewrite it until you would.
-3. **Swap every abstract claim for the fact it was hiding.** "Robust growth" becomes "revenue up
-   38% in two quarters". If there is no fact, the line had no job: cut it.
-4. **Run the checks.** `build_html.py` and `build_deck.py` print `voice` lines; `lint_deck.py`
-   reports `ai_voice` (warn) and `ai_rhythm` (info) on any .pptx. Fix each hit or keep it on
-   purpose (a literal "landscape" in an architecture deck); never leave one unseen.
+3. **Swap every abstract claim for the fact it was hiding**, when the evidence has it. "Robust
+   growth" becomes "revenue up 38% in two quarters" only if 38% is in the facts. Specificity must
+   come from evidence: without it, narrow or qualify the claim ("revenue grew in both quarters"),
+   never invent precision. If the line has no job at all, cut it.
+4. **Run the checks.** `build_html.py` and `build_deck.py` print `style` prompts; `lint_deck.py`
+   reports `style_review` (warn) and `style_rhythm` (info) on any .pptx. Technical uses are
+   already skipped (robust standard errors, financial leverage, landscape orientation). For each
+   remaining prompt, either rewrite or keep it on purpose by adding the word or phrase to
+   `voice_ok` (deck or slide level) so the decision is recorded; never leave one unseen.
 5. **Read the headline track for rhythm** (`--outline`): mixed lengths, mixed shapes, no formula.
+
+Protect useful consistency: one concept keeps one term (writing.md §3), and parallel comparison
+labels stay parallel. Vary sentence shape, not terminology.
 
 Slides are allowed to be fragments. Labels, kickers, chart headers and talk punchlines ("Then the
 rain came.") can be two words. The rule against tiny sentences is for prose, not slide furniture.
@@ -61,6 +88,9 @@ Customer journey, user journey and buyer journey are real terms and are not flag
 
 ## 4. Slide-level tells (the ones decks add on top of prose)
 
+- **Rhetorical devices used by default.** "No pressure. No flow." can be a deliberate line in an
+  engineering talk; the same shape on every slide is a tic. Keep intentional ones (record them in
+  `voice_ok`), cut reflexive ones.
 - **Every list has three items.** Three cards, three pillars, three bullets, three steps on every
   slide. Let the content set the count; two and five are normal. (Checked deck-wide.)
 - **Every title has the same shape**: all "Topic: phrase", all ten words, all starting with "Our"
@@ -114,11 +144,12 @@ Removing tells is half the job; sterile text is just as obvious.
 | Key Takeaways | Price, not volume, rescued the year (the takeaway is the title) |
 | Driving growth / Enhancing efficiency / Ensuring quality | Two new campuses by June · Ticket backlog under 24 hours · First-reply quality audited weekly |
 | The future looks bright: let's build it together! | Approve ₹1.8 crore and three creators by 20 May |
-| Experts agree the market is booming | The market grew 22% in 2025 (named source, year); we grew 38% |
+| Experts agree the market is booming | The market grew 22% in 2025 (named source, year); we grew 38% (both figures from the evidence; if they aren't, say "the market is growing; our share rose", not a made-up number) |
 
 ## 8. Where this runs in the flow
 
-Stage 4 (Draft) writes with these rules; Gate 4 includes "no voice hits left unexamined"; the
-fresh-eye review (qa.md §5) asks the reviewer to flag phrasing that feels AI-written. For long
+Stage 4 (Draft) writes with these rules; Gate 4 includes "every style prompt fixed or kept on
+purpose"; the semantic review (qa.md §3) is separate and checks what the words claim; the
+fresh-eye review (qa.md §6) asks the reviewer to flag phrasing that feels AI-written. For long
 prose that travels with a deck (handouts, notes pages, an email to the client), the behuman or
 unslop skill, when installed, can sweep the text with the same rules.

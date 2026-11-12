@@ -1,1 +1,88 @@
-{"title": "Doc features", "direction": "consulting-navy", "frame": "rail", "footer": "Doc test", "sources": ["Synthetic"], "slides": [{"type": "chart", "kicker": "Market", "letter": "A", "title": "Southeast Asia grows ^^7x^^ faster than the home market¹", "exhibit": "Market growth, 2026-31 (% CAGR)", "tag": "Illustrative", "footnotes": ["CAGR on 2026 base; local currency"], "chart": {"kind": "bar", "categories": ["Vietnam", "Indonesia", "Home"], "series": [{"name": "CAGR", "values": [14, 12, 2]}], "highlight": 0, "number_format": "0"}, "side": {"heading": "Why", "points": ["Young population", "Rising incomes"]}, "so_what": "Lead with Vietnam.", "source": "Synthetic", "notes": {"say": "A."}}, {"type": "kpi", "kicker": "Scorecard", "letter": "B", "title": "Three of four metrics beat plan; repeat rate lags", "items": [{"value": "₹42 cr", "label": "Revenue", "delta": "+12% vs plan"}, {"value": "38%", "label": "Gross margin", "delta": "+2 pts"}, {"value": "21%", "label": "Repeat rate", "delta": "−6 pts", "good": false}, {"value": "4.6", "label": "Rating", "delta": "+0.2"}], "highlight": 2, "source": "Synthetic", "notes": {"say": "B."}}]}
+{
+  "title": "Doc features",
+  "direction": "consulting-navy",
+  "frame": "rail",
+  "footer": "Doc test",
+  "sources": [
+    "Synthetic"
+  ],
+  "slides": [
+    {
+      "type": "chart",
+      "kicker": "Market",
+      "letter": "A",
+      "title": "Southeast Asia grows ^^7x^^ faster than the home market¹",
+      "exhibit": "Market growth, 2026-31 (% CAGR)",
+      "tag": "Illustrative",
+      "footnotes": [
+        "CAGR on 2026 base; local currency"
+      ],
+      "chart": {
+        "kind": "bar",
+        "categories": [
+          "Vietnam",
+          "Indonesia",
+          "Home"
+        ],
+        "series": [
+          {
+            "name": "CAGR",
+            "values": [
+              14,
+              12,
+              2
+            ]
+          }
+        ],
+        "highlight": 0,
+        "number_format": "0"
+      },
+      "side": {
+        "heading": "Why",
+        "points": [
+          "Young population",
+          "Rising incomes"
+        ]
+      },
+      "so_what": "Lead with Vietnam.",
+      "source": "Synthetic",
+      "notes": {
+        "say": "A."
+      }
+    },
+    {
+      "type": "kpi",
+      "kicker": "Scorecard",
+      "letter": "B",
+      "title": "Three of four metrics beat plan; repeat rate lags",
+      "items": [
+        {
+          "value": "₹42 cr",
+          "label": "Revenue",
+          "delta": "+12% vs plan"
+        },
+        {
+          "value": "38%",
+          "label": "Gross margin",
+          "delta": "+2 pts"
+        },
+        {
+          "value": "21%",
+          "label": "Repeat rate",
+          "delta": "−6 pts",
+          "good": false
+        },
+        {
+          "value": "4.6",
+          "label": "Rating",
+          "delta": "+0.2"
+        }
+      ],
+      "highlight": 2,
+      "source": "Synthetic",
+      "notes": {
+        "say": "B."
+      }
+    }
+  ]
+}

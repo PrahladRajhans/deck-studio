@@ -35,9 +35,11 @@ from pptx.util import Emu, Inches, Pt
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from slides_extra import ExtraMixin, _alpha  # noqa: E402
+from spec_io import load_spec, report as spec_report  # noqa: E402,F401  (shared loader, no pptx dependency)
 from _common import (MARGIN, SLIDE_H, SLIDE_W, PLACEHOLDER, SpecError, fit_size,  # noqa: E402
                      has_figures, is_label_title, render_tokens, resolve_theme, safe_eval,
-                     strip_markup, text_height_in, voice_report, wrap_count, DIRECTIONS)
+                     strip_markup, text_height_in, voice_report, wrap_count, DIRECTIONS,
+                     slide_seconds, FONT_FALLBACKS)
 
 # Type floors (pt). Projected decks should stay well above these; read-ahead decks may sit near.
 FLOOR = dict(title=20, body=12, small=9.5, table=11, label=10)
@@ -751,8 +753,8 @@ class Builder(ExtraMixin):
         for se in series:
             sig = tuple(round(float(v), 6) for v in se["values"])
             if len(sig) >= 3 and sig in self.chart_sigs and self.chart_sigs[sig] != self.cur_idx:
-                self.warn(f"slide {self.chart_sigs[sig]} already charts these numbers: chart a series once; "
-                          "summaries state conclusions in words or KPIs")
+                self.warn(f"slide {self.chart_sigs[sig]} already charts these numbers: keep the second chart only if it "
+                          "shows a different relationship; otherwise state the conclusion in words or KPIs")
             self.chart_sigs.setdefault(sig, self.cur_idx)
 
     def _style_range(self, chart, wf, ch, cats):
@@ -1321,6 +1323,19 @@ class Builder(ExtraMixin):
                           min_size=11.5, anchor="middle")
         return slide
 
+    def s_custom(self, s):
+        """A slide composed by hand in the HTML draft (`html`). The builder lays down the chrome and a
+        placeholder that fails lint until the composition is rebuilt on the same grid with python-pptx
+        (routes.md §B) or the slide is redesigned with a standard type."""
+        t = self.t
+        slide, top, bottom = self._body(s)
+        note = s.get("pptx_note", "rebuild this composition with native shapes on the deck grid")
+        self.rect(slide, MARGIN, top, SLIDE_W - 2 * MARGIN, bottom - top, fill=t["panel"], line=t["rule"])
+        self.text(slide, MARGIN + 0.3, top + 0.3, SLIDE_W - 2 * MARGIN - 0.6, 1.2,
+                  f"[CUSTOM LAYOUT: {note}]", 14, t["muted"], self.bf, min_size=11, max_lines=3)
+        self.warn(f"slide {self.cur_idx}: custom layout needs a hand build before delivery ({note})")
+        return slide
+
     def s_bullets(self, s):
         t = self.t
         slide, top, bottom = self._body(s)
@@ -1446,15 +1461,8 @@ class Builder(ExtraMixin):
 
     # ------------------------------------------------------------------ orchestration
     def _seconds(self, s):
-        """Rough time budget per slide from deck `minutes` (dividers/covers ~8 s, the rest share the slot)."""
-        mins = self.spec.get("minutes")
-        if not mins:
-            return None
-        light = ("cover", "divider", "agenda", "closing")
-        n_body = sum(1 for sl in self.spec["slides"] if sl.get("type") not in light)
-        n_light = len(self.spec["slides"]) - n_body
-        budget = mins * 60 * 0.9 - n_light * 8  # keep ~10% for overrun / Q&A changeover
-        return 8 if s.get("type") in light else max(10, int(round(budget / max(1, n_body) / 5.0) * 5))
+        """Time budget per slide (shared with the HTML draft: _common.slide_seconds)."""
+        return slide_seconds(self.spec, s)
 
     def notes(self, slide, s):
         n = s.get("notes") or {}
@@ -1491,9 +1499,11 @@ class Builder(ExtraMixin):
         # layout rhythm: never the same type three slides running
         self.type_run.append(typ)
         if len(self.type_run) >= 3 and len(set(self.type_run[-3:])) == 1 and typ not in ("divider",):
-            self.warn(f"third '{typ}' slide in a row: vary the layout (or merge the slides)")
+            self.warn(f"third '{typ}' slide in a row: fine for like-for-like comparisons; change it if the "
+                      "communication task changed (or merge the slides)")
         if self.talk and typ == "agenda":
-            self.warn("agenda slide in talk mode: talks reveal step by step; use question dividers instead")
+            self.warn("agenda in talk mode: keep it only if it orients (workshop, long or teaching session); "
+                      "for a short persuasive talk, question dividers usually work better")
         if typ == "ask" and not any(ch.isdigit() for ch in json.dumps(s.get("ask", ""))):
             self.warn("the ask has no number (amount, people, date): decision-makers approve what they can weigh")
         if typ in ("cover", "divider", "closing", "agenda", "quote", "question", "references", "image_full",
@@ -1590,7 +1600,7 @@ every light slide: type, id (for exec-summary refs), kicker, title (an assertion
   notes {say, assumptions[], sources[], qa[]}
 OPENERS AND STRUCTURE
   cover        eyebrow, title, subtitle, meta[], figure {value,label}, style (field|gradient|split|minimal), image
-  agenda       title, items[], active (1-based chapter to light up)          [not in talk mode]
+  agenda       title, items[], active (1-based chapter to light up)          [talk mode: only if it orients]
   divider      number, title (talk mode: the audience's next question), subtitle
   exec_summary rows [{claim, detail, ref (slide id), pages, highlight}]
   framework    kicker, title (the thesis), points [{heading, body}]          dark rail + numbered points
@@ -1640,49 +1650,13 @@ PEOPLE, PROOF, PICTURES
   gallery      images [{path, caption, alt}]
   code         code, points[], side_heading
   bullets      items[] (max 6), side{}             (last resort)
+  custom       html (draft body, uses the deck's CSS tokens), pptx_note   (when no type fits; hand-built in PPTX)
   references   items[]
 tokens: any string may contain {=expr|fmt} (e.g. {=rev[2]|.1f}, {=pct(rev[0],rev[2])|+.0f}%);
         a value of "=expr" becomes a number or list (e.g. "values": "=rev").
 functions: sum min max len abs round avg wavg approx pct cagr cumsum share vadd vsub first_at_least
            logistic(n, cap, mid, k) rng(n) all any list
 markup in text: **bold**, ^^accent^^""".replace("DIRS", ", ".join(DIRECTIONS))
-
-
-def load_spec(path: str) -> dict:
-    with open(path, encoding="utf-8") as fh:
-        spec = json.load(fh)
-    facts = spec.get("facts", {})
-    # facts may reference earlier facts
-    resolved = {}
-    for k, v in facts.items():
-        resolved[k] = render_tokens(v, resolved) if isinstance(v, str) else v
-    spec["facts"] = resolved
-    failures = []
-    for chk in spec.get("checks", []):
-        try:
-            ok = safe_eval(chk, resolved)
-        except Exception as e:  # noqa: BLE001
-            raise SpecError(f"check '{chk}' could not run: {e}")
-        if not ok:
-            failures.append(chk)
-    if failures:
-        raise SpecError("fact checks failed (fix the numbers before building):\n  " + "\n  ".join(failures))
-    if resolved:
-        # numbers typed by hand into claims bypass the facts model (the commonest contradiction)
-        pat = re.compile(r"(?:[₹$€£]|USD|INR|Rs\.?)\s?\d[\d,]*(?:\.\d+)?|\b\d[\d,]*(?:\.\d+)?\s?(?:%|x\b|×|cr\b|crore|lakh|bn\b|mn\b|[MK]\b)")
-        hand = []
-        for i, sl in enumerate(spec["slides"], 1):
-            for key in ("title", "so_what", "subtitle", "claim", "ask", "value", "label"):
-                v = sl.get(key)
-                if isinstance(v, str):
-                    bare = re.sub(r"\{=[^}]*\}", "", v)
-                    m = pat.search(bare)
-                    if m:
-                        hand.append(f"slide {i}: hand-typed figure '{m.group(0)}' in {key}: derive it from facts "
-                                    "({=expr}) or confirm it is not a model number")
-        spec["_handtyped"] = hand
-    spec["slides"] = [render_tokens(s, resolved) for s in spec["slides"]]
-    return spec
 
 
 def outline(spec: dict):
@@ -1704,6 +1678,8 @@ def main(argv=None):
     ap.add_argument("--schema", action="store_true")
     ap.add_argument("--direction", help="override the spec's direction (to preview looks)")
     ap.add_argument("--only", help="build only these 1-based slides, e.g. 1,4 (direction previews)")
+    ap.add_argument("--strict", action="store_true",
+                    help="release gate for the final build: refuse to build while blockers remain (spec_io.py)")
     a = ap.parse_args(argv)
     if a.schema:
         print(SCHEMA)
@@ -1720,6 +1696,9 @@ def main(argv=None):
         if a.outline:
             outline(spec)
             return 0
+        if a.strict and spec.get("_blockers"):
+            spec_report(spec, True)
+            return 2
         base = os.path.dirname(os.path.abspath(a.spec))
         b = Builder(spec, base)
         prs = b.build()
@@ -1737,13 +1716,14 @@ def main(argv=None):
     os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
     prs.save(out)
     print(f"built {out}  ({len(spec['slides'])} slides, direction {b.t['name']})")
-    for w in spec.get("_handtyped", []):
-        print(f"  check {w}")
+    spec_report(spec, a.strict)
     for w in b.warnings:
         print(f"  warn  {w}")
     for w in voice_report(spec):
-        print(f"  voice {w}")
+        print(f"  style {w}")
     hard = [w for w in b.warnings if "does not fit" in w or "placeholder" in w]
+    for (fam, bold), used in FONT_FALLBACKS.items():
+        print(f"  note  fit measured with {used} in place of {fam}{' bold' if bold else ''}: check wrapping by eye")
     if b.shrunk:
         print("  note  some text was stepped down in size to fit (within floors)")
     return 3 if hard else 0

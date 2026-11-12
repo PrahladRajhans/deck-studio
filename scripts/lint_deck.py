@@ -11,7 +11,7 @@ more than 7 paragraphs in one box (warn) · placeholder / lorem / [CONFIRM] left
 figures with no source on the slide or in the notes (info) · missing speaker notes (info) ·
 picture or chart with no alt text (info) · overlapping text boxes (warn) · more than 5 fill colours (info) ·
 the same label carrying different numbers across slides (info, cross-slide ledger: check, often legit) ·
-machine-voice phrases (warn, ai_voice) and deck rhythm tells (info, ai_rhythm).
+stock phrasing (warn, style_review) and deck rhythm (info, style_rhythm): editorial prompts, not proof of authorship.
 Exit 1 if any error.
 """
 from __future__ import annotations
@@ -100,6 +100,13 @@ def _lum(hexs):
         return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
     r, g, b = (int(hexs[i:i + 2], 16) for i in (0, 2, 4))
     return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b)
+
+
+def _is_bold(shp) -> bool:
+    try:
+        return any(r.font.bold for p in shp.text_frame.paragraphs for r in p.runs if r.text.strip())
+    except Exception:  # noqa: BLE001
+        return False
 
 
 def contrast(a, b):
@@ -246,9 +253,13 @@ def lint(path: str, mode: str = "document"):
             under = [f for f in filled if (f[0].left or 0) <= cx <= (f[0].left or 0) + (f[0].width or 0)
                      and (f[0].top or 0) <= cy <= (f[0].top or 0) + (f[0].height or 0)]
             behind = min(under, key=lambda f: (f[0].width or 0) * (f[0].height or 0))[1] if under else bg
-            if behind and contrast(col, behind) < 3.0:
+            size = max_font_size(sp) or 12
+            large = size >= 18 or (size >= 14 and _is_bold(sp))  # WCAG large text
+            need = 3.0 if large else 4.5
+            if behind and contrast(col, behind) < need:
                 add(idx, "warn", "low_contrast", f"'{shape_text(sp)[:35]}...' {col} on {behind} "
-                    f"(contrast {contrast(col, behind):.1f}:1, need 4.5 for body, 3 for large text)")
+                    f"(contrast {contrast(col, behind):.1f}:1; {size:.0f}pt{' bold' if large and size < 18 else ''} "
+                    f"text needs {need}:1)")
         for shp in slide.shapes:
             if getattr(shp, "has_chart", False) and shp.has_chart:
                 for pl in shp.chart.plots:
@@ -311,7 +322,7 @@ def lint(path: str, mode: str = "document"):
                 if len(paras) >= 2:
                     list_lens.append(len(paras))
             for code, snips in hits.items():
-                add(idx, "warn", "ai_voice", f"{code}: {', '.join(sorted(set(snips))[:5])} (references/human-voice.md)")
+                add(idx, "warn", "style_review", f"{code}: {', '.join(sorted(set(snips))[:5])} (editorial prompt; references/human-voice.md)")
         if PLACEHOLDER.search(full):
             add(idx, "error", "placeholder", "placeholder text left on the slide ([CONFIRM]/[TBD]/lorem)")
         notes = slide.notes_slide.notes_text_frame.text if slide.has_notes_slide else ""
@@ -339,11 +350,11 @@ def lint(path: str, mode: str = "document"):
         if mode == "talk" and len(spoken.split()) > 50:
             add(idx, "info", "word_budget", f"{len(spoken.split())} words on a talk slide (aim < 40)")
     for msg in deck_voice([t for _, t, _ in titles if t], list_lens):
-        add(1, "info", "ai_rhythm", msg)
+        add(1, "info", "style_rhythm", msg)
     for sig, idxs in chart_sigs.items():
         if len(set(idxs)) > 1:
             add(idxs[0], "info", "same_chart_data", f"slides {sorted(set(idxs))} chart the same numbers: "
-                "chart a series once; let summaries state conclusions")
+                "keep a second chart only if it shows a different relationship")
     for tri, idxs in phrases.items():
         if len(idxs) >= 4:
             add(min(idxs), "info", "repeated_phrase", f"'{tri}' appears on {len(idxs)} slides {sorted(idxs)}: "

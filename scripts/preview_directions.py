@@ -49,8 +49,13 @@ def main():
             if r.returncode != 0:
                 print(r.stdout, r.stderr)
                 sys.exit(r.returncode)
-            subprocess.run([sys.executable, os.path.join(HERE, "render_html.py"), page, rd],
-                           capture_output=True, text=True)
+            r = subprocess.run([sys.executable, os.path.join(HERE, "render_html.py"), page, rd],
+                               capture_output=True, text=True)
+            if r.returncode == 3:
+                print(f"  warn  {d}: some text does not fit in this direction:\n{r.stdout}")
+            elif r.returncode != 0:
+                print(r.stdout, r.stderr)
+                sys.exit(r.returncode)
         rows.append((d, sorted(os.path.join(rd, f) for f in os.listdir(rd) if f.startswith("slide-"))))
     from PIL import Image, ImageDraw, ImageFont
     tw = 640

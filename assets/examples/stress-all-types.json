@@ -1,368 +1,392 @@
 {
- "title": "Stress test: every slide type",
- "direction": "boardroom-oxblood",
- "mode": "document",
- "footer": "Stress test \u00b7 synthetic data",
- "sources": [
-  "Synthetic test data"
- ],
- "facts": {
-  "start": 4.2,
-  "price": 1.1,
-  "volume": -0.6,
-  "cost": -0.3,
-  "end": "=start+price+volume+cost"
- },
- "checks": [
-  "end > 0"
- ],
- "slides": [
-  {
-   "type": "agenda",
-   "title": "Contents",
-   "items": [
-    "Bridge",
-    "Mix",
-    "Risks",
-    "Plan"
-   ],
-   "active": 1
+  "title": "Stress test: every slide type",
+  "direction": "boardroom-oxblood",
+  "mode": "document",
+  "footer": "Stress test · synthetic data",
+  "sources": [
+    "Synthetic test data"
+  ],
+  "facts": {
+    "start": 4.2,
+    "price": 1.1,
+    "volume": -0.6,
+    "cost": -0.3,
+    "end": "=start+price+volume+cost"
   },
-  {
-   "type": "divider",
-   "title": "Profit grew because price more than offset volume",
-   "subtitle": "Section one"
-  },
-  {
-   "type": "chart",
-   "id": "bridge",
-   "kicker": "Bridge",
-   "title": "Price added USD {=price|.1f}M, more than volume and cost took away",
-   "exhibit": "Operating profit bridge, FY29 to FY30 (USD M)",
-   "chart": {
-    "kind": "waterfall",
-    "categories": [
-     "FY29",
-     "Price",
-     "Volume",
-     "Cost",
-     "FY30"
-    ],
-    "values": [
-     "=start",
-     "=price",
-     "=volume",
-     "=cost",
-     "=end"
-    ],
-    "totals": [
-     4
-    ],
-    "highlight": 1,
-    "number_format": "0.0"
-   },
-   "so_what": "Price is the lever: protect it before chasing volume.",
-   "source": "Synthetic"
-  },
-  {
-   "type": "chart",
-   "kicker": "Trend",
-   "title": "Online share climbed every quarter while stores flattened",
-   "exhibit": "Revenue by channel (USD M)",
-   "chart": {
-    "kind": "line",
-    "categories": [
-     "Q1",
-     "Q2",
-     "Q3",
-     "Q4"
-    ],
-    "series": [
-     {
-      "name": "Online",
-      "values": [
-       1,
-       1.4,
-       1.9,
-       2.5
-      ]
-     },
-     {
-      "name": "Stores",
-      "values": [
-       2,
-       2.1,
-       2.0,
-       2.1
-      ]
-     }
-    ],
-    "number_format": "0.0"
-   },
-   "side": {
-    "heading": "Why",
-    "points": [
-     "Marketplace launch in Q2",
-     "Store traffic flat"
-    ]
-   },
-   "source": "Synthetic"
-  },
-  {
-   "type": "chart",
-   "kicker": "Mix",
-   "title": "Three channels make up 80% of revenue",
-   "exhibit": "Revenue share (%)",
-   "chart": {
-    "kind": "doughnut",
-    "categories": [
-     "Online",
-     "Stores",
-     "Wholesale",
-     "Other"
-    ],
-    "series": [
-     {
-      "name": "Share",
-      "values": [
-       45,
-       20,
-       15,
-       20
-      ]
-     }
-    ],
-    "highlight": 0,
-    "number_format": "0"
-   },
-   "source": "Synthetic"
-  },
-  {
-   "type": "chart",
-   "kicker": "Mix",
-   "title": "Premium lines grow fastest in every region",
-   "exhibit": "Revenue by region and tier (USD M)",
-   "chart": {
-    "kind": "stacked_bar",
-    "categories": [
-     "North",
-     "South",
-     "West"
-    ],
-    "series": [
-     {
-      "name": "Core",
-      "values": [
-       2,
-       1.5,
-       1
-      ]
-     },
-     {
-      "name": "Premium",
-      "values": [
-       1,
-       0.8,
-       0.9
-      ]
-     }
-    ],
-    "number_format": "0.0"
-   },
-   "source": "Synthetic"
-  },
-  {
-   "type": "matrix",
-   "kicker": "Risks",
-   "title": "Two risks need a named owner before launch",
-   "exhibit": "Risks by likelihood and impact",
-   "x_axis": {
-    "label": "Likelihood"
-   },
-   "y_axis": {
-    "label": "Impact"
-   },
-   "quadrants": [
-    "Watch closely",
-    "Act now",
-    "Accept",
-    "Mitigate"
-   ],
-   "items": [
+  "checks": [
+    "end > 0"
+  ],
+  "slides": [
     {
-     "label": "Registration delay",
-     "x": 0.8,
-     "y": 0.85,
-     "highlight": true
+      "type": "agenda",
+      "title": "Contents",
+      "items": [
+        "Bridge",
+        "Mix",
+        "Risks",
+        "Plan"
+      ],
+      "active": 1
     },
     {
-     "label": "Retailer exits",
-     "x": 0.35,
-     "y": 0.75
+      "type": "divider",
+      "title": "Profit grew because price more than offset volume",
+      "subtitle": "Section one"
     },
     {
-     "label": "FX swing",
-     "x": 0.7,
-     "y": 0.3
+      "type": "chart",
+      "id": "bridge",
+      "kicker": "Bridge",
+      "title": "Price added USD {=price|.1f}M, more than volume and cost took away",
+      "exhibit": "Operating profit bridge, FY29 to FY30 (USD M)",
+      "chart": {
+        "kind": "waterfall",
+        "categories": [
+          "FY29",
+          "Price",
+          "Volume",
+          "Cost",
+          "FY30"
+        ],
+        "values": [
+          "=start",
+          "=price",
+          "=volume",
+          "=cost",
+          "=end"
+        ],
+        "totals": [
+          4
+        ],
+        "highlight": 1,
+        "number_format": "0.0"
+      },
+      "so_what": "Price is the lever: protect it before chasing volume.",
+      "source": "Synthetic"
     },
     {
-     "label": "Stock-out",
-     "x": 0.2,
-     "y": 0.2
+      "type": "chart",
+      "kicker": "Trend",
+      "title": "Online revenue climbed every quarter while stores stayed flat",
+      "exhibit": "Revenue by channel (USD M)",
+      "chart": {
+        "kind": "line",
+        "categories": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4"
+        ],
+        "series": [
+          {
+            "name": "Online",
+            "values": [
+              1,
+              1.4,
+              1.9,
+              2.5
+            ]
+          },
+          {
+            "name": "Stores",
+            "values": [
+              2,
+              2.1,
+              2.0,
+              2.1
+            ]
+          }
+        ],
+        "number_format": "0.0"
+      },
+      "side": {
+        "heading": "Why",
+        "points": [
+          "Marketplace launch in Q2",
+          "Store traffic flat"
+        ]
+      },
+      "source": "Synthetic",
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "chart",
+      "kicker": "Mix",
+      "title": "Three channels make up 80% of revenue",
+      "exhibit": "Revenue share (%)",
+      "chart": {
+        "kind": "doughnut",
+        "categories": [
+          "Online",
+          "Stores",
+          "Wholesale",
+          "Other"
+        ],
+        "series": [
+          {
+            "name": "Share",
+            "values": [
+              45,
+              20,
+              15,
+              20
+            ]
+          }
+        ],
+        "highlight": 0,
+        "number_format": "0"
+      },
+      "source": "Synthetic",
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "chart",
+      "kicker": "Mix",
+      "title": "Core lines still carry most revenue in every region",
+      "exhibit": "Revenue by region and tier (USD M)",
+      "chart": {
+        "kind": "stacked_bar",
+        "categories": [
+          "North",
+          "South",
+          "West"
+        ],
+        "series": [
+          {
+            "name": "Core",
+            "values": [
+              2,
+              1.5,
+              1
+            ]
+          },
+          {
+            "name": "Premium",
+            "values": [
+              1,
+              0.8,
+              0.9
+            ]
+          }
+        ],
+        "number_format": "0.0"
+      },
+      "source": "Synthetic",
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "matrix",
+      "kicker": "Risks",
+      "title": "Two risks need a named owner before launch",
+      "exhibit": "Risks by likelihood and impact",
+      "x_axis": {
+        "label": "Likelihood"
+      },
+      "y_axis": {
+        "label": "Impact"
+      },
+      "quadrants": [
+        "Watch closely",
+        "Act now",
+        "Accept",
+        "Mitigate"
+      ],
+      "items": [
+        {
+          "label": "Registration delay",
+          "x": 0.8,
+          "y": 0.85,
+          "highlight": true
+        },
+        {
+          "label": "Retailer exits",
+          "x": 0.35,
+          "y": 0.75
+        },
+        {
+          "label": "FX swing",
+          "x": 0.7,
+          "y": 0.3
+        },
+        {
+          "label": "Stock-out",
+          "x": 0.2,
+          "y": 0.2
+        }
+      ],
+      "highlight_quadrant": 1,
+      "side": {
+        "heading": "Mitigations",
+        "points": [
+          "Start the dossier this quarter",
+          "Two-retailer fallback list"
+        ]
+      }
+    },
+    {
+      "type": "compare",
+      "kicker": "Options",
+      "title": "A partner model trades margin for speed",
+      "columns": [
+        {
+          "heading": "Own channel",
+          "points": [
+            "Higher margin",
+            "Slower: 12 months",
+            "Needs a team of 8"
+          ]
+        },
+        {
+          "heading": "Partner",
+          "points": [
+            "Live in 3 months",
+            "Margin 6 points lower",
+            "Partner holds the customer data"
+          ]
+        }
+      ],
+      "highlight": 1
+    },
+    {
+      "type": "cards",
+      "kicker": "Plan",
+      "title": "Three moves make the plan work",
+      "items": [
+        {
+          "heading": "Price first",
+          "body": "Hold list price; use bundles, not discounts"
+        },
+        {
+          "heading": "Fix stock",
+          "body": "Weekly replenishment for the top 50 SKUs"
+        },
+        {
+          "heading": "Own the data",
+          "body": "Loyalty sign-up at every partner till"
+        }
+      ],
+      "numbered": true,
+      "highlight": 0
+    },
+    {
+      "type": "kpi",
+      "kicker": "Targets",
+      "title": "Year-one targets are set against last year's baseline",
+      "items": [
+        {
+          "value": "USD 4.4M",
+          "label": "operating profit",
+          "detail": "from USD 4.2M"
+        },
+        {
+          "value": "45%",
+          "label": "online share",
+          "detail": "from 30%"
+        },
+        {
+          "value": "98%",
+          "label": "in-stock rate",
+          "detail": "top 50 SKUs"
+        }
+      ],
+      "highlight": 0,
+      "source": "Synthetic",
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "table",
+      "kicker": "Detail",
+      "title": "Every region beats last year, the West by most",
+      "exhibit": "Revenue by region (USD M)",
+      "columns": [
+        "Region",
+        "FY29",
+        "FY30",
+        "Change"
+      ],
+      "rows": [
+        [
+          "North",
+          "2.6",
+          "3.0",
+          "+15%"
+        ],
+        [
+          "South",
+          "2.0",
+          "2.3",
+          "+15%"
+        ],
+        [
+          "West",
+          "1.5",
+          "1.9",
+          "+27%"
+        ],
+        [
+          "Total",
+          "6.1",
+          "7.2",
+          "+18%"
+        ]
+      ],
+      "highlight_row": 2,
+      "total_row": true,
+      "source": "Synthetic",
+      "data_status": "illustrative",
+      "tag": "Illustrative"
+    },
+    {
+      "type": "bullets",
+      "kicker": "Next steps",
+      "title": "Four actions start this month",
+      "items": [
+        "Sign the partner term sheet",
+        "File the registration dossier",
+        "Hire the category lead",
+        "Set up the weekly stock review"
+      ],
+      "side": {
+        "heading": "Owners",
+        "points": [
+          "CEO",
+          "Regulatory",
+          "HR",
+          "Ops"
+        ]
+      }
+    },
+    {
+      "type": "image",
+      "kicker": "Proof",
+      "title": "The pilot store doubled basket size in six weeks",
+      "path": "test-photo.jpg",
+      "alt": "Synthetic test image",
+      "side": "left",
+      "heading": "What changed",
+      "points": [
+        "Shelf moved to the entrance",
+        "Staff trained on two bundles",
+        "Weekly stock review"
+      ]
     }
-   ],
-   "highlight_quadrant": 1,
-   "side": {
-    "heading": "Mitigations",
-    "points": [
-     "Start the dossier this quarter",
-     "Two-retailer fallback list"
-    ]
-   }
-  },
-  {
-   "type": "compare",
-   "kicker": "Options",
-   "title": "A partner model trades margin for speed",
-   "columns": [
-    {
-     "heading": "Own channel",
-     "points": [
-      "Higher margin",
-      "Slower: 12 months",
-      "Needs a team of 8"
-     ]
+  ],
+  "fact_meta": {
+    "start": {
+      "kind": "illustrative"
     },
-    {
-     "heading": "Partner",
-     "points": [
-      "Live in 3 months",
-      "Margin 6 points lower",
-      "Partner holds the customer data"
-     ]
+    "price": {
+      "kind": "illustrative"
+    },
+    "volume": {
+      "kind": "illustrative"
+    },
+    "cost": {
+      "kind": "illustrative"
     }
-   ],
-   "highlight": 1
-  },
-  {
-   "type": "cards",
-   "kicker": "Plan",
-   "title": "Three moves make the plan work",
-   "items": [
-    {
-     "heading": "Price first",
-     "body": "Hold list price; use bundles, not discounts"
-    },
-    {
-     "heading": "Fix stock",
-     "body": "Weekly replenishment for the top 50 SKUs"
-    },
-    {
-     "heading": "Own the data",
-     "body": "Loyalty sign-up at every partner till"
-    }
-   ],
-   "numbered": true,
-   "highlight": 0
-  },
-  {
-   "type": "kpi",
-   "kicker": "Targets",
-   "title": "Year-one targets are set against last year's baseline",
-   "items": [
-    {
-     "value": "USD 4.4M",
-     "label": "operating profit",
-     "detail": "from USD 4.2M"
-    },
-    {
-     "value": "45%",
-     "label": "online share",
-     "detail": "from 30%"
-    },
-    {
-     "value": "98%",
-     "label": "in-stock rate",
-     "detail": "top 50 SKUs"
-    }
-   ],
-   "highlight": 0,
-   "source": "Synthetic"
-  },
-  {
-   "type": "table",
-   "kicker": "Detail",
-   "title": "Every region beats last year, the West by most",
-   "exhibit": "Revenue by region (USD M)",
-   "columns": [
-    "Region",
-    "FY29",
-    "FY30",
-    "Change"
-   ],
-   "rows": [
-    [
-     "North",
-     "2.6",
-     "3.0",
-     "+15%"
-    ],
-    [
-     "South",
-     "2.0",
-     "2.3",
-     "+15%"
-    ],
-    [
-     "West",
-     "1.5",
-     "1.9",
-     "+27%"
-    ],
-    [
-     "Total",
-     "6.1",
-     "7.2",
-     "+18%"
-    ]
-   ],
-   "highlight_row": 2,
-   "total_row": true,
-   "source": "Synthetic"
-  },
-  {
-   "type": "bullets",
-   "kicker": "Next steps",
-   "title": "Four actions start this month",
-   "items": [
-    "Sign the partner term sheet",
-    "File the registration dossier",
-    "Hire the category lead",
-    "Set up the weekly stock review"
-   ],
-   "side": {
-    "heading": "Owners",
-    "points": [
-     "CEO",
-     "Regulatory",
-     "HR",
-     "Ops"
-    ]
-   }
-  },
-  {
-   "type": "image",
-   "kicker": "Proof",
-   "title": "The pilot store doubled basket size in six weeks",
-   "path": "test-photo.jpg",
-   "alt": "Synthetic test image",
-   "side": "left",
-   "heading": "What changed",
-   "points": [
-    "Shelf moved to the entrance",
-    "Staff trained on two bundles",
-    "Weekly stock review"
-   ]
   }
- ]
 }

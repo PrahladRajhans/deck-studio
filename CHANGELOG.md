@@ -18,7 +18,7 @@ rewrite older entries to imply that later fixes already existed.
 - Ensure illustrative provenance badges appear in HTML and native PPTX, including full-bleed
   covers and closing slides that omit ordinary footers.
 - Scan quotations, references, source lines, code, deck sources and notes for placeholders independently of
-  editorial exemptions. Custom HTML scans its text without mistaking CSS dimensions for data.
+  editorial exemptions, including the documented "Source: to be added" gap marker. Custom HTML scans its text without mistaking CSS dimensions for data.
 - Keep administrative number exceptions narrow and documented; an exception for a standalone
   digit does not remove that digit from larger substantive quantities.
 

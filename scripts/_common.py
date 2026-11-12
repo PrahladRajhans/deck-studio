@@ -532,7 +532,7 @@ _VERBISH = re.compile(
     r"wins?|fails?|helps?|lifts?|drops?|slips?|shifts?|runs?|ran|comes?|came|goes|went|"
     r"[a-z]{3,}ed)\b|\b(not|no|only|than|vs)\b", re.I)
 PLACEHOLDER = re.compile(r"\[(CONFIRM|TBD|TODO|VERIFY|INSERT|IMAGE NEEDED|CUSTOM LAYOUT)[^\]]*\]|lorem|ipsum|\bx{3,}\b|"
-                         r"click to (add|edit)|\[insert", re.I)
+                         r"click to (add|edit)|\[insert|\b(?:source|citation):?\s*(?:to be added|needed|missing)\b", re.I)
 NUMBER = re.compile(r"(?<![A-Za-z])[-+]?\d[\d,]*(?:\.\d+)?\s?(%|x|bn|mn|m|k|cr|lakh|pp|bps)?", re.I)
 
 

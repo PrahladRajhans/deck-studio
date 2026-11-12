@@ -151,15 +151,14 @@ are explicitly fictional layout demonstrations and have been classified accordin
 - `frame` per slide overrides the deck frame (rare).
 - Deck `minutes` → `[~N sec]` at the top of each slide's notes.
 
-## Builder guarantees
+## Builder checks and limits
 
 Text is measured with real font metrics and stepped down to fit, never below the floors
 (title 20pt, body 12pt, talk-mode body 18pt); if it still can't fit, it warns and exits 3.
-Charts and tables are native and editable. Pictures are cropped, never stretched. Every chart and
-picture gets alt text. Shapes carry no inherited shadows. Text that would sit on a fill (or slide
+Charts and tables are native and editable. Pictures are cropped, never stretched. Charts receive generated alt text; pictures need supplied alt text and warn when it is missing. Shapes carry no inherited shadows. Text that would sit on a fill (or slide
 background) without enough contrast flips to ink or white (4.5:1 body, 3:1 large text). Notes
-separate the spoken script from presenter-only reference. Validation (above) flags numbers that
-bypass the facts model anywhere on a slide, and `--strict` blocks them. The builders print a note
+separate the spoken script from presenter-only reference. Validation (above) checks recorded numerical provenance and blocks detected gaps under
+`--strict`; administrative exceptions and reviewed claim inventories still need semantic review. The builders print a note
 when text was measured with a substitute font. Warnings flag label titles, missing
 sources and notes, the same type three times running (a prompt, not a ban), agenda in talk mode, asks without a number
 or cost, FAQ fragments, risks without mitigation, scorecards that contradict the recommendation,

@@ -56,6 +56,11 @@ class ReleaseGate(unittest.TestCase):
         for field in ('footer', 'sources', 'title'):
             self.blocked({field: '[TBD]', 'slides': []}, 'placeholder')
 
+    def test_missing_source_sentinel_blocks_release(self):
+        spec = self.observed()
+        spec['slides'][0]['source'] = 'Source: to be added'
+        self.blocked(spec, 'placeholder')
+
     def test_observed_fact_and_matching_claim_pass(self):
         self.assertEqual(self.load(self.observed())['_blockers'], [])
 

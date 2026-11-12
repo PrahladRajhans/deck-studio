@@ -90,7 +90,8 @@
       ],
       "notes": {
         "say": "We recommend a capital-light entry into the UAE: Amazon.ae plus one premium retailer. It needs USD {=budget|.1f} million and pays back in year {=payback+1}."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "exec_summary",
@@ -132,7 +133,8 @@
         "How to enter",
         "What it takes"
       ],
-      "active": 3
+      "active": 3,
+      "data_status": "illustrative"
     },
     {
       "type": "chart",
@@ -167,7 +169,8 @@
           "Growth path is illustrative, not researched"
         ]
       },
-      "id": "market"
+      "id": "market",
+      "data_status": "illustrative"
     },
     {
       "type": "options",
@@ -358,7 +361,8 @@
       "notes": {
         "say": "Four workstreams run in parallel. Registration is highlighted because every other date depends on it."
       },
-      "id": "plan"
+      "id": "plan",
+      "data_status": "illustrative"
     },
     {
       "type": "ask",
@@ -382,7 +386,8 @@
       "notes": {
         "say": "Here is the decision we need today, why it cannot wait, and what it costs."
       },
-      "id": "ask"
+      "id": "ask",
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -397,7 +402,8 @@
       ],
       "notes": {
         "say": "To close: one decision, one budget, one clear payback year."
-      }
+      },
+      "data_status": "illustrative"
     }
   ],
   "fact_meta": {
@@ -431,5 +437,6 @@
     "sc_c": {
       "kind": "illustrative"
     }
-  }
+  },
+  "illustrative_authorized": true
 }

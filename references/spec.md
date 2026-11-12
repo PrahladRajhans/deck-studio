@@ -35,35 +35,68 @@ Optional slide keys besides the visible fields: `role` (recommendation, evidence
 investigation, workshop, transition, closing; writing.md §1) and `question` (the audience question
 the slide answers) for planning and review; `data_status` and `voice_ok` (below).
 
-## Evidence register, claim types and the release gate
+## Evidence register, claim inventories and the release gate
+
+Run `spec_io.py spec.json --strict` before final production in **every** format. Final HTML also
+supports `build_html.py spec.json --strict -o out/deck.html`. Draft mode reports blockers but
+continues, so unresolved evidence can still be discussed in a visibly unfinished draft.
 
 ```json
-"facts":     { "share_2026": 34, "target_orders": 5000, "conv": "=orders/carts*100" },
-"fact_meta": { "share_2026":    {"kind": "observed", "evidence": "panel26"},
-               "target_orders": {"kind": "target"} },
-"evidence":  { "panel26": {"source": "Retail panel, Q2 2026 report", "locator": "Table 4, p. 12",
-                           "status": "verified", "kind": "observed"} }
+{
+  "facts": {"enrolled": 12},
+  "fact_meta": {"enrolled": {"kind": "observed", "evidence": "report"}},
+  "evidence": {"report": {
+    "source": "User-supplied study report", "locator": "Table 1, enrolled row",
+    "status": "verified"
+  }},
+  "slides": [{
+    "type": "statement", "claim": "We enrolled {=enrolled} participants",
+    "claims": [{
+      "text": "We enrolled {=enrolled} participants", "kind": "observed",
+      "evidence_ids": ["report"], "status": "reviewed"
+    }]
+  }]
+}
 ```
 
-- `fact_meta.kind` for every raw fact: `observed`, `estimate`, `forecast`, `assumption`, `target`
-  or `illustrative`. Derived (`"=expr"`) facts are `calculated` automatically. Observed facts name
-  an `evidence` entry.
-- `evidence` entries record `source`, `locator` (page, table, cell, URL) and `status`: `verified`
-  (the source exists and supports the claim's wording, scope, period and certainty), `unverified`
-  or `missing`. Never mark an entry verified that you have not checked.
-- A slide whose numbers are typed rather than drawn from facts declares `data_status`: `sourced`
-  (needs a `source` line) or `illustrative` (needs an Illustrative tag or footer).
-- `voice_ok`: words or phrases kept on purpose despite a style prompt (deck or slide level).
+- Classify raw facts as `observed`, `estimate`, `forecast`, `assumption`, `target` or
+  `illustrative`. Only an `=expression` can be `calculated`. Observed facts link an evidence ID.
+- Every evidence entry requires a source, a precise locator and `verified` status. Verification
+  means the source was actually checked and supports the particular wording, scope, population,
+  period and certainty. The validator checks the record, not the source itself.
+- Record each substantive claim in the slide's `claims` list, including facts in notes and exact
+  quotations. `text` must match presented wording (tokens are supported). Set `status: reviewed`
+  only after semantic review. Observed claims and quotations require `evidence_ids`.
+- Other claim kinds are `calculated`, `estimate`, `forecast`, `assumption`, `target`, `hypothesis`,
+  `recommendation` and `illustrative`. All except illustrative claims require a `basis` explaining
+  their calculation, analysis or assumptions. Match the visible wording to that classification.
+- Navigation and other content making no factual assertion may use `non_factual_reason` instead
+  of claims. This is a documented review decision, not an automatic assertion exemption. Do not
+  use it to hide factual content. Review inventory completeness against the actual output.
+- Literal figures, including ordinary counts and years, are checked even without a facts model.
+  Prefer tokens and expressions. A slide using literal sourced data requires `data_status: sourced`,
+  a source line **and** `evidence_ids` linked to verified entries. A citation string alone never
+  establishes provenance. Code and citation metadata are exempt from numerical scanning only;
+  placeholders in them still block release.
+- Administrative text such as a section number may use
+  `number_exceptions: [{"text": "Part 2", "reason": "Section navigation"}]`. Keep the exception
+  exact and narrow; it is reviewed, not inferred. Never exempt substantive counts or dates.
+- Illustrative content requires user agreement recorded as `illustrative_authorized: true`, a
+  visible `Illustrative` tag or footer, and `data_status: illustrative` on wholly illustrative
+  slides. Such slides describe fictional examples and may omit real-world claim evidence.
+  Derived facts inherit illustrative provenance, so calculations cannot remove the label requirement.
+  Both builders add a visible high-contrast badge, including on full-bleed covers and closings.
+- Do not infer truth or user agreement merely from these fields. They are audit records. No prompt
+  or schema guarantees zero hallucinations; source verification and semantic review remain required.
+- Placeholder scanning includes quotations, references, source lines, code and speaker notes,
+  independently of style exemptions. Count mismatches and custom reconstruction needs remain notes.
+- `voice_ok` records editorial exceptions and does not waive any evidence or release rule.
 
-`spec_io.py spec.json` reports what would block a final build; the builders print the same as
-`check` lines. `--strict` (Stage 6) turns these into errors and refuses to build: hand-typed figures
-in any visible text, literal numbers in chart, KPI, funnel or scorecard data, placeholders, facts
-without a kind, observed facts without evidence, and evidence that is not verified, all unless the
-slide declares `data_status`. Administrative numbers (page numbers, matrix positions, timeline
-period indexes, highlights) are exempt. Count mismatches between a title ("Three limits") and its
-list, illustrative facts and custom slides are reported as notes for the semantic review.
+**Migration:** older real decks may now fail strict validation. Add locators, claim inventories and
+linked evidence; do not relabel real figures illustrative to silence errors. The bundled examples
+are explicitly fictional layout demonstrations and have been classified accordingly.
 
-## The facts model (why the numbers always agree)
+## The facts model (shared inputs and checked calculations)
 
 - `facts` holds raw inputs (numbers or lists) and derived values (`"=expr"`). Derived facts may
   use earlier facts. Evaluated with a safe whitelist: arithmetic, comparisons, indexing,
@@ -83,6 +116,21 @@ list, illustrative facts and custom slides are reported as notes for the semanti
 - Useful derivations: `profit = vsub(vsub(rev, cost), opex)`, `cum = cumsum(profit)`,
   `peak_draw = -min(cum)`, `turn = first_at_least(profit, 0)`, `payback = first_at_least(cum, 0)`,
   `score_b = wavg(sc_b, weights)`, `growth = cagr(rev[0], rev[3], 3)`.
+
+## Creative planning and custom composition
+
+Keep `brief.creative_brief` and `brief.creative_plan` beside the content: audience change, tension,
+distinctive material, latitude, selected concept, alternatives, rationale and intended rhythm.
+They guide judgement and are not rendered or graded by the validator. See creative-direction.md.
+
+A `custom` slide can improve explanation or expression even when standard types technically fit.
+Its `html` uses the deck's tokens inside normal chrome. `full_bleed: true` uses the whole stage;
+notes, a supplied source line and illustrative provenance remain in the generated HTML. Place
+the visible headline inside `html`; ordinary chrome fields such as `title` become planning metadata
+in this mode and cannot substitute for presented claim text. Give the
+composition a clear reading order and retain legible, editable text. Full-stage HTML does not
+promise automatic native PPTX conversion: record a feasible `pptx_note`, reconstruct after approval,
+then compare and QA the actual file. The builder's placeholder must not be delivered as final.
 
 ## Slide-writing tips per type
 
@@ -118,15 +166,14 @@ list, illustrative facts and custom slides are reported as notes for the semanti
 - `frame` per slide overrides the deck frame (rare).
 - Deck `minutes` → `[~N sec]` at the top of each slide's notes.
 
-## Builder guarantees
+## Builder checks and limits
 
 Text is measured with real font metrics and stepped down to fit, never below the floors
 (title 20pt, body 12pt, talk-mode body 18pt); if it still can't fit, it warns and exits 3.
-Charts and tables are native and editable. Pictures are cropped, never stretched. Every chart and
-picture gets alt text. Shapes carry no inherited shadows. Text that would sit on a fill (or slide
+Charts and tables are native and editable. Pictures are cropped, never stretched. Charts receive generated alt text; pictures need supplied alt text and warn when it is missing. Shapes carry no inherited shadows. Text that would sit on a fill (or slide
 background) without enough contrast flips to ink or white (4.5:1 body, 3:1 large text). Notes
-separate the spoken script from presenter-only reference. Validation (above) flags numbers that
-bypass the facts model anywhere on a slide, and `--strict` blocks them. The builders print a note
+separate the spoken script from presenter-only reference. Validation (above) checks recorded numerical provenance and blocks detected gaps under
+`--strict`; administrative exceptions and reviewed claim inventories still need semantic review. The builders print a note
 when text was measured with a substitute font. Warnings flag label titles, missing
 sources and notes, the same type three times running (a prompt, not a ban), agenda in talk mode, asks without a number
 or cost, FAQ fragments, risks without mitigation, scorecards that contradict the recommendation,

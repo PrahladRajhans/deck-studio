@@ -2,7 +2,7 @@
   "title": "Doc features",
   "direction": "consulting-navy",
   "frame": "rail",
-  "footer": "Doc test",
+  "footer": "Doc test · Illustrative",
   "sources": [
     "Synthetic"
   ],
@@ -48,7 +48,8 @@
       "source": "Synthetic",
       "notes": {
         "say": "A."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "kpi",
@@ -82,7 +83,9 @@
       "source": "Synthetic",
       "notes": {
         "say": "B."
-      }
+      },
+      "data_status": "illustrative"
     }
-  ]
+  ],
+  "illustrative_authorized": true
 }

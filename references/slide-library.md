@@ -1,5 +1,7 @@
 # Slide library (44 types plus `custom`)
 
+Treat these types as a toolbox, not a mandatory menu or ceiling. Develop the concept first
+(creative-direction.md); use a type or a custom composition according to what it explains.
 For each type: use it when / avoid it when / content limits / notes. Field reference:
 `build_deck.py --schema`. Visual reference: `assets/examples/*-preview.png` and the showcase spec
 `assets/examples/showcase-new-types.json` (every type rendered on one grid).
@@ -24,7 +26,7 @@ misleads.
 |---|---|---|---|
 | `cover` | always | — | Title = answer (D) or promise (T). `figure` = the one number. Styles: field, gradient, split (+ photo), minimal |
 | `exec_summary` | document decks of 6+ slides | talk mode | 3-5 rows, one per chapter, same order as the body; `ref` gives live page numbers; write it last |
-| `agenda` | long document decks | talk mode (builder warns) | reuse per chapter with `active` = running spine |
+| `agenda` | navigation in long decks, teaching or workshops | short talks where it adds no orientation | reuse per chapter with `active` = running spine |
 | `divider` | every 3-6 body slides in long decks | two in a row | talk mode: only the audience's next question; the next slide starts answering it |
 | `framework` | a thesis with 3-4 supports | data slides | dark left rail; use for the chapter's key idea, not everything |
 | `statement` | one idea to land | lists | claim may be the headline (no title) |
@@ -88,9 +90,9 @@ not editable data: keep the numbers in `facts`, give alt text, say so if editabi
 | `image_full` | the human hook, a place, a product in use | text-heavy points | scrim keeps text legible; credit line |
 | `gallery` | 2-6 pictures with captions | unrelated images | portfolios, events, product range |
 | `code` | code, prompt, command | executives who don't code | monospaced on a dark panel + 2-3 points |
-| `bullets` | nothing else fits | more than 6 items | ask first why no exhibit fits |
+| `bullets` | clear parallel text is the most useful form | more than 6 items | choose deliberately; no need to manufacture a diagram |
 | `references` | sources slide | invented sources | numbered; consistent, complete citations (publisher, title, date, locator) |
-| `custom` | no type fits without distorting the idea (a map, a dependency network, an annotated schematic) | a standard type would do | `html` body on the deck's CSS tokens, reproducible from the spec; say why no type fits; the PPTX needs a hand build of the slide (placeholder fails lint until done) |
+| `custom` | a tailored composition improves explanation, emphasis, identity or experience | novelty that adds no value | `html` on the deck tokens; optional `full_bleed: true`; reproducible from the spec; record native reconstruction in `pptx_note`; PPTX placeholder fails lint until rebuilt |
 
 ## Variants worth knowing
 

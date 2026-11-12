@@ -1,5 +1,8 @@
 # Visual language
 
+Develop a concept before choosing these tokens (creative-direction.md). A theme is a construction
+kit, not a finished design language. Prefer choices specific to the evidence and presenter.
+
 ## 1. Art directions (22; tokens in `scripts/_common.py`)
 
 Each direction = colour tokens + type pair + shape language (corner radius, card style) + default
@@ -32,11 +35,11 @@ frame with `frame`, the cover with `style` on the cover slide.
 | campus-bright | creative | low | high-energy, youthful | Arial / Calibri | rounded, gradient cover | club events, fests, orientation | investors |
 
 Selection: decision-trees.md T8. Preview before committing: `preview_directions.py`.
-Font QA: all heading/body fonts above have metric-compatible clones here (Carlito, Caladea,
-Liberation, TeX Gyre Schola/Bonum/Pagella), so fit checks are trustworthy; Palatino via Pagella is
-close, not identical (`fonts_qa: approximate` on luxe-noir: leave ~10% slack). Never default to Aptos,
-Georgia, Trebuchet, Garamond, Impact or Arial Black for body text: their QA substitutes have
-different widths (Anthropic pptx skill). Use them only if the user asks, with slack.
+Font QA: compatible clones may be available (Carlito, Caladea, Liberation and TeX Gyre).
+Run `env_check.py` in the actual environment before trusting measurements; Palatino via Pagella is
+close, not identical (`fonts_qa: approximate` on luxe-noir: leave ~10% slack). Some fonts have unreliable substitutes in a given environment. Choose expressive typography
+when it fits, verify the actual font and wrapping, and disclose substitution. Familiar fonts are
+also valid; neither popularity nor novelty is a reason to reject one.
 
 ## 2. Frames and covers
 
@@ -54,7 +57,7 @@ Talk-mode dividers carry only the question.
 
 The rule-under-headline question (sources disagree): Anthropic's skill calls accent lines under
 titles an AI tell; office-kit's McKinsey comparison found a thin full-width rule under the headline
-is the default in long external decks. Resolution: never a short coloured bar under a title; a
+is the default in long external decks. Resolution: avoid a short coloured bar used only as filler; a
 full-width neutral hairline only in the `classic`/`rail` frames; no rule in `clean`/`editorial`.
 
 ## 3. Colour
@@ -64,9 +67,10 @@ full-width neutral hairline only in the `classic`/`rail` frames; no rule in `cle
   nothing is. Semantic green/red only for good/bad deltas and status, sparingly (in the McKinsey
   reference red appeared on two slides of 68).
 - Dominance over equality: one colour carries 60-70% of the visual weight (Anthropic).
-- Highlight one, grey the rest in every chart and diagram.
-- Three background modes, each with a job: white (exhibits), light panel (commentary, so-what,
-  side panels), dark (cover, dividers, agenda spine, framework rail). Don't invent a fourth.
+- Use emphasis to clarify the relationship. One highlight often helps; comparisons, categories
+  and mechanisms may need several meaningful colours or equal emphasis.
+- White, light-panel and dark backgrounds provide reliable starting modes. Other brand or
+  concept-led treatments are welcome when they preserve readability and coherent hierarchy.
 - Contrast: body text ≥ 4.5:1, large text ≥ 3:1 (WCAG AA). The builder flips text to ink or white
   when a fill is too light or dark for it; lint reports what remains.
 - Don't default to cream/beige grounds for a generic deck (Anthropic); the warm directions use them
@@ -95,7 +99,7 @@ Embedding a font in the PPTX depends on its licence; when unsure, stay with font
 has. A familiar font with clear hierarchy beats a distinctive one that breaks the deck: don't
 reject a font only because it is common.
 
-Two typefaces max (a third only for code). Three sizes per slide. Left-align body; centre only
+Two typefaces max (a third only for code). Keep a clear type hierarchy; three sizes is a useful starting point, not a cap. Left-align body; centre only
 single lines (covers, big numbers, quotes). Authored line breaks at meaning boundaries; no 1-3
 character last lines.
 
@@ -125,12 +129,13 @@ Shadows: at most one or two elevated surfaces per slide, subtle (the builder's `
 - Keep apart, and label: documentary photos vs illustrations, real interfaces vs mockups, technical
   diagrams vs decoration, verified charts vs illustrative ones. A clearly labelled conceptual
   illustration is fine; AI imagery presented as a real facility, person, customer, product or
-  result never is. Never photos of public figures pulled from the web.
+  result never is. Use photographs with verified identity, provenance and permitted use; a famous face is not a
+  substitute for evidence.
 - Icons: glyph badges (▲ ▼ ✓ ✗ ★ → ! ◎ ●) in a filled circle render in every Office font; no emoji
   (they render inconsistently). `columns` and `cards` take `icon` names: up, down, check, cross,
   star, arrow, warn, plus, minus, question, dot, diamond, money, rupee, percent, time, target.
-- One visual motif repeated across the deck (rounded photo frames, glyph badges, the highlight bar):
-  never a decorative colour stripe (Anthropic).
+- An optional visual motif used where it reinforces meaning (rounded photo frames, glyph badges, the highlight bar):
+  keep it when it supports identity or orientation; remove it when it is only filler.
 - A richer icon set (one consistent SVG family with semantic names, stroke weight, size rules and
   licence notes) is not bundled yet; until it is, use glyph badges or none rather than mixing icon
   styles from different sources.
@@ -159,11 +164,11 @@ standard types can't make.
 ## 9. Anti-patterns (AI-slop and amateur tells)
 
 Layout: everything centred; the same layout slide after slide; identical card grids everywhere;
-a "pretty" slide with nothing to say; text-only slides with no visual; four thin boxes on a talk
+a "pretty" slide with nothing to say; visuals added only to fill space; four thin boxes on a talk
 slide. Decoration: accent bars under titles, edge stripes, header/footer bars, purposeless drop
 shadows, glassmorphism, glows, gradients on every slide, AI stock art, emoji icons. Colour: purple
 gradient on white, generic indigo #6366F1, rainbow categorical charts, three accents fighting.
-Type: Inter/Roboto/Arial as display in HTML decks (in PPTX the safe fonts are deliberate);
+Type: typography chosen by habit without attention to meaning, hierarchy or deployment;
 centred body text; 14pt body under a 16pt title (no hierarchy). Content: topic-label titles,
 numbers that disagree, invented sources or fictional institutes, uniformly-shaped case studies,
 the same closing clause on every slide, a "Thank you" close with no ask.
@@ -207,5 +212,6 @@ before use.)
   date check and the read-back checklist exist.
 - Canva gives the look, not the argument (topic titles, decorative placeholder charts, no exhibit
   numbers, so-what or sources): borrow the look, impose the grammar.
-- Manus composes every slide with a diagram (copy that) but shows density without hierarchy,
-  generic invented numbers, no sources and AI-looking imagery (don't).
+- Manus examples suggest using visual relationships rather than default paragraphs. Use a
+  diagram only when it explains; retain hierarchy and verified evidence. Do not reproduce
+  unsupported figures or documentary-looking synthetic imagery.

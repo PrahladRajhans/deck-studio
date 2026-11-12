@@ -2,7 +2,7 @@
   "title": "Stress test: every slide type",
   "direction": "boardroom-oxblood",
   "mode": "document",
-  "footer": "Stress test · synthetic data",
+  "footer": "Stress test · synthetic data · Illustrative",
   "sources": [
     "Synthetic test data"
   ],
@@ -26,12 +26,14 @@
         "Risks",
         "Plan"
       ],
-      "active": 1
+      "active": 1,
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "Profit grew because price more than offset volume",
-      "subtitle": "Section one"
+      "subtitle": "Section one",
+      "data_status": "illustrative"
     },
     {
       "type": "chart",
@@ -62,7 +64,8 @@
         "number_format": "0.0"
       },
       "so_what": "Price is the lever: protect it before chasing volume.",
-      "source": "Synthetic"
+      "source": "Synthetic",
+      "data_status": "illustrative"
     },
     {
       "type": "chart",
@@ -224,7 +227,8 @@
           "Start the dossier this quarter",
           "Two-retailer fallback list"
         ]
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "compare",
@@ -248,7 +252,8 @@
           ]
         }
       ],
-      "highlight": 1
+      "highlight": 1,
+      "data_status": "illustrative"
     },
     {
       "type": "cards",
@@ -269,7 +274,8 @@
         }
       ],
       "numbered": true,
-      "highlight": 0
+      "highlight": 0,
+      "data_status": "illustrative"
     },
     {
       "type": "kpi",
@@ -358,7 +364,8 @@
           "HR",
           "Ops"
         ]
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "image",
@@ -372,7 +379,8 @@
         "Shelf moved to the entrance",
         "Staff trained on two bundles",
         "Weekly stock review"
-      ]
+      ],
+      "data_status": "illustrative"
     }
   ],
   "fact_meta": {
@@ -388,5 +396,6 @@
     "cost": {
       "kind": "illustrative"
     }
-  }
+  },
+  "illustrative_authorized": true
 }

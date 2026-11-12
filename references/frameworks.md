@@ -14,8 +14,8 @@ test                      (previews)     human voice        repeat              
 ```
 
 Why the order: content, visuals and the skeleton change most while iterating, and every change
-is a one-line spec edit plus a rebuild of the draft in seconds. A PPTX, Gamma or Canva build costs
-far more tokens and time and, for generators, credits. So it happens once, on settled content.
+is a one-line spec edit plus a rebuild of the draft in seconds. Deferring PPTX, Gamma or Canva production can reduce rework and, for generators, credit use.
+The token and time advantage depends on the workflow and has not been measured here. So it happens once, on settled content.
 
 ---
 
@@ -79,12 +79,14 @@ legitimate), or say the material is not ready and offer a one-page issue summary
    as answers; read in sequence they form one speech.
 
 **Gate 1 (headline test).** Read only the titles: they tell the whole story and land the answer
-(document mode) or reveal it step by step (talk mode). Every document title passes both tests:
+(document mode) or follow the purposefully chosen reveal (talk mode). Analytical evidence titles normally pass both tests; teaching, navigation and facilitation may
+use deliberate questions or labels. Evidence-title tests:
 (a) a sceptic could say "I disagree"; (b) hide the body and the title still carries the point.
 
 ## 3. Selection framework
 
-Score each choice against the brief, not taste. Write the one-line rationale (Gate 3).
+Develop the concept first (creative-direction.md), then select the system that can express it.
+Judge choices against the brief and content, while using visual taste to make the result coherent. Write the one-line rationale (Gate 3).
 
 | Choice | Decide by | Tool |
 |---|---|---|
@@ -98,9 +100,10 @@ Score each choice against the brief, not taste. Write the one-line rationale (Ga
 | Imagery | Real photographs available? | T10 |
 | Density | Mode + audience tolerance | T2 table |
 
-**Show, don't tell.** When the look is open, build 2 slides (cover + one representative content
-slide) in three directions with `preview_directions.py` (HTML, seconds) and let the user pick: one safe for the
-room, one bolder, one wildcard. People recognise what they want faster than they can describe it.
+**Show, don't tell.** Explore a few distinct concepts on real content when direction is open.
+Test an evidence slide and an explanation or comparison, plus an opener where useful.
+`preview_directions.py` compares themes only; it does not substitute for concept exploration.
+Recommend one, or show options when the preference is consequential. Avoid repeating approval gates.
 
 **Showcase first.** For a section of 4+ similar slides, build one, render it, look, then build the
 rest.
@@ -110,7 +113,8 @@ rest.
 Build order: content slides → executive summary (from the finished content; rows `ref` the slides)
 → agenda / dividers → cover and close → appendix (backup for every number a judge might challenge).
 
-Slide anatomy (document content slide):
+Default anatomy for analytical document evidence (adapt composition to the slide's job;
+claim, evidence, scope and implication matter more than separate boxes for each):
 
 | Zone | Rule |
 |---|---|
@@ -119,15 +123,16 @@ Slide anatomy (document content slide):
 | Subtitle (optional) | scope or method in one line |
 | Exhibit label | "Exhibit N · what it shows (unit)" |
 | Exhibit | the one chart / table / diagram / picture that proves the title |
-| Side panel (optional) | 2-3 "why" sentences beside a chart: the chart shows what, the panel why |
+| Side panel (optional) | interpretation beside the evidence when useful; distinguish explanation from hypothesis |
 | So-what | the implication or decision; the accent appears here and on the highlighted data only |
 | Footnotes (optional) | numbered, tied to ¹ ² ³ markers at the claim |
 | Source | real source; or "Source: to be added" |
 | Tag (optional) | "Illustrative" / "Non-exhaustive" when the exhibit is a sample |
 | Footer + page | constant across the deck |
 
-Talk-mode anatomy: headline that reads at a glance, one figure or 3-4 lines, nothing the audience
-must squint at; the depth is in the notes.
+Talk-mode anatomy: a clear focal point and an intentional reading or reveal order. A short
+headline, one large figure or a few lines often works; an annotated mechanism or demonstration
+may need another form. Keep it readable and put supporting depth in the notes.
 
 Notes anatomy (every slide): `[~N sec]` → spoken script (2-5 sentences, point first, each figure
 with its source in the sentence) → "For the presenter, not to be read out": assumptions to confirm,
@@ -149,7 +154,8 @@ sources, likely questions with short answers.
 | Text overflow, overlaps, off-slide | font-metric fitting with floors; lint; render | builder, lint, render |
 | Low contrast | auto-flip on fills; lint contrast check | builder, lint |
 | Repeated phrasing (machine tell) | `repeated_phrase`; vary sentence shape, not a new stock phrase | lint |
-| Uniform case studies (machine tell) | vary depth and resolution; one may stay unresolved | review |
+| Generic presentation despite clean layout | concept and subject-specific evidence appear on substantive slides | creative-direction.md §8 |
+| Uniform case studies | preserve their real differences; never invent unevenness | review |
 | Placeholders shipped | `[TBD]`, `[IMAGE NEEDED]`, lorem, xxx fail lint | lint (exit 1) |
 | Self-grading | fresh-eye reviewer who has not seen the build; zero findings allowed | qa.md §6 |
 | Time overrun | timing notes from `minutes`; read-aloud test | builder, rehearsal |

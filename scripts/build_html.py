@@ -713,7 +713,16 @@ class HtmlDeck:
             raise SpecError(f"slide {self.cur}: custom slide needs an 'html' body")
         if re.search(r"<script|on\w+=", s["html"], re.I):
             raise SpecError(f"slide {self.cur}: custom html may not contain scripts or event handlers")
-        self.warn("custom layout: say why no standard type fits; the PPTX needs a hand build of this slide")
+        self.warn("custom composition: preserve its purpose and native reconstruction plan; PPTX needs a hand build")
+        if s.get("full_bleed"):
+            self.page += 1  # content page, just like a custom slide using standard chrome
+            source = s.get("source", "")
+            source_line = (f'<div class="custom-source" style="position:absolute;left:64px;bottom:20px;'
+                           f'max-width:85%;padding:6px 10px;background:#fff;color:#111;'
+                           f'font:20px/1.25 Arial,sans-serif">{md(source)}</div>') if source else ""
+            return ('<section class="slide t-custom custom-full" style="padding:0;display:block">'
+                    f'<div class="custom-stage" style="position:absolute;inset:0">{s["html"]}</div>'
+                    + source_line + self.notes(s) + '</section>')
         return self.chrome(s, f'<div class="custom">{s["html"]}</div>')
 
     def s_references(self, s):
@@ -745,7 +754,16 @@ class HtmlDeck:
             if len(run) == 3 and len(set(run)) == 1 and typ not in ("divider",):
                 self.warn(f"'{typ}' three times running: fine for like-for-like comparisons; change it if the "
                           "communication task changed")
-            slides.append(fn(s))
+            rendered = fn(s)
+            # Some full-bleed types omit ordinary footers/tags. Always put a visible,
+            # high-contrast provenance badge on illustrative slides, outside notes.
+            if s.get("_illustrative") or s.get("data_status") == "illustrative":
+                badge = ('<span class="provenance-label" style="position:absolute;top:18px;right:24px;'
+                         'z-index:5;padding:8px 14px;background:#fff;color:#111;border:2px solid #111;'
+                         'font:700 28px/1.2 Arial,sans-serif">Illustrative</span>')
+                body, end = rendered.rsplit('</section>', 1)
+                rendered = body + badge + '</section>' + end
+            slides.append(rendered)
             if s.get("id"):
                 self.pages_seen[s["id"]] = self.page
         return PAGE.format(
@@ -1376,10 +1394,14 @@ def main(argv=None):
     ap.add_argument("-o", "--out")
     ap.add_argument("--direction", help="override the spec's direction (to compare looks)")
     ap.add_argument("--only", help="render only these 1-based slides, e.g. 1,4")
+    ap.add_argument("--strict", action="store_true", help="refuse final HTML while release blockers remain")
     ap.add_argument("--link-images", action="store_true", help="link images instead of embedding them")
     a = ap.parse_args(argv)
     try:
         spec = load_spec(a.spec)
+        if a.strict and spec.get("_blockers"):
+            spec_report(spec, True)
+            return 2
         if a.direction:
             spec["direction"] = a.direction
         if a.only:
@@ -1401,7 +1423,7 @@ def main(argv=None):
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(page)
     print(f"built {out}  ({len(spec['slides'])} slides, direction {deck.t['name']}, {spec.get('mode', 'document')} mode)")
-    spec_report(spec, False)
+    spec_report(spec, a.strict)
     for w in deck.warnings:
         print(f"  warn  {w}")
     for w in voice_report(spec):

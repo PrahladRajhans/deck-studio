@@ -94,7 +94,16 @@ two can pass while the third fails. Read each slide and answer:
    doesn't support.
 
 Record each failure with slide, claim, evidence and fix. `spec_io.py` catches count mismatches and
-numbers that bypass the facts model; the rest needs reading.
+many numerical provenance gaps; claim inventories record review decisions. Source support,
+claim coverage and the rest still need reading. A clean validator report is not a truth certificate.
+
+## 3a. Creative quality (before approval)
+
+Use creative-direction.md §8. Look for a subject-specific organising idea on substantive slides,
+visible relationships, intentional reading order and an earned memorable moment where appropriate.
+Check that the language expresses this presenter's point of view. If slides are generic, try a
+different composition before polishing the theme. A strong table or repeated comparison layout
+may be the best answer; never trade fidelity for novelty.
 
 ## 4. The ten-point check (every deck)
 
@@ -119,13 +128,13 @@ Document: the answer is first; every non-exempt title passes both assertion test
 form; evaluative words are backed on the same slide; later slides add rather than restate; the
 summary claims nothing the body contradicts; the last body slide asks for a decision or action.
 
-Talk: no slide over one headline + 3-4 lines; no two figures or two emphases on a slide; every
-divider is answered by the next slide and fully before the next divider; no question asked twice;
+Talk: no slide over one headline + 3-4 lines; no two figures or two emphases on a slide; questions lead to a useful explanation, task or explicit investigation; revisiting a question
+adds understanding rather than merely repeating it;
 an agenda only if it orients, and the reveal (answer first or progressive) chosen on purpose;
-headline forms are mixed, no pattern three times running;
+headline forms fit their roles; retain repetition when it supports comparison or learning;
 the abstract's promises are all paid off; the time estimate fits the slot.
 
-Look: nothing below the floors; cover and close use a colour field and carry the key figure; one
+Look: nothing below the floors; cover and close suit the selected style; use a key figure only when the argument has one; one
 primary and one accent, each accent marks the answer or the problem; cards in a row share height;
 every chart has its unit and a zero baseline (or a note); table numbers right-aligned.
 
@@ -150,7 +159,7 @@ Do not tell it how the deck was made or what you are proud of. Prompt:
 > claims stronger than their evidence (causation from correlation, "all" from some).
 > 4. Look: anything cramped, clipped, overlapping, too small, low-contrast, unbalanced or half-empty.
 > For each finding give: slide number, the exact text, what is wrong, a suggested rewrite. End with
-> the top 5 fixes in priority order. Report only problems you can point to on a slide; if you find
+> up to five evidenced fixes in priority order. Report only problems you can point to on a slide; if you find
 > none in a category, say "none found". Do not praise.
 
 Triage every finding in a table: slide · finding · type · adopt / reject (reason) / ask the user.
@@ -167,7 +176,8 @@ and ask before another round.
 - Record what you inspected, what changed and which renderer you used.
 - Draft rounds: keep the spec under version (spec_v01.json, spec_v02.json) so any round can be
   rebuilt; the HTML is always regenerated from the spec, never hand-edited (custom compositions live
-  in the spec as `custom` slides, so they regenerate too).
+  in the spec as `custom` slides, so the HTML regenerates too). Preserve any custom PPTX
+  reconstruction script alongside the spec and rerun it after each rebuild.
 - Revisions: change what was asked and nothing else; diff the spec (or the slide text) before and
   after and confirm unrelated slides are untouched.
 - Version before destructive edits (deck_v01.pptx, deck_v02.pptx); never overwrite the user's

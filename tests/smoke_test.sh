@@ -13,7 +13,7 @@ for f in "$HERE"/assets/examples/*.json; do
   b=$(basename "$f" .json)
   case "$b" in chart-*) continue ;; esac
   echo "== $b"
-  python3 "$S/build_html.py" "$f" -o "$OUT/$b.html" > "$OUT/$b.html.log" || { echo "FAIL html build $b"; cat "$OUT/$b.html.log"; fail=1; continue; }
+  python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b.html" > "$OUT/$b.html.log" || { echo "FAIL html build $b"; cat "$OUT/$b.html.log"; fail=1; continue; }
   python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" || { echo "FAIL draft fit $b"; fail=1; }
   python3 "$S/build_deck.py" "$f" -o "$OUT/$b.pptx" --strict > "$OUT/$b.pptx.log"; rc=$?
   if [ $rc -ne 0 ]; then echo "FAIL pptx build $b (exit $rc)"; cat "$OUT/$b.pptx.log"; fail=1; continue; fi
@@ -22,6 +22,16 @@ for f in "$HERE"/assets/examples/*.json; do
     python3 "$S/render.py" "$OUT/$b.pptx" "$OUT/render-pptx-$b" > /dev/null 2>&1 && ls "$OUT/render-pptx-$b"/slide-*.png > /dev/null 2>&1 \
       || { echo "FAIL pptx render $b"; fail=1; }
   fi
+done
+# Creative concept demonstrations use custom HTML compositions. Native PPTX needs
+# deliberate reconstruction after approval, so do not count placeholder builds as success.
+for f in "$HERE"/assets/creative-examples/*.json; do
+  [ -f "$f" ] || continue
+  b="creative-$(basename "$f" .json)"
+  python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b.html" > "$OUT/$b.html.log" \
+    || { echo "FAIL creative html $b"; cat "$OUT/$b.html.log"; fail=1; continue; }
+  python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" \
+    || { echo "FAIL creative fit $b"; fail=1; }
 done
 for c in "$HERE"/assets/examples/chart-*.json; do
   python3 "$S/chart_images.py" "$c" -o "$OUT/$(basename "$c" .json).png" > /dev/null || { echo "FAIL chart $c"; fail=1; }

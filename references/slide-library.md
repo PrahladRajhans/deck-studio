@@ -24,7 +24,7 @@ misleads.
 |---|---|---|---|
 | `cover` | always | — | Title = answer (D) or promise (T). `figure` = the one number. Styles: field, gradient, split (+ photo), minimal |
 | `exec_summary` | document decks of 6+ slides | talk mode | 3-5 rows, one per chapter, same order as the body; `ref` gives live page numbers; write it last |
-| `agenda` | long document decks | talk mode (builder warns) | reuse per chapter with `active` = running spine |
+| `agenda` | navigation in long decks, teaching or workshops | short talks where it adds no orientation | reuse per chapter with `active` = running spine |
 | `divider` | every 3-6 body slides in long decks | two in a row | talk mode: only the audience's next question; the next slide starts answering it |
 | `framework` | a thesis with 3-4 supports | data slides | dark left rail; use for the chapter's key idea, not everything |
 | `statement` | one idea to land | lists | claim may be the headline (no title) |

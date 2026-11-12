@@ -2,7 +2,8 @@
 
 Every new deck goes through route E (the HTML draft) first. Routes A-D and F are the final
 builds, used only after the user approves the draft or explicitly skips it (SKILL.md, "Draft
-first"). Editing an attached deck goes straight to its own format (route B, editing).
+first"). In-place editing of an attached deck stays in its format (route B). Substantive restyling
+uses an HTML draft and approval before rebuilding.
 
 ## Fidelity contract: what each final route promises
 
@@ -27,7 +28,7 @@ chart form) goes back to the user before delivery.
 | Custom shapes / custom slides | yes, by hand build | limited | no | yes, by hand | yes |
 | Speaker notes | yes | per the type | yes | yes | yes (N key) |
 | Animation | none added | per the type | its own | its own | CSS (reduced-motion respected) |
-| Facts model enforced in the final file | yes (`--strict`) | figures computed before writing | no: read back and reconcile | no: read back and reconcile | yes |
+| Pre-build specification gate | `--strict` | run `spec_io.py --strict` first | run `spec_io.py --strict` first; reconcile output | run `spec_io.py --strict` first; reconcile output | `build_html.py --strict` |
 
 Observations about Gamma and Canva below (template IDs, credit costs, plan limits, network
 limits) were recorded in Nov 2026. Treat them as dated notes and re-check when using the
@@ -81,7 +82,7 @@ Commands: `--schema` (fields), `--outline` (Gate 1 headline track), `--direction
 (previews), `-o out.pptx`. Then `render.py`, `lint_deck.py`.
 
 Need a layout the builder lacks (a map, an S-curve with phase bands, an org chart): it is a `custom`
-slide in the draft. Build the deck, open it with python-pptx, replace the `[CUSTOM LAYOUT]`
+slide in the draft. Preserve a reconstruction script next to the spec, then build the deck, open it with python-pptx, replace the `[CUSTOM LAYOUT]`
 placeholder with shapes on the same grid and tokens, re-render, re-lint (the placeholder fails lint
 until replaced). For chart forms PowerPoint lacks, use route G.
 
@@ -140,7 +141,8 @@ Read-back checklist after every generation (the four failures seen with Mandate)
 1. Source lines: any source you didn't supply is invented → replace with the real one or
    "Source: to be added".
 2. Tie-out: every chart and table against the facts and against each other.
-3. Dates: roadmap starts after today and matches the launch date.
+3. Dates: proposed activity starts after today and matches the launch date; label retrospective
+   and in-progress activity.
 4. Card count: did it add a cover or closer you didn't ask for?
 Then fix card by card with `edit_gamma` (cheaper than regenerating; keeps what worked), and
 `export_gamma` for PPTX/PDF. Say the credit cost before a large run (~20 credits a card measured).
@@ -165,7 +167,8 @@ source line. Best for co-edited, event, social and photo-led decks.
 ## F. HTML as the final format
 
 When the approved deck stays HTML (a projected talk, a link to share, no PowerPoint editing
-needed), the route E file is the deliverable. Optional `html_fonts` gives it distinctive web
+needed), run `spec_io.py spec.json --strict`, then `build_html.py spec.json --strict -o out/deck.html`.
+The resulting route E file is the deliverable after approval. Optional `html_fonts` gives it distinctive web
 fonts (visual-language.md §11). Then check two things with screenshots: 16:9 and one phone size.
 Nothing should overflow or overlap.
 - To publish, put it up as an artifact for a link, or send the file.
@@ -195,6 +198,6 @@ finalise stage. Default to three: one safe for the room, one bolder, one wildcar
 | A projected talk or a link, with no editing in PowerPoint | F |
 
 - **Hybrid**: core in A/B, opener and closer in C.
-- **Unsure and the stakes are high**: build the core in B. It is the only route where every
-  number is asserted inside the final file.
+- **Unsure and the stakes are high**: build the core in B. Its specification is validated before production; the exported file still needs reconciliation.
+  No route embeds a continuing guarantee that numbers remain correct after editing.
 - **Recommend one**: give one line of reason, and let the user decide.

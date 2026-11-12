@@ -63,7 +63,7 @@ class Validation(unittest.TestCase):
         self.assertTrue(any("no kind" in x for x in b))
 
     def test_data_status_classifies_literals(self):
-        p = spec_file({"facts": {"x": 1}, "fact_meta": {"x": {"kind": "illustrative"}}, "footer": "Illustrative",
+        p = spec_file({"facts": {"x": 1}, "fact_meta": {"x": {"kind": "illustrative"}}, "footer": "Illustrative", "illustrative_authorized": True,
                        "slides": [{"type": "chart", "title": "T", "data_status": "illustrative", "chart": {
                            "kind": "column", "categories": ["A"], "series": [{"name": "r", "values": [9]}]}}]})
         self.assertEqual(load_spec(p)["_blockers"], [])

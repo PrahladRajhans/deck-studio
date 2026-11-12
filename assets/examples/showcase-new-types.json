@@ -2,7 +2,7 @@
   "title": "Showcase: every new slide type",
   "direction": "modern-teal",
   "mode": "document",
-  "footer": "Showcase · synthetic data for layout testing",
+  "footer": "Showcase · synthetic data for layout testing · Illustrative",
   "sources": [
     "Synthetic test data"
   ],
@@ -42,7 +42,8 @@
       ],
       "notes": {
         "say": "Cover."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "big_number",
@@ -220,7 +221,8 @@
       "highlight": 2,
       "notes": {
         "say": "Hub."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "issue_tree",
@@ -280,7 +282,8 @@
       "highlight": "weaknesses",
       "notes": {
         "say": "SWOT."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "venn",
@@ -364,7 +367,8 @@
       "highlight": 0,
       "notes": {
         "say": "Columns."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "team",
@@ -483,7 +487,8 @@
       "highlight": 0,
       "notes": {
         "say": "Roadmap."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "journey",
@@ -525,7 +530,8 @@
       ],
       "notes": {
         "say": "Journey."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "before_after",
@@ -551,7 +557,8 @@
       },
       "notes": {
         "say": "Before after."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "faq",
@@ -592,7 +599,8 @@
       "prompt": "Vote with a show of hands; we answer on the next slide.",
       "notes": {
         "say": "Question."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "milestones",
@@ -622,7 +630,8 @@
       ],
       "notes": {
         "say": "Milestones."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "actions",
@@ -656,7 +665,8 @@
       ],
       "notes": {
         "say": "Actions."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "risks",
@@ -687,7 +697,8 @@
       ],
       "notes": {
         "say": "Risks."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "chart",
@@ -802,7 +813,8 @@
       ],
       "notes": {
         "say": "Code."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "gallery",
@@ -824,7 +836,8 @@
       ],
       "notes": {
         "say": "Gallery."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "image_full",
@@ -836,7 +849,8 @@
       "credit": "Photo: synthetic test image",
       "notes": {
         "say": "Story card."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "references",
@@ -849,7 +863,8 @@
       ],
       "notes": {
         "say": "Sources."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -882,5 +897,6 @@
     "years": {
       "kind": "illustrative"
     }
-  }
+  },
+  "illustrative_authorized": true
 }

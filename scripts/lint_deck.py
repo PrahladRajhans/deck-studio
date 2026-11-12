@@ -34,7 +34,7 @@ STOP = {"the", "a", "an", "and", "of", "to", "in", "for", "on", "with", "by", "i
         "from", "or", "be", "it", "this", "that", "we", "our", "illustrative", "example", "synthetic",
         "data", "source", "figures", "made", "template", "test", "deck"}
 # Chrome / small print: allowed below the 12pt body floor (but not below 9pt)
-SMALL_PRINT = {"Source", "Footer", "PageNumber", "Kicker", "ExhibitLabel", "Caption", "Owner",
+SMALL_PRINT = {"provenance-label", "Source", "Footer", "PageNumber", "Kicker", "ExhibitLabel", "Caption", "Owner",
                "SoWhatLabel", "Eyebrow", "Meta", "Slide Number Placeholder 3", "Footer Placeholder 2"}
 
 

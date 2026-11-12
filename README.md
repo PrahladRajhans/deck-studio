@@ -54,7 +54,8 @@ pip install -r requirements.txt
 python -m playwright install chromium            # for the HTML draft renderer
 # For PPTX rendering: LibreOffice and poppler (apt-get install -y libreoffice poppler-utils)
 
-python3 scripts/build_html.py assets/examples/case-comp.json -o out/case-comp.html
+python3 scripts/build_html.py assets/examples/case-comp.json -o out/case-comp.html  # draft
+python3 scripts/build_html.py assets/examples/case-comp.json --strict -o out/final.html  # after approval
 python3 scripts/render_html.py out/case-comp.html out/render      # PNGs + contact-sheet.png
 python3 scripts/spec_io.py assets/examples/case-comp.json --strict  # release gate
 python3 scripts/build_deck.py assets/examples/case-comp.json --strict -o out/case-comp.pptx
@@ -64,6 +65,8 @@ bash tests/smoke_test.sh                                          # everything, 
 
 Open any file in `assets/examples/drafts/` in a browser. Arrow keys move between slides, N shows
 speaker notes, G shows all slides as a grid, P prints a PDF.
+
+Changes and migration notes: [CHANGELOG.md](CHANGELOG.md).
 
 ## For reviewers
 

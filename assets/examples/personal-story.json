@@ -27,7 +27,8 @@
       ],
       "notes": {
         "say": "Thank you for having me. I'll tell you one story in detail and what it says about how I'd work here."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "quote",
@@ -35,7 +36,8 @@
       "attribution": "My neighbour, 2023: the sentence that started my first product",
       "notes": {
         "say": "Every product I've built started with a sentence like this one. This one came from my neighbour."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
@@ -43,7 +45,8 @@
       "title": "What happens when you listen before you build?",
       "notes": {
         "say": "Story one: the pharmacy finder."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "kpi",
@@ -71,7 +74,8 @@
       "source": "Project analytics (illustrative)",
       "notes": {
         "say": "We went from about twelve hundred to over nine thousand weekly users in ten weeks, and we spent nothing on ads. The change was trust: live stock, not a static list."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "process",
@@ -99,7 +103,8 @@
       "notes": {
         "say": "The pharmacy finder used four steps, and I've used the same four on every project since. Listen first, size the problem, ship something small, and measure."
       },
-      "so_what": "The pharmacy finder's live stock feed came out of interview 14."
+      "so_what": "The pharmacy finder's live stock feed came out of interview 14.",
+      "data_status": "illustrative"
     },
     {
       "type": "statement",
@@ -112,7 +117,8 @@
       ],
       "notes": {
         "say": "Here is what that means for this role, concretely, for the first ninety days."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -123,7 +129,8 @@
       ],
       "notes": {
         "say": "That's my way of working. I'd love to bring it to your team. Happy to take questions."
-      }
+      },
+      "data_status": "illustrative"
     }
   ],
   "fact_meta": {
@@ -136,5 +143,6 @@
     "weeks": {
       "kind": "illustrative"
     }
-  }
+  },
+  "illustrative_authorized": true
 }

@@ -3,7 +3,7 @@
   "direction": "dark-stage",
   "mode": "talk",
   "minutes": 10,
-  "footer": "Talk test",
+  "footer": "Talk test · Illustrative",
   "slides": [
     {
       "type": "cover",
@@ -11,14 +11,16 @@
       "subtitle": "A 10-minute talk",
       "notes": {
         "say": "Hello."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "So why do students leave?",
       "notes": {
         "say": "Q1."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "big_number",
@@ -33,14 +35,16 @@
       "source": "Synthetic",
       "notes": {
         "say": "Stat."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "What did we try first?",
       "notes": {
         "say": "Q2."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "before_after",
@@ -62,14 +66,16 @@
       },
       "notes": {
         "say": "Fix."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "Did it work?",
       "notes": {
         "say": "Q3."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "data_contrast",
@@ -90,7 +96,8 @@
       "source": "Synthetic",
       "notes": {
         "say": "Result."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -98,7 +105,9 @@
       "ask": "Try it: ship a starter path this sprint",
       "notes": {
         "say": "Close."
-      }
+      },
+      "data_status": "illustrative"
     }
-  ]
+  ],
+  "illustrative_authorized": true
 }

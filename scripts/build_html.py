@@ -745,7 +745,16 @@ class HtmlDeck:
             if len(run) == 3 and len(set(run)) == 1 and typ not in ("divider",):
                 self.warn(f"'{typ}' three times running: fine for like-for-like comparisons; change it if the "
                           "communication task changed")
-            slides.append(fn(s))
+            rendered = fn(s)
+            # Some full-bleed types omit ordinary footers/tags. Always put a visible,
+            # high-contrast provenance badge on illustrative slides, outside notes.
+            if s.get("_illustrative") or s.get("data_status") == "illustrative":
+                badge = ('<span class="provenance-label" style="position:absolute;top:18px;right:24px;'
+                         'z-index:5;padding:8px 14px;background:#fff;color:#111;border:2px solid #111;'
+                         'font:700 28px/1.2 Arial,sans-serif">Illustrative</span>')
+                body, end = rendered.rsplit('</section>', 1)
+                rendered = body + badge + '</section>' + end
+            slides.append(rendered)
             if s.get("id"):
                 self.pages_seen[s["id"]] = self.page
         return PAGE.format(
@@ -1376,10 +1385,14 @@ def main(argv=None):
     ap.add_argument("-o", "--out")
     ap.add_argument("--direction", help="override the spec's direction (to compare looks)")
     ap.add_argument("--only", help="render only these 1-based slides, e.g. 1,4")
+    ap.add_argument("--strict", action="store_true", help="refuse final HTML while release blockers remain")
     ap.add_argument("--link-images", action="store_true", help="link images instead of embedding them")
     a = ap.parse_args(argv)
     try:
         spec = load_spec(a.spec)
+        if a.strict and spec.get("_blockers"):
+            spec_report(spec, True)
+            return 2
         if a.direction:
             spec["direction"] = a.direction
         if a.only:
@@ -1401,7 +1414,7 @@ def main(argv=None):
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(page)
     print(f"built {out}  ({len(spec['slides'])} slides, direction {deck.t['name']}, {spec.get('mode', 'document')} mode)")
-    spec_report(spec, False)
+    spec_report(spec, a.strict)
     for w in deck.warnings:
         print(f"  warn  {w}")
     for w in voice_report(spec):

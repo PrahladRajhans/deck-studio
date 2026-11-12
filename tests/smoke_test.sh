@@ -13,7 +13,7 @@ for f in "$HERE"/assets/examples/*.json; do
   b=$(basename "$f" .json)
   case "$b" in chart-*) continue ;; esac
   echo "== $b"
-  python3 "$S/build_html.py" "$f" -o "$OUT/$b.html" > "$OUT/$b.html.log" || { echo "FAIL html build $b"; cat "$OUT/$b.html.log"; fail=1; continue; }
+  python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b.html" > "$OUT/$b.html.log" || { echo "FAIL html build $b"; cat "$OUT/$b.html.log"; fail=1; continue; }
   python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" || { echo "FAIL draft fit $b"; fail=1; }
   python3 "$S/build_deck.py" "$f" -o "$OUT/$b.pptx" --strict > "$OUT/$b.pptx.log"; rc=$?
   if [ $rc -ne 0 ]; then echo "FAIL pptx build $b (exit $rc)"; cat "$OUT/$b.pptx.log"; fail=1; continue; fi

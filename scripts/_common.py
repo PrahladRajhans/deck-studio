@@ -657,7 +657,7 @@ def deck_voice(titles: list[str], list_lengths: list[int]) -> list[str]:
 
 _VOICE_SKIP = {"notes", "quote", "code", "path", "image", "photo", "alt", "id", "type", "style", "kind",
                "direction", "frame", "source", "credit", "icon", "state", "status", "number_format",
-               "_raw", "_raw_text", "data_status", "voice_ok", "role", "question"}
+               "_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions", "evidence_ids", "data_status", "voice_ok", "role", "question"}
 
 
 def slide_strings(s, skip=_VOICE_SKIP):

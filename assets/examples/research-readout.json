@@ -17,7 +17,8 @@
       ],
       "notes": {
         "say": "Cover."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "exec_summary",
@@ -43,7 +44,8 @@
       ],
       "notes": {
         "say": "Summary."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "big_number",
@@ -61,7 +63,8 @@
       "tag": "Illustrative",
       "notes": {
         "say": "A."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "image",
@@ -84,7 +87,8 @@
       ],
       "notes": {
         "say": "B."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "issue_tree",
@@ -119,7 +123,8 @@
       "source": "Illustrative survey",
       "notes": {
         "say": "C."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "risks",
@@ -143,7 +148,8 @@
       ],
       "notes": {
         "say": "Limits."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "references",
@@ -154,7 +160,9 @@
       ],
       "notes": {
         "say": "Sources."
-      }
+      },
+      "data_status": "illustrative"
     }
-  ]
+  ],
+  "illustrative_authorized": true
 }

@@ -32,8 +32,8 @@ frame with `frame`, the cover with `style` on the cover slide.
 | campus-bright | creative | low | high-energy, youthful | Arial / Calibri | rounded, gradient cover | club events, fests, orientation | investors |
 
 Selection: decision-trees.md T8. Preview before committing: `preview_directions.py`.
-Font QA: all heading/body fonts above have metric-compatible clones here (Carlito, Caladea,
-Liberation, TeX Gyre Schola/Bonum/Pagella), so fit checks are trustworthy; Palatino via Pagella is
+Font QA: compatible clones may be available (Carlito, Caladea, Liberation and TeX Gyre).
+Run `env_check.py` in the actual environment before trusting measurements; Palatino via Pagella is
 close, not identical (`fonts_qa: approximate` on luxe-noir: leave ~10% slack). Never default to Aptos,
 Georgia, Trebuchet, Garamond, Impact or Arial Black for body text: their QA substitutes have
 different widths (Anthropic pptx skill). Use them only if the user asks, with slack.
@@ -159,7 +159,7 @@ standard types can't make.
 ## 9. Anti-patterns (AI-slop and amateur tells)
 
 Layout: everything centred; the same layout slide after slide; identical card grids everywhere;
-a "pretty" slide with nothing to say; text-only slides with no visual; four thin boxes on a talk
+a "pretty" slide with nothing to say; visuals added only to fill space; four thin boxes on a talk
 slide. Decoration: accent bars under titles, edge stripes, header/footer bars, purposeless drop
 shadows, glassmorphism, glows, gradients on every slide, AI stock art, emoji icons. Colour: purple
 gradient on white, generic indigo #6366F1, rainbow categorical charts, three accents fighting.

@@ -1,7 +1,7 @@
 # Human voice: slides that sound like a person wrote them
 
-A deck that reads as machine-written loses the room before the argument starts: judges, partners
-and interviewers now spot the pattern in seconds and discount everything after it. This file is
+Generic phrasing can weaken clarity and credibility. Review wording for specificity, audience
+fit and the presenter's voice. This file is
 the single home for voice rules. It adapts the BeHuman and Unslop skills (both built on Wikipedia's
 "Signs of AI writing" field guide) to slides, where text is short, fragmentary and spoken over.
 
@@ -43,7 +43,8 @@ simulate a person.
    already skipped (robust standard errors, financial leverage, landscape orientation). For each
    remaining prompt, either rewrite or keep it on purpose by adding the word or phrase to
    `voice_ok` (deck or slide level) so the decision is recorded; never leave one unseen.
-5. **Read the headline track for rhythm** (`--outline`): mixed lengths, mixed shapes, no formula.
+5. **Read the headline track for clarity** (`--outline`): vary form when it helps; preserve
+   repetition when it supports comparison, learning or the presenter's authentic register.
 
 Protect useful consistency: one concept keeps one term (writing.md §3), and parallel comparison
 labels stay parallel. Vary sentence shape, not terminology.

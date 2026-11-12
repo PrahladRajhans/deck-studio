@@ -42,8 +42,8 @@ teaching, transition or facilitation purpose on purpose.
 
 - Mix forms by role (office-kit, from a speaker's own decks): a short label when a figure or
   screenshot is the star; a plain statement for a finding; an exclamation for a surprise; the
-  audience's inner voice; a question for dividers; a cut-off line as a bridge. All-same forms read
-  as machine-made; look for the same pattern three slides running.
+  audience's inner voice; a question for dividers; a cut-off line as a bridge. Repeated forms can support teaching and comparison; change them when their communication
+  role changes, not to satisfy a variety quota.
 - Choose the reveal by purpose: progressive (one step at a time, the answer last) when the room must
   be brought along; answer first when it is senior, time-poor or deciding, even live. An agenda
   belongs where it reduces uncertainty (workshops, teaching, long sessions); in a short persuasive
@@ -86,7 +86,7 @@ teaching, transition or facilitation purpose on purpose.
   other reading. When two slides show "the same" figure from different angles, make them equal or
   footnote why they differ.
 - Success has a number: "≥ 95% on-time", "by 30 June", never "improved" or "no drop".
-- Invented targets must add up: goal × people × periods fits the stated target; list the basis in
+- Proposed targets must be identified as targets and have a stated basis: goal × people × periods fits the stated target; list the basis in
   `assumptions`.
 - Units always: in the exhibit label, the axis or the header. Same decimals within a column.
 - Proposed activity starts after today; retrospective and in-progress timelines are labelled as such.

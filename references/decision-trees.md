@@ -2,7 +2,8 @@
 
 Walk these in order: T0 → T1 (provisional) → T2 → T3 → T4 → T5 at the start of a deck; T6 → T7 for every
 content slide; T8 → T9 → T10 once per deck. Each tree ends in a concrete choice. When two branches
-fit, take the earlier one; when none fits, say so and ask.
+fit, use the audience's task, evidence and destination to choose; do not let row order decide.
+When none fits, explain the gap and ask only if it prevents useful progress.
 
 ---
 
@@ -29,7 +30,8 @@ becomes. Build it only after the user's go-ahead (SKILL.md, "Draft first").
 
 ```
 Is this an edit of a deck the user attached?
-├─ Yes → edit in its own format (routes.md §B, editing); no HTML draft
+├─ Yes, in-place changes → edit in its own format (routes.md §B); no HTML draft
+├─ Yes, substantive restyle/rebuild → HTML draft and approval before rebuilding
 └─ No → draft in HTML, iterate, get approval, then:
    Did the user name a format or tool?
    ├─ ".pptx / PowerPoint / editable file"      → PPTX BUILDER
@@ -43,7 +45,7 @@ Is this an edit of a deck the user attached?
       ├─ Image-led storytelling, link to share  → GAMMA (with read-back checklist)
       ├─ Team edits in Canva / event & social assets  → CANVA
       ├─ Projected talk, link to share, no editing needed → KEEP THE HTML
-      └─ Unsure and stakes are high → PPTX BUILDER (asserts every number in the final file)
+      └─ Unsure and stakes are high → PPTX BUILDER (validates the specification before building; reconcile the exported file afterwards)
 Hybrid is allowed: analytical core in the builder, narrative opener/closer in Gamma or HTML.
 ```
 
@@ -67,9 +69,9 @@ If the brief does not settle it and the user is present, ask once.
 
 | | Document | Talk |
 |---|---|---|
-| Answer | first (pyramid) | revealed step by step |
+| Answer | usually first for decisions | answer first or progressive reveal, by purpose |
 | Titles | full-sentence assertions | mixed forms: claims, questions, short labels when a figure is the star |
-| Agenda | yes, as a numbered spine | no; question dividers instead |
+| Agenda | when it supports navigation | when it orients; useful for teaching and workshops |
 | Words per slide | dense allowed | ≤ 40 visible words, one idea |
 | Body text | ≥ 12pt | ≥ 18pt (22pt+ teaching, 24pt+ big rooms) |
 | Notes | sources, assumptions, Q&A | the script, word for word |

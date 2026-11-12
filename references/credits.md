@@ -72,3 +72,7 @@ sign-in. Nothing in this skill claims to come from Pinterest.
   accessibility guidance (alt text, reading order, contrast, slide titles) for the QA accessibility
   checks.
 
+
+- **Evidence-gate hardening (Nov 2026)**: subsequent implementation and regression tests close
+  documented provenance and placeholder bypasses; `CHANGELOG.md` records behavior, migration and
+  verification limits. Claim inventories record semantic review rather than claiming to prove truth.

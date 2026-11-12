@@ -1544,6 +1544,14 @@ class Builder(ExtraMixin):
                 if r.get("ref") and self.id_pages and r["ref"] not in self.id_pages:
                     self.warn(f"exec summary ref '{r['ref']}' matches no slide id")
             slide = handlers[typ](s)
+            # Full-bleed layouts may omit ordinary footers and tags. Keep provenance
+            # visible in the delivered deck, including on covers and closing slides.
+            if s.get("_illustrative") or s.get("data_status") == "illustrative":
+                self.rect(slide, SLIDE_W - 1.65, 0.12, 1.45, 0.30,
+                          fill="FFFFFF", line="111111", name="provenance-badge")
+                self.text(slide, SLIDE_W - 1.60, 0.17, 1.35, 0.20, "Illustrative", 10,
+                          "111111", font="Arial", bold=True, align="center", fit=False,
+                          name="provenance-label")
             self.notes(slide, s)
             if s.get("id"):
                 self.pages_seen[s["id"]] = self.page_no
@@ -1588,16 +1596,20 @@ def _set_border(cell, side: str, color: str | None, width_pt: float):
     tcPr.insert(idx, ln)
 
 
-SMALL_PRINT = {"Source", "Footer", "PageNumber", "Kicker", "ExhibitLabel", "Caption", "Owner"}
+SMALL_PRINT = {"provenance-label", "Source", "Footer", "PageNumber", "Kicker", "ExhibitLabel", "Caption", "Owner"}
 
 SCHEMA = """deck-level: title, direction (DIRS), theme {token overrides}, mode (document|talk),
   frame (classic|clean|editorial|rail; default from direction), footer, sources [..], minutes (adds
   [~N sec] timing to notes), facts {name: number|[numbers]|"=expr"}, checks ["expr", ..],
+  fact_meta {name: {kind, evidence}}, evidence {id: {source, locator, status}},
+  illustrative_authorized (true only with user agreement),
   title_rule (bool), number_kickers (bool; default on in document mode, off in talk mode)
 every light slide: type, id (for exec-summary refs), kicker, title (an assertion; ^^word^^ = accent),
   letter ("A" -> governing-thought prefix), subtitle, so_what, source, exhibit (label + unit),
   tag ("Illustrative" | "Non-exhaustive"), footnotes [..] (mark claims with ¹ ² ³), frame,
-  notes {say, assumptions[], sources[], qa[]}
+  notes {say, assumptions[], sources[], qa[]}, data_status (sourced|illustrative), evidence_ids[],
+  claims [{text, kind, evidence_ids[], status (reviewed), basis}], non_factual_reason,
+  number_exceptions [{text, reason}] (administrative text only; see references/spec.md)
 OPENERS AND STRUCTURE
   cover        eyebrow, title, subtitle, meta[], figure {value,label}, style (field|gradient|split|minimal), image
   agenda       title, items[], active (1-based chapter to light up)          [talk mode: only if it orients]

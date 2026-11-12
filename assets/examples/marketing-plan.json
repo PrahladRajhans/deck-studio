@@ -31,7 +31,8 @@
       },
       "notes": {
         "say": "We propose one idea for the monsoon."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "big_number",
@@ -47,7 +48,8 @@
       "source": "Illustrative brand tracking",
       "notes": {
         "say": "The insight."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "statement",
@@ -60,7 +62,8 @@
       ],
       "notes": {
         "say": "The idea."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "image",
@@ -78,7 +81,8 @@
       "source": "Illustrative channel data",
       "notes": {
         "say": "Channels."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "funnel",
@@ -112,7 +116,8 @@
           "Conversion rate is a planning assumption, not an observed rate; confirm against last monsoon's data",
           "Payback is not shown here: it needs contribution margin per order, which the brief does not give"
         ]
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "roadmap",
@@ -156,7 +161,8 @@
       "highlight": 1,
       "notes": {
         "say": "Flighting."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "kpi",
@@ -207,7 +213,8 @@
       "owner": "Owner: Brand lead",
       "notes": {
         "say": "The ask."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -215,7 +222,8 @@
       "ask": "Decision today: budget and creators",
       "notes": {
         "say": "Close."
-      }
+      },
+      "data_status": "illustrative"
     }
   ],
   "fact_meta": {
@@ -237,5 +245,6 @@
     "lift": {
       "kind": "illustrative"
     }
-  }
+  },
+  "illustrative_authorized": true
 }

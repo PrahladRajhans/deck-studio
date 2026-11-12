@@ -15,14 +15,16 @@
       },
       "notes": {
         "say": "Welcome."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "Why should you show up?",
       "notes": {
         "say": "Q."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "columns",
@@ -47,14 +49,16 @@
       ],
       "notes": {
         "say": "What you get."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "How does it work?",
       "notes": {
         "say": "Q."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "milestones",
@@ -79,14 +83,16 @@
       ],
       "notes": {
         "say": "Schedule."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "divider",
       "title": "Who's running it?",
       "notes": {
         "say": "Q."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "team",
@@ -111,7 +117,8 @@
       ],
       "notes": {
         "say": "Team."
-      }
+      },
+      "data_status": "illustrative"
     },
     {
       "type": "closing",
@@ -119,7 +126,9 @@
       "ask": "Scan the code at the stall or ask an organiser",
       "notes": {
         "say": "Close."
-      }
+      },
+      "data_status": "illustrative"
     }
-  ]
+  ],
+  "illustrative_authorized": true
 }

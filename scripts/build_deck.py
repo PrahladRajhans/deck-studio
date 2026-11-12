@@ -1496,7 +1496,7 @@ class Builder(ExtraMixin):
 
     def lint_spec_slide(self, s):
         typ = s.get("type")
-        # layout rhythm: never the same type three slides running
+        # Review repeated types in context; useful comparison may intentionally repeat.
         self.type_run.append(typ)
         if len(self.type_run) >= 3 and len(set(self.type_run[-3:])) == 1 and typ not in ("divider",):
             self.warn(f"third '{typ}' slide in a row: fine for like-for-like comparisons; change it if the "
@@ -1662,7 +1662,8 @@ PEOPLE, PROOF, PICTURES
   gallery      images [{path, caption, alt}]
   code         code, points[], side_heading
   bullets      items[] (max 6), side{}             (last resort)
-  custom       html (draft body, uses the deck's CSS tokens), pptx_note   (when no type fits; hand-built in PPTX)
+  custom       html (draft body), full_bleed (optional full-stage HTML composition), pptx_note
+               (tailored explanation or expression; rebuild with native objects in PPTX)
   references   items[]
 tokens: any string may contain {=expr|fmt} (e.g. {=rev[2]|.1f}, {=pct(rev[0],rev[2])|+.0f}%);
         a value of "=expr" becomes a number or list (e.g. "values": "=rev").

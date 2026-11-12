@@ -7,7 +7,7 @@ the single home for voice rules. It adapts the BeHuman and Unslop skills (both b
 
 These are density signals, not a ban on words, and a check that fires is not evidence of AI
 authorship. One "robust" in a statistics appendix is fine. Five stock words, three "-ing" tails and
-every list in threes on one slide is a signature. Rewrite only when the new wording is clearer, more
+repeated stock structures are reasons to review the writing, not a diagnosis of authorship. Rewrite only when the new wording is clearer, more
 specific, better evidenced or a better fit for the room.
 
 Avoiding stock phrases is half the job. The other half is sounding like this presenter.
@@ -52,7 +52,41 @@ labels stay parallel. Vary sentence shape, not terminology.
 Slides are allowed to be fragments. Labels, kickers, chart headers and talk punchlines ("Then the
 rain came.") can be two words. The rule against tiny sentences is for prose, not slide furniture.
 
-## 2. Words that give it away
+## 1b. Originate a voice; do not only remove phrases
+
+1. Start with the evidence and the presenter's actual judgement: what matters, what is difficult,
+   what they recommend and what they are unsure about. If samples exist, preserve their useful
+   vocabulary, cadence, understatement, humour and degree of formality. Do not homogenise them.
+2. Draft a plain spoken sentence for each pivotal idea. Then edit it for its job: a self-contained
+   document headline, a short talk beat, an analytical caption or a line in the speaker's notes.
+   The same sentence need not do all four jobs.
+3. For an opening, turning point or close that sounds generic, try a couple of genuinely different
+   phrasings: direct, understated, observational, questioning or vivid. Choose the one the evidence
+   and presenter can carry. Do not generate variants for every label or force a slogan.
+4. Keep the detail that makes the sentence belong here: the real constraint, trade-off, object,
+   disagreement or observation. Specificity can be qualitative. Missing numerical evidence is a
+   reason to qualify the sentence, not to add a plausible-looking percentage.
+5. Read a short run of slides and their notes together. It should sound like one person explaining
+   a thought, not a sequence of polished captions. Connect ideas through meaning; use deliberate
+   repetition when it helps. Keep necessary caveats, quoted wording and technical terms intact.
+
+Examples below assume the stated material was actually supplied. They demonstrate choices of
+voice, not claims to reuse:
+
+| Material | Generic line | A fitting alternative |
+|---|---|---|
+| Orders wait between picking and packing; no capacity study | Unlock operational excellence | Clear the handoff before buying more capacity |
+| A technical audience must locate a queue in a visible diagram | Optimising workflow efficiency | The queue forms here |
+| A board pre-read needs that finding without narration | Optimising workflow efficiency | Orders wait at the picking-to-packing handoff |
+| A proposed experiment has no measured outcome yet | Our solution will transform delivery | Test a named handoff owner; measure the queue before expanding |
+| A presenter describes a real supplied reversal | A journey of resilience and innovation | We changed the plan when the interviews contradicted it |
+
+Humanised does not mean casual, chatty or emotional. It means credible authorship: a point of view,
+a clear relationship with the audience, natural syntax and details grounded in the work. Never
+claim to defeat AI detectors, add fake imperfections, or substitute a performance of humanity for
+honest content.
+
+## 2. Words to review in decorative use
 
 Use the plain word or the fact instead. Quotes, proper names and literal technical uses are exempt.
 
@@ -74,7 +108,7 @@ Use the plain word or the fact instead. Quotes, proper names and literal technic
 
 Customer journey, user journey and buyer journey are real terms and are not flagged.
 
-## 3. Sentence shapes that give it away
+## 3. Sentence patterns to review in context
 
 - **"Not just X, it's Y" / "It's not about X. It's about Y."** Fake reveal. State Y with its proof.
 - **"No X. No Y. Just Z."** Slogan rhythm. Say what is actually true.
@@ -94,8 +128,8 @@ Customer journey, user journey and buyer journey are real terms and are not flag
   `voice_ok`), cut reflexive ones.
 - **Every list has three items.** Three cards, three pillars, three bullets, three steps on every
   slide. Let the content set the count; two and five are normal. (Checked deck-wide.)
-- **Every title has the same shape**: all "Topic: phrase", all ten words, all starting with "Our"
-  or "Driving". Mix forms (writing.md §1-2). (Checked deck-wide.)
+- **Every title has the same shape without a reason**: review the pattern rather than varying
+  it automatically. Parallel comparisons and technical teaching may benefit from repeated forms.
 - **Gerund bullets**: "Driving growth / Enhancing efficiency / Ensuring quality". Write what
   happens: "Two new campuses by June".
 - **Bold-label bullets that restate themselves**: "**Speed:** we are fast". Use the fact, or make it
@@ -104,7 +138,8 @@ Customer journey, user journey and buyer journey are real terms and are not flag
   "Medium". Real material is uneven; let it be.
 - **Same closing clause on every slide** (writing.md §3: phrasing diversity).
 - **Generic sections**: "Challenges and opportunities", "Looking ahead", "Key takeaways",
-  "Conclusion" slides that restate the deck. A document ends on the decision; a talk on the action.
+  "Conclusion" slides that merely repeat earlier wording. A useful synthesis or teaching takeaway
+  is welcome. Close on the consequence appropriate to the audience.
 - **Emoji icons and decorative symbols** standing in for meaning. Use glyph badges only where they
   carry a status (✓ done, ▲ up).
 - **Em dashes.** None on slides; use a comma, a colon or a full stop. (User preference too.)
@@ -122,7 +157,8 @@ Removing tells is half the job; sterile text is just as obvious.
 - **First person where it fits**: personal stories, interviews and talks use "I" and "we".
 - **One honest limitation** (writing.md §2). It reads as confidence, not weakness.
 - **The room's words**: their units (₹ crore, lakh), their product names, their metrics.
-- **Uneven rhythm**: a long headline, then a four-word one. A dense exhibit, then a single number.
+- **Intentional rhythm**: let the subject determine where to pause, explain or compare. A dense
+  exhibit can need a quiet follow-up; a run of comparable exhibits can need stable repetition.
 - **Notes in spoken English**: contractions, short sentences, the way the presenter actually talks
   ("Here's the surprise: the rain helped us."). The notes are a script, not a report.
 
@@ -137,6 +173,9 @@ Removing tells is half the job; sterile text is just as obvious.
 
 ## 7. Rewrite drills (slides)
 
+These are illustrative editorial alternatives. Never reuse their numbers, names or outcomes
+unless supplied evidence supports them. Section 1b shows how to be specific without adding figures.
+
 | Before | After |
 |---|---|
 | Leveraging AI to unlock operational efficiencies | AI drafts the claim report; the analyst approves it in 10 minutes, not 2 hours |
@@ -149,7 +188,8 @@ Removing tells is half the job; sterile text is just as obvious.
 
 ## 8. Where this runs in the flow
 
-Stage 4 (Draft) writes with these rules; Gate 4 includes "every style prompt fixed or kept on
+Stage 1 establishes the voice; creative-direction.md links it to the concept; Stage 4 originates
+the writing and edits it in context; Gate 4 includes "every style prompt fixed or kept on
 purpose"; the semantic review (qa.md §3) is separate and checks what the words claim; the
 fresh-eye review (qa.md §6) asks the reviewer to flag phrasing that feels AI-written. For long
 prose that travels with a deck (handouts, notes pages, an email to the client), the behuman or

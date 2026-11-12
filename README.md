@@ -12,11 +12,17 @@ Plan → Decide → Select → Draft (HTML) → Review and iterate → [user app
 
 `SKILL.md` is the entry point Claude reads. Everything else is loaded when needed.
 
+For distinctive decks, develop the concept before selecting a theme. The creative-direction
+reference helps Claude make relationships visible, explore different compositions, pace the story
+and write in the presenter's voice. Standard types are a toolbox; custom HTML compositions can
+use the whole stage, with explicit final-format reconstruction limits.
+
 ## What's in the repo
 
 | Path | What it is |
 |---|---|
 | `SKILL.md` | The method: truth rules, the draft-first rule, six stages with gates, commands, anti-patterns |
+| `references/creative-direction.md` | Concept development, creative moves, sequence, voice and distinctiveness review |
 | `references/domain-packs.md` | What consulting, finance, marketing, energy, science/health, technology, policy and teaching decks must prove |
 | `references/decision-trees.md` | T0-T11: job type, final format, mode, use case, structure, length, slide type, chart form, direction, frame, imagery, when to ask |
 | `references/frameworks.md` | Brief canvas, decision structures, selection, skeleton and anatomy, checks and balances, review rounds |
@@ -42,6 +48,7 @@ Plan → Decide → Select → Draft (HTML) → Review and iterate → [user app
 | `scripts/chart_images.py` | Mekko, slope, dumbbell, heatmap and bullet charts as images |
 | `assets/examples/*.json` | Worked example specs (all fictional or illustrative data) |
 | `assets/examples/drafts/` | HTML drafts built from those specs, with contact sheets |
+| `assets/creative-examples/queue-review.json` | A fictional concept-led HTML example with an exact counted display and a proposed test |
 | `assets/html-stage/stage-template.html` | Hand-built HTML stage for layouts beyond the 44 types |
 | `tests/smoke_test.sh` | Builds every example (draft and strict PPTX), renders both, lints, runs unit tests; run by GitHub Actions on each push |
 | `tests/test_core.py` | Unit tests: arithmetic edge cases, validation, style exemptions, builder independence |
@@ -67,6 +74,8 @@ Open any file in `assets/examples/drafts/` in a browser. Arrow keys move between
 speaker notes, G shows all slides as a grid, P prints a PDF.
 
 Changes and migration notes: [CHANGELOG.md](CHANGELOG.md).
+
+Creative planning checks and their limits: [evaluation notes](tests/evaluations/2026-11-12-creative-plans.md).
 
 ## For reviewers
 

@@ -74,14 +74,14 @@ instructions for the data format; translate a direction's tokens into its theme.
 ## B. PPTX builder (`scripts/build_deck.py`)
 
 After approval: for a .pptx request, offline submission, Google Slides (it opens .pptx), or
-whenever the numbers must tie out. The approved draft's spec builds as-is with `--strict` (the
-release gate, spec.md). Exit codes: 0 built · 2 spec, fact-check or release-blocker error (nothing
+whenever the numbers must tie out. Supported standard slides build from the approved draft's spec with `--strict`; custom compositions
+require the reconstruction step below. The release gate is described in spec.md. Exit codes: 0 built · 2 spec, fact-check or release-blocker error (nothing
 written) · 3 built but some text could not fit within floors (shorten or split, never shrink).
 
 Commands: `--schema` (fields), `--outline` (Gate 1 headline track), `--direction X --only 1,4`
 (previews), `-o out.pptx`. Then `render.py`, `lint_deck.py`.
 
-Need a layout the builder lacks (a map, an S-curve with phase bands, an org chart): it is a `custom`
+A tailored explanation or expression (a map, an S-curve, an annotated document, a spatial idea) can use a `custom`
 slide in the draft. Preserve a reconstruction script next to the spec, then build the deck, open it with python-pptx, replace the `[CUSTOM LAYOUT]`
 placeholder with shapes on the same grid and tokens, re-render, re-lint (the placeholder fails lint
 until replaced). For chart forms PowerPoint lacks, use route G.

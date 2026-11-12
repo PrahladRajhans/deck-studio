@@ -117,6 +117,21 @@ are explicitly fictional layout demonstrations and have been classified accordin
   `peak_draw = -min(cum)`, `turn = first_at_least(profit, 0)`, `payback = first_at_least(cum, 0)`,
   `score_b = wavg(sc_b, weights)`, `growth = cagr(rev[0], rev[3], 3)`.
 
+## Creative planning and custom composition
+
+Keep `brief.creative_brief` and `brief.creative_plan` beside the content: audience change, tension,
+distinctive material, latitude, selected concept, alternatives, rationale and intended rhythm.
+They guide judgement and are not rendered or graded by the validator. See creative-direction.md.
+
+A `custom` slide can improve explanation or expression even when standard types technically fit.
+Its `html` uses the deck's tokens inside normal chrome. `full_bleed: true` uses the whole stage;
+notes, a supplied source line and illustrative provenance remain in the generated HTML. Place
+the visible headline inside `html`; ordinary chrome fields such as `title` become planning metadata
+in this mode and cannot substitute for presented claim text. Give the
+composition a clear reading order and retain legible, editable text. Full-stage HTML does not
+promise automatic native PPTX conversion: record a feasible `pptx_note`, reconstruct after approval,
+then compare and QA the actual file. The builder's placeholder must not be delivered as final.
+
 ## Slide-writing tips per type
 
 - `cover`: title is the answer (document mode) or the promise (talk mode); `figure` = the one

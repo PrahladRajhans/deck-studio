@@ -177,7 +177,7 @@ cover → image_full: the person helped (with consent) → big_number: scale of 
 cover → exec_summary → chart: the problem in data → options: policy choices scored → risks →
 actions: implementation → references.
 
-**G7. Webinar / conference talk (T, 20-40) ·** cover → question: the audience's problem → (no agenda) →
+**G7. Webinar / conference talk (T, 20-40) ·** cover → question: the audience's problem → (agenda only when it helps orientation) →
 chapters with question dividers every 3-6 slides → at least one honest limitation slide → closing:
 call to action → references.
 

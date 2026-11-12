@@ -97,6 +97,14 @@ Record each failure with slide, claim, evidence and fix. `spec_io.py` catches co
 many numerical provenance gaps; claim inventories record review decisions. Source support,
 claim coverage and the rest still need reading. A clean validator report is not a truth certificate.
 
+## 3a. Creative quality (before approval)
+
+Use creative-direction.md §8. Look for a subject-specific organising idea on substantive slides,
+visible relationships, intentional reading order and an earned memorable moment where appropriate.
+Check that the language expresses this presenter's point of view. If slides are generic, try a
+different composition before polishing the theme. A strong table or repeated comparison layout
+may be the best answer; never trade fidelity for novelty.
+
 ## 4. The ten-point check (every deck)
 
 1. **Title test**: the titles alone tell the story (document) or the plot (talk).
@@ -120,8 +128,8 @@ Document: the answer is first; every non-exempt title passes both assertion test
 form; evaluative words are backed on the same slide; later slides add rather than restate; the
 summary claims nothing the body contradicts; the last body slide asks for a decision or action.
 
-Talk: no slide over one headline + 3-4 lines; no two figures or two emphases on a slide; every
-divider is answered by the next slide and fully before the next divider; no question asked twice;
+Talk: no slide over one headline + 3-4 lines; no two figures or two emphases on a slide; questions lead to a useful explanation, task or explicit investigation; revisiting a question
+adds understanding rather than merely repeating it;
 an agenda only if it orients, and the reveal (answer first or progressive) chosen on purpose;
 headline forms fit their roles; retain repetition when it supports comparison or learning;
 the abstract's promises are all paid off; the time estimate fits the slot.

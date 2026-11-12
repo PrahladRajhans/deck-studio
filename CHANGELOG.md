@@ -6,6 +6,26 @@ rewrite older entries to imply that later fixes already existed.
 
 ## Unreleased
 
+### Creative direction and presenter voice (2026-11-12)
+
+- Develop a subject-specific concept before selecting palette and typography. Add concise creative
+  briefs, genuinely different concept candidates, relationship-based composition prompts and a
+  distinctiveness review. Keep the process lightweight and avoid extra compulsory approval gates.
+- Treat the layout library as a toolbox. Permit custom composition for explanatory or expressive
+  value, not only after every standard type fails. Add a full-stage custom HTML option that retains
+  sources, notes and provenance, with explicit native PPTX reconstruction requirements.
+- Replace rigid composition and storytelling prescriptions with purpose-based defaults. Preserve
+  factual, accessibility, readability and destination constraints; do not substitute novelty for proof.
+- Strengthen positive voice development: presenter judgement, authentic samples, pivotal-title
+  alternatives and contextual editing. Do not simulate humanity with invented detail, slang, errors
+  or forced sentence variation. Keep technical terms, quotations and useful repetition.
+- Add a fictional queue-review example with a spatial handoff concept, accurately counted units,
+  an explicitly unproven intervention and an exact lookup table. CI builds and renders it as HTML;
+  it is not advertised as automatically converted native PowerPoint.
+- Expand evaluation to concept, composition, narrative sequence and presenter voice. Examples and
+  passing renderer tests establish feasibility; future creative quality must be judged from outputs.
+
+
 ### Fixed
 
 - Check literal figures even when `facts` is empty or absent. Ordinary counts and years, mixed

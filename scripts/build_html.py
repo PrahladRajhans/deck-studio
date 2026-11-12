@@ -713,7 +713,16 @@ class HtmlDeck:
             raise SpecError(f"slide {self.cur}: custom slide needs an 'html' body")
         if re.search(r"<script|on\w+=", s["html"], re.I):
             raise SpecError(f"slide {self.cur}: custom html may not contain scripts or event handlers")
-        self.warn("custom layout: say why no standard type fits; the PPTX needs a hand build of this slide")
+        self.warn("custom composition: preserve its purpose and native reconstruction plan; PPTX needs a hand build")
+        if s.get("full_bleed"):
+            self.page += 1  # content page, just like a custom slide using standard chrome
+            source = s.get("source", "")
+            source_line = (f'<div class="custom-source" style="position:absolute;left:64px;bottom:20px;'
+                           f'max-width:85%;padding:6px 10px;background:#fff;color:#111;'
+                           f'font:20px/1.25 Arial,sans-serif">{md(source)}</div>') if source else ""
+            return ('<section class="slide t-custom custom-full" style="padding:0;display:block">'
+                    f'<div class="custom-stage" style="position:absolute;inset:0">{s["html"]}</div>'
+                    + source_line + self.notes(s) + '</section>')
         return self.chrome(s, f'<div class="custom">{s["html"]}</div>')
 
     def s_references(self, s):

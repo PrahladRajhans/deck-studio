@@ -12,6 +12,8 @@ with an unsupported claim fails on factual fidelity whatever its design score.
 | Factual fidelity | every figure from evidence or labelled; claims at the right strength | an invented or contradicted figure, source or causal claim |
 | Audience fit | structure, density and register suit the room | a document deck for a live room, or the reverse |
 | Reasoning | titles tell the story; the recommendation follows | jumps, repeats, conclusions without premises |
+| Concept and identity | a subject-specific organising idea appears on substantive slides | a generic deck with only palette or noun substitutions |
+| Composition and sequence | space, emphasis and order explain the material; repetition has a purpose | prose redistributed into cards; arbitrary variation or dramatic moments without meaning |
 | Visual appropriateness | each exhibit shows the relationship that answers the slide's question | decoration, wrong chart form, every slide the same |
 | Readability | nothing below the floors, nothing clipped, clear focal point | flagged slides left in |
 | Voice | sounds like the presenter; no stock phrasing | generic or manufactured voice |
@@ -45,3 +47,20 @@ with an unsupported claim fails on factual fidelity whatever its design score.
 
 Record for each run: the brief, the spec, the draft contact sheet, the validator and lint output,
 the scores, and what changed in the skill since the last run.
+
+## Evaluating creative transfer and voice
+
+For the executive, teaching and expressive-brand briefs, keep the supplied material fixed. Retain
+candidate concepts and a few representative drafts, then select one with reasons. Compare actual
+outputs, not the agent's claims of creativity. A palette change does not count as a new concept.
+Check whether distinctive choices improve comprehension, evidence access or presenter identity.
+The sober executive deck need not resemble the expressive pitch; neither should borrow documentary
+assets or emotional details that were not supplied.
+
+For voice, supply a short authentic writing sample and check whether a pivotal title and spoken
+notes preserve its register without copying irrelevant phrases. Repeat without a sample: the
+presenter should still sound plausible without manufactured personal history or stock slogans.
+Do not reward writing merely for avoiding words on a list.
+
+The queue-review example establishes a working HTML path, not a completed benchmark suite. Record
+what was actually run, including drafts, reviewer findings, destination limits and unresolved gaps.

@@ -65,6 +65,8 @@ def validation_strings(obj, *, numbers=False):
     """
     if isinstance(obj, dict):
         for key, value in obj.items():
+            if obj.get("type") == "custom" and obj.get("full_bleed") and key not in {"html", "source", "notes"}:
+                continue  # other chrome fields are planning metadata in a full-stage composition
             if key in _VALIDATION_SKIP or key.startswith("_"):
                 continue
             if numbers and key in {"code", "source", "sources", "credit", "alt"}:

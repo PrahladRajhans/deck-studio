@@ -1,7 +1,7 @@
 # Decision trees
 
 Walk these in order: T0 → T1 (provisional) → T2 → T3 → T4 → T5 at the start of a deck; T6 → T7 for every
-content slide; T8 → T9 → T10 once per deck. Each tree ends in a concrete choice. When two branches
+content slide; T8 → T9 → T10 once per deck, after developing the concept (creative-direction.md). Each tree ends in a concrete choice. When two branches
 fit, use the audience's task, evidence and destination to choose; do not let row order decide.
 When none fits, explain the gap and ask only if it prevents useful progress.
 
@@ -172,7 +172,8 @@ Use a table when exact lookup is the job, and a sentence when a visual adds noth
 | 39 | A question for the room? | quiz, poll, think about it | `question` |
 | 40 | Proof by picture? | photo, product, before/after shots | `image` / `image_full` / `gallery` |
 | 41 | Code, prompt, command? | code, prompt, config | `code` |
-| 42 | Nothing above fits | — | `bullets` (≤ 6, and ask why nothing fit) |
+| 42 | A tailored composition explains or expresses the idea better | spatial explanation, documentary detail, typographic idea | `custom` (full-stage if useful), with native reconstruction plan |
+| 43 | Parallel text is the clearest answer | short parallel statements | `bullets` (≤ 6); no need to manufacture a diagram |
 
 Overrides:
 - Talk mode avoids document devices on one slide (four thin cards, hubs with 8 spokes): split into

@@ -48,14 +48,18 @@ teaching, transition or facilitation purpose on purpose.
   be brought along; answer first when it is senior, time-poor or deciding, even live. An agenda
   belongs where it reduces uncertainty (workshops, teaching, long sessions); in a short persuasive
   talk, question dividers usually orient better. When a slide asks, the next slide answers.
-- Dividers voice the audience's next question; one every 3-6 body slides; never the same question
-  twice; the answer is complete before the next divider.
-- Introduce a concept in three steps: what it is → what it improves (before/after) → a one-line
-  analogy that the next slide builds on.
-- One headline and 3-4 lines; one figure, large; one emphasis per slide.
-- Don't add small text for what the screen already shows (captions under logos, notes under tables).
-- Include at least one honest limitation slide; never only sell.
-- Close with an action for the audience, not a summary or "thank you".
+- Use dividers when the audience needs a new question or orientation. Revisit a question when
+  learning or investigation benefits from it; make progress or remaining uncertainty explicit.
+- Introduce concepts in the sequence learners need. A definition, worked example, contrast or
+  bounded analogy may help; do not force a three-step analogy into every explanation.
+- Aim for one clear focal point. A short headline and a few lines often work; use a mechanism,
+  annotated image, comparison or demonstration when that explains more.
+- Remove redundant captions, but keep labels and explanations the audience needs to interpret
+  the screen accurately.
+- State material limitations where they help the audience judge the claim, on the slide or in
+  notes as appropriate. Do not manufacture a limitation or a compulsory extra slide.
+- Close on the useful consequence: an action, decision, takeaway or question the audience can
+  now answer. A teaching session need not invent a commercial ask.
 - Quote only real words, verbatim. No invented "what I typed".
 
 ## 3. Body text

@@ -1,0 +1,126 @@
+{
+  "direction": "public-sector",
+  "frame": "clean",
+  "mode": "document",
+  "title": "Queue review: a concept-led HTML demonstration",
+  "footer": "Illustrative concept study · fictional workflow",
+  "illustrative_authorized": true,
+  "facts": {
+    "total": 10,
+    "packed": 6,
+    "waiting": "=total-packed"
+  },
+  "fact_meta": {
+    "total": {
+      "kind": "illustrative"
+    },
+    "packed": {
+      "kind": "illustrative"
+    }
+  },
+  "checks": [
+    "packed+waiting==total",
+    "waiting>=0"
+  ],
+  "brief": {
+    "purpose": "Make the location of a fictional queue understandable; propose a measured trial without claiming causation.",
+    "destination": "HTML concept demonstration. Native PPTX custom slides need deliberate reconstruction after approval.",
+    "creative_brief": {
+      "audience_change": "Locate the transfer queue before discussing more upstream capacity.",
+      "central_tension": "Activities can be completed while work still waits between teams.",
+      "distinctive_material": "A ten-order fictional snapshot with six received and four waiting; no measured causes or ROI.",
+      "creative_latitude": "Spatial explanation and editorial typography; preserve counts, limitations and readability.",
+      "takeaway": "Test the handoff hypothesis and measure the result."
+    },
+    "creative_plan": {
+      "selected_concept": "The gap between teams",
+      "alternatives": [
+        {
+          "concept": "Follow one order",
+          "decision": "Not chosen: no supplied longitudinal order record."
+        },
+        {
+          "concept": "Busy versus finished",
+          "decision": "Not chosen: no activity-time dataset; would overstate the available snapshot."
+        }
+      ],
+      "rationale": "Use space for the transfer boundary, exact unit counts for evidence and a labelled test for the next step.",
+      "rhythm": "Question, counted proof, proposed test, exact lookup. The metaphor stops at the snapshot; it does not establish a cause."
+    },
+    "voice": {
+      "stance": "Operational peer",
+      "register": "Direct, measured, no claim of a proven remedy."
+    }
+  },
+  "slides": [
+    {
+      "type": "custom",
+      "id": "Q1",
+      "title": "Where did the work stop?",
+      "full_bleed": true,
+      "html": "<div style=\"position:absolute;inset:0;background:#152b32;color:#f5f1e8;font-family:Arial,sans-serif\"><div style=\"position:absolute;left:82px;top:74px;width:900px;font-size:25px;line-height:1.08;letter-spacing:2px;font-weight:700\">DISPATCH REVIEW / A QUESTION ABOUT THE HANDOFF</div><div style=\"position:absolute;left:82px;top:180px;width:1420px;font-size:112px;line-height:1.08;font-weight:700;letter-spacing:-4px\">Where did the<br>work stop?</div><div style=\"position:absolute;left:82px;top:695px;width:550px;font-size:54px;line-height:1.08;font-weight:700\">Picking complete</div><div style=\"position:absolute;left:1230px;top:695px;width:550px;font-size:54px;line-height:1.08;font-weight:700\">Packing received</div><div style=\"position:absolute;left:720px;top:650px;width:410px;height:190px;border-left:3px dashed #ca7658;border-right:3px dashed #ca7658\"></div><div style=\"position:absolute;left:735px;top:855px;width:400px;font-size:26px;line-height:1.08;text-align:center;color:#e6b19b;letter-spacing:1px\">THE TRANSFER BETWEEN TEAMS</div><div style=\"position:absolute;left:82px;top:945px;width:1500px;font-size:30px;line-height:1.08;\">Start with the boundary between activities, not another activity dashboard.</div></div>",
+      "data_status": "illustrative",
+      "source": "Illustrative workflow snapshot; no real organisation or measured outcome.",
+      "pptx_note": "Reconstruct with editable text and native shapes on the same stage; retain source, unit counts, labels and limitations.",
+      "notes": {
+        "say": "The opening identifies a boundary worth examining. It does not attribute a measured delay or promise a cause."
+      }
+    },
+    {
+      "type": "custom",
+      "id": "Q2",
+      "title": "The queue is at the transfer.",
+      "full_bleed": true,
+      "html": "<div style=\"position:absolute;inset:0;background:#f5f1e8;color:#152b32;font-family:Arial,sans-serif\"><div style=\"position:absolute;left:82px;top:70px;width:1000px;font-size:26px;line-height:1.08;letter-spacing:2px;font-weight:700\">THE SNAPSHOT</div><div style=\"position:absolute;left:82px;top:150px;width:1710px;font-size:76px;line-height:1.08;font-weight:700;letter-spacing:-2px\">The queue is at the transfer.</div><div style=\"position:absolute;left:82px;top:320px;width:800px;font-size:96px;line-height:1.08;font-weight:700;color:#285d70\">{=packed} / {=total}</div><div style=\"position:absolute;left:1060px;top:320px;width:780px;font-size:96px;line-height:1.08;font-weight:700;color:#a9492c\">{=waiting} / {=total}</div><div style=\"position:absolute;left:82px;top:445px;width:800px;font-size:34px;line-height:1.08;font-weight:700;color:#285d70\">Received by packing</div><div style=\"position:absolute;left:1060px;top:445px;width:780px;font-size:34px;line-height:1.08;font-weight:700;color:#a9492c\">Waiting at transfer</div><div style=\"position:absolute;left:82px;top:535px;display:flex;gap:14px;color:#285d70\"><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">A</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">B</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">C</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">D</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">E</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">F</span></div><div style=\"position:absolute;left:1060px;top:535px;display:flex;gap:14px;color:#a9492c\"><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">G</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">H</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">I</span><span data-order-unit=\"true\" style=\"display:flex;align-items:center;justify-content:center;width:104px;height:104px;border:2px solid currentColor;font-size:38px;font-weight:700\">J</span></div><div style=\"position:absolute;left:82px;top:720px;width:1700px;font-size:34px;line-height:1.08;\">Each square is an order. The groups account for the whole snapshot.</div><div style=\"position:absolute;left:82px;top:870px;width:1600px;font-size:41px;line-height:1.08;font-weight:700\">This locates the queue. It does not explain why.</div></div>",
+      "data_status": "illustrative",
+      "source": "Illustrative workflow snapshot; no real organisation or measured outcome.",
+      "pptx_note": "Reconstruct with editable text and native shapes on the same stage; retain source, unit counts, labels and limitations.",
+      "notes": {
+        "say": "In this fictional snapshot, {=packed} of {=total} orders reached packing and {=waiting} await transfer. This locates the queue, not its cause."
+      }
+    },
+    {
+      "type": "custom",
+      "id": "Q3",
+      "title": "Change the handoff. Then measure.",
+      "full_bleed": true,
+      "html": "<div style=\"position:absolute;inset:0;background:#f5f1e8;color:#152b32;font-family:Arial,sans-serif\"><div style=\"position:absolute;left:82px;top:70px;width:1200px;font-size:26px;line-height:1.08;letter-spacing:2px;font-weight:700\">PROPOSED TEST / THE RESULT IS STILL UNKNOWN</div><div style=\"position:absolute;left:82px;top:150px;width:1700px;font-size:86px;line-height:1.08;font-weight:700;letter-spacing:-2px\">Change the handoff.<br>Then measure.</div><div style=\"position:absolute;left:82px;top:440px;width:380px;font-size:42px;line-height:1.08;font-weight:700\">Picking</div><div style=\"position:absolute;left:615px;top:440px;width:650px;font-size:42px;line-height:1.08;font-weight:700;color:#a9492c\">Named handoff owner</div><div style=\"position:absolute;left:1450px;top:440px;width:400px;font-size:42px;line-height:1.08;font-weight:700\">Packing</div><div style=\"position:absolute;left:440px;top:440px;width:160px;font-size:46px;line-height:1.08;text-align:center\">→</div><div style=\"position:absolute;left:1240px;top:440px;width:160px;font-size:46px;line-height:1.08;text-align:center\">→</div><div style=\"position:absolute;left:82px;top:680px;width:740px;font-size:29px;line-height:1.08;letter-spacing:2px;font-weight:700\">WATCH</div><div style=\"position:absolute;left:82px;top:745px;width:780px;font-size:43px;line-height:1.08;\">Orders waiting at transfer<br>Time to acknowledge receipt</div><div style=\"position:absolute;left:1060px;top:680px;width:700px;font-size:29px;line-height:1.08;letter-spacing:2px;font-weight:700\">DECIDE AFTER THE TRIAL</div><div style=\"position:absolute;left:1060px;top:745px;width:720px;font-size:43px;line-height:1.08;\">Did the queue change?<br>What else changed with it?</div><div style=\"position:absolute;left:82px;top:945px;width:1700px;font-size:30px;line-height:1.08;\">A process hypothesis to test, not a promised productivity gain.</div></div>",
+      "data_status": "illustrative",
+      "source": "Illustrative workflow snapshot; no real organisation or measured outcome.",
+      "pptx_note": "Reconstruct with editable text and native shapes on the same stage; retain source, unit counts, labels and limitations.",
+      "notes": {
+        "say": "A named handoff owner is a proposed experiment. Observe the queue and receipt time; no productivity gain or return has been established."
+      }
+    },
+    {
+      "type": "table",
+      "id": "Q4",
+      "title": "The snapshot behind the argument",
+      "exhibit": "Order states, same snapshot (orders)",
+      "columns": [
+        "State",
+        "Orders"
+      ],
+      "rows": [
+        [
+          "Received by packing",
+          "=packed"
+        ],
+        [
+          "Awaiting transfer",
+          "=waiting"
+        ],
+        [
+          "Total",
+          "=total"
+        ]
+      ],
+      "total_row": 2,
+      "data_status": "illustrative",
+      "source": "Illustrative workflow snapshot for this design example.",
+      "notes": {
+        "say": "Use the table for exact lookup. The counted diagram and this table describe the same fictional snapshot."
+      }
+    }
+  ]
+}

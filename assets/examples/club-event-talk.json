@@ -1,0 +1,125 @@
+{
+ "title": "Club fest (illustrative)",
+ "direction": "campus-bright",
+ "mode": "talk",
+ "minutes": 6,
+ "footer": "Illustrative club deck",
+ "slides": [
+  {
+   "type": "cover",
+   "eyebrow": "Consulting Club · Fest 2027",
+   "title": "Three days to crack real cases with real firms",
+   "figure": {
+    "value": "12",
+    "label": "partner firms (illustrative)"
+   },
+   "notes": {
+    "say": "Welcome."
+   }
+  },
+  {
+   "type": "divider",
+   "title": "Why should you show up?",
+   "notes": {
+    "say": "Q."
+   }
+  },
+  {
+   "type": "columns",
+   "kicker": "What you get",
+   "title": "Real cases, real feedback, real shortlists",
+   "columns": [
+    {
+     "icon": "target",
+     "heading": "Live cases",
+     "body": "Briefs from partner firms"
+    },
+    {
+     "icon": "check",
+     "heading": "Feedback",
+     "body": "Partners score every team"
+    },
+    {
+     "icon": "star",
+     "heading": "Shortlists",
+     "body": "Top teams meet recruiters"
+    }
+   ],
+   "notes": {
+    "say": "What you get."
+   }
+  },
+  {
+   "type": "divider",
+   "title": "How does it work?",
+   "notes": {
+    "say": "Q."
+   }
+  },
+  {
+   "type": "milestones",
+   "kicker": "Schedule",
+   "title": "Three days, one final",
+   "milestones": [
+    {
+     "date": "Day 1",
+     "label": "Case drop + workshops",
+     "state": "now"
+    },
+    {
+     "date": "Day 2",
+     "label": "Mentor rounds",
+     "state": "next"
+    },
+    {
+     "date": "Day 3",
+     "label": "Finals on stage",
+     "state": "next"
+    }
+   ],
+   "notes": {
+    "say": "Schedule."
+   }
+  },
+  {
+   "type": "divider",
+   "title": "Who's running it?",
+   "notes": {
+    "say": "Q."
+   }
+  },
+  {
+   "type": "team",
+   "kicker": "Organisers",
+   "title": "Ask any of us",
+   "people": [
+    {
+     "name": "Riya Menon",
+     "role": "Lead",
+     "line": "Cases and partners"
+    },
+    {
+     "name": "Arjun Rao",
+     "role": "Ops",
+     "line": "Rooms and schedule"
+    },
+    {
+     "name": "Sana Khan",
+     "role": "Outreach",
+     "line": "Sign-ups and comms"
+    }
+   ],
+   "notes": {
+    "say": "Team."
+   }
+  },
+  {
+   "type": "closing",
+   "title": "Teams of four. Sign up by Friday.",
+   "ask": "Scan the code at the stall or ask an organiser",
+   "notes": {
+    "say": "Close."
+   }
+  }
+ ]
+}

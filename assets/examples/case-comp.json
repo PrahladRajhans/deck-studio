@@ -1,0 +1,400 @@
+{
+  "title": "UAE entry for a Pune ayurvedic skincare brand",
+  "direction": "consulting-navy",
+  "mode": "document",
+  "footer": "Illustrative example · figures are made up for the template",
+  "sources": [
+    "Illustrative figures for this example deck"
+  ],
+  "facts": {
+    "years": [
+      "FY28",
+      "FY29",
+      "FY30",
+      "FY31"
+    ],
+    "rev": [
+      0.6,
+      1.8,
+      3.5,
+      5.2
+    ],
+    "channel": [
+      0.2,
+      0.7,
+      1.3,
+      1.9
+    ],
+    "marketing": [
+      0.5,
+      0.8,
+      1.1,
+      1.4
+    ],
+    "fixed": [
+      0.3,
+      0.2,
+      0.2,
+      0.2
+    ],
+    "budget": 1.2,
+    "profit": "=vsub(vsub(vsub(rev, channel), marketing), fixed)",
+    "peak_draw": "=-min(cumsum(profit))",
+    "weights": [
+      3,
+      2,
+      3,
+      2
+    ],
+    "sc_a": [
+      5,
+      5,
+      2,
+      4
+    ],
+    "sc_b": [
+      4,
+      4,
+      4,
+      5
+    ],
+    "sc_c": [
+      1,
+      2,
+      5,
+      2
+    ],
+    "cum": "=cumsum(profit)",
+    "turn": "=first_at_least(profit, 0)",
+    "payback": "=first_at_least(cum, 0)"
+  },
+  "checks": [
+    "len(rev) == len(channel) == len(marketing) == len(fixed)",
+    "peak_draw <= budget",
+    "wavg(sc_b, weights) > wavg(sc_a, weights) and wavg(sc_b, weights) > wavg(sc_c, weights)",
+    "turn >= 0 and payback >= turn"
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Strategy recommendation · Board review",
+      "title": "Enter the UAE through Amazon.ae and one premium retailer, not own stores",
+      "subtitle": "A capital-light entry that pays back in year {=payback+1} within a USD {=budget|.1f}M budget",
+      "figure": {
+        "value": "USD {=budget|.1f}M",
+        "label": "entry budget requested today, covering the peak cash draw"
+      },
+      "meta": [
+        "Prepared for the founders and board",
+        "November 2026"
+      ],
+      "notes": {
+        "say": "We recommend a capital-light entry into the UAE: Amazon.ae plus one premium retailer. It needs USD {=budget|.1f} million and pays back in year {=payback+1}."
+      }
+    },
+    {
+      "type": "exec_summary",
+      "kicker": "Executive summary",
+      "title": "A capital-light entry wins on risk, speed and payback; we ask for USD {=budget|.1f}M today",
+      "rows": [
+        {
+          "claim": "The UAE is a large, online-first market with real pull for ayurvedic skincare",
+          "detail": "Diaspora familiarity plus premium clean-beauty demand; e-commerce share above 30%",
+          "ref": "market"
+        },
+        {
+          "claim": "Global prestige brands hold the shelf, but none owns clinical ayurveda",
+          "detail": "Mass ayurvedic brands lack premium credibility; prestige brands are synthetic"
+        },
+        {
+          "claim": "Amazon.ae plus one premium retailer beats both alternatives on our criteria",
+          "detail": "Scores {=wavg(sc_b, weights)|.1f} of 5 against {=wavg(sc_a, weights)|.1f} for online-only and {=wavg(sc_c, weights)|.1f} for own stores",
+          "highlight": true,
+          "ref": "options"
+        },
+        {
+          "claim": "Operating profit turns positive in {=years[turn]}; the cumulative draw peaks at USD {=peak_draw|.1f}M",
+          "detail": "Cumulative payback in {=years[payback]}, well inside the USD {=budget|.1f}M budget",
+          "ref": "pnl"
+        }
+      ],
+      "notes": {
+        "say": "Four points carry the recommendation. The market is attractive, the shelf has a gap, the hybrid option wins, and the numbers work inside the budget."
+      }
+    },
+    {
+      "type": "agenda",
+      "title": "Contents",
+      "items": [
+        "Why the UAE, why now",
+        "Where we can win",
+        "How to enter",
+        "What it takes"
+      ],
+      "active": 3
+    },
+    {
+      "type": "chart",
+      "kicker": "Market",
+      "title": "UAE revenue scales from USD {=rev[0]|.1f}M to {=rev[3]|.1f}M in four years as distribution widens",
+      "exhibit": "Revenue by year (USD M)",
+      "chart": {
+        "kind": "column",
+        "categories": "=years",
+        "series": [
+          {
+            "name": "Revenue",
+            "values": "=rev"
+          }
+        ],
+        "highlight": "=turn",
+        "number_format": "0.0"
+      },
+      "side": {
+        "heading": "Why it compounds",
+        "points": [
+          "Amazon.ae gives national reach from day one",
+          "The retail partner adds trial and premium credibility",
+          "Repeat purchase lowers blended acquisition cost each year"
+        ]
+      },
+      "so_what": "{=years[turn]} is the turn: revenue of USD {=rev[turn]|.1f}M covers channel, marketing and fixed costs; cumulative payback follows in {=years[payback]}.",
+      "source": "Illustrative model for this example",
+      "notes": {
+        "say": "Revenue grows from 0.6 to 5.2 million over four years. The highlighted bar is the first year revenue covers all operating costs.",
+        "assumptions": [
+          "Growth path is illustrative, not researched"
+        ]
+      },
+      "id": "market"
+    },
+    {
+      "type": "options",
+      "kicker": "How to enter",
+      "title": "Amazon.ae plus one premium retailer scores highest once risk and brand-building are weighted",
+      "exhibit": "Entry options scored against four criteria",
+      "criteria": [
+        {
+          "name": "Capital at risk",
+          "weight": 3
+        },
+        {
+          "name": "Speed to market",
+          "weight": 2
+        },
+        {
+          "name": "Brand building",
+          "weight": 3
+        },
+        {
+          "name": "Payback",
+          "weight": 2
+        }
+      ],
+      "options": [
+        {
+          "name": "A. Amazon.ae only",
+          "scores": "=sc_a"
+        },
+        {
+          "name": "B. Amazon.ae + one retailer",
+          "scores": "=sc_b"
+        },
+        {
+          "name": "C. Own flagship stores",
+          "scores": "=sc_c"
+        }
+      ],
+      "recommended": 1,
+      "so_what": "Option B gives up a little speed for brand credibility that online-only cannot buy.",
+      "source": "Team scoring workshop (illustrative)",
+      "notes": {
+        "say": "We scored three options on four weighted criteria. Option B wins because it builds the brand without lease risk."
+      },
+      "id": "options"
+    },
+    {
+      "type": "table",
+      "kicker": "What it takes",
+      "title": "Operating profit turns positive in {=years[turn]} and the cash draw never exceeds USD {=peak_draw|.1f}M",
+      "exhibit": "Operating P&L (USD M)",
+      "columns": [
+        "Line item",
+        "{=years[0]}",
+        "{=years[1]}",
+        "{=years[2]}",
+        "{=years[3]}"
+      ],
+      "rows": [
+        [
+          "Revenue",
+          "{=rev[0]|.1f}",
+          "{=rev[1]|.1f}",
+          "{=rev[2]|.1f}",
+          "{=rev[3]|.1f}"
+        ],
+        [
+          "Channel fees",
+          "({=channel[0]|.1f})",
+          "({=channel[1]|.1f})",
+          "({=channel[2]|.1f})",
+          "({=channel[3]|.1f})"
+        ],
+        [
+          "Marketing",
+          "({=marketing[0]|.1f})",
+          "({=marketing[1]|.1f})",
+          "({=marketing[2]|.1f})",
+          "({=marketing[3]|.1f})"
+        ],
+        [
+          "Fixed costs",
+          "({=fixed[0]|.1f})",
+          "({=fixed[1]|.1f})",
+          "({=fixed[2]|.1f})",
+          "({=fixed[3]|.1f})"
+        ],
+        [
+          "Operating profit",
+          "{=profit[0]|.1f}",
+          "{=profit[1]|.1f}",
+          "{=profit[2]|.1f}",
+          "{=profit[3]|.1f}"
+        ]
+      ],
+      "total_row": true,
+      "side": {
+        "heading": "Sensitivities",
+        "points": [
+          "Every 2 points of retailer margin moves year-2 profit by about USD 35k",
+          "Marketplace ad cost must fall from 28% to 18% of sales by year 3"
+        ]
+      },
+      "source": "Illustrative model for this example",
+      "notes": {
+        "say": "Every number on this page comes from one model, so the summary, chart and table agree."
+      },
+      "id": "pnl"
+    },
+    {
+      "type": "timeline",
+      "kicker": "What it takes",
+      "title": "A 12-month plan gets registration done before the {=years[0]} launch",
+      "exhibit": "Workstreams by quarter",
+      "periods": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "Launch"
+      ],
+      "rows": [
+        {
+          "label": "Entity and banking",
+          "owner": "CFO",
+          "bars": [
+            {
+              "start": 0,
+              "end": 1,
+              "label": "Free-zone entity"
+            },
+            {
+              "start": 2,
+              "milestone": true,
+              "label": "Accounts live"
+            }
+          ]
+        },
+        {
+          "label": "Registration and labels",
+          "owner": "Regulatory",
+          "bars": [
+            {
+              "start": 0,
+              "end": 2,
+              "label": "Dossier, filing, Arabic labels",
+              "highlight": true
+            }
+          ]
+        },
+        {
+          "label": "Amazon.ae channel",
+          "owner": "D2C lead",
+          "bars": [
+            {
+              "start": 1,
+              "end": 3,
+              "label": "Brand registry, FBA, catalogue"
+            },
+            {
+              "start": 4,
+              "milestone": true,
+              "label": "Go-live"
+            }
+          ]
+        },
+        {
+          "label": "Retail partner",
+          "owner": "Sales",
+          "bars": [
+            {
+              "start": 1,
+              "end": 2,
+              "label": "Shortlist and sign"
+            },
+            {
+              "start": 3,
+              "end": 4,
+              "label": "First 10 doors"
+            }
+          ]
+        }
+      ],
+      "so_what": "Registration is the critical path: start the dossier this quarter or the launch slips.",
+      "source": "Illustrative plan",
+      "notes": {
+        "say": "Four workstreams run in parallel. Registration is highlighted because every other date depends on it."
+      },
+      "id": "plan"
+    },
+    {
+      "type": "ask",
+      "kicker": "Decision",
+      "title": "We ask the board to approve USD {=budget|.1f}M and start registration this quarter",
+      "ask": "Approve a USD {=budget|.1f}M entry budget and mandate exclusive talks with one premium UAE retailer",
+      "why": [
+        "Registration takes 4 to 6 months, so delay moves the launch",
+        "Option B scored highest on the weighted criteria",
+        "Peak cash draw stays inside the budget"
+      ],
+      "cost": [
+        "USD {=budget|.1f}M over two years, released in two tranches",
+        "Operating profit positive in {=years[turn]}; payback in {=years[payback]}"
+      ],
+      "figure": {
+        "value": "{=years[payback]}",
+        "label": "year cumulative cash turns positive: the full entry cost is paid back"
+      },
+      "owner": "Owner: CEO · Decision needed by 15 December",
+      "notes": {
+        "say": "Here is the decision we need today, why it cannot wait, and what it costs."
+      },
+      "id": "ask"
+    },
+    {
+      "type": "closing",
+      "title": "Capital-light entry: in the UAE by {=years[0]}, paid back by {=years[payback]}",
+      "ask": "Decision today: approve USD {=budget|.1f}M and start registration",
+      "figure": {
+        "value": "USD {=budget|.1f}M",
+        "label": "entry budget requested"
+      },
+      "lines": [
+        "Questions and discussion"
+      ],
+      "notes": {
+        "say": "To close: one decision, one budget, one clear payback year."
+      }
+    }
+  ]
+}

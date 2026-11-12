@@ -1,0 +1,216 @@
+{
+ "title": "Monsoon campaign plan (illustrative)",
+ "direction": "coral-studio",
+ "mode": "document",
+ "footer": "Illustrative campaign plan · figures made up",
+ "sources": [
+  "Illustrative brand tracking data"
+ ],
+ "facts": {
+  "reach": 2400000,
+  "visits": 96000,
+  "carts": 14400,
+  "orders": 5040,
+  "budget": 1.8,
+  "cac": "=budget*10000000/orders",
+  "conv": "=orders/carts*100",
+  "lift": 3
+ },
+ "checks": [
+  "orders < carts < visits < reach"
+ ],
+ "slides": [
+  {
+   "type": "cover",
+   "eyebrow": "Campaign plan · Monsoon 2027",
+   "title": "Make chai the reason to stay in when it rains",
+   "subtitle": "A six-week digital-first campaign for a tea brand (illustrative)",
+   "figure": {
+    "value": "₹{=budget|.1f} cr",
+    "label": "campaign budget requested"
+   },
+   "notes": {
+    "say": "We propose one idea for the monsoon."
+   }
+  },
+  {
+   "type": "big_number",
+   "kicker": "Insight",
+   "title": "Rainy evenings are when young urban buyers try a new tea",
+   "value": "{=lift}×",
+   "label": "more first-time tea purchases on rainy evenings",
+   "context": "Illustrative tracking data, metro cities",
+   "points": [
+    "Online orders spike after 6 pm",
+    "Bundles with snacks convert best"
+   ],
+   "source": "Illustrative brand tracking",
+   "notes": {
+    "say": "The insight."
+   }
+  },
+  {
+   "type": "statement",
+   "kicker": "The idea",
+   "claim": "Every downpour is an invitation: brew one, share one",
+   "points": [
+    "Weather-triggered offers",
+    "Snack-pairing bundles",
+    "Share-a-cup social challenge"
+   ],
+   "notes": {
+    "say": "The idea."
+   }
+  },
+  {
+   "type": "image",
+   "kicker": "Channels",
+   "title": "Online overtakes general trade as the place first-time buyers try us",
+   "path": "slope.png",
+   "alt": "Slope chart: online share rises from 18% to 34% while general trade falls from 56% to 37%, 2024-2026",
+   "side": "left",
+   "image_width": 7.2,
+   "heading": "What it means",
+   "points": [
+    "Lead with quick-commerce placements",
+    "Keep general trade for repeat"
+   ],
+   "source": "Illustrative channel data",
+   "notes": {
+    "say": "Channels."
+   }
+  },
+  {
+   "type": "funnel",
+   "kicker": "Conversion",
+   "title": "{=conv|.0f}% of carts must convert for the plan to pay back",
+   "exhibit": "Planned funnel (people)",
+   "stages": [
+    {
+     "label": "Reach",
+     "value": "=reach"
+    },
+    {
+     "label": "Visits",
+     "value": "=visits"
+    },
+    {
+     "label": "Carts",
+     "value": "=carts"
+    },
+    {
+     "label": "Orders",
+     "value": "=orders",
+     "note": "Cost per order ₹{=cac|,.0f}"
+    }
+   ],
+   "highlight": 2,
+   "source": "Illustrative plan",
+   "notes": {
+    "say": "Funnel."
+   }
+  },
+  {
+   "type": "roadmap",
+   "kicker": "Flighting",
+   "title": "Six weeks: tease in June, peak with the first heavy rain",
+   "lanes": [
+    {
+     "heading": "Weeks 1-2 · Tease",
+     "items": [
+      {
+       "heading": "Creator teasers"
+      },
+      {
+       "heading": "Weather triggers set up"
+      }
+     ]
+    },
+    {
+     "heading": "Weeks 3-4 · Peak",
+     "items": [
+      {
+       "heading": "Rain-day offers live"
+      },
+      {
+       "heading": "Share-a-cup challenge"
+      }
+     ]
+    },
+    {
+     "heading": "Weeks 5-6 · Sustain",
+     "items": [
+      {
+       "heading": "Bundle retargeting"
+      },
+      {
+       "heading": "Repeat-purchase nudges"
+      }
+     ]
+    }
+   ],
+   "highlight": 1,
+   "notes": {
+    "say": "Flighting."
+   }
+  },
+  {
+   "type": "kpi",
+   "kicker": "Targets",
+   "title": "Success is {=orders|,} first orders at about ₹{=cac|,.0f} each",
+   "items": [
+    {
+     "value": "{=orders|,}",
+     "label": "first orders",
+     "delta": "+40% vs last monsoon"
+    },
+    {
+     "value": "₹{=cac|,.0f}",
+     "label": "cost per first order",
+     "delta": "−12% vs plan",
+     "good": true
+    },
+    {
+     "value": "22%",
+     "label": "repeat within 60 days",
+     "delta": "target"
+    }
+   ],
+   "highlight": 0,
+   "source": "Illustrative plan",
+   "notes": {
+    "say": "Targets."
+   }
+  },
+  {
+   "type": "ask",
+   "kicker": "Decision",
+   "title": "Approve ₹{=budget|.1f} crore and the creator shortlist by 20 May",
+   "ask": "Approve a ₹{=budget|.1f} crore budget and sign three creators by 20 May",
+   "why": [
+    "Monsoon onset is the window",
+    "Creators book out 4 weeks ahead"
+   ],
+   "cost": [
+    "₹{=budget|.1f} crore over six weeks",
+    "Expected {=orders|,} first orders"
+   ],
+   "figure": {
+    "value": "₹{=cac|,.0f}",
+    "label": "planned cost per first order"
+   },
+   "owner": "Owner: Brand lead",
+   "notes": {
+    "say": "The ask."
+   }
+  },
+  {
+   "type": "closing",
+   "title": "Brew one, share one: own the rainy evening",
+   "ask": "Decision today: budget and creators",
+   "notes": {
+    "say": "Close."
+   }
+  }
+ ]
+}

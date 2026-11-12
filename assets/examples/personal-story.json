@@ -1,0 +1,129 @@
+{
+  "title": "Interview story deck for a product-strategy role (fictional candidate)",
+  "direction": "editorial-warm",
+  "mode": "talk",
+  "footer": "Illustrative example · fictional candidate",
+  "sources": [
+    "Candidate's own project records (illustrative)"
+  ],
+  "facts": {
+    "users_before": 1200,
+    "users_after": 9400,
+    "growth": "=users_after / users_before",
+    "weeks": 10
+  },
+  "checks": [
+    "users_after > users_before",
+    "growth > 5"
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Final round · Product strategy",
+      "title": "I turn messy customer problems into products people come back to",
+      "subtitle": "Asha Rao · three stories, one way of working",
+      "meta": [
+        "Fictional candidate for this template"
+      ],
+      "notes": {
+        "say": "Thank you for having me. I'll tell you three short stories and what they say about how I'd work here."
+      }
+    },
+    {
+      "type": "quote",
+      "quote": "Nobody on our street could tell which pharmacy actually had the medicine in stock.",
+      "attribution": "My neighbour, 2023: the sentence that started my first product",
+      "notes": {
+        "say": "Every product I've built started with a sentence like this one. This one came from my neighbour."
+      }
+    },
+    {
+      "type": "divider",
+      "number": "01",
+      "title": "What happens when you listen before you build?",
+      "notes": {
+        "say": "Story one: the pharmacy finder."
+      }
+    },
+    {
+      "type": "kpi",
+      "kicker": "Story one",
+      "title": "Ten weeks of listening grew weekly users {=growth|.0f}x",
+      "items": [
+        {
+          "value": "{=users_before|,}",
+          "label": "weekly users before",
+          "detail": "a stock list nobody trusted"
+        },
+        {
+          "value": "{=users_after|,}",
+          "label": "weekly users after {=weeks} weeks",
+          "detail": "live stock from 40 pharmacies",
+          "highlight": true
+        },
+        {
+          "value": "{=growth|.0f}x",
+          "label": "growth",
+          "detail": "with no paid marketing"
+        }
+      ],
+      "highlight": 1,
+      "source": "Project analytics (illustrative)",
+      "notes": {
+        "say": "We went from about twelve hundred to over nine thousand weekly users in ten weeks, and we spent nothing on ads. The change was trust: live stock, not a static list."
+      }
+    },
+    {
+      "type": "process",
+      "kicker": "How I work",
+      "title": "The same four steps run through every project",
+      "steps": [
+        {
+          "heading": "Listen",
+          "body": "Twenty conversations first"
+        },
+        {
+          "heading": "Size it",
+          "body": "One number that matters"
+        },
+        {
+          "heading": "Ship small",
+          "body": "Usable in a week"
+        },
+        {
+          "heading": "Measure",
+          "body": "Keep what moves it"
+        }
+      ],
+      "highlight": 0,
+      "notes": {
+        "say": "Across all three stories the method was the same. Listen first, size the problem, ship something small, and measure."
+      },
+      "so_what": "The pharmacy finder's live stock feed came out of interview 14."
+    },
+    {
+      "type": "statement",
+      "kicker": "What I bring",
+      "claim": "My first 30 days go to your customers, not your roadmap",
+      "points": [
+        "Twenty interviews in month one",
+        "One problem sized and shared by day 45",
+        "A first small release by day 90"
+      ],
+      "notes": {
+        "say": "Here is what that means for this role, concretely, for the first ninety days."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Listen first, ship small, measure honestly",
+      "ask": "I'd love to bring this to your growth team",
+      "lines": [
+        "Questions welcome"
+      ],
+      "notes": {
+        "say": "That's my way of working. I'd love to bring it to your team. Happy to take questions."
+      }
+    }
+  ]
+}

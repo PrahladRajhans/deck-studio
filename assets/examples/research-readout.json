@@ -1,0 +1,160 @@
+{
+ "title": "Research readout (illustrative)",
+ "direction": "mono-ink",
+ "mode": "document",
+ "footer": "Illustrative research readout",
+ "sources": [
+  "Illustrative survey, n=1,240"
+ ],
+ "slides": [
+  {
+   "type": "cover",
+   "title": "Price, not awareness, holds back ayurvedic skincare in tier-2 cities",
+   "subtitle": "Survey readout (illustrative data)",
+   "meta": [
+    "Research team",
+    "November 2026"
+   ],
+   "notes": {
+    "say": "Cover."
+   }
+  },
+  {
+   "type": "exec_summary",
+   "kicker": "Summary",
+   "title": "Awareness is high; price and availability block trial",
+   "rows": [
+    {
+     "claim": "Four in five buyers know at least two ayurvedic brands",
+     "detail": "Awareness is not the constraint",
+     "ref": "aw"
+    },
+    {
+     "claim": "South leads on share, but the market is fragmented everywhere",
+     "detail": "No brand above 35% in any region",
+     "ref": "mkt"
+    },
+    {
+     "claim": "Price is the most cited reason for not trying",
+     "detail": "Ahead of availability and trust",
+     "ref": "why",
+     "highlight": true
+    }
+   ],
+   "notes": {
+    "say": "Summary."
+   }
+  },
+  {
+   "type": "big_number",
+   "id": "aw",
+   "kicker": "Awareness",
+   "letter": "A",
+   "title": "Awareness is already high: four in five know two brands or more",
+   "value": "81%",
+   "label": "of tier-2 skincare buyers name two or more ayurvedic brands",
+   "points": [
+    "Unaided recall 46%",
+    "Highest among 25-34"
+   ],
+   "source": "Illustrative survey, n=1,240",
+   "tag": "Illustrative",
+   "notes": {
+    "say": "A."
+   }
+  },
+  {
+   "type": "image",
+   "id": "mkt",
+   "kicker": "Market",
+   "letter": "B",
+   "title": "No brand holds more than 35% of any region; South is the largest market",
+   "path": "mekko.png",
+   "alt": "Marimekko of share by brand across four regions; South largest; our share 35% in South",
+   "side": "left",
+   "image_width": 8.6,
+   "heading": "So what",
+   "points": [
+    "Fragmented: share is winnable",
+    "Start where the market is largest"
+   ],
+   "source": "Illustrative survey",
+   "footnotes": [
+    "Column width = market size in ₹ crore"
+   ],
+   "notes": {
+    "say": "B."
+   }
+  },
+  {
+   "type": "issue_tree",
+   "id": "why",
+   "kicker": "Barriers",
+   "letter": "C",
+   "title": "Price explains most non-trial; availability and trust follow",
+   "exhibit": "Why don't buyers try ayurvedic skincare?",
+   "root": "Why don't aware buyers try?",
+   "branches": [
+    {
+     "label": "Price (52%)",
+     "leaves": [
+      "Pack sizes too large",
+      "No trial packs"
+     ]
+    },
+    {
+     "label": "Availability (28%)",
+     "leaves": [
+      "Not in local stores"
+     ]
+    },
+    {
+     "label": "Trust (20%)",
+     "leaves": [
+      "Doubts about results"
+     ]
+    }
+   ],
+   "highlight": 0,
+   "source": "Illustrative survey",
+   "notes": {
+    "say": "C."
+   }
+  },
+  {
+   "type": "risks",
+   "kicker": "Limits",
+   "title": "Three limits matter before acting on these findings",
+   "rows": [
+    {
+     "risk": "Online sample over-represents urban buyers",
+     "likelihood": "H",
+     "impact": "M",
+     "mitigation": "Weight by census; field 300 offline interviews",
+     "owner": "Research"
+    },
+    {
+     "risk": "Stated price sensitivity may overstate behaviour",
+     "likelihood": "M",
+     "impact": "M",
+     "mitigation": "Test trial packs in 20 stores",
+     "owner": "Brand"
+    }
+   ],
+   "notes": {
+    "say": "Limits."
+   }
+  },
+  {
+   "type": "references",
+   "title": "Sources",
+   "items": [
+    "Illustrative consumer survey, n=1,240, Oct 2026",
+    "Illustrative retail audit, 120 stores"
+   ],
+   "notes": {
+    "say": "Sources."
+   }
+  }
+ ]
+}

@@ -16,7 +16,7 @@ jobs:
       - name: Install Chromium for the HTML draft renderer
         run: python -m playwright install --with-deps chromium
       - name: Install fonts (metric-compatible Office clones), LibreOffice and poppler for PPTX renders
-        run: sudo apt-get update && sudo apt-get install -y fonts-crosextra-carlito fonts-crosextra-caladea fonts-liberation fonts-texgyre libreoffice-impress poppler-utils
+        run: sudo apt-get update && sudo apt-get install -y libcairo2 fonts-crosextra-carlito fonts-crosextra-caladea fonts-liberation fonts-texgyre libreoffice-impress poppler-utils
       - name: Run smoke tests (drafts, strict PPTX builds, renders, lint, unit tests)
         run: bash tests/smoke_test.sh out/smoke
       - name: Upload drafts and renders

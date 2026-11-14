@@ -1,0 +1,121 @@
+{
+  "title": "marketing fixed-packet benchmark",
+  "direction": "editorial-warm",
+  "mode": "talk",
+  "minutes": 10,
+  "footer": "Illustrative benchmark \u00b7 fixed source packet",
+  "illustrative_authorized": true,
+  "brief": {
+    "packet": "tests/fixtures/marketing.json"
+  },
+  "facts": {
+    "before": 1000,
+    "during": 1200,
+    "price_before": 100,
+    "price_during": 90,
+    "uplift": "=pct(before,during)",
+    "clicks": 20000,
+    "reach": 1000000,
+    "ctr": "=clicks/reach*100"
+  },
+  "fact_meta": {
+    "before": {
+      "kind": "illustrative"
+    },
+    "during": {
+      "kind": "illustrative"
+    },
+    "price_before": {
+      "kind": "illustrative"
+    },
+    "price_during": {
+      "kind": "illustrative"
+    },
+    "uplift": {
+      "kind": "calculated"
+    },
+    "clicks": {
+      "kind": "illustrative"
+    },
+    "reach": {
+      "kind": "illustrative"
+    },
+    "ctr": {
+      "kind": "calculated"
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Sales rose while both the campaign and price changed",
+      "subtitle": "A performance review with attribution still open",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "chart",
+      "title": "The observed sales uplift is {=uplift|.0f}%",
+      "chart": {
+        "kind": "column",
+        "categories": [
+          "Before",
+          "During"
+        ],
+        "series": [
+          {
+            "name": "Units",
+            "values": "=[before,during]"
+          }
+        ],
+        "alt": "Illustrative sales volumes in equal-length periods"
+      },
+      "source": "Fixed packet: tests/fixtures/marketing.json",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "data_contrast",
+      "title": "Price also changed during the campaign",
+      "items": [
+        {
+          "label": "Before",
+          "value": "{=price_before}",
+          "detail": "Price per unit"
+        },
+        {
+          "label": "During",
+          "value": "{=price_during}",
+          "detail": "Price per unit"
+        }
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "columns",
+      "title": "Measure attention and incremental sales separately",
+      "columns": [
+        {
+          "icon": "feather:activity",
+          "heading": "What happened",
+          "points": [
+            "Click-through rate: {=ctr|.1f}%",
+            "Sales and price both moved."
+          ]
+        },
+        {
+          "icon": "feather:help-circle",
+          "heading": "What remains unknown",
+          "points": [
+            "No control group isolates the campaign effect.",
+            "A controlled test would support an incrementality estimate."
+          ]
+        }
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "closing",
+      "title": "Report the uplift; test the explanation",
+      "ask": "Do not assign the full sales change to the campaign.",
+      "data_status": "illustrative"
+    }
+  ]
+}

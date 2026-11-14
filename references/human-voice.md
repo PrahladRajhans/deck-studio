@@ -42,7 +42,7 @@ simulate a person.
    reports `style_review` (warn) and `style_rhythm` (info) on any .pptx. Technical uses are
    already skipped (robust standard errors, financial leverage, landscape orientation). For each
    remaining prompt, either rewrite or keep it on purpose by adding the word or phrase to
-   `voice_ok` (deck or slide level) so the decision is recorded; never leave one unseen.
+   `voice_ok` (deck or slide level) when a short shared rationale helps. Do not create a separate compliance record for each legitimate word.
 5. **Read the headline track for clarity** (`--outline`): vary form when it helps; preserve
    repetition when it supports comparison, learning or the presenter's authentic register.
 
@@ -194,3 +194,9 @@ purpose"; the semantic review (qa.md §3) is separate and checks what the words 
 fresh-eye review (qa.md §6) asks the reviewer to flag phrasing that feels AI-written. For long
 prose that travels with a deck (handouts, notes pages, an email to the client), the behuman or
 unslop skill, when installed, can sweep the text with the same rules.
+
+## Typography in context
+
+Prefer sentence case for authored titles and headers, except proper nouns, acronyms and supplied brand
+forms. Use en dashes for ranges such as FY24–FY26 and 10–15 minutes. Preserve exact quotations and code.
+These are editorial defaults, not mechanical rewrites of technical language.

@@ -1,0 +1,11 @@
+{
+  "brief": "Prepare a market-entry decision draft. Expose what cannot yet be concluded. Do not invent missing evidence or produce a release-ready recommendation.",
+  "material": {
+    "target_market": "West region",
+    "market_size": null,
+    "competitor_share": null,
+    "customer_interviews": 3,
+    "interview_scope": "Convenience sample; no willingness-to-pay test.",
+    "illustrative": true
+  }
+}

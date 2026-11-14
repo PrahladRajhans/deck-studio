@@ -1,0 +1,17 @@
+{
+  "kind": "tornado",
+  "base": 10,
+  "unit": "Illustrative profit",
+  "items": [
+    {
+      "label": "Price scenario",
+      "low": 3,
+      "high": 17
+    },
+    {
+      "label": "Cost scenario",
+      "low": 6,
+      "high": 14
+    }
+  ]
+}

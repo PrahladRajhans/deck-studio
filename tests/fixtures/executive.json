@@ -1,0 +1,14 @@
+{
+  "brief": "A CFO has ten minutes to decide on a warehouse automation proposal. Recommend what to do now, preserve uncertainty and make the economic relationship visible. Voice: I want to know what changes the decision. Keep the downside where I can see it.",
+  "material": {
+    "currency": "INR crore",
+    "capex": 50,
+    "annual_labour_saving": 12,
+    "annual_maintenance": 2,
+    "horizon_years": 5,
+    "discount_rate": null,
+    "vendor_quote": "Budgetary estimate only; site assessment not performed.",
+    "constraints": "No forecast of demand or tax effects supplied.",
+    "illustrative": true
+  }
+}

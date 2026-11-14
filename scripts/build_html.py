@@ -373,13 +373,14 @@ class HtmlDeck:
         svg = chart_svg(ch, self.t, side=bool(s.get("side")), warn=self.warn)
         return self.chrome(s, self.with_side(s, f'<div class="chart-col">{self.exhibit(s)}<div class="chart">{svg}</div></div>'))
 
-    def table_html(self, columns, rows, highlight_row=None, total_row=False, widths=None):
+    def table_html(self, columns, rows, highlight_row=None, total_row=False, widths=None, base_cell=None):
+        from visual_elements import table_cell
         num = re.compile(r"^[\s(+−-]*[₹$€£]?\s?[\d.,]+\s?(%|x|×|cr|bn|mn|m|k|pp|bps)?\)?\s*$", re.I)
         cols = ""
         if widths:
             tot = float(sum(widths))
             cols = "<colgroup>" + "".join(f'<col style="width:{w / tot * 100:.1f}%">' for w in widths) + "</colgroup>"
-        numcol = [bool(rows) and all(num.match(str(r[j])) for r in rows if j < len(r)) for j in range(len(columns))]
+        numcol = [bool(rows) and all(num.match(table_cell(r[j])[0]) for r in rows if j < len(r)) for j in range(len(columns))]
         head = "".join(f'<th class="{"num" if j and numcol[j] else ""}">{md(c)}</th>' for j, c in enumerate(columns))
         body = []
         for i, r in enumerate(rows):
@@ -388,13 +389,20 @@ class HtmlDeck:
                 cls.append("hl")
             if total_row and i == len(rows) - 1:
                 cls.append("total")
-            cells = "".join(f'<td class="{"num" if j and num.match(str(c)) else ""}">{md(c)}</td>' for j, c in enumerate(r))
+            cells = []
+            for j, c in enumerate(r):
+                text, token = table_cell(c)
+                base = base_cell == [i, j]
+                style = f' style="color:#{self.t[token]}"' if token else ''
+                content = md(text) + (' <small>(base)</small>' if base else '')
+                cells.append(f'<td class="{"num" if j and num.match(text) else ""}"{style}>{content}</td>')
+            cells = ''.join(cells)
             body.append(f'<tr class="{" ".join(cls)}">{cells}</tr>')
         # right-align numeric headers too
         return f'<table class="tbl">{cols}<thead><tr>{head}</tr></thead><tbody>{"".join(body)}</tbody></table>'
 
     def s_table(self, s):
-        t = self.table_html(s["columns"], s["rows"], s.get("highlight_row"), s.get("total_row"), s.get("widths"))
+        t = self.table_html(s["columns"], s["rows"], s.get("highlight_row"), s.get("total_row"), s.get("widths"), s.get("base_cell"))
         note = f'<p class="caption">{md(s["note"])}</p>' if s.get("note") else ""
         return self.chrome(s, self.with_side(s, f'<div class="chart-col">{self.exhibit(s)}{t}{note}</div>'))
 
@@ -420,10 +428,11 @@ class HtmlDeck:
 
     # ------------------------------------------------------------------ diagrams
     def s_process(self, s):
+        from visual_elements import process_body
         hl = s.get("highlight")
         steps = s.get("steps", [])
         out = "".join(f'<li class="{"hl" if i == hl else ""}"><div class="pr-n">{esc(st.get("label") or i + 1)}</div>'
-                      f'<h3>{md(st.get("heading", ""))}</h3><p>{md(st.get("body", ""))}</p></li>' for i, st in enumerate(steps))
+                      f'<h3>{md(st.get("heading", ""))}</h3><p>{md(process_body(st))}</p></li>' for i, st in enumerate(steps))
         return self.chrome(s, self.exhibit(s) + f'<ol class="process" style="--n:{len(steps)}">{out}</ol>')
 
     def s_cycle(self, s):
@@ -551,7 +560,12 @@ class HtmlDeck:
         cols = []
         for i, c in enumerate(s.get("columns", [])):
             g = GLYPHS.get(c.get("icon", ""), c.get("icon") or str(i + 1))
-            cols.append(f'<div class="colx{" hl" if i == hl else ""}"><div class="badge">{esc(g)}</div><h3>{md(c.get("heading", ""))}</h3>'
+            if str(g).startswith('feather:'):
+                from icons import svg
+                badge = svg(g, 'FFFFFF')
+            else:
+                badge = esc(g)
+            cols.append(f'<div class="colx{" hl" if i == hl else ""}"><div class="badge">{badge}</div><h3>{md(c.get("heading", ""))}</h3>'
                         f'{ul(c.get("points") or c.get("body", ""))}</div>')
         return self.chrome(s, f'<div class="cols ruled" style="--n:{len(cols)}">{"".join(cols)}</div>')
 
@@ -737,7 +751,7 @@ class HtmlDeck:
             typ = s.get("type")
             fn = getattr(self, f"s_{typ}", None)
             if fn is None:
-                raise SpecError(f"slide {i}: unknown type '{typ}' (see build_deck.py --schema)")
+                raise SpecError(f"slide {i}: unknown type '{typ}' (see spec_io.py --schema)")
             if typ == "agenda" and self.talk:
                 self.warn("agenda in talk mode: keep it only if it orients (workshop, long or teaching session); "
                           "for a short persuasive talk, question dividers usually work better")

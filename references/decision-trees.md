@@ -23,10 +23,10 @@ Is there an existing deck or file?
                                                  converted deck in HTML like a new deck
 ```
 
-## T1 · Final format (provisional at Stage 3, confirmed at the approval gate)
+## T1 · Final format (provisional at intake, confirmed at the approval gate)
 
 Every new deck is drafted in HTML first (`build_html.py`); this tree picks what the APPROVED draft
-becomes. Build it only after the user's go-ahead (SKILL.md, "Draft first").
+becomes. Build it only after the user's go-ahead (SKILL.md, "Approval and preservation").
 
 ```
 Is this an edit of a deck the user attached?

@@ -1,0 +1,35 @@
+{
+  "kind": "sensitivity",
+  "rows": [
+    "Low volume",
+    "Base volume",
+    "High volume"
+  ],
+  "cols": [
+    "Low price",
+    "Base price",
+    "High price"
+  ],
+  "values": [
+    [
+      -8,
+      -4,
+      0
+    ],
+    [
+      -4,
+      0,
+      4
+    ],
+    [
+      0,
+      4,
+      8
+    ]
+  ],
+  "base_cell": [
+    1,
+    1
+  ],
+  "unit": "Illustrative profit"
+}

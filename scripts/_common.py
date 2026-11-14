@@ -713,12 +713,23 @@ LIGHT_TYPES = ("cover", "divider", "agenda", "closing")
 
 
 def slide_seconds(spec: dict, s: dict):
-    """Time budget per slide from deck `minutes`, shared by both builders: light slides (cover, divider,
-    agenda, closing) get ~8 s, the rest share the slot after a 10% reserve for overrun and changeover."""
+    """Explicit rehearsal timings win; otherwise estimate from role and complexity.
+
+    These are planning estimates, not a measurement of speaking speed. Never change
+    explicit timings to make the slot appear to fit.
+    """
+    if s.get("seconds") is not None:
+        return s["seconds"]
     mins = spec.get("minutes")
     if not mins:
         return None
-    n_body = sum(1 for sl in spec["slides"] if sl.get("type") not in LIGHT_TYPES)
-    n_light = len(spec["slides"]) - n_body
-    budget = mins * 60 * 0.9 - n_light * 8
-    return 8 if s.get("type") in LIGHT_TYPES else max(10, int(round(budget / max(1, n_body) / 5.0) * 5))
+    if s.get("type") in LIGHT_TYPES:
+        return 8
+    weights = {"chart": 2.0, "options": 2.0, "table": 1.6, "process": 1.4,
+               "custom": 1.4, "big_number": 0.6, "statement": 0.6}
+    pending = [sl for sl in spec["slides"] if sl.get("seconds") is None and sl.get("type") not in LIGHT_TYPES]
+    fixed = sum(sl["seconds"] for sl in spec["slides"] if sl.get("seconds") is not None)
+    lights = sum(sl.get("seconds") is None and sl.get("type") in LIGHT_TYPES for sl in spec["slides"])
+    budget = max(0, mins * 60 * 0.9 - fixed - lights * 8)
+    denominator = sum(weights.get(sl.get("type"), 1.0) for sl in pending) or 1
+    return max(10, int(round(budget * weights.get(s.get("type"), 1.0) / denominator / 5) * 5))

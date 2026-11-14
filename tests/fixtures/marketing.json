@@ -1,0 +1,14 @@
+{
+  "brief": "Review a festive campaign for the brand team in six minutes. Voice: Sales moved. Before we take credit, let us check what else changed.",
+  "material": {
+    "reach": 1000000,
+    "clicks": 20000,
+    "sales_before": 1000,
+    "sales_during": 1200,
+    "price_before": 100,
+    "price_during": 90,
+    "control_group": null,
+    "tracking": "Same store set; adjacent equal-length periods. No control group.",
+    "illustrative": true
+  }
+}

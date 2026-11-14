@@ -1,0 +1,119 @@
+{
+  "title": "Visual components regression",
+  "direction": "consulting-navy",
+  "footer": "Illustrative component demonstration",
+  "illustrative_authorized": true,
+  "facts": {},
+  "slides": [
+    {
+      "type": "columns",
+      "title": "Use a consistent icon vocabulary",
+      "columns": [
+        {
+          "icon": "feather:clock",
+          "heading": "Time",
+          "body": "Make a time constraint visible."
+        },
+        {
+          "icon": "feather:target",
+          "heading": "Focus",
+          "body": "Name the intended outcome."
+        }
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "table",
+      "title": "Use labels as well as status colours",
+      "columns": [
+        "Option",
+        "Readiness",
+        "Coverage"
+      ],
+      "rows": [
+        [
+          "Pilot",
+          {
+            "kind": "status",
+            "status": "green"
+          },
+          {
+            "kind": "harvey",
+            "score": 3
+          }
+        ],
+        [
+          "Scale",
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "Approval pending"
+          },
+          {
+            "kind": "harvey",
+            "score": 1
+          }
+        ]
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "table",
+      "title": "Mark the base case in a scenario table",
+      "columns": [
+        "Volume / price",
+        "Low",
+        "Base",
+        "High"
+      ],
+      "rows": [
+        [
+          "Low",
+          "-8",
+          "-4",
+          "0"
+        ],
+        [
+          "Base",
+          "-4",
+          "0",
+          "4"
+        ],
+        [
+          "High",
+          "0",
+          "4",
+          "8"
+        ]
+      ],
+      "base_cell": [
+        1,
+        2
+      ],
+      "note": "Illustrative outcome; rows vary volume and columns vary price.",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "process",
+      "title": "Show the measurements that define each step",
+      "steps": [
+        {
+          "heading": "Receive",
+          "volume": "100 items",
+          "duration": "2 hours"
+        },
+        {
+          "heading": "Inspect",
+          "volume": "80 items",
+          "cost": "INR 400"
+        },
+        {
+          "heading": "Release",
+          "volume": "60 items",
+          "conversion": "75% of inspected items"
+        }
+      ],
+      "data_status": "illustrative"
+    }
+  ]
+}

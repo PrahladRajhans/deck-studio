@@ -36,6 +36,23 @@ done
 for c in "$HERE"/assets/examples/chart-*.json; do
   python3 "$S/chart_images.py" "$c" -o "$OUT/$(basename "$c" .json).png" > /dev/null || { echo "FAIL chart $c"; fail=1; }
 done
+# Fixed source packets: missing evidence must render as a draft and refuse final output.
+for f in "$HERE"/assets/benchmarks/*.json; do
+  b="benchmark-$(basename "$f" .json)"
+  if [ "$b" = benchmark-incomplete ]; then
+    python3 "$S/build_html.py" "$f" -o "$OUT/$b.html" > "$OUT/$b.html.log" || fail=1
+    python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b-final.html" > "$OUT/$b.strict.log"; rc=$?
+    if [ "$rc" -ne 2 ] || [ -f "$OUT/$b-final.html" ]; then echo "FAIL incomplete evidence released"; fail=1; fi
+  else
+    python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b.html" > "$OUT/$b.html.log" || { cat "$OUT/$b.html.log"; fail=1; continue; }
+    python3 "$S/build_deck.py" "$f" --strict -o "$OUT/$b.pptx" > "$OUT/$b.pptx.log" || { cat "$OUT/$b.pptx.log"; fail=1; continue; }
+    python3 "$S/lint_deck.py" "$OUT/$b.pptx" --spec "$f" > "$OUT/$b.lint.txt" || fail=1
+    if [ $have_soffice -eq 1 ]; then
+      python3 "$S/render.py" "$OUT/$b.pptx" "$OUT/render-pptx-$b" > /dev/null 2>&1 || fail=1
+    fi
+  fi
+  python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" || { echo "FAIL benchmark fit $b"; fail=1; }
+done
 python3 -m unittest discover -s "$HERE/tests" -p "test_*.py" -q || { echo "FAIL unit tests"; fail=1; }
 [ $have_soffice -eq 1 ] || echo "note: LibreOffice/poppler not found; PPTX renders skipped"
 [ $fail -eq 0 ] && echo "ALL SMOKE TESTS PASSED" || { echo "SMOKE TESTS FAILED"; exit 1; }

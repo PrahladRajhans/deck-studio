@@ -10,7 +10,7 @@ Four kinds of quality are checked separately, and one never compensates for anot
 fidelity (numbers, sources, claim strength), argument (does the story hold), presentation (fit,
 legibility, hierarchy) and voice. A beautiful deck with an unsupported claim fails.
 
-A first render is never clean; assume problems and hunt for them.
+Inspect the first render without assuming it is clean or defective. Report actual findings; zero findings is permitted.
 
 ## 1. Render and look (every deck, every slide)
 
@@ -117,7 +117,7 @@ may be the best answer; never trade fidelity for novelty.
    slide for five seconds; what is remembered should be the title's claim.
 7. **Consistency**: fonts, grid, colours, number formats, exhibit numbering, capitalisation, terms.
 8. **Look and voice check**: no generic AI imagery, glows, decorative stripes, filler icons,
-   uniform case studies, repeated closing clauses. Every `style` prompt fixed or kept on purpose (`voice_ok`). Read three
+   uniform case studies, repeated closing clauses. Review style prompts in context; a short voice rationale may cover recurring technical or deliberate usage. Read three
    slides aloud as the presenter: would a person say this to this room? (human-voice.md)
 9. **Criteria map**: every judging criterion or interview question has a slide.
 10. **Time test**: a timed read-aloud of the notes fits the slot with room for questions.

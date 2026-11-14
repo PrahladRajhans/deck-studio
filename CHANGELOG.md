@@ -13,6 +13,9 @@ rewrite older entries to imply that later fixes already existed.
   add tamper/structure regression coverage; do not claim that packaging tests are Claude execution.
 
 
+- Verification: native/runtime checkpoint passes 73 tests without skips, with 148 HTML and 131
+  PPTX slide renders. Packaging adds the 74th test. Final-head checks, source readback and release
+  download verification gate publication; detailed evidence is in the feedback coverage ledger.
 - Audit both the earlier Gemini/Claude discussion and detailed actual-file feedback against code,
   references and examples. Add a recommendation-by-recommendation coverage ledger, including
   intentional rejections and remaining limits, in tests/evaluations/2026-11-14-feedback-coverage.md.

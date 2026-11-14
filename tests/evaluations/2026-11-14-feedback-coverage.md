@@ -124,3 +124,30 @@ are not Claude tests or certification of every target application. The brand rec
 editable custom path; it does not eliminate the need to implement other custom designs deliberately.
 Accessibility checks require target-application reading-order/screen-reader review when relevant.
 Creative samples establish working examples, not a guarantee of artistic quality in every future deck.
+
+## Verification and publication record
+
+- Native/runtime checkpoint 487dcf0ee56b44cd3438d5339ffe69f8df0b4c84 passed CI run 43588787868,
+  including all 73 tests without skips, old/new HTML and PPTX builds, rendering and lint.
+- That artifact contains 21 HTML decks / 148 slide renders and 17 PPTX decks / 131 slide renders.
+  Native reconstruction is included in the PPTX count; no whole-slide raster wrapper is used.
+- New decision, contribution, teaching and native-brand lints are clean. The missing-evidence final
+  still refuses output. Copy/readback checks preserve every brand text block, source and speaker note.
+- Rendered contact sheets and individual dense/new native slides were reviewed. Brand reconstruction
+  preserves typography, conceptual circle/rules and content hierarchy with disclosed geometric
+  adaptation; the large cover type fits after its box-height repair. RAG labels remain readable;
+  financial bridges and closing cash reconcile, with assumptions visible or in notes.
+- Packaging adds one test, bringing the local suite to 74 (67 passed, seven renderer-dependency
+  skips). The full CI environment has those dependencies. Local upload build and verify-only both
+  passed, preserving source bytes and a correctly named root; package tampering is rejected.
+- Final source is read back against the published Git tree. The exact final PR head must pass full
+  CI before merge; final run outcomes are recorded on https://github.com/PrahladRajhans/deck-studio/pull/3.
+- After merge, main's successful workflow publishes and re-downloads the release ZIP, then verifies
+  it against that exact main source. The stable asset URL is
+  https://github.com/PrahladRajhans/deck-studio/releases/latest/download/deck-studio.zip.
+  Publication is a separately checked step; a ZIP link is not reported ready until its release exists.
+
+Commands used: unittest discovery; tests/smoke_test.sh; spec_io --strict; both builders; Chromium
+and LibreOffice renders; native brand recipe; lint; package_skill.py build and verify-only.
+The changelog records the follow-up separately from the earlier PR 2 work. Claude execution remains
+an explicit untested target, not hidden behind the automated test count.

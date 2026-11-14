@@ -29,7 +29,8 @@ def table_cell(value):
 def process_body(step):
     """Optional explicit metrics; no inferred throughput, costs or conversions."""
     parts = [str(step.get('body', ''))] if step.get('body') else []
-    for key, label in (('volume', 'Volume'), ('duration', 'Time'), ('cost', 'Cost'), ('conversion', 'Conversion')):
+    for key, label in (('volume', 'Volume'), ('duration', 'Time'), ('cost', 'Cost'), ('conversion', 'Conversion'),
+                       ('defect_rate', 'Defect rate'), ('drop_off', 'Drop-off')):
         if key in step:
             parts.append(f'{label}: {step[key]}')
     return '\n'.join(parts)
@@ -51,3 +52,15 @@ def status_color(token, theme, background=None):
         if ratio(color) >= 4.5:
             return color
     return max(('000000','FFFFFF'), key=ratio)
+
+
+def table_base(base_cell, rows, columns):
+    """Reject malformed or out-of-range base markers before indexing the crosshair."""
+    if base_cell is None:
+        return None
+    if not isinstance(base_cell, list) or len(base_cell) != 2 or any(isinstance(v, bool) or not isinstance(v, int) for v in base_cell):
+        raise SpecError('base_cell must be [row, column] with integer indices')
+    row, col = base_cell
+    if not 0 <= row < len(rows) or not 0 <= col < len(columns):
+        raise SpecError('base_cell lies outside the table')
+    return base_cell

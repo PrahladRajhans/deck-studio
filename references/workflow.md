@@ -41,6 +41,12 @@ native components when they serve the idea. Keep the HTML as the reference and p
 reconstruction code alongside the spec. An agreed image-based exhibit is a disclosed fallback;
 full-slide rasterisation is never the default substitute for an editable deck.
 
+The expressive brand example has an explicit native recipe:
+`python3 assets/forward-tests/rebuild_brand.py -o out/brand-native.pptx`.
+It validates the shared spec and preserves its copy/sources/notes with editable text and shapes.
+Review the controlled layout adaptations against HTML; this recipe supports that example only.
+Run the normal render/lint/readback checks before treating a reconstruction as complete.
+
 ## Fallback HTML
 
 assets/html-stage/stage-template.html is a small manual starting point. Preserve its fixed stage,
@@ -58,3 +64,13 @@ with the content; do not repeat them by habit.
 - After final production, reconcile order, claims, quantities, units, images, sources and notes.
 - Name the renderer and target applications actually tested. A LibreOffice render does not establish
   identical behavior in every version of PowerPoint, Canva or Gamma.
+
+## Build in an order that exposes risk early
+
+After the ghost deck, start with consequential content exhibits and one representative dense slide.
+For a section of four or more similar slides, render and inspect that first specimen before scaling
+the pattern. Recheck the longest variant. Content-first production often works well: evidence core,
+then summary/ask, navigation/dividers, cover/close and appendix. This is a production heuristic, not
+the audience's slide order or a restriction on exploring a strong cover concept early. Rewrite the
+summary after the evidence changes. Preserve relevant detail in notes or appendix rather than
+silently deleting it to fit a short slide.

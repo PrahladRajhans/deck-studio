@@ -54,7 +54,8 @@ Existing `table` slides accept ordinary strings and structured cells:
 Status values are green, amber, red and unknown. A visible label accompanies the colour. Harvey scores
 range from 0 to 4 and display a numeric fraction as well as a symbol. Define the assessment rubric and
 source; these are ordinal judgements, not fabricated measured precision. RAG is categorical, not an
-interpolated numerical scale. `base_cell:[row,column]` marks the base in a sensitivity table, zero-based.
+interpolated numerical scale. `base_cell:[row,column]` marks the base in a sensitivity table, zero-based; its row and column form
+a subtle crosshair and the base cell is explicitly labelled.
 Use native tables for editable outputs. Scenario matrices should label both varied inputs, units,
 base case and assumptions. For unit economics, use rows for revenue, variable costs and contribution;
 calculate totals in facts and distinguish fixed costs from per-unit costs. Do not add a slide type
@@ -62,7 +63,7 @@ when the existing table, waterfall or chart already expresses the relationship.
 
 ## Quantified processes and sensitivity
 
-Process steps optionally accept `volume`, `duration`, `cost` and `conversion`. Use facts tokens for
+Process steps optionally accept `volume`, `duration`, `cost`, `conversion`, `defect_rate` and `drop_off`. Use facts tokens for
 substantive numbers and label units and denominators. Show only metrics that exist; omit the rest.
 Stage volumes and conversion denominators must reconcile. A bottleneck is not proven by a large box.
 
@@ -90,3 +91,28 @@ Names must match unique actual PowerPoint shape names. Supported edges: left, ri
 center_x, center_y. Invalid names or reasons produce warnings and never grant an overlap exception.
 Only that pair is exempted from text-overlap warnings; other checks remain. Geometric checks cannot
 prove visual quality or detect every occlusion. HTML clipping and overflow still need rendered review.
+
+## Evidence-aware visual details
+
+Show uncertainty when it could change the interpretation; identify whether a range is a confidence
+interval, prediction interval, observed spread or scenario range. They are not interchangeable.
+Do not invent intervals or silently infer a distribution from endpoints. Keep material uncertainty
+visible beside the finding. Offer exact lookup data or an explanatory alternative when the chart
+would imply more precision than exists. The cited ONS guidance informs these choices, not a blanket
+requirement to put error bars on every chart.
+
+For accessibility, inspect reading order as well as appearance. A small icon with an adjacent label
+may be decorative; an informative image needs a useful text alternative. Check keyboard navigation
+for HTML and PowerPoint's Accessibility Checker/Reading Order pane in the target application when
+available. A PNG inspection and contrast calculation do not certify screen-reader accessibility.
+Use direct labels, text status and appropriate symbols so colour carries reinforcement, not the
+only distinction. Primary-source links and the adoption boundary are in credits.md.
+
+## Worked sample routes
+
+- assets/examples/decision-tradeoffs.json: projected decision, genuine alternatives, RAG and Harvey
+  assessments with a declared rubric, plus a quantified process.
+- assets/examples/unit-economics.json: explicit contribution layers, native waterfall, missing LTV.
+- assets/examples/cash-flow-teaching.json: question, reconciliation, worked example and retrieval task.
+- assets/forward-tests/brand.json plus rebuild_brand.py: expressive conceptual typography and its
+  native editable reconstruction. These are samples of judgement, not mandatory deck structures.

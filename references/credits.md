@@ -90,3 +90,13 @@ sign-in. Nothing in this skill claims to come from Pinterest.
   3dc050d97405062eba78aa57115c0a15c63abdaa. Copyright Cole Bemis; MIT license is
   bundled at assets/icons/feather/LICENSE. See that directory's README for source and usage. This
   supersedes the earlier review's deferral; it does not rewrite the historical decision.
+
+## Primary guidance checked for the completeness audit (14 November 2026)
+
+- Anthropic, [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills): supports moving task-specific detail into referenced files and evaluating realistic executions. This supports selective loading, not deleting useful context or treating a line count as a proven model limit.
+- W3C, [Understanding SC 1.4.3 Contrast (Minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html): AA text reference is 4.5:1, or 3:1 for large text. These ratios inform checks; they do not certify a presentation's overall accessibility.
+- Microsoft, [Make PowerPoint presentations accessible](https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities): include meaningful alt text and inspect reading order using the target application's accessibility tools. Pixel inspection alone cannot establish screen-reader usability.
+- UK Analysis Function, [Colours in charts](https://analysisfunction.civilservice.gov.uk/policy-store/data-visualisation-colours-in-charts/): reinforce distinctions with labels and meaningful encodings rather than relying only on colour. The skill's RAG status text and ordinal fractions reflect this principle.
+- ONS, [Showing uncertainty in charts](https://service-manual.ons.gov.uk/data-visualisation/guidance/showing-uncertainty-in-charts): show uncertainty when it changes interpretation, explain its meaning and avoid misleading comparisons. The skill keeps scenario ranges distinct from statistical intervals. This is not a blanket ban on technical terminology or every error-bar style in scientific presentations.
+
+- Anthropic Help Center, [How to create custom skills](https://support.claude.com/en/articles/12512198-how-to-create-custom-skills): package a folder matching the skill name as the ZIP root. This motivates the verified release ZIP instead of the generic GitHub source archive. Upload validation is distinct from execution inside Claude.

@@ -17,6 +17,19 @@ reference helps Claude make relationships visible, explore different composition
 and write in the presenter's voice. Standard types are a toolbox; custom HTML compositions can
 use the whole stage, with explicit final-format reconstruction limits.
 
+## Download for Claude
+
+[Download the latest verified upload ZIP](https://github.com/PrahladRajhans/deck-studio/releases/latest/download/deck-studio.zip).
+The package contains one `deck-studio/` folder matching the skill name, with the complete references,
+scripts, examples, source packets, context and changelog. It is published only after main passes the
+smoke workflow. GitHub's generic Code ZIP uses a different folder name, so use the release package
+for direct upload. Upload and enable it using Claude's Skills interface; account permissions and
+code-execution availability still apply. Actual Claude execution is not certified by packaging.
+
+To reproduce locally: `python3 scripts/package_skill.py --out out/deck-studio.zip`.
+The generated bundle manifest records source-file checksums; verification compares every packaged
+file with its source. Checksums detect byte changes, not factual accuracy or publisher identity.
+
 ## What's in the repo
 
 | Path | What it is |
@@ -84,6 +97,19 @@ Changes and migration notes: [CHANGELOG.md](CHANGELOG.md).
 Latest validation and limitations: [revision ledger](tests/evaluations/2026-11-14-revision-plan.md) and
 [independent execution notes](tests/evaluations/2026-11-14-forward-test.md). Earlier
 [creative planning checks](tests/evaluations/2026-11-12-creative-plans.md) remain historical evidence.
+
+Feedback coverage and preservation audit: [what was adopted, retained or declined](tests/evaluations/2026-11-14-feedback-coverage.md).
+Additional samples cover fair option judgements, per-order contribution and cash-flow teaching.
+For the expressive brand's native editable reconstruction:
+
+```bash
+python3 assets/forward-tests/rebuild_brand.py -o out/brand-native.pptx
+python3 scripts/render.py out/brand-native.pptx out/render-brand-native
+python3 scripts/lint_deck.py out/brand-native.pptx
+```
+
+The recipe targets that specific concept and shares its resolved copy, sources and notes. It is not
+a general HTML converter. Build a corresponding native recipe for other custom designs.
 
 ## For reviewers
 

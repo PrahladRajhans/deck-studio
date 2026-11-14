@@ -22,6 +22,17 @@ Packs are added from real use: when a deck in a new field teaches something, add
 - **Traps**: sizing presented as a forecast; options scored with invented weights; a recommendation
   the scorecard doesn't support; implementation that starts before the decision date.
 
+### Fair options, rather than a staged winner
+
+Compare plausible alternatives against the same declared criteria, time horizon and evidence.
+Record actual advantages of rejected contenders, such as lower commitment, earlier availability or
+better learning. Do not invent benefits merely to make a table balanced. Include the status quo
+when it is a real choice. Distinguish disqualified/dominated options from viable contenders; unknown
+is not a red failure. Explain weights, rating rubric and confidence. Treat Harvey/RAG judgements as
+ordinal categories; do not average their colours into a spurious return. Show when weights or key
+assumptions would change the recommendation. The strongest case can include a green advantage for
+another option and an amber weakness for the preferred one.
+
 ## Finance, investment and banking
 
 - **Questions**: What is it worth, on what assumptions? How sensitive is the answer? What are the

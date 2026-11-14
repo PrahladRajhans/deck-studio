@@ -1,0 +1,214 @@
+{
+  "title": "Compare viable choices before committing",
+  "direction": "consulting-navy",
+  "mode": "talk",
+  "footer": "Illustrative worked example \u00b7 hypothetical inputs",
+  "illustrative_authorized": true,
+  "facts": {
+    "received": 100,
+    "inspected": 80,
+    "released": 60,
+    "inspection_loss": "=(received-inspected)/received*100",
+    "release_conversion": "=released/inspected*100"
+  },
+  "fact_meta": {
+    "received": {
+      "kind": "illustrative"
+    },
+    "inspected": {
+      "kind": "illustrative"
+    },
+    "released": {
+      "kind": "illustrative"
+    },
+    "inspection_loss": {
+      "kind": "calculated"
+    },
+    "release_conversion": {
+      "kind": "calculated"
+    }
+  },
+  "brief": {
+    "purpose": "Compare viable choices before committing",
+    "destination": "HTML draft, then editable PowerPoint after approval",
+    "voice": "Explain the actual tradeoff in plain language. Preserve uncertainty.",
+    "sample_context": "All inputs and assessments are hypothetical, not evidence of a real outcome."
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Test the site before choosing the rollout",
+      "subtitle": "A live decision example with real tradeoffs, not a staged winner",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "table",
+      "title": "Each viable option has a reason to choose it",
+      "size": 18,
+      "columns": [
+        "Choice",
+        "Commitment",
+        "Learning",
+        "Coverage"
+      ],
+      "rows": [
+        [
+          "Keep current setup",
+          {
+            "kind": "status",
+            "status": "green",
+            "label": "Lowest"
+          },
+          {
+            "kind": "status",
+            "status": "red",
+            "label": "Little"
+          },
+          {
+            "kind": "status",
+            "status": "red",
+            "label": "Unchanged"
+          }
+        ],
+        [
+          "Pilot",
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "Limited"
+          },
+          {
+            "kind": "status",
+            "status": "green",
+            "label": "Site test"
+          },
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "Limited"
+          }
+        ],
+        [
+          "Full rollout",
+          {
+            "kind": "status",
+            "status": "red",
+            "label": "Largest"
+          },
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "During rollout"
+          },
+          {
+            "kind": "status",
+            "status": "green",
+            "label": "Broad"
+          }
+        ]
+      ],
+      "note": "Illustrative rubric: lower commitment, more learning and broader coverage are favourable.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "table",
+      "title": "Unknown evidence is a question, not a failed score",
+      "size": 18,
+      "columns": [
+        "Criterion",
+        "Current setup",
+        "Pilot",
+        "Full rollout"
+      ],
+      "rows": [
+        [
+          "Learning potential",
+          {
+            "kind": "harvey",
+            "score": 1,
+            "label": "Limited"
+          },
+          {
+            "kind": "harvey",
+            "score": 3,
+            "label": "Test design"
+          },
+          {
+            "kind": "status",
+            "status": "unknown",
+            "label": "Not assessed"
+          }
+        ],
+        [
+          "Implementation simplicity",
+          {
+            "kind": "harvey",
+            "score": 4,
+            "label": "Existing"
+          },
+          {
+            "kind": "harvey",
+            "score": 3,
+            "label": "Bounded"
+          },
+          {
+            "kind": "harvey",
+            "score": 1,
+            "label": "Broad change"
+          }
+        ]
+      ],
+      "note": "Ordinal rubric: 0 absent, 1 limited, 2 mixed, 3 strong, 4 comprehensive. Illustrative ratings.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "process",
+      "title": "Measure where the flow actually narrows",
+      "highlight": 1,
+      "steps": [
+        {
+          "heading": "Receive",
+          "volume": "{=received} items"
+        },
+        {
+          "heading": "Inspect",
+          "volume": "{=inspected} items",
+          "drop_off": "{=inspection_loss|.0f}% of received"
+        },
+        {
+          "heading": "Release",
+          "volume": "{=released} items",
+          "conversion": "{=release_conversion|.0f}% of inspected"
+        }
+      ],
+      "so_what": "Volumes identify a narrowing; they do not establish its cause.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Choose the next evidence step",
+      "ask": "A pilot is a proposed learning step. Confirm setup cost and site feasibility before approval.",
+      "notes": {
+        "say": "The pilot has a setup cost and limited reach. Its proposed value is learning before a larger commitment. If broad coverage outweighs learning, revisit the recommendation."
+      },
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec."
+    }
+  ]
+}

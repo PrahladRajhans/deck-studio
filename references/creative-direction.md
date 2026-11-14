@@ -151,6 +151,13 @@ the concept needs it, such as a documentary opener or a spatial explanation. The
 retains notes and supplied source lines, and adds provenance labels for illustrative content.
 Keep meaningful text editable and readable; include sources rather than hiding them behind art.
 
+Before seeking approval for a custom design targeting editable PowerPoint, test its hardest native
+relationship with real content. Choose reproducible text/shape/image primitives and retain the
+reconstruction script. If the chosen treatment cannot survive, adapt it before approval or explain
+the material compromise. An example of the full path is assets/forward-tests/rebuild_brand.py:
+it reconstructs that specific four-slide brand concept as native editable text and shapes. This
+is an example recipe, not a general HTML converter.
+
 A custom HTML composition needs deliberate reconstruction in native PowerPoint after approval.
 Record a feasible `pptx_note` and preserve the reconstruction script next to the spec. Choose
 compositions the target can reproduce with editable text, shapes, images and supported charts.

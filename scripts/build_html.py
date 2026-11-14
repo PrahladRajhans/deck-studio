@@ -374,7 +374,8 @@ class HtmlDeck:
         return self.chrome(s, self.with_side(s, f'<div class="chart-col">{self.exhibit(s)}<div class="chart">{svg}</div></div>'))
 
     def table_html(self, columns, rows, highlight_row=None, total_row=False, widths=None, base_cell=None):
-        from visual_elements import table_cell, status_color
+        from visual_elements import table_cell, status_color, table_base
+        base_cell = table_base(base_cell, rows, columns)
         num = re.compile(r"^[\s(+−-]*[₹$€£]?\s?[\d.,]+\s?(%|x|×|cr|bn|mn|m|k|pp|bps)?\)?\s*$", re.I)
         cols = ""
         if widths:
@@ -393,8 +394,14 @@ class HtmlDeck:
             for j, c in enumerate(r):
                 text, token = table_cell(c)
                 base = base_cell == [i, j]
-                color = status_color(token, self.t, self.t['panel'] if i == highlight_row else self.t['bg']) if token else None
-                style = f' style="color:#{color}"' if color else ''
+                color = status_color(token, self.t, self.t['panel'] if i == highlight_row or (base_cell and (i == base_cell[0] or j == base_cell[1])) else self.t['bg']) if token else None
+                styles = [f'color:#{color}'] if color else []
+                on_axis = bool(base_cell) and (i == base_cell[0] or j == base_cell[1])
+                if on_axis:
+                    styles.append(f'background:#{self.t["panel"]}')
+                if base:
+                    styles.append(f'outline:2px solid #{self.t["primary"]};outline-offset:-2px')
+                style = (' style="' + ';'.join(styles) + '"') if styles else ''
                 content = md(text) + (' <small>(base)</small>' if base else '')
                 cells.append(f'<td class="{"num" if j and num.match(text) else ""}"{style}>{content}</td>')
             cells = ''.join(cells)

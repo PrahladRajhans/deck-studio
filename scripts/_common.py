@@ -644,14 +644,14 @@ def deck_voice(titles: list[str], list_lengths: list[int]) -> list[str]:
     if len(ts) >= 5:
         colon = sum(1 for t in ts if ":" in t)
         if colon / len(ts) >= 0.5:
-            msgs.append(f"{colon} of {len(ts)} titles use 'X: Y'; vary the headline shape")
+            msgs.append(f"{colon} of {len(ts)} titles use 'X: Y'; review generic topic prefixes, retaining useful parallelism")
         firsts = [t.split()[0].lower() for t in ts]
         top = max(set(firsts), key=firsts.count)
         if firsts.count(top) >= max(3, len(ts) // 3):
-            msgs.append(f"{firsts.count(top)} titles start with '{top}'; vary the openings")
+            msgs.append(f"{firsts.count(top)} titles start with '{top}'; check whether repetition serves the argument")
         lens = [len(t.split()) for t in ts]
         if max(lens) - min(lens) <= 2 and len(ts) >= 8:
-            msgs.append("every title is the same length; mix short and long headlines")
+            msgs.append("every title is similar in length; check whether the rhythm serves the material")
     return msgs
 
 

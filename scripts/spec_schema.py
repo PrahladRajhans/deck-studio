@@ -38,7 +38,7 @@ NUMBERS
                cells may be {kind:status, status:green|amber|red|unknown, label} or {kind:harvey, score:0..4, label}
   options      criteria [{name, weight}], options [{name, scores[]}], recommended, scale
 DIAGRAMS
-  process      steps [{heading, label, body, volume, duration, cost, conversion}], highlight
+  process      steps [{heading, label, body, volume, duration, cost, conversion, defect_rate, drop_off}], highlight
   cycle        steps [{heading, body}], center, highlight, side{}
   funnel       stages [{label, value, note, conversion}], highlight
   pyramid      levels [{label, detail}] (top -> base), highlight

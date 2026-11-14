@@ -1,5 +1,7 @@
 # Deck Studio
 
+Repository: [Prahlad Rajhans / deck-studio](https://github.com/PrahladRajhans/deck-studio.git).
+
 A shared Claude and ChatGPT skill for making presentations: consulting readouts, case competitions, board asks,
 pitches, interviews, classes, research readouts, marketing plans and events.
 

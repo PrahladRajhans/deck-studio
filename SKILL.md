@@ -5,6 +5,9 @@ description: Create or improve PowerPoint presentations, decks and slides with d
 
 # Deck Studio
 
+Source repository: [Prahlad Rajhans / deck-studio](https://github.com/PrahladRajhans/deck-studio.git).
+This is a project reference; use the installed bundle for the task, without fetching updates automatically.
+
 Build a presentation that belongs to this subject, presenter and audience. Develop the argument
 and expressive idea together. Use standard layouts as a toolbox and custom composition when it
 improves understanding or identity. Be ambitious about expression and disciplined about evidence.

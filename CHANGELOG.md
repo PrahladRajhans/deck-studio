@@ -6,6 +6,13 @@ rewrite older entries to imply that later fixes already existed.
 
 ## 2026-11-14
 
+### Repository attribution links
+
+- Add the [project repository](https://github.com/PrahladRajhans/deck-studio.git) to the README,
+  skill entry point and credits. Keep the standard MIT licence wording unchanged.
+- Documentation-only change; verify the diff and ZIP contents without manually rerunning the
+  full test suite. The existing GitHub publication workflow retains its configured checks.
+
 ### MIT licence and final package
 
 - Add the standard MIT licence in licence.txt, Copyright (c) 2026 Prahlad Rajhans, as selected by

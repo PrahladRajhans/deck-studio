@@ -1,5 +1,8 @@
 # Sources, credits and the positives matrix
 
+Project repository: [Prahlad Rajhans / deck-studio](https://github.com/PrahladRajhans/deck-studio.git).
+Project authorship and licence are recorded in the bundle's licence.txt; third-party notices remain separate.
+
 Ideas were studied and re-implemented; no code was copied. All code in `scripts/` (including the HTML
 draft builder) and `assets/html-stage/` is original to this skill. Anthropic's pptx skill declares its own
 licence terms in its `LICENSE.txt`; ai-awesome showed no licence file when studied. From both, only ideas

@@ -111,6 +111,14 @@ python3 scripts/lint_deck.py out/brand-native.pptx
 The recipe targets that specific concept and shares its resolved copy, sources and notes. It is not
 a general HTML converter. Build a corresponding native recipe for other custom designs.
 
+Execution and reference checks: `python3 scripts/check_links.py`; feature readiness:
+`python3 scripts/env_check.py --json`. Select route prerequisites with `--require` rather than
+requiring every optional package for every task. Recovery budgets and explicit pause/stop outcomes
+are in references/workflow.md. Renderer timeouts report failure; they never certify an incomplete
+output. POSIX subprocess groups are cleaned up; target applications/model behavior still need review.
+
+Latest execution/linkage closure: [findings, fixes and verification limits](tests/evaluations/2026-11-14-closed-loops.md).
+
 ## For reviewers
 
 Useful questions to review against:

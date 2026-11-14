@@ -17,39 +17,56 @@ import os
 import subprocess
 import sys
 
+from execution import Deadline, ExecutionTimeout, positive_seconds, run_bounded
+from _common import DIRECTIONS
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("spec")
     ap.add_argument("--directions", required=True)
     ap.add_argument("--slides", default="1,2")
     ap.add_argument("-o", "--out", default="previews")
     ap.add_argument("--pptx", action="store_true", help="preview the PPTX build instead of the HTML draft")
-    a = ap.parse_args()
+    ap.add_argument('--timeout', type=positive_seconds, default=240, help='seconds per child command')
+    ap.add_argument('--budget', type=positive_seconds, default=900, help='total child-command budget')
+    a = ap.parse_args(argv)
+    deadline = Deadline(a.budget)
+    def run(command, **kwargs):
+        return run_bounded(command, timeout=deadline.remaining(a.timeout), **kwargs)
+    selected = [value.strip() for value in a.directions.split(',') if value.strip()]
+    if not selected or any(value not in DIRECTIONS for value in selected):
+        ap.error('directions must be nonempty registered direction names')
     os.makedirs(a.out, exist_ok=True)
+    compare = os.path.join(a.out,'compare.png')
+    if os.path.isfile(compare):
+        os.remove(compare)
     rows = []
-    for d in a.directions.split(","):
-        d = d.strip()
+    for d in selected:
         rd = os.path.join(a.out, f"{d}_render")
+        if os.path.isdir(rd):
+            for old in os.listdir(rd):
+                if (old.startswith('slide-') and old.endswith('.png')) or old == 'contact-sheet.png':
+                    os.remove(os.path.join(rd,old))
         if a.pptx:
             pptx = os.path.join(a.out, f"{d}.pptx")
-            r = subprocess.run([sys.executable, os.path.join(HERE, "build_deck.py"), a.spec, "-o", pptx,
+            r = run([sys.executable, os.path.join(HERE, "build_deck.py"), a.spec, "-o", pptx,
                                 "--direction", d, "--only", a.slides], capture_output=True, text=True)
             if r.returncode not in (0, 3):
                 print(r.stdout, r.stderr)
                 sys.exit(r.returncode)
-            subprocess.run([sys.executable, os.path.join(HERE, "render.py"), pptx, rd, "--cols",
+            run([sys.executable, os.path.join(HERE, "render.py"), pptx, rd, "--cols",
                             str(len(a.slides.split(",")))], capture_output=True, text=True, check=True)
         else:
             page = os.path.join(a.out, f"{d}.html")
-            r = subprocess.run([sys.executable, os.path.join(HERE, "build_html.py"), a.spec, "-o", page,
+            r = run([sys.executable, os.path.join(HERE, "build_html.py"), a.spec, "-o", page,
                                 "--direction", d, "--only", a.slides], capture_output=True, text=True)
             if r.returncode != 0:
                 print(r.stdout, r.stderr)
                 sys.exit(r.returncode)
-            r = subprocess.run([sys.executable, os.path.join(HERE, "render_html.py"), page, rd],
+            r = run([sys.executable, os.path.join(HERE, "render_html.py"), page, rd],
                                capture_output=True, text=True)
             if r.returncode == 3:
                 print(f"  warn  {d}: some text does not fit in this direction:\n{r.stdout}")
@@ -80,4 +97,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except ExecutionTimeout as exc:
+        print(f'preview stopped: {exc}', file=sys.stderr)
+        sys.exit(124)

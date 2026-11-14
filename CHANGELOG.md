@@ -6,6 +6,26 @@ rewrite older entries to imply that later fixes already existed.
 
 ## 2026-11-14
 
+### Bounded recovery and connected dependencies
+
+- Bound external conversion/preview commands with per-command and shared wall-clock budgets,
+  clear timeout outcomes and POSIX process-group cleanup. Run the optional PDF fallback in a bounded
+  child process. Add explicit CI job limits; timeout failures cannot be reported as successful builds.
+- Share a three-round/15-minute QA recovery budget across the deck, layouts and routes, with a
+  stop-with-draft diagnostic outcome. Creative exploration and initial authoring remain unrestricted
+  by this failure-recovery counter. User-specified budgets take precedence.
+- Report actual route-specific dependencies, including CairoSVG/native Cairo icon rendering,
+  Pillow, chart packages, Chromium, LibreOffice, poppler and optional PyMuPDF. Missing optional
+  packages do not crash the checker or block dependency-free HTML authoring.
+- Discover Gamma/Canva operations, permissions, assets, export paths and current cost estimates at
+  runtime. Retain historical catalogue hints as optional context; remove account/network assumptions
+  and mandatory references to uninstalled skills or an external playbook.
+- Complete chart-image routing for tornado/sensitivity. Add an automatic internal-reference,
+  section-pointer and local-import-cycle check. CI exercises timeout cleanup, dependency isolation,
+  PDF fallback, link failures, all existing examples and package verification.
+
+
+
 ### Feedback completeness and content preservation
 
 - Add a deterministic, source-verified Claude upload ZIP rooted at deck-studio/, matching the skill

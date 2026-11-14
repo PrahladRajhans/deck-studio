@@ -17,6 +17,8 @@ import subprocess
 import sys
 import tempfile
 
+from execution import Deadline, ExecutionTimeout, positive_seconds, run_bounded
+
 
 def soffice_bin() -> str:
     for c in ("soffice", "libreoffice", "/Applications/LibreOffice.app/Contents/MacOS/soffice",
@@ -27,12 +29,12 @@ def soffice_bin() -> str:
     sys.exit("LibreOffice not found: install it (or use PowerPoint's Save As PNG) to render")
 
 
-def to_pdf(pptx: str, out_dir: str) -> str:
-    profile = tempfile.mkdtemp(prefix="lo-profile-")
+def to_pdf(pptx: str, out_dir: str, timeout=240) -> str:
+    profile = tempfile.mkdtemp(prefix="lo-profile-", dir=os.environ.get("_DECK_STUDIO_EXEC_CONTEXT"))
     cmd = [soffice_bin(), f"-env:UserInstallation=file://{profile}", "--headless", "--norestore",
            "--convert-to", "pdf", "--outdir", out_dir, pptx]
     try:
-        subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=240)
+        run_bounded(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout)
     finally:
         shutil.rmtree(profile, ignore_errors=True)
     pdf = os.path.join(out_dir, os.path.splitext(os.path.basename(pptx))[0] + ".pdf")
@@ -41,21 +43,19 @@ def to_pdf(pptx: str, out_dir: str) -> str:
     return pdf
 
 
-def to_pngs(pdf: str, out_dir: str, dpi: int) -> list[str]:
+def to_pngs(pdf: str, out_dir: str, dpi: int, timeout=240) -> list[str]:
     stem = os.path.join(out_dir, "slide")
     for old in glob.glob(stem + "-*.png"):
         os.remove(old)
     if shutil.which("pdftoppm"):
-        subprocess.run(["pdftoppm", "-png", "-r", str(dpi), pdf, stem], check=True,
-                       stderr=subprocess.DEVNULL)
+        run_bounded(["pdftoppm", "-png", "-r", str(dpi), pdf, stem], check=True,
+                    stderr=subprocess.DEVNULL, timeout=timeout)
     else:
-        try:
-            import fitz  # PyMuPDF
-        except ImportError:
-            sys.exit("need pdftoppm (poppler) or PyMuPDF to rasterise")
-        doc = fitz.open(pdf)
-        for i, page in enumerate(doc, 1):
-            page.get_pixmap(dpi=dpi).save(f"{stem}-{i:02d}.png")
+        import importlib.util
+        if importlib.util.find_spec('fitz') is None:
+            sys.exit('need pdftoppm (poppler) or optional PyMuPDF to rasterise')
+        run_bounded([sys.executable, os.path.abspath(__file__), '--raster-worker', pdf, stem, str(dpi)],
+                    timeout=timeout, check=True)
     return sorted(glob.glob(stem + "-*.png"))
 
 
@@ -85,22 +85,36 @@ def contact_sheet(pngs: list[str], out: str, cols: int = 3, thumb_w: int = 620):
     return out
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("pptx")
     ap.add_argument("out_dir", nargs="?")
     ap.add_argument("--dpi", type=int, default=110)
     ap.add_argument("--cols", type=int, default=3)
-    a = ap.parse_args()
+    ap.add_argument('--timeout', type=positive_seconds, default=240, help='seconds per external conversion')
+    ap.add_argument('--budget', type=positive_seconds, default=600, help='total conversion/raster budget')
+    a = ap.parse_args(argv)
+    deadline = Deadline(a.budget)
     out_dir = a.out_dir or os.path.splitext(a.pptx)[0] + "_render"
     os.makedirs(out_dir, exist_ok=True)
-    pdf = to_pdf(os.path.abspath(a.pptx), out_dir)
-    pngs = to_pngs(pdf, out_dir, a.dpi)
+    try:
+        pdf = to_pdf(os.path.abspath(a.pptx), out_dir, deadline.remaining(a.timeout))
+        pngs = to_pngs(pdf, out_dir, a.dpi, deadline.remaining(a.timeout))
+    except ExecutionTimeout as exc:
+        print(f'render stopped: {exc}', file=sys.stderr)
+        return 124
     sheet = contact_sheet(pngs, os.path.join(out_dir, "contact-sheet.png"), a.cols)
     print(f"sheet {os.path.abspath(sheet)}")
     for p in pngs:
         print(f"slide {os.path.abspath(p)}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 5 and sys.argv[1] == '--raster-worker':
+        import fitz
+        with fitz.open(sys.argv[2]) as document:
+            for index, page in enumerate(document, 1):
+                page.get_pixmap(dpi=int(sys.argv[4])).save(f'{sys.argv[3]}-{index:02d}.png')
+    else:
+        sys.exit(main())

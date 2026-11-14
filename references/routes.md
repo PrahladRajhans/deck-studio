@@ -1,8 +1,8 @@
 # Routes: where the deck gets built
 
 Every new deck goes through route E (the HTML draft) first. Routes A-D and F are the final
-builds, used only after the user approves the draft or explicitly skips it (SKILL.md, "Draft
-first"). In-place editing of an attached deck stays in its format (route B). Substantive restyling
+builds, used only after the user approves the draft or explicitly skips it (SKILL.md,
+"Approval and preservation"). In-place editing of an attached deck stays in its format (route B). Substantive restyling
 uses an HTML draft and approval before rebuilding.
 
 ## Fidelity contract: what each final route promises
@@ -30,9 +30,10 @@ chart form) goes back to the user before delivery.
 | Animation | none added | per the type | its own | its own | CSS (reduced-motion respected) |
 | Pre-build specification gate | `--strict` | run `spec_io.py --strict` first | run `spec_io.py --strict` first; reconcile output | run `spec_io.py --strict` first; reconcile output | `build_html.py --strict` |
 
-Observations about Gamma and Canva below (template IDs, credit costs, plan limits, network
-limits) were recorded in Nov 2026. Treat them as dated notes and re-check when using the
-connector; capabilities change.
+The external columns are planning prompts, not a guarantee for the current account. Discover the
+available connector operations, permissions, plan limits, templates, notes and export capabilities
+before approving a cloud route. Historical catalogue hints below are not live capability checks.
+Use workflow.md's shared recovery budget and explicit exit outcomes for blocked operations.
 
 ## E. HTML draft (`scripts/build_html.py`): always first
 
@@ -108,9 +109,11 @@ Version before any destructive edit: `deck_v01.pptx`, `deck_v02.pptx`.
 After approval, as a redesign route (fidelity contract): send the approved draft's titles, figures,
 notes and, per slide, the intended exhibit form and emphasis as the prompt (below). Gamma will not
 reproduce the draft's layouts; reconcile the result against the approved spec slide by slide.
-What works (verified): `generate_from_template` with official template IDs on a paid plan;
-reading/duplicating official templates returns 404. ~20 credits per card. Output fabricates
-sources and numbers → always read back (`read_gamma`/outline) and fix with `edit_gamma`.
+Discover the available generation, reading/editing and export operations at runtime. Use their
+actual names and schemas, not assumed API spellings. Check that the account/plan can perform the
+chosen operation and that the selected template is available. Read back generated claims, numbers
+and sources before trusting the result. Obtain the current credit estimate when available; otherwise
+state that cost is unknown rather than reusing a historical per-card charge.
 
 Prompt recipe (put all of it in the prompt):
 1. Today's date. 2. The ghost-deck titles, in order, as the slide list. 3. The real figures with
@@ -118,7 +121,7 @@ units and sources, and "use only these numbers". 4. Audience and what they must 
 5. Slide count, stating whether it includes the cover. 6. Text density (brief/medium/detailed).
 7. Image source and style (or none for analytical slides). 8. "British English" (or Indian).
 9. "Never invent source names or statistics; where a source is missing write
-'Source: to be added'." 10. "Each slide title is a full-sentence insight."
+'Source: to be added'." 10. "Evidence titles state the supported insight; other title forms follow the slide’s purpose."
 
 Quick picks (template IDs from Gamma search, Nov 2026):
 
@@ -133,9 +136,11 @@ Quick picks (template IDs from Gamma search, Nov 2026):
 | Brand or marketing case | Upswing `xski90vc8kufvl4` | Mosaic `hysatb92fqwhrne` | Gamma / Coral Glow |
 | Metrics or project update | Daybook `5gq3jxkshjn70cp` | The Quiet Deck `tfkcig75f7si2wt` | Commons / Sage |
 
-IDs can go stale: if one is rejected, `search_templates` again or use a workspace template.
-Families, skins and the 11 themes: `use-cases.md`; full catalogue: the user's "Gamma Design
-Playbook" doc.
+These IDs are historical hints, not verified current templates. If one is rejected, do one fresh
+lookup using an available search operation and try one verified alternative. If lookup or generation
+is unavailable, stop that route and retain the reviewed draft. Do not loop through unverified IDs.
+Families, skins and the 11 themes: use-cases.md. A separate user-supplied Gamma Design Playbook may
+provide more context, but is optional and never a missing dependency that blocks this bundle.
 
 Read-back checklist after every generation (the four failures seen with Mandate):
 1. Source lines: any source you didn't supply is invented → replace with the real one or
@@ -144,25 +149,30 @@ Read-back checklist after every generation (the four failures seen with Mandate)
 3. Dates: proposed activity starts after today and matches the launch date; label retrospective
    and in-progress activity.
 4. Card count: did it add a cover or closer you didn't ask for?
-Then fix card by card with `edit_gamma` (cheaper than regenerating; keeps what worked), and
-`export_gamma` for PPTX/PDF. Say the credit cost before a large run (~20 credits a card measured).
+Use available editing operations for targeted repairs when they preserve more than regeneration.
+Export through a currently supported operation, then reconcile content and render the actual file.
+Try the available export/download path before declaring it blocked. On an actual failure, use one
+materially different authorised retrieval path if available; otherwise ask for the exported file or
+return the reviewed draft with the precise limitation. Do not repeatedly troubleshoot an unavailable
+network route or claim that every workspace shares a previously observed restriction.
 
-Checking a Gamma or Canva export: the cloud workspace cannot download Gamma or Canva export links
-(network allowlist, tested Nov 2026), so ask the user to download the .pptx and attach it, then run
-`lint_deck.py` and `lint_deck.py --figures` on it and render it like any other deck.
-
-Learn each template once: the first time a template is used, record its real slide layouts in the
-Gamma Design Playbook, so the playbook gets more precise with use.
+Preserve useful template observations with the task spec or a supplied playbook. Updating an
+external document is optional and needs the user's authorisation; a missing playbook is not a gate.
 
 ## D. Canva (connector)
 
-After approval. Editing an existing design is controlled adaptation; Canva AI generation is a
-redesign (fidelity contract). The connector can read and edit the user's own designs, generate new designs with Canva AI,
-resize, and export to PPTX/PDF/images. It cannot browse Canva's public template library, and this
-account has no Brand Kits or Brand Templates. Workflow: user opens a Canva template and clicks "Customize this template" → you find
-it with `search-designs` → read it → edit text/images with the edit tools (load the
-canva:edit-design skill) → export. Impose the grammar: action titles, numbered exhibit, so-what,
-source line. Best for co-edited, event, social and photo-led decks.
+After approval. Editing an existing design is controlled adaptation; AI generation is a redesign
+(fidelity contract). Discover the connected account's actual search, edit, generation and export
+capabilities, permissions and brand assets. Use available Brand Kits/Templates or user-provided
+brand guidance; do not assume they exist or are absent. Load applicable Canva guidance if available,
+without requiring a named skill that is not installed.
+
+For a supplied design, read and edit the user's accessible copy, preserve unrelated content, then
+export and reconcile. If public templates cannot be accessed through the current tools, use an
+accessible user-owned copy or a supplied reference. If editing/export is unavailable, report that
+specific limitation and retain the reviewed draft rather than pretending a final was produced.
+Use slide anatomy where it serves the content, with real sources and appropriate presenter voice.
+Best for co-edited, event, social and photo-led decks. All retries share workflow.md's recovery budget.
 
 ## F. HTML as the final format
 
@@ -178,7 +188,7 @@ Nothing should overflow or overlap.
 
 ## G. Chart images (`scripts/chart_images.py`)
 
-Mekko, slope, dumbbell, heatmap and bullet charts in a direction's colours, as PNG for an `image`
+Mekko, slope, dumbbell, heatmap, bullet, tornado and sensitivity charts in a direction's colours, as PNG for an `image`
 slide. Use when the chart form carries the insight (a market map, a two-period shift); keep the
 numbers in `facts`; always alt text; state that the chart is a picture.
 

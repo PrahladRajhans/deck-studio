@@ -68,6 +68,7 @@ file with its source. Checksums detect byte changes, not factual accuracy or pub
 | Path | What it is |
 |---|---|
 | `SKILL.md` | Concise stage router, selective reference loading and approval gates |
+| `licence.txt` | MIT licence, Copyright (c) 2026 Prahlad Rajhans; bundled third-party notices remain in place |
 | `agents/openai.yaml` | OpenAI interface metadata and implicit-discovery policy; consent remains in the shared entry point |
 | `references/host-chatgpt.md`, `references/host-claude.md` | Host-specific execution, preview and delivery guidance |
 | `references/visual-components.md` | Visual grammar, icons, richer tables/processes, scenario charts and named alignment annotations |
@@ -175,3 +176,10 @@ and what was not, with reasons.
 
 The skill was written for Claude, with its scripts running in Claude's workspace. Example data is
 fictional or labelled illustrative.
+
+## Licence
+
+Deck Studio is licensed under the [MIT License](licence.txt), copyright © 2026 Prahlad Rajhans.
+Bundled third-party material retains its own notices, including the
+[Feather icon licence](assets/icons/feather/LICENSE). The project licence does not replace those
+notices or reattribute their authorship. Runtime dependencies retain their respective licences.

@@ -6,6 +6,15 @@ rewrite older entries to imply that later fixes already existed.
 
 ## 2026-11-14
 
+### MIT licence and final package
+
+- Add the standard MIT licence in licence.txt, Copyright (c) 2026 Prahlad Rajhans, as selected by
+  the author. Keep the bundled Feather icon copyright/licence and other third-party notices intact.
+- Require the project licence in source-verified upload ZIPs. Extend package regression checks to
+  confirm attribution and third-party preservation, and reject a source bundle missing licence.txt.
+- Document licence scope in the README. No creative instructions, adapters, examples, specification
+  or slide-building behavior change. Existing reference, builder and package CI gates publication.
+
 ### Shared Claude and ChatGPT package
 
 - Keep one creative method, human-voice reference collection, specification, builder pipeline and

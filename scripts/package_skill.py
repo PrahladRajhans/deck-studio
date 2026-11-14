@@ -7,11 +7,12 @@ from pathlib import Path, PurePosixPath
 import re
 import zipfile
 
-INCLUDE = ('SKILL.md', 'README.md', 'CHANGELOG.md', 'requirements.txt', 'LICENSE',
+INCLUDE = ('SKILL.md', 'README.md', 'CHANGELOG.md', 'requirements.txt', 'LICENSE', 'licence.txt',
            'agents', 'scripts', 'references', 'assets', 'tests')
 REQUIRED = ('SKILL.md', 'requirements.txt', 'scripts/spec_io.py', 'scripts/build_html.py',
             'scripts/build_deck.py', 'references/creative-direction.md',
-            'agents/openai.yaml', 'references/host-chatgpt.md', 'references/host-claude.md')
+            'agents/openai.yaml', 'references/host-chatgpt.md', 'references/host-claude.md',
+            'licence.txt')
 MANIFEST = 'bundle-manifest.json'
 
 

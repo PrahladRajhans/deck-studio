@@ -18,6 +18,8 @@ def inputs(root):
     files = {}
     for entry in INCLUDE:
         path = root / entry
+        if path.is_symlink():
+            raise ValueError(f'bundle does not follow symlinks: {entry}')
         candidates = [path] if path.is_file() else (path.rglob('*') if path.is_dir() else [])
         for source in candidates:
             relative = source.relative_to(root)
@@ -58,7 +60,7 @@ def build(root, out, revision='unspecified'):
     return manifest
 
 
-def verify(root, out):
+def verify(root, out, expected_revision=None):
     expected = inputs(Path(root).resolve())
     name = skill_name(expected)
     with zipfile.ZipFile(out) as archive:
@@ -67,6 +69,10 @@ def verify(root, out):
         if len(names) != len(set(names)) or set(names) != wanted or any('..' in PurePosixPath(p).parts for p in names):
             raise ValueError('ZIP must contain exactly one correctly named skill folder and its source files')
         manifest = json.loads(archive.read(f'{name}/{MANIFEST}'))
+        if manifest.get('schema_version') != 1 or not isinstance(manifest.get('revision'),str):
+            raise ValueError('unsupported manifest schema or revision metadata')
+        if expected_revision is not None and manifest['revision'] != expected_revision:
+            raise ValueError('bundle revision differs from the expected source commit')
         hashes = {p: hashlib.sha256(data).hexdigest() for p, data in expected.items()}
         if manifest.get('skill') != name or manifest.get('files') != hashes:
             raise ValueError('bundle manifest differs from the source')
@@ -80,10 +86,10 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument('--out', required=True)
-    parser.add_argument('--revision', default='unspecified')
+    parser.add_argument('--revision')
     parser.add_argument('--verify-only', action='store_true')
     args = parser.parse_args(argv)
-    manifest = verify(args.root, args.out) if args.verify_only else build(args.root, args.out, args.revision)
+    manifest = verify(args.root, args.out, expected_revision=args.revision) if args.verify_only else build(args.root, args.out, args.revision or 'unspecified')
     print(f'verified {args.out}: {manifest["skill"]}/, {len(manifest["files"])} source files, revision {manifest["revision"]}')
 
 

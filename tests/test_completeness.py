@@ -69,6 +69,8 @@ class Completeness(unittest.TestCase):
             dest=Path(folder)/'deck-studio.zip'
             manifest=build(ROOT,dest,revision='test-source')
             self.assertEqual(manifest['skill'],'deck-studio')
+            self.assertEqual(verify(ROOT,dest,expected_revision='test-source')['revision'],'test-source')
+            with self.assertRaises(ValueError):verify(ROOT,dest,expected_revision='different-source')
             self.assertIn('references/human-voice.md',manifest['files'])
             self.assertIn('assets/icons/feather/LICENSE',manifest['files'])
             self.assertIn('tests/fixtures/marketing.json',manifest['files'])
@@ -81,6 +83,18 @@ class Completeness(unittest.TestCase):
             with zipfile.ZipFile(bad,'w') as z:
                 for path,content in data.items():z.writestr(path,content)
             with self.assertRaises(ValueError):verify(ROOT,bad)
+            metadata=json.loads(data['deck-studio/bundle-manifest.json'])
+            metadata['schema_version']=999
+            data['deck-studio/bundle-manifest.json']=json.dumps(metadata).encode()
+            data['deck-studio/SKILL.md']=data['deck-studio/SKILL.md'].removesuffix(b'Altered after verification')
+            with zipfile.ZipFile(bad,'w') as z:
+                for path,content in data.items():z.writestr(path,content)
+            with self.assertRaises(ValueError):verify(ROOT,bad)
+            from package_skill import inputs
+            linkroot=Path(folder)/'source'
+            linkroot.mkdir()
+            (linkroot/'assets').symlink_to(ROOT/'assets',target_is_directory=True)
+            with self.assertRaisesRegex(ValueError,'symlinks'):inputs(linkroot)
 
     def test_native_brand_recipe_preserves_copy_and_notes(self):
         try:

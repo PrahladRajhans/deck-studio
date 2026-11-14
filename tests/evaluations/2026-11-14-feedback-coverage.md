@@ -145,6 +145,8 @@ Creative samples establish working examples, not a guarantee of artistic quality
 - After merge, main's successful workflow publishes and re-downloads the release ZIP, then verifies
   it against that exact main source. The stable asset URL is
   https://github.com/PrahladRajhans/deck-studio/releases/latest/download/deck-studio.zip.
+  Release publication stages the asset as a draft, repairs a missing asset on retry, and checks
+  manifest schema, expected revision and every source byte before making it public/latest.
   Publication is a separately checked step; a ZIP link is not reported ready until its release exists.
 
 Commands used: unittest discovery; tests/smoke_test.sh; spec_io --strict; both builders; Chromium

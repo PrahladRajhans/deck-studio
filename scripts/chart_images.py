@@ -14,6 +14,9 @@ Kinds (spec JSON):
   dumbbell {"kind":"dumbbell","a_label":"Today","b_label":"Target","items":[{"label":"X","a":40,"b":65}]}
   heatmap  {"kind":"heatmap","rows":[...],"cols":[...],"values":[[...]],"fmt":"{:.0f}%"}
   bullet   {"kind":"bullet","items":[{"label":"NPS","value":42,"target":50,"max":100}]}  progress vs target
+  tornado  {"kind":"tornado","base":10,"items":[{"label":"Price","low":3,"high":17}],"unit":"Profit"}
+  sensitivity {"kind":"sensitivity","rows":["Low","Base"],"cols":["Low","Base"],
+               "values":[[-4,0],[0,4]],"base_cell":[1,1],"unit":"Profit"}
 """
 from __future__ import annotations
 

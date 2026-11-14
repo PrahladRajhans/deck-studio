@@ -74,3 +74,41 @@ then summary/ask, navigation/dividers, cover/close and appendix. This is a produ
 the audience's slide order or a restriction on exploring a strong cover concept early. Rewrite the
 summary after the evidence changes. Preserve relevant detail in notes or appendix rather than
 silently deleting it to fit a short slide.
+
+## Bounded recovery and explicit exits
+
+Keep one task-level QA budget: three failed-check repair rounds or 15 minutes, whichever comes
+first, unless the user specifies otherwise. Track the count in normal progress notes, not per-slide
+compliance records. Initial authoring and useful concept exploration are outside this recovery count.
+New layouts, routes and failed API calls share the same budget. Count a changed API recovery
+attempt plus its result check as one round; discovery is limited to one refreshed lookup and one
+verified alternative for that failed step, never a fresh budget. Do not restart it implicitly.
+
+| Condition | Next step | Exit when unresolved |
+|---|---|---|
+| Fit/collision failure | Fix the relevant spec, rebuild and inspect; count the round | Budget exhausted: last usable draft plus exact failed slides and next decision |
+| Missing evidence | Narrow or remove the claim, or request essential evidence once | Keep a labelled draft; strict final remains blocked |
+| Approval missing | Show the reviewed draft and identify the pending decision | Pause; do not poll or manufacture approval |
+| Dependency absent/broken | Check the required feature, attempt one appropriate setup if allowed | Report the blocked feature; retain the draft or use an authorised available route |
+| External API/template rejection | One refreshed capability/template lookup, then one verified alternative | No identical retry; report blocked operation and available draft/export |
+| Renderer timeout | Inspect diagnostic; one materially changed retry within remaining budget | Stop and withhold the unverified final |
+| Material destination compromise | Explain the change against the approved design | Await agreement before that compromise |
+
+`render.py` bounds each external conversion at 240 seconds and shares a 600-second conversion
+budget. `preview_directions.py` bounds child commands at 240 seconds within a 900-second total.
+Both accept `--timeout` and `--budget` in seconds; pass the smaller remaining task budget where
+appropriate. Timeout exit is 124, with a diagnostic rather than a success claim. POSIX cleanup retains one owner across nested commands and kills
+the whole stage group, including converters; Windows cleanup kills the direct child and still needs host/job supervision.
+No automatic retry is hidden inside the execution helper. A local file operation or arbitrary model
+trajectory is not made mathematically time-bounded by these controls.
+
+Use `env_check.py --json` for feature readiness, or `--require html_render`, `--require pptx_build`,
+`--require pptx_render`, `--require pptx_icons` or `--require chart_images` for the chosen route.
+Required-feature failure exits 1. Dependency-free HTML drafting remains available when optional
+PowerPoint/icon packages are missing. CairoSVG is tested by actually rasterising a bundled icon;
+its Python import alone is not treated as proof that native Cairo works. Font substitution and
+final application wrapping still need visual review.
+
+Run `python3 scripts/check_links.py` after moving references or modules. CI checks internal file and
+section references plus circular local imports. This is structural validation, not proof that prose
+instructions have identical meaning or that a changing external service is available.

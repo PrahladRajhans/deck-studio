@@ -167,14 +167,16 @@ Do not tell it how the deck was made or what you are proud of. Prompt:
 Triage every finding in a table: slide · finding · type · adopt / reject (reason) / ask the user.
 Show the user any finding that would change meaning or structure. Apply the adopted ones, rebuild,
 re-render, re-lint. One round is the default; report findings / adopted / remaining in three lines
-and ask before another round.
+and continue only within the shared recovery budget and existing user-authorised scope.
 
 ## 7. Audit discipline
 
 - No soft language for defects: "slightly tight" or "nearly overlapping" means fix it.
 - Every slide individually; archetype bugs are type-specific (a legend bug hits every doughnut,
   a footer bug every rail slide). Render at least one slide of every type you used.
-- Three fixes on the same defect without success: change the slide type or split the content.
+- After repeated failed fixes, change the composition only within the shared recovery budget.
+  At three repair rounds or 15 minutes across the deck, stop with the last usable draft and exact
+  unresolved issues. A new layout or route never resets the budget. Follow workflow.md.
 - Record what you inspected, what changed and which renderer you used.
 - Draft rounds: keep the spec under version (spec_v01.json, spec_v02.json) so any round can be
   rebuilt; the HTML is always regenerated from the spec, never hand-edited (custom compositions live

@@ -8,17 +8,22 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install Python dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt PyMuPDF
       - name: Install Chromium for the HTML draft renderer
         run: python -m playwright install --with-deps chromium
       - name: Install fonts (metric-compatible Office clones), LibreOffice and poppler for PPTX renders
         run: sudo apt-get update && sudo apt-get install -y libcairo2 fonts-crosextra-carlito fonts-crosextra-caladea fonts-liberation fonts-texgyre libreoffice-impress poppler-utils
+      - name: Check internal references and module dependencies
+        run: python3 scripts/check_links.py
+      - name: Check the installed rendering features
+        run: python3 scripts/env_check.py --direction consulting-navy --require html_render --require pptx_build --require pptx_render --require chart_images --require pptx_icons
       - name: Run smoke tests (drafts, strict PPTX builds, renders, lint, unit tests)
         run: bash tests/smoke_test.sh out/smoke
       - name: Verify the upload ZIP structure and source bytes
@@ -30,6 +35,7 @@ jobs:
           name: smoke-output
           path: out/smoke
   release:
+    timeout-minutes: 10
     needs: smoke
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

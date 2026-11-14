@@ -124,6 +124,17 @@ route. Show alternatives when useful; avoid another compulsory preference gate.
 figures reconcile, and the visual relationships are meaningful. Resolve actual defects; review
 editorial prompts in context rather than treating them as forbidden-word rules.
 
+## Recovery limits
+
+For failed QA, allow at most three repair rounds across the whole deck or 15 minutes, whichever
+comes first, unless the user sets another budget. A round is an attempted fix followed by checking
+its output. Changing a layout, tool or route does not reset the count. This limits failure recovery,
+not creative exploration or initial authoring. Follow workflow.md for timeouts and stop outcomes.
+
+On exhaustion, stop automatic work. Preserve the last usable draft, identify unresolved issues and
+the next useful choice, and withhold an unverified final. Missing evidence or approval has an explicit
+pause outcome; do not retry unchanged inputs. A user-authorised new revision can start a fresh budget.
+
 ## Stage 5 — Review and approval
 
 1. Inspect the contact sheet, then every slide; inspect dense and consequential slides closely.

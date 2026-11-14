@@ -62,6 +62,13 @@ for f in "$HERE"/assets/benchmarks/*.json; do
   fi
   python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" || { echo "FAIL benchmark fit $b"; fail=1; }
 done
+# Exercise actual preview orchestration, not only direct builders, with a shared budget.
+python3 "$S/preview_directions.py" "$HERE/assets/examples/visual-components.json" --directions consulting-navy --slides 1 -o "$OUT/preview-html" --timeout 60 --budget 120 \
+  > "$OUT/preview-html.log" || { cat "$OUT/preview-html.log"; fail=1; }
+if [ $have_soffice -eq 1 ]; then
+  python3 "$S/preview_directions.py" "$HERE/assets/examples/visual-components.json" --directions consulting-navy --slides 1 --pptx -o "$OUT/preview-pptx" --timeout 60 --budget 120 \
+    > "$OUT/preview-pptx.log" || { cat "$OUT/preview-pptx.log"; fail=1; }
+fi
 python3 -m unittest discover -s "$HERE/tests" -p "test_*.py" -q || { echo "FAIL unit tests"; fail=1; }
 [ $have_soffice -eq 1 ] || echo "note: LibreOffice/poppler not found; PPTX renders skipped"
 [ $fail -eq 0 ] && echo "ALL SMOKE TESTS PASSED" || { echo "SMOKE TESTS FAILED"; exit 1; }

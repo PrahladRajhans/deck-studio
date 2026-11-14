@@ -51,9 +51,8 @@
       "type": "question",
       "title": "Can profit rise while cash stays tight?",
       "options": [
-        "Yes",
-        "No",
-        "It depends on cash timing"
+        "Profit and cash must move together",
+        "Profit and cash can move differently"
       ],
       "prompt": "Before the example, explain what each number measures.",
       "notes": {

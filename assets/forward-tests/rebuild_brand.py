@@ -8,6 +8,8 @@ render it and reconcile before using it for a different design. No full-slide im
 from html.parser import HTMLParser
 from pathlib import Path
 import argparse
+import hashlib
+import json
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,7 +24,20 @@ class Copy(HTMLParser):
     def __init__(self, markup):
         super().__init__()
         self.parts = []
+        self.structure = []
         self.feed(markup)
+
+    def handle_starttag(self, tag, attrs):
+        self.structure.append(['start', tag, sorted(attrs)])
+
+    def handle_endtag(self, tag):
+        self.structure.append(['end', tag])
+
+    def handle_startendtag(self, tag, attrs):
+        self.structure.append(['empty', tag, sorted(attrs)])
+
+    def signature(self):
+        return hashlib.sha256(json.dumps(self.structure).encode()).hexdigest()
 
     def handle_data(self, text):
         if text.strip():
@@ -32,7 +47,11 @@ class Copy(HTMLParser):
 class BrandRecipe(Builder):
     def s_custom(self, s):
         index = self.cur_idx - 1
-        parts = Copy(s['html']).parts
+        copy = Copy(s['html'])
+        parts = copy.parts
+        signatures = ['5208cb057440d508d4045e365577e899ad25722059eebe6a2f9eaf0a42fc2ac4', '2b3d3c2c8e5ac0ad0c9ffb015e9a3851d9e6fffb7de9ade08057909646d515fc', '319c5a37f477c2b3529e66a96824689a374061d0737b607a09edca06e17e5032', '946108eca543d45b063a0a07398423afe2f4dc16c84af01a5813b7f2dc244719']
+        if copy.signature() != signatures[index]:
+            raise SpecError('brand recipe markup/layout changed; revise and review the native recipe')
         counts = [4, 8, 8, 6]
         if len(parts) != counts[index]:
             raise SpecError('brand recipe content structure changed; revise and review the native recipe')
@@ -55,8 +74,8 @@ class BrandRecipe(Builder):
         if index == 0:
             self.rect(slide, 1305/144, 240/144, 490/144, 490/144,
                       line=acid, line_w=1, shape=MSO_SHAPE.OVAL, name='Conceptual spotlight')
-            text('Festival name', 120, 280, 1100, 400, '\n'.join(parts[1:3]), 180, acid, True)
-            text('Headline', 120, 755, 1600, 90, parts[3], 48)
+            text('Festival name', 120, 250, 1100, 530, '\n'.join(parts[1:3]), 180, acid, True)
+            text('Headline', 120, 850, 1600, 90, parts[3], 48)
         elif index == 1:
             text('Headline', 120, 220, 1640, 150, parts[1], 100, bold=True)
             rule('Section rule', 120, 390, 1680)

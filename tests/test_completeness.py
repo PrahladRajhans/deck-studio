@@ -10,7 +10,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from spec_io import load_spec
-from visual_elements import process_body
+from visual_elements import process_body, table_base
+from _common import SpecError
 from build_html import HtmlDeck
 
 
@@ -49,6 +50,18 @@ class Completeness(unittest.TestCase):
         self.assertIn('outline:2px solid',doc)
         self.assertGreaterEqual(doc.count('background:#'),5)
 
+    def test_bad_base_markers_are_controlled_spec_errors(self):
+        for marker in ([],[1],[True,0],[-1,0],[0,2],'0,0'):
+            with self.assertRaises(SpecError):
+                table_base(marker, [['a','b']], ['x','y'])
+        with tempfile.TemporaryDirectory() as folder:
+            original=json.loads((ROOT/'assets/examples/visual-components.json').read_text())
+            original['slides'][2]['base_cell']=[1]
+            path=Path(folder)/'invalid.json'
+            path.write_text(json.dumps(original))
+            result=load_spec(str(path))
+            self.assertTrue(any('base_cell' in b for b in result['_blockers']))
+
     def test_native_brand_recipe_preserves_copy_and_notes(self):
         try:
             import pptx
@@ -70,11 +83,17 @@ class Completeness(unittest.TestCase):
                 self.assertIn(source['source'],text)
                 self.assertIn(source['notes']['say'],slide.notes_slide.notes_text_frame.text)
                 self.assertFalse(any(sp.shape_type==13 for sp in slide.shapes))
-            changed=json.loads((ROOT/'assets/forward-tests/brand.json').read_text())
-            changed['slides'][0]['html']+='<p>Extra copy requiring a revised composition.</p>'
-            bad=Path(folder)/'changed.json'
-            bad.write_text(json.dumps(changed))
-            rejected=Path(folder)/'rejected.pptx'
-            result=subprocess.run([sys.executable,str(recipe),'--spec',str(bad),'-o',str(rejected)],capture_output=True,text=True)
-            self.assertEqual(result.returncode,2,result.stderr)
-            self.assertFalse(rejected.exists())
+            for edit in ('append','same_count_structure','layout_style'):
+                changed=json.loads((ROOT/'assets/forward-tests/brand.json').read_text())
+                if edit=='append':
+                    changed['slides'][0]['html']+='<p>Extra copy requiring a revised composition.</p>'
+                elif edit=='same_count_structure':
+                    changed['slides'][0]['html']=changed['slides'][0]['html'].replace('<br>','</h1><h1>')
+                else:
+                    changed['slides'][0]['html']=changed['slides'][0]['html'].replace('right:125px','right:150px')
+                bad=Path(folder)/(edit+'.json')
+                bad.write_text(json.dumps(changed))
+                rejected=Path(folder)/(edit+'.pptx')
+                result=subprocess.run([sys.executable,str(recipe),'--spec',str(bad),'-o',str(rejected)],capture_output=True,text=True)
+                self.assertEqual(result.returncode,2,result.stderr)
+                self.assertFalse(rejected.exists())

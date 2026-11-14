@@ -300,6 +300,13 @@ def validate(spec: dict) -> tuple[list[str], list[str]]:
         if PLACEHOLDER.search(str(spec.get(field, ""))):
             blockers.append(f"deck {field} contains a placeholder")
     for i, s in enumerate(spec.get("slides", []), 1):
+        if s.get('type') == 'table' and 'base_cell' in s:
+            from visual_elements import table_base
+            try:
+                table_base(s['base_cell'], s.get('rows', []), s.get('columns', []))
+            except SpecError as exc:
+                blockers.append(f'slide {i}: {exc}')
+
         seconds = s.get("seconds")
         if seconds is not None and (isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0):
             blockers.append(f"slide {i}: seconds must be a positive number")

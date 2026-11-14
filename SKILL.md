@@ -109,8 +109,8 @@ route. Show alternatives when useful; avoid another compulsory preference gate.
 
 1. Write the spoken explanation and pivotal claims, then compose the slide for its job. Use
    assertion/evidence anatomy for analytical exhibits where useful, not as compulsory furniture.
-2. Render one representative dense slide before building a section of similar slides. Use actual
-   content to test wrapping, labels and the visual idea; fix the pattern before scaling it.
+2. When a dense or repeated content pattern carries layout risk, render one representative slide
+   before scaling it. Test actual copy, labels and the visual idea; then check the longest variant.
 3. Select visuals by the audience's question and relationship. Tables suit exact lookup; repeated
    layouts suit comparison. Never manufacture a diagram or vary layouts to meet a quota.
 4. Use the shared specification, facts, sources and voice. Link observed facts once and reuse their

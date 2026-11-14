@@ -98,6 +98,13 @@ permission to remove a premise, source, caveat or technical meaning. No global c
   It rejects structural changes requiring a revised recipe. It is not a general HTML converter.
 - Existing examples, fixed packets and earlier regressions remain in smoke tests.
 
+Independent review repaired a mismatched option criterion, a confusing quiz choice and an overly
+broad showcase-first instruction. It also identified that chunk counts alone did not detect markup
+changes. The native recipe now pins a structural/layout signature while keeping copy in the shared
+spec, and tests reject both added copy and same-count structure/style changes. A malformed base-cell
+regression now produces a controlled spec error rather than an indexing crash. Initial full CI caught
+a cover textbox too short at the intended 90pt size; its geometry was enlarged without shrinking type.
+
 Validation outcomes and publication are recorded below after checks, renders and source readback.
 
 ## Remaining limits

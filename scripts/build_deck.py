@@ -925,7 +925,8 @@ class Builder(ExtraMixin):
 
     def _table(self, slide, x, y, w, h, columns, rows, widths=None, highlight_row=None,
                first_col_bold=True, size=13, total_row=False, base_cell=None):
-        from visual_elements import table_cell, status_color
+        from visual_elements import table_cell, status_color, table_base
+        base_cell = table_base(base_cell, rows, columns)
         raw_rows = rows
         rows = [[table_cell(v)[0] for v in row] for row in rows]
         t = self.t

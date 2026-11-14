@@ -374,7 +374,8 @@ class HtmlDeck:
         return self.chrome(s, self.with_side(s, f'<div class="chart-col">{self.exhibit(s)}<div class="chart">{svg}</div></div>'))
 
     def table_html(self, columns, rows, highlight_row=None, total_row=False, widths=None, base_cell=None):
-        from visual_elements import table_cell, status_color
+        from visual_elements import table_cell, status_color, table_base
+        base_cell = table_base(base_cell, rows, columns)
         num = re.compile(r"^[\s(+−-]*[₹$€£]?\s?[\d.,]+\s?(%|x|×|cr|bn|mn|m|k|pp|bps)?\)?\s*$", re.I)
         cols = ""
         if widths:

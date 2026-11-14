@@ -53,7 +53,7 @@
         "Choice",
         "Commitment",
         "Learning",
-        "Speed"
+        "Coverage"
       ],
       "rows": [
         [
@@ -70,8 +70,8 @@
           },
           {
             "kind": "status",
-            "status": "green",
-            "label": "Immediate"
+            "status": "red",
+            "label": "Unchanged"
           }
         ],
         [
@@ -89,7 +89,7 @@
           {
             "kind": "status",
             "status": "amber",
-            "label": "Needs setup"
+            "label": "Limited"
           }
         ],
         [
@@ -107,11 +107,11 @@
           {
             "kind": "status",
             "status": "green",
-            "label": "Broad reach"
+            "label": "Broad"
           }
         ]
       ],
-      "note": "Illustrative qualitative rubric. Lower commitment, greater learning and earlier availability are favourable.",
+      "note": "Illustrative rubric: lower commitment, more learning and broader coverage are favourable.",
       "data_status": "illustrative",
       "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
       "notes": {
@@ -130,7 +130,7 @@
       ],
       "rows": [
         [
-          "Site-fit evidence",
+          "Learning potential",
           {
             "kind": "harvey",
             "score": 1,
@@ -166,7 +166,7 @@
           }
         ]
       ],
-      "note": "Ordinal rubric: 0 absent, 1 limited, 2 mixed, 3 strong, 4 comprehensive. Assessments are illustrative.",
+      "note": "Ordinal rubric: 0 absent, 1 limited, 2 mixed, 3 strong, 4 comprehensive. Illustrative ratings.",
       "data_status": "illustrative",
       "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
       "notes": {
@@ -205,7 +205,7 @@
       "title": "Choose the next evidence step",
       "ask": "A pilot is a proposed learning step. Confirm setup cost and site feasibility before approval.",
       "notes": {
-        "say": "The pilot has a cost and a delay. Its value here is learning before the larger commitment. If speed outweighs learning, revisit the recommendation."
+        "say": "The pilot has a setup cost and limited reach. Its proposed value is learning before a larger commitment. If broad coverage outweighs learning, revisit the recommendation."
       },
       "data_status": "illustrative",
       "source": "Illustrative inputs and judgements supplied in this worked-example spec."

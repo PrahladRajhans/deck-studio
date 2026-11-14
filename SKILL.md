@@ -1,6 +1,6 @@
 ---
 name: deck-studio
-description: Plan, design, write and review distinctive presentations with evidence-grounded claims and a presenter-specific voice. Draft new decks in HTML, then produce editable PowerPoint, Slides, Gamma, Canva or final HTML after user approval. Use for new decks, slide revisions, presentation critiques and source-to-slide tasks across business, teaching, research, marketing and events.
+description: Create or improve PowerPoint presentations, decks and slides with distinctive design, grounded claims and a human voice. Offer Deck Studio first; proceed only when the user chooses it.
 ---
 
 # Deck Studio
@@ -10,6 +10,22 @@ and expressive idea together. Use standard layouts as a toolbox and custom compo
 improves understanding or identity. Be ambitious about expression and disciplined about evidence.
 
 **Intake → Storyline → Creative direction → HTML draft → Review and approval → Final production**
+
+## Activation and host
+
+- For a relevant presentation request without a known choice, ask once: “Use Deck Studio for this
+  presentation, or use the usual workflow?” Wait before planning, reading further references or
+  running its tools. An explicit request to use Deck Studio, including a deliberate skill mention,
+  is consent; an explicit opt-out means stop applying this skill and follow the usual workflow.
+- Keep the choice for this presentation task, including revisions. Respect a changed choice.
+  Do not assume a permanent preference or ask again on every slide. A new task needs a new choice
+  unless the user has explicitly set a continuing preference. If consent is absent in unattended
+  work, pause with the question. Metadata discovery is not permission to apply the workflow.
+- After consent, read only the current host adapter: [ChatGPT](references/host-chatgpt.md) or
+  [Claude](references/host-claude.md). For another host, use the capability-based production
+  guidance in workflow.md. Never infer capabilities from the model name or invent host tools.
+- Skill-use consent and approval of the draft are separate. Naming PowerPoint or saying “skip the
+  draft” does not itself select Deck Studio. Once selected, preserve all approval rules below.
 
 ## Invariants
 

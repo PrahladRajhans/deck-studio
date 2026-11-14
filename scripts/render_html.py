@@ -5,8 +5,9 @@
 
 Writes slide-01.png ... and contact-sheet.png, then prints one line per slide that carries a
 "does not fit" flag (title over its line limit, body text below the floor, or content off the slide).
-Exit code 3 when any slide is flagged. Needs Playwright with Chromium (pre-installed in Claude's
-workspace; elsewhere: pip install playwright && playwright install chromium).
+Exit code 3 when any slide is flagged. Needs Playwright with Chromium; check availability with
+env_check.py rather than assuming the host pre-installs it. Where permitted, install with
+pip install playwright && playwright install chromium.
 """
 from __future__ import annotations
 

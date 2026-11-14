@@ -1,5 +1,9 @@
 # Routes: where the deck gets built
 
+Apply these routes only after the activation choice in SKILL.md. Use host-chatgpt.md or
+host-claude.md for the current host's execution, preview and delivery conventions; retain the
+same destination fidelity and approval rules on both hosts.
+
 Every new deck goes through route E (the HTML draft) first. Routes A-D and F are the final
 builds, used only after the user approves the draft or explicitly skips it (SKILL.md,
 "Approval and preservation"). In-place editing of an attached deck stays in its format (route B). Substantive restyling
@@ -48,7 +52,7 @@ measured: don't quote a figure. Settle content, visuals and the slide skeleton h
 2. `render_html.py out/deck.html out/render` takes screenshots of every slide (Playwright) and a
    contact sheet. Text that cannot fit at the floor sizes is flagged on the slide in red and
    reported with exit code 3.
-3. Show the user the HTML file (it previews inline and opens in any browser) and the contact
+3. Show the user the HTML file (inline where supported, otherwise a download) and the contact
    sheet. In the browser, arrows move, N shows notes, G shows the grid, P prints a PDF.
    It also runs inside sandboxed previews (claude.ai shows HTML in an `about:srcdoc` frame); there
    it simply skips remembering the slide number in the address.

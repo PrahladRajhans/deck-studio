@@ -48,7 +48,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build and verify the Claude upload package from this exact commit
+      - name: Build and verify the shared skill upload package from this exact commit
         run: python3 scripts/package_skill.py --out out/deck-studio.zip --revision "$GITHUB_SHA"
       - name: Publish the verified package as a versioned release
         env:
@@ -65,7 +65,7 @@ jobs:
               gh release upload "$skill_tag" out/deck-studio.zip
             fi
           else
-            gh release create "$skill_tag" out/deck-studio.zip --target "$GITHUB_SHA" --draft --title "Deck Studio ${GITHUB_SHA:0:8}" --notes "Verified Claude upload package for $GITHUB_SHA. See CHANGELOG.md and tests/evaluations/2026-11-14-feedback-coverage.md for changes, checks and limits. Actual execution inside Claude remains untested."
+            gh release create "$skill_tag" out/deck-studio.zip --target "$GITHUB_SHA" --draft --title "Deck Studio ${GITHUB_SHA:0:8}" --notes "Shared Claude/ChatGPT skill package verified against $GITHUB_SHA. See CHANGELOG.md for changes, installation and validation limits. Automated builder and package checks are not in-application certification; native Skills access and runtime capabilities depend on the host."
           fi
           gh release download "$skill_tag" --pattern deck-studio.zip --dir "$RUNNER_TEMP/skill-package-readback"
           python3 scripts/package_skill.py --out "$RUNNER_TEMP/skill-package-readback/deck-studio.zip" --verify-only --revision "$GITHUB_SHA"

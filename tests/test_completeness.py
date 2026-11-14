@@ -75,11 +75,14 @@ class Completeness(unittest.TestCase):
             for path in ('agents/openai.yaml', 'references/host-chatgpt.md', 'references/host-claude.md'):
                 self.assertIn(path,manifest['files'])
             self.assertIn('assets/icons/feather/LICENSE',manifest['files'])
+            self.assertIn('licence.txt',manifest['files'])
             self.assertIn('tests/fixtures/marketing.json',manifest['files'])
             self.assertIn('tests/evaluations/2026-11-14-feedback-coverage.md',manifest['files'])
             with zipfile.ZipFile(dest) as z:
                 self.assertTrue(all(p.startswith('deck-studio/') for p in z.namelist()))
                 data={p:z.read(p) for p in z.namelist()}
+            self.assertIn(b'Copyright (c) 2026 Prahlad Rajhans',data['deck-studio/licence.txt'])
+            self.assertIn(b'Cole Bemis',data['deck-studio/assets/icons/feather/LICENSE'])
             bad=Path(folder)/'tampered.zip'
             data['deck-studio/SKILL.md']+=b'Altered after verification'
             with zipfile.ZipFile(bad,'w') as z:
@@ -98,11 +101,14 @@ class Completeness(unittest.TestCase):
             requiredroot.mkdir()
             for name in ('SKILL.md','requirements.txt','scripts/spec_io.py','scripts/build_html.py',
                          'scripts/build_deck.py','references/creative-direction.md',
-                         'agents/openai.yaml','references/host-claude.md'):
+                         'agents/openai.yaml','references/host-claude.md','licence.txt'):
                 source=requiredroot/name
                 source.parent.mkdir(parents=True,exist_ok=True)
                 source.write_bytes((ROOT/name).read_bytes())
             with self.assertRaisesRegex(ValueError,'host-chatgpt'):inputs(requiredroot)
+            (requiredroot/'references/host-chatgpt.md').write_bytes((ROOT/'references/host-chatgpt.md').read_bytes())
+            (requiredroot/'licence.txt').unlink()
+            with self.assertRaisesRegex(ValueError,'licence.txt'):inputs(requiredroot)
             linkroot=Path(folder)/'source'
             linkroot.mkdir()
             (linkroot/'assets').symlink_to(ROOT/'assets',target_is_directory=True)

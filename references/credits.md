@@ -81,3 +81,12 @@ sign-in. Nothing in this skill claims to come from Pinterest.
   narrative rhythm and positive presenter voice; add a full-stage custom HTML path and a fictional
   worked example. These are proposed authoring practices and tested renderer capabilities, not a
   measured claim that all future decks will be more creative. See creative-direction.md and CHANGELOG.md.
+
+- **Workflow and component revision (14 Nov 2026)**: evaluate external review claims against this
+  repository, consolidate stage routing, keep assurance proportional to claim consequence and add
+  fixed-packet execution tests. Reviewer suggestions are hypotheses, not source-code evidence or
+  proof of better output. See tests/evaluations/2026-11-14-revision-plan.md for actual verification.
+- **Feather icons**: twelve unmodified SVGs from feathericons/feather, pinned at
+  3dc050d97405062eba78aa57115c0a15c63abdaa. Copyright Cole Bemis; MIT license is
+  bundled at assets/icons/feather/LICENSE. See that directory's README for source and usage. This
+  supersedes the earlier review's deferral; it does not rewrite the historical decision.

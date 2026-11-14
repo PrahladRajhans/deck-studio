@@ -7,6 +7,7 @@
 <!-- deck-studio HTML stage, hand-built variant. Drafts normally come from scripts/build_html.py (same spec as
      the PPTX); use this file only for motion or layouts beyond the 44 slide types, or when scripts/ is missing.
      Fixed 1920x1080 stage scaled to the window; arrows / space / swipe to move;
+     N toggles notes, G opens the slide grid, Escape closes overlays;
      P or Ctrl+P prints one slide per page (PDF). Swap the font pair and the :root tokens per direction
      (references/visual-language.md, "HTML stage pairs"). Keep everything in this one file. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +43,7 @@ p,li{font:400 34px/1.4 var(--body)}
 .big-number .num{font:800 300px/0.9 var(--display);color:var(--accent);letter-spacing:-.04em}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex:1}
 .split img{width:100%;height:760px;object-fit:cover;border-radius:24px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:64px}
+.cards{display:grid;grid-template-columns:repeat(var(--columns,3),1fr);gap:var(--gap);margin-top:64px}
 .card{background:var(--panel);border-radius:24px;padding:48px}
 .card .n{font:800 56px var(--display);color:var(--accent)}
 .card h3{font:700 38px/1.15 var(--display);margin:16px 0 12px}
@@ -56,6 +57,11 @@ p,li{font:400 34px/1.4 var(--body)}
 .bar b{font:700 34px var(--body);margin-bottom:14px}
 .bar span{position:relative;top:56px;font:500 26px var(--body);color:var(--muted)}
 /* === CHROME === */
+#notes{display:none;position:fixed;left:5%;right:5%;bottom:24px;padding:24px;background:#fff;color:#111;z-index:10;font:18px/1.4 Arial;max-height:35vh;overflow:auto}
+#grid{display:none;position:fixed;inset:0;z-index:9;background:#222;overflow:auto;padding:32px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;align-content:start}
+#grid button{height:160px;overflow:hidden;position:relative;border:2px solid #888;background:#fff;cursor:pointer}
+#grid .slide{width:1920px;height:1080px;transform:scale(.14);transform-origin:top left;visibility:visible;opacity:1;pointer-events:none}
+
 #progress{position:fixed;left:0;bottom:0;height:4px;background:var(--accent);transition:width .3s}
 @media (prefers-reduced-motion: reduce){.slide{transition:none;transform:none}}
 @media print{
@@ -63,7 +69,7 @@ p,li{font:400 34px/1.4 var(--body)}
   html,body{background:none;overflow:visible;height:auto}
   #viewport{position:static;display:block} #stage{transform:none!important}
   .slide{position:relative;visibility:visible;opacity:1;transform:none;page-break-after:always;width:1920px;height:1080px}
-  #progress{display:none}
+  #progress,#notes,#grid{display:none!important}
 }
 </style>
 </head>
@@ -72,6 +78,7 @@ p,li{font:400 34px/1.4 var(--body)}
 
   <!-- 1. Title: the promise, not the topic -->
   <section class="slide dark center">
+    <template class="notes">Replace the template content with supported claims before presenting. All example figures are illustrative.</template>
     <div class="kicker">Event · Date</div>
     <h1>One sentence that says what the audience gets</h1>
     <p class="muted" style="margin-top:36px">Speaker name · role</p>
@@ -128,23 +135,33 @@ p,li{font:400 34px/1.4 var(--body)}
 
 </div></div>
 <div id="progress"></div>
+<aside id="notes" aria-live="polite"></aside>
+<nav id="grid" aria-label="Slide overview"></nav>
 <script>
 /* === RUNTIME: scale, navigate, print === */
 const stage=document.getElementById('stage'), slides=[...document.querySelectorAll('.slide')];
+document.querySelectorAll('.cards').forEach(el=>{if(!el.style.getPropertyValue('--columns'))el.style.setProperty('--columns',Math.max(1,el.children.length));});
 /* sandboxed previews (claude.ai, about:srcdoc) forbid touching the URL: remembering the slide is optional */
 function readHash(){try{return parseInt(location.hash.slice(1))||1}catch(e){return 1}}
 function writeHash(n){try{if(location.protocol!=='about:')history.replaceState(null,'','#'+n)}catch(e){}}
 let i=Math.max(0,Math.min(slides.length-1,readHash()-1));
 function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`scale(${s})`;}
+const notes=document.getElementById('notes'), grid=document.getElementById('grid');
+function updateNotes(){notes.textContent=slides[i].querySelector('template.notes')?.content.textContent || 'No speaker notes for this slide.';}
+function toggleNotes(){notes.style.display=notes.style.display==='block'?'none':'block';updateNotes();}
+function toggleGrid(){grid.style.display=grid.style.display==='grid'?'none':'grid';}
+slides.forEach((slide,k)=>{const button=document.createElement('button');button.setAttribute('aria-label','Slide '+(k+1));button.append(slide.cloneNode(true));button.onclick=e=>{e.stopPropagation();grid.style.display='none';show(k)};grid.append(button)});
 function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));
-  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';writeHash(i+1);}
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';writeHash(i+1);updateNotes();}
 addEventListener('resize',fit);
 addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
   if(['ArrowLeft','PageUp'].includes(e.key))show(i-1); if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);
+  if(e.key==='n'||e.key==='N')toggleNotes(); if(e.key==='g'||e.key==='G')toggleGrid();
+  if(e.key==='Escape'){grid.style.display='none';notes.style.display='none';}
   if(e.key==='p'||e.key==='P')print();});
 let x0=null;addEventListener('touchstart',e=>x0=e.touches[0].clientX);
 addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null;});
-addEventListener('click',e=>{if(e.target.tagName!=='A')show(i+(e.clientX>innerWidth/2?1:-1))});
+addEventListener('click',e=>{if(!e.target.closest('a,button,#notes,#grid'))show(i+(e.clientX>innerWidth/2?1:-1))});
 fit();show(i);
 </script>
 </body>

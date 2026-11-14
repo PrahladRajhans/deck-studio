@@ -17,6 +17,7 @@ import argparse
 import ast
 from html.parser import HTMLParser
 import json
+import math
 import os
 import re
 import sys
@@ -35,7 +36,7 @@ CLAIM_KINDS = {"observed", "quotation", "calculated", "estimate", "forecast", "a
                "target", "hypothesis", "recommendation", "illustrative"}
 _VALIDATION_SKIP = {"_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions",
                     "evidence_ids", "voice_ok", "path", "image", "photo", "id", "type", "kind",
-                    "style", "direction", "frame", "icon", "number_format", "pptx_note"}
+                    "style", "direction", "frame", "icon", "number_format", "pptx_note", "layout_review", "seconds"}
 
 
 class _VisibleHTML(HTMLParser):
@@ -108,17 +109,54 @@ def _labelled_illustrative(spec, slide):
     return bool(re.search(r"\billustrative\b", slide.get("tag", "") + " " + spec.get("footer", ""), re.I))
 
 
-def _claim_issues(index, slide, evidence, illustrative):
+def _provenance(spec):
+    """Trace displayed fact expressions and explicit citations to their source records."""
+    facts = spec.get("_facts_raw", {})
+    meta = spec.get("fact_meta", {})
+    dependencies = {key: _expression_names(value) & facts.keys() for key, value in facts.items()}
+    inherited = {key: {m.get("evidence")} if isinstance(m, dict) and isinstance(m.get("evidence"), str) else set()
+                 for key, m in ((key, meta.get(key, {})) for key in facts)}
+    for _ in facts:
+        for key, deps in dependencies.items():
+            inherited[key].update(eid for dep in deps for eid in inherited[dep])
+    used, citations = set(), set()
+    for slide in spec.get("slides", []):
+        raw = slide.get("_raw", slide)
+        used.update(_expression_names(raw) & facts.keys())
+        refs = slide.get("evidence_ids", [])
+        if isinstance(refs, list):
+            citations.update(eid for eid in refs if isinstance(eid, str))
+        claims = raw.get("claims", [])
+        if isinstance(claims, list):
+            for claim in claims:
+                if not isinstance(claim, dict):
+                    continue
+                used.update(_expression_names(claim.get("text", "")) & facts.keys())
+                refs = claim.get("evidence_ids", [])
+                if isinstance(refs, list):
+                    citations.update(eid for eid in refs if isinstance(eid, str))
+    for _ in facts:
+        expanded = used | {dep for key in used for dep in dependencies[key]}
+        if expanded == used:
+            break
+        used = expanded
+    citations.update(eid for key in used for eid in inherited[key])
+    return used, citations, inherited
+
+
+def _claim_issues(index, slide, evidence, illustrative, inherited=None, assurance="standard"):
     """Validate a semantically reviewed claim inventory, not the truth of natural language."""
     errors = []
     claims = slide.get("claims", [])
     if not isinstance(claims, list):
         return [f"slide {index}: claims must be a list"]
-    if not claims and not illustrative and not str(slide.get("non_factual_reason", "")).strip():
+    brief_cited = assurance == "brief" and bool(slide.get("evidence_ids"))
+    needs_inventory = not illustrative or assurance == "high"
+    if not claims and needs_inventory and not brief_cited and not str(slide.get("non_factual_reason", "")).strip():
         errors.append(f"slide {index}: missing claims inventory; record factual claims or a non_factual_reason")
     visible = " ".join(validation_strings(slide))
     normal = lambda text: " ".join(strip_markup(str(text)).split())
-    for claim in claims:
+    for claim_index, claim in enumerate(claims):
         if not isinstance(claim, dict):
             errors.append(f"slide {index}: each claim must be an object")
             continue
@@ -133,6 +171,12 @@ def _claim_issues(index, slide, evidence, illustrative):
         if not isinstance(refs, list) or any(not isinstance(x, str) for x in refs):
             errors.append(f"slide {index}: claim evidence_ids must be a list of evidence IDs")
             refs = []
+        raw_claims = slide.get("_raw", slide).get("claims", [])
+        raw_text = raw_claims[claim_index].get("text", "") if claim_index < len(raw_claims) else text
+        fact_names = _expression_names(raw_text)
+        # A fact token inherits source links. It does not inherit semantic review status
+        # or prove a causal/interpretive assertion wrapped around the number.
+        refs = sorted(set(refs) | {eid for name in fact_names for eid in (inherited or {}).get(name, set())})
         if kind in {"observed", "quotation"} and not refs:
             errors.append(f"slide {index}: {kind} claim needs linked evidence")
         for eid in refs:
@@ -162,7 +206,7 @@ def _raw_numbers(obj, path=""):
             if key.startswith("_") or key in {
                 "claims", "number_exceptions", "evidence_ids", "theme", "id", "highlight",
                 "recommended", "start", "end", "number", "feeling", "image_width",
-                "highlight_row", "active", "widths", "totals", "min", "max",
+                "highlight_row", "active", "widths", "totals", "min", "max", "seconds", "base_cell", "layout_review",
             }:
                 continue
             yield from _raw_numbers(value, f"{path}.{key}")
@@ -194,25 +238,41 @@ def validate(spec: dict) -> tuple[list[str], list[str]]:
     facts_raw = spec.get("_facts_raw", {})
     meta = spec.get("fact_meta", {})
     evidence = spec.get("evidence", {})
+    assurance = spec.get("assurance", "standard")
+    if assurance not in {"brief", "standard", "high"}:
+        blockers.append("assurance must be 'brief', 'standard' or 'high'")
+    used_facts, used_evidence, inherited = _provenance(spec)
     # evidence register and fact classification
     for eid, e in evidence.items():
+        issues = blockers if eid in used_evidence else notes
+        prefix = "" if eid in used_evidence else "unused research history: "
+        if not isinstance(e, dict):
+            issues.append(prefix + f"evidence '{eid}': entry must be an object")
+            continue
         st = e.get("status", "missing")
         if st not in EVIDENCE_STATUS:
-            blockers.append(f"evidence '{eid}': status must be one of {sorted(EVIDENCE_STATUS)}")
+            issues.append(prefix + f"evidence '{eid}': status must be one of {sorted(EVIDENCE_STATUS)}")
         elif st != "verified":
-            blockers.append(f"evidence '{eid}' is {st}: verify it (source exists AND supports the claim) or drop "
+            issues.append(prefix + f"evidence '{eid}' is {st}: verify it (source exists AND supports the claim) or drop "
                             "the claims that rest on it")
         if not e.get("source"):
-            blockers.append(f"evidence '{eid}' has no source")
+            issues.append(prefix + f"evidence '{eid}' has no source")
         if not str(e.get("locator", "")).strip():
-            blockers.append(f"evidence '{eid}' has no locator (page, table, cell, section or precise URL)")
+            issues.append(prefix + f"evidence '{eid}' has no locator (page, table, cell, section or precise URL)")
         if PLACEHOLDER.search(str(e)):
-            blockers.append(f"evidence '{eid}' contains a placeholder")
+            issues.append(prefix + f"evidence '{eid}' contains a placeholder")
     unclassified = []
     for name, v in facts_raw.items():
         derived = isinstance(v, str) and v.startswith("=")
         m = meta.get(name, {})
+        if not isinstance(m, dict):
+            blockers.append(f"fact_meta '{name}': entry must be an object")
+            continue
         kind = m.get("kind", "calculated" if derived else None)
+        if name not in used_facts:
+            if kind is None:
+                notes.append(f"unused research history: fact '{name}' has no kind; no delivered claim uses it")
+            continue
         if kind is None:
             unclassified.append(name)
             continue
@@ -228,7 +288,7 @@ def validate(spec: dict) -> tuple[list[str], list[str]]:
         blockers.append(f"{len(unclassified)} raw fact(s) have no kind in fact_meta ({', '.join(unclassified[:6])}"
                         f"{'…' if len(unclassified) > 6 else ''}); kinds: "
                         f"{', '.join(sorted(FACT_KINDS - {'calculated'}))}")
-    illustrative_facts = {n for n, m in meta.items() if m.get("kind") == "illustrative"}
+    illustrative_facts = {n for n, m in meta.items() if isinstance(m, dict) and m.get("kind") == "illustrative"}
     # Derived values retain illustrative provenance, even through multiple calculations.
     for _ in facts_raw:
         expanded = illustrative_facts | {n for n, v in facts_raw.items()
@@ -240,6 +300,9 @@ def validate(spec: dict) -> tuple[list[str], list[str]]:
         if PLACEHOLDER.search(str(spec.get(field, ""))):
             blockers.append(f"deck {field} contains a placeholder")
     for i, s in enumerate(spec.get("slides", []), 1):
+        seconds = s.get("seconds")
+        if seconds is not None and (isinstance(seconds, bool) or not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds <= 0):
+            blockers.append(f"slide {i}: seconds must be a positive number")
         status = s.get("data_status")
         if status and status not in DATA_STATUS:
             blockers.append(f"slide {i}: data_status must be 'sourced' or 'illustrative'")
@@ -266,7 +329,7 @@ def validate(spec: dict) -> tuple[list[str], list[str]]:
             if PLACEHOLDER.search(t):
                 blockers.append(f"slide {i}: placeholder left in deliverable text: '{t[:50]}'")
                 break
-        blockers += _claim_issues(i, s, evidence, illustrative)
+        blockers += _claim_issues(i, s, evidence, illustrative, inherited, assurance)
         notes += _count_issues(i, s)
         if s.get("type") == "custom":
             notes.append(f"slide {i}: custom layout; preserve its PPTX reconstruction script alongside the spec")
@@ -302,6 +365,11 @@ def load_spec(path: str) -> dict:
     """Read a spec, resolve facts, run checks, render tokens. Keeps raw slides for validation."""
     with open(path, encoding="utf-8") as fh:
         spec = json.load(fh)
+    if not isinstance(spec, dict) or not isinstance(spec.get("slides"), list) or any(not isinstance(s, dict) for s in spec["slides"]):
+        raise SpecError("spec must be an object with a slides list of objects")
+    for key in ("facts", "fact_meta", "evidence"):
+        if not isinstance(spec.get(key, {}), dict):
+            raise SpecError(f"{key} must be an object")
     facts = spec.get("facts", {})
     spec["_facts_raw"] = dict(facts)
     resolved = {}
@@ -349,14 +417,26 @@ def report(spec: dict, strict: bool, out=print) -> int:
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("spec")
+    ap.add_argument("spec", nargs="?")
+    ap.add_argument("--schema", action="store_true", help="show authoring fields without PPTX dependencies")
+    ap.add_argument("--outline", action="store_true", help="print title track without PPTX dependencies")
     ap.add_argument("--strict", action="store_true")
     a = ap.parse_args(argv)
+    if a.schema:
+        from spec_schema import SCHEMA
+        print(SCHEMA)
+        return 0
+    if not a.spec:
+        ap.error("spec path required unless --schema is used")
     try:
         spec = load_spec(a.spec)
     except SpecError as e:
         print(f"SPEC ERROR: {e}", file=sys.stderr)
         return 2
+    if a.outline:
+        for index, slide in enumerate(spec["slides"], 1):
+            print(f"{index:>2}. [{slide.get('type')}] {strip_markup(slide.get('title') or slide.get('claim') or '')}")
+        return 0
     rc = report(spec, a.strict)
     if rc == 0 and not spec.get("_blockers"):
         print("  ok    no release blockers")

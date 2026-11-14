@@ -1,0 +1,82 @@
+{
+  "title": "brand fixed-packet benchmark",
+  "direction": "editorial-warm",
+  "mode": "talk",
+  "minutes": 10,
+  "footer": "Illustrative benchmark \u00b7 fixed source packet",
+  "illustrative_authorized": true,
+  "brief": {
+    "packet": "tests/fixtures/brand.json"
+  },
+  "facts": {
+    "ask": 500000
+  },
+  "fact_meta": {
+    "ask": {
+      "kind": "illustrative"
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Make the space after the show part of the festival",
+      "eyebrow": "After Hours",
+      "subtitle": "A place to make something, not only watch it",
+      "style": "field",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "columns",
+      "title": "Give people a reason to stay",
+      "columns": [
+        {
+          "icon": "feather:layers",
+          "heading": "A place to make",
+          "body": "A sponsor-supported late-night making space."
+        },
+        {
+          "icon": "feather:users",
+          "heading": "Artists in the room",
+          "body": "An opt-in workshop with student artists."
+        }
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "process",
+      "title": "A small pilot can test the idea",
+      "steps": [
+        {
+          "heading": "Agree the space",
+          "body": "Confirm venue rules and feasibility."
+        },
+        {
+          "heading": "Invite the artists",
+          "body": "Agree the workshop and materials."
+        },
+        {
+          "heading": "Learn from the night",
+          "body": "Collect voluntary feedback; publish no attendance or ROI promise."
+        }
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "ask",
+      "title": "Back the making space",
+      "ask": "Sponsor the proposed pilot",
+      "figure": {
+        "value": "INR {=ask|,}",
+        "label": "proposed support"
+      },
+      "why": [
+        "A concrete place for student creativity."
+      ],
+      "cost": [
+        "Budget and scope to be agreed."
+      ],
+      "owner": "Student club",
+      "data_status": "illustrative"
+    }
+  ]
+}

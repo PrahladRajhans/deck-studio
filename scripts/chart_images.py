@@ -23,7 +23,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from _common import resolve_theme  # noqa: E402
+from _common import resolve_theme, SpecError  # noqa: E402
 
 
 def _c(h):
@@ -161,10 +161,83 @@ def bullet(ax, t, sp):
     ax.spines["left"].set_visible(False)
 
 
-KINDS = {"mekko": mekko, "slope": slope, "dumbbell": dumbbell, "heatmap": heatmap, "bullet": bullet}
+def tornado(ax, t, sp):
+    """Outcome ranges from one-at-a-time scenarios, not causal attribution."""
+    import math
+    base = sp.get('base')
+    items = sp.get('items', [])
+    if not isinstance(base, (int, float)) or isinstance(base, bool) or not math.isfinite(base) or not items:
+        raise SpecError('tornado needs a finite base and nonempty items')
+    for item in items:
+        low, high = item.get('low'), item.get('high')
+        if any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in (low, high)) or not low <= base <= high:
+            raise SpecError('tornado outcomes must satisfy low <= base <= high')
+    items = sorted(items, key=lambda item: item['high'] - item['low'], reverse=True)
+    ys = list(range(len(items)))
+    for y, item in zip(ys, items):
+        ax.barh(y, base - item['low'], left=item['low'], color=_c(t['grey']), height=.55)
+        ax.barh(y, item['high'] - base, left=base, color=_c(t['accent']), height=.55)
+        ax.annotate(f"{item['low']:g}", (item['low'], y), xytext=(-5, 0), textcoords='offset points', ha='right', va='center', fontsize=10)
+        ax.annotate(f"{item['high']:g}", (item['high'], y), xytext=(5, 0), textcoords='offset points', ha='left', va='center', fontsize=10)
+    ax.axvline(base, color=_c(t['ink']), linewidth=1)
+    ax.set_yticks(ys, [item['label'] for item in items])
+    ax.invert_yaxis()
+    low = min(item["low"] for item in items)
+    high = max(item["high"] for item in items)
+    span = high-low or max(abs(base), 1)
+    ax.set_xlim(low-span*.18, high+span*.18)
+    ax.tick_params(axis="y", pad=12)
+    ax.set_xlabel(sp.get('unit', 'Outcome') + f' · Base {base:g} · one input varied at a time')
+
+
+def sensitivity(ax, t, sp):
+    """Exact lookup matrix with a declared base, including negative outcome ranges."""
+    import numpy as np
+    from matplotlib.colors import LinearSegmentedColormap, Normalize
+    rows, cols = sp.get('rows', []), sp.get('cols', [])
+    values = sp.get('values', [])
+    base = sp.get('base_cell')
+    if not rows or not cols or len(values) != len(rows) or any(len(row) != len(cols) for row in values):
+        raise SpecError('sensitivity values must match nonempty row and column labels')
+    if not isinstance(base, list) or len(base) != 2 or any(isinstance(v, bool) or not isinstance(v, int) for v in base) or not (0 <= base[0] < len(rows) and 0 <= base[1] < len(cols)):
+        raise SpecError('sensitivity needs an in-range base_cell [row, column]')
+    vals = np.array(values, dtype=float)
+    if not np.isfinite(vals).all():
+        raise SpecError('sensitivity values must be finite')
+    cmap = LinearSegmentedColormap.from_list('sensitivity', [_c(t['panel']), _c(t['primary'])])
+    norm = Normalize(vmin=float(vals.min()), vmax=float(vals.max()))
+    ax.imshow(vals, cmap=cmap, norm=norm, aspect='auto')
+    def contrast(a, b):
+        def lum(h):
+            vals = [int(h[k:k+2], 16)/255 for k in (0, 2, 4)]
+            vals = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in vals]
+            return sum(v*w for v, w in zip(vals, (.2126, .7152, .0722)))
+        x, y = sorted((lum(a), lum(b)))
+        return (y+.05)/(x+.05)
+    for i in range(len(rows)):
+        for j in range(len(cols)):
+            rgba = cmap(norm(vals[i, j]))
+            bg = ''.join(f'{round(c*255):02X}' for c in rgba[:3])
+            color = 'FFFFFF' if contrast('FFFFFF', bg) >= contrast('000000', bg) else '000000'
+            text = sp.get('fmt', '{:g}').format(vals[i, j])
+            if [i, j] == base:
+                text += '\n(base)'
+            ax.text(j, i, text, ha='center', va='center', color=_c(color), fontsize=11)
+    ax.set_xticks(range(len(cols)), cols)
+    ax.set_yticks(range(len(rows)), rows)
+    ax.xaxis.tick_top()
+    ax.set_xlabel(sp.get('unit', 'Outcome'))
+    ax.tick_params(length=0)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+
+KINDS = {"mekko": mekko, "slope": slope, "dumbbell": dumbbell, "heatmap": heatmap, "bullet": bullet, "tornado": tornado, "sensitivity": sensitivity}
 
 
 def render(spec: dict, out: str, direction=None, w=8.4, h=4.6):
+    if spec.get("kind") not in KINDS:
+        raise SpecError(f"unsupported image chart: {spec.get('kind')}")
     t = resolve_theme(direction or spec.get("direction"), spec.get("theme"))
     plt, fig, ax = setup(t, w, h)
     KINDS[spec["kind"]](ax, t, spec)

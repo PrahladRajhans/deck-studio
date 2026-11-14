@@ -57,7 +57,7 @@ class Validation(unittest.TestCase):
         p = spec_file({"facts": {"share": 34, "size": 10},
                        "fact_meta": {"share": {"kind": "observed", "evidence": "e1"}},
                        "evidence": {"e1": {"source": "Panel data 2026", "status": "unverified"}},
-                       "slides": [{"type": "statement", "claim": "Share is {=share}%"}]})
+                       "slides": [{"type": "statement", "claim": "Share is {=share}% across {=size} stores"}]})
         b = load_spec(p)["_blockers"]
         self.assertTrue(any("unverified" in x for x in b))
         self.assertTrue(any("no kind" in x for x in b))

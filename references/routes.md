@@ -66,7 +66,7 @@ anyway (Gamma, Canva); otherwise the draft would promise a look the PPTX can't d
 After approval, when the session lists a Slides artifact type and the user named no file format,
 build there:
 the user gets an editable, shareable deck that exports to .pptx/PDF. Everything in this skill
-still applies: ghost deck and Gate 1 first, anatomy per slide, one accent, the facts model
+still applies: ghost deck and Gate 2 first, anatomy per slide, one accent, the facts model
 (keep it in a scratch JSON and compute figures with a few lines of Python before writing them
 in), notes-first, then render/inspect via the type's own preview and fix. Follow the type's own
 instructions for the data format; translate a direction's tokens into its theme.
@@ -78,7 +78,7 @@ whenever the numbers must tie out. Supported standard slides build from the appr
 require the reconstruction step below. The release gate is described in spec.md. Exit codes: 0 built · 2 spec, fact-check or release-blocker error (nothing
 written) · 3 built but some text could not fit within floors (shorten or split, never shrink).
 
-Commands: `--schema` (fields), `--outline` (Gate 1 headline track), `--direction X --only 1,4`
+Commands: `--schema` (fields), `--outline` (Gate 2 headline track), `--direction X --only 1,4`
 (previews), `-o out.pptx`. Then `render.py`, `lint_deck.py`.
 
 A tailored explanation or expression (a map, an S-curve, an annotated document, a spatial idea) can use a `custom`

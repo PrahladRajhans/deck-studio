@@ -64,3 +64,12 @@ Do not reward writing merely for avoiding words on a list.
 
 The queue-review example establishes a working HTML path, not a completed benchmark suite. Record
 what was actually run, including drafts, reviewer findings, destination limits and unresolved gaps.
+
+## Reproducible packets
+
+Four fixed hypothetical packets live in tests/fixtures: executive, marketing, incomplete and brand.
+Do not enrich them with invented evidence. Keep the packet unchanged between runs; generate a new
+spec before looking at assets/benchmarks (authored regression examples). assets/forward-tests retains
+independent Codex executions. tests/evaluations records executor, provenance and limitations.
+CI renders both classes, but neither replaces an actual Claude run. Score rendered output, keep each
+dimension separate and record material failures rather than averaging them away.

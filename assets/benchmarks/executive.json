@@ -1,0 +1,123 @@
+{
+  "title": "executive fixed-packet benchmark",
+  "direction": "consulting-navy",
+  "mode": "talk",
+  "minutes": 10,
+  "footer": "Illustrative benchmark \u00b7 fixed source packet",
+  "illustrative_authorized": true,
+  "brief": {
+    "packet": "tests/fixtures/executive.json"
+  },
+  "facts": {
+    "capex": 50,
+    "saving": 12,
+    "maintenance": 2,
+    "net": "=saving-maintenance",
+    "payback": "=capex/net"
+  },
+  "fact_meta": {
+    "capex": {
+      "kind": "illustrative"
+    },
+    "saving": {
+      "kind": "illustrative"
+    },
+    "maintenance": {
+      "kind": "illustrative"
+    },
+    "net": {
+      "kind": "calculated"
+    },
+    "payback": {
+      "kind": "calculated"
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Validate the site before committing the capital",
+      "subtitle": "Warehouse automation \u00b7 decision brief",
+      "notes": {
+        "say": "The quote is budgetary. The economics make site validation worth doing, but do not settle the investment decision."
+      },
+      "data_status": "illustrative"
+    },
+    {
+      "type": "table",
+      "title": "Maintenance reduces the saving available to repay capital",
+      "columns": [
+        "Economic input",
+        "INR crore"
+      ],
+      "rows": [
+        [
+          "Upfront capital",
+          "{=capex}"
+        ],
+        [
+          "Annual labour saving",
+          "{=saving}"
+        ],
+        [
+          "Annual maintenance",
+          "{=maintenance}"
+        ],
+        [
+          "Annual net saving",
+          "{=net}"
+        ]
+      ],
+      "total_row": true,
+      "note": "Illustrative inputs. Simple annual cash view; discounting, taxes and demand effects excluded.",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "big_number",
+      "value": "{=payback|.1f} years",
+      "label": "simple payback at the supplied annual savings",
+      "context": "This is a scenario calculation, not an investment appraisal.",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "table",
+      "title": "The untested assumptions belong beside the decision",
+      "columns": [
+        "Question",
+        "Readiness"
+      ],
+      "rows": [
+        [
+          "Site feasibility",
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "Assessment not performed"
+          }
+        ],
+        [
+          "Discounted return",
+          {
+            "kind": "status",
+            "status": "unknown",
+            "label": "Discount rate missing"
+          }
+        ],
+        [
+          "Quote certainty",
+          {
+            "kind": "status",
+            "status": "amber",
+            "label": "Budgetary only"
+          }
+        ]
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "closing",
+      "title": "Commission site validation before approving the investment",
+      "ask": "Return with a firm scope, site constraints and discounted downside case.",
+      "data_status": "illustrative"
+    }
+  ]
+}

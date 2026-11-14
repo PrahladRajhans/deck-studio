@@ -2,7 +2,7 @@
 
 One spec drives both builders: the HTML draft during iteration and the native PPTX after approval.
 Loading, facts, checks, tokens and validation live in `scripts/spec_io.py` and behave identically in both. Run
-`python3 scripts/build_deck.py --schema` for the authoritative field list (44 slide types plus `custom`,
+`python3 scripts/spec_io.py --schema` for the authoritative field list (44 slide types plus `custom`,
 11 chart kinds). This page explains how to use it well. Worked examples in `assets/examples/`:
 `case-comp.json` (document, recommendation, every number from `facts`), `personal-story.json`
 (talk, interview), `showcase-new-types.json` (every newer type on one grid), `stress-all-types.json`
@@ -178,3 +178,15 @@ when text was measured with a substitute font. Warnings flag label titles, missi
 sources and notes, the same type three times running (a prompt, not a ban), agenda in talk mode, asks without a number
 or cost, FAQ fragments, risks without mitigation, scorecards that contradict the recommendation,
 dual-scale series and the same data charted twice.
+
+## Workflow and component extensions
+
+Choose `assurance` by claim consequence, following evidence-policy.md. Fact tokens inherit source links
+through calculated dependencies; semantic review of claim strength remains necessary. Unused research
+gaps remain advisory. Use `spec_io.py --schema` and `spec_io.py spec.json --outline` independently of
+the PPTX libraries. Existing build_deck.py commands remain supported.
+
+Optional per-slide `seconds` overrides estimated speaking time. `table` supports structured status and
+Harvey cells plus `base_cell`; `process` supports labelled metrics; `columns` supports bundled Feather
+icons. Layout annotations refer to actual named PPTX shapes. See visual-components.md for fields,
+semantics and examples, and workflow.md for commands and renderer limitations.

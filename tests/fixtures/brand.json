@@ -1,0 +1,16 @@
+{
+  "brief": "A student club pitches a night-time arts festival to potential sponsors. Make the concept belong to the festival, with a clear ask. Voice: Give people a reason to stay after the last performance.",
+  "material": {
+    "festival_name": "After Hours",
+    "sponsorship_ask": 500000,
+    "currency": "INR",
+    "attendance_last_year": null,
+    "photos": [],
+    "offer": [
+      "A sponsor-supported late-night making space",
+      "An opt-in workshop with student artists"
+    ],
+    "constraints": "No rights-cleared photos, audience-size data or sponsor ROI evidence supplied. Use typographic or conceptual artwork, never invented event photography.",
+    "illustrative": true
+  }
+}

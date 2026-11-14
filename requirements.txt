@@ -2,3 +2,4 @@ python-pptx>=1.0
 Pillow>=10.0
 matplotlib>=3.8
 playwright>=1.40
+CairoSVG>=2.7

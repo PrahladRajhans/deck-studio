@@ -1,0 +1,56 @@
+{
+  "title": "incomplete fixed-packet benchmark",
+  "direction": "consulting-navy",
+  "mode": "talk",
+  "minutes": 10,
+  "footer": "Illustrative benchmark \u00b7 fixed source packet",
+  "illustrative_authorized": true,
+  "brief": {
+    "packet": "tests/fixtures/incomplete.json"
+  },
+  "facts": {
+    "interviews": 3
+  },
+  "fact_meta": {
+    "interviews": {
+      "kind": "illustrative"
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Market entry remains an open decision",
+      "subtitle": "Evidence gaps constrain the recommendation",
+      "data_status": "illustrative"
+    },
+    {
+      "type": "statement",
+      "claim": "The interviews suggest questions to test",
+      "points": [
+        "{=interviews} convenience-sample interviews cannot establish market demand.",
+        "Willingness to pay has not been tested."
+      ],
+      "data_status": "illustrative"
+    },
+    {
+      "type": "table",
+      "title": "The sizing and competitive questions remain unanswered",
+      "columns": [
+        "Decision input",
+        "Status"
+      ],
+      "rows": [
+        [
+          "Market size",
+          "[TBD]"
+        ],
+        [
+          "Competitor share",
+          "[TBD]"
+        ]
+      ],
+      "note": "Draft only. Obtain credible sizing and competitor evidence before a release-ready recommendation.",
+      "data_status": "illustrative"
+    }
+  ]
+}

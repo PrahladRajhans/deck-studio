@@ -1,23 +1,7 @@
-# Frameworks: plan, decide, select, build, check
+# Brief and reasoning tools
 
-The Deck Framework (from the Gamma Design Playbook) runs as six stages with five gates. The
-user's approval of a cheap HTML draft (Gate 5) sits between the work and the expensive final
-build. This file gives each stage its working tool: a canvas to fill, a rule to decide, a
-checklist to pass.
-
-```
-PLAN ─g1─▶ DECIDE ─g2─▶ SELECT ─g3─▶ DRAFT (HTML) ─g4─▶ REVIEW + ITERATE ─g5: user approves─▶ FINALISE ─▶ DELIVER
-brief       archetype,    direction,     notes first,       render, ten-point check,     PPTX / Slides /
-ghost deck  structure,    frame,         build order,       voice read-aloud, show the   Gamma / Canva /
-headline    skeleton      imagery        facts model,       user, change the spec,       HTML; final QA
-test                      (previews)     human voice        repeat                       on the real file
-```
-
-Why the order: content, visuals and the skeleton change most while iterating, and every change
-is a one-line spec edit plus a rebuild of the draft in seconds. Deferring PPTX, Gamma or Canva production can reduce rework and, for generators, credit use.
-The token and time advantage depends on the workflow and has not been measured here. So it happens once, on settled content.
-
----
+Use the relevant section at intake or storyline work. SKILL.md owns the stage order and gates;
+creative-direction.md owns concept exploration; visual-language.md owns theme and grid defaults.
 
 ## 1. Planning framework: the brief canvas
 
@@ -78,65 +62,6 @@ legitimate), or say the material is not ready and offer a one-page issue summary
 5. **Ghost deck**: one line per slide, in order. Lines may be premises, facts or questions as well
    as answers; read in sequence they form one speech.
 
-**Gate 1 (headline test).** Read only the titles: they tell the whole story and land the answer
-(document mode) or follow the purposefully chosen reveal (talk mode). Analytical evidence titles normally pass both tests; teaching, navigation and facilitation may
-use deliberate questions or labels. Evidence-title tests:
-(a) a sceptic could say "I disagree"; (b) hide the body and the title still carries the point.
-
-## 3. Selection framework
-
-Develop the concept first (creative-direction.md), then select the system that can express it.
-Judge choices against the brief and content, while using visual taste to make the result coherent. Write the one-line rationale (Gate 3).
-
-| Choice | Decide by | Tool |
-|---|---|---|
-| Final format (confirmed at Gate 5) | Format named? numbers must tie? image-led? team edits? | decision-trees.md T1 |
-| Archetype + skeleton | What the room must do | T3, deck-skeletons.md |
-| Story structure | Seniority, scepticism, live or read | T4 |
-| Slide types | Shape of each piece of evidence | T6, slide-library.md |
-| Chart forms | Comparison type | T7 |
-| Direction | Formality × energy × brand × medium | T8, visual-language.md §1 |
-| Frame + cover | Document length, register | T9 |
-| Imagery | Real photographs available? | T10 |
-| Density | Mode + audience tolerance | T2 table |
-
-**Show, don't tell.** Explore a few distinct concepts on real content when direction is open.
-Test an evidence slide and an explanation or comparison, plus an opener where useful.
-`preview_directions.py` compares themes only; it does not substitute for concept exploration.
-Recommend one, or show options when the preference is consequential. Avoid repeating approval gates.
-
-**Showcase first.** For a section of 4+ similar slides, build one, render it, look, then build the
-rest.
-
-## 4. Skeleton framework: build order and anatomy
-
-Build order: content slides → executive summary (from the finished content; rows `ref` the slides)
-→ agenda / dividers → cover and close → appendix (backup for every number a judge might challenge).
-
-Default anatomy for analytical document evidence (adapt composition to the slide's job;
-claim, evidence, scope and implication matter more than separate boxes for each):
-
-| Zone | Rule |
-|---|---|
-| Kicker | section name, small tracked caps; quiet wayfinding |
-| Title | one full-sentence assertion, ≤ 2 lines; optional `letter` prefix for a chapter's key exhibits |
-| Subtitle (optional) | scope or method in one line |
-| Exhibit label | "Exhibit N · what it shows (unit)" |
-| Exhibit | the one chart / table / diagram / picture that proves the title |
-| Side panel (optional) | interpretation beside the evidence when useful; distinguish explanation from hypothesis |
-| So-what | the implication or decision; the accent appears here and on the highlighted data only |
-| Footnotes (optional) | numbered, tied to ¹ ² ³ markers at the claim |
-| Source | real source; or "Source: to be added" |
-| Tag (optional) | "Illustrative" / "Non-exhaustive" when the exhibit is a sample |
-| Footer + page | constant across the deck |
-
-Talk-mode anatomy: a clear focal point and an intentional reading or reveal order. A short
-headline, one large figure or a few lines often works; an annotated mechanism or demonstration
-may need another form. Keep it readable and put supporting depth in the notes.
-
-Notes anatomy (every slide): `[~N sec]` → spoken script (2-5 sentences, point first, each figure
-with its source in the sentence) → "For the presenter, not to be read out": assumptions to confirm,
-sources, likely questions with short answers.
 
 ## 5. Checks and balances (built into the workflow)
 
@@ -166,17 +91,3 @@ sources, likely questions with short answers.
 | Machine-sounding text | human-voice.md rules; `style` prompts; `style_review` / `style_rhythm` | builders, lint, read-aloud |
 | Expensive rework | final format built only after the draft is approved | Gate 5 |
 | Draft promises what the final can't do | draft uses the final direction and fonts; final QA on the real file | routes.md §E, Stage 6 |
-
-## 6. Review framework (rounds)
-
-1. **Self-check pass** (on the draft, then again on the final file): render → look at every
-   slide → lint (final) → ten-point check (qa.md). Fix.
-2. **Fresh-eye pass** (high stakes): a separate agent with only the PNGs and the brief; triage each
-   finding (adopt / reject with reason / ask the user); apply; rebuild.
-3. **User round** (draft): show the draft, collect changes, apply them to the spec, rebuild.
-   Repeat until the user approves. Content and structure come first, look second.
-4. **Stop rule**: stop when a full pass finds nothing new. Report: number of findings, adopted
-   changes, remaining concerns, in three lines. Ask before another round.
-5. **Three fixes on the same defect without success**: stop patching; change the slide type or
-   split the content.
-6. **No soft language for defects**: "slightly tight", "nearly overlapping" means fix it.

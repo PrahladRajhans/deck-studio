@@ -1,0 +1,178 @@
+{
+  "footer": "Illustrative benchmark \u00b7 supplied fictional packet",
+  "illustrative_authorized": true,
+  "mode": "talk",
+  "title": "Before we take credit",
+  "direction": "editorial-warm",
+  "minutes": 6,
+  "brief": {
+    "final_destination": "HTML review draft",
+    "creative_brief": {
+      "central_tension": "Sales rose as both advertising and price moved.",
+      "concept": "Hold two explanations side by side, then leave causal credit deliberately unassigned.",
+      "choice": "A split evidence frame: what moved / what can be inferred."
+    },
+    "voice": "Candid brand-team peer"
+  },
+  "facts": {
+    "reach": 1000000,
+    "clicks": 20000,
+    "before": 1000,
+    "during": 1200,
+    "old_price": 100,
+    "new_price": 90,
+    "ctr": "=clicks/reach*100",
+    "uplift": "=pct(before,during)",
+    "price_change": "=pct(old_price,new_price)",
+    "price_drop": "=-price_change"
+  },
+  "fact_meta": {
+    "reach": {
+      "kind": "illustrative"
+    },
+    "clicks": {
+      "kind": "illustrative"
+    },
+    "before": {
+      "kind": "illustrative"
+    },
+    "during": {
+      "kind": "illustrative"
+    },
+    "old_price": {
+      "kind": "illustrative"
+    },
+    "new_price": {
+      "kind": "illustrative"
+    },
+    "ctr": {
+      "kind": "calculated"
+    },
+    "uplift": {
+      "kind": "calculated"
+    },
+    "price_change": {
+      "kind": "calculated"
+    },
+    "price_drop": {
+      "kind": "calculated"
+    }
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Festive campaign review",
+      "title": "Sales moved. Before we take credit, check what else changed.",
+      "subtitle": "A performance readout with causal credit still open.",
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Sales moved. Before we take credit, check what else changed.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "title": "Sales rose {=uplift|.0f}% across the same store set",
+      "chart": {
+        "kind": "column",
+        "categories": [
+          "Before",
+          "During"
+        ],
+        "series": [
+          {
+            "name": "Units sold",
+            "values": "=[before,during]"
+          }
+        ],
+        "min": 0,
+        "alt": "Illustrative unit sales in adjacent equal-length periods"
+      },
+      "exhibit": "Unit sales \u00b7 adjacent equal-length periods",
+      "source": "Fixed packet: tests/fixtures/marketing.json, material.tracking",
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Sales rose {=uplift|.0f}% across the same store set",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "data_contrast",
+      "title": "Price was {=price_drop|.0f}% lower during the campaign",
+      "items": [
+        {
+          "value": "{=old_price}",
+          "label": "Before",
+          "detail": "Price per unit; currency not supplied"
+        },
+        {
+          "value": "{=new_price}",
+          "label": "During",
+          "detail": "Price per unit; currency not supplied"
+        }
+      ],
+      "notes": {
+        "say": "Price fell by ten percent. Without a control group, we cannot tell how much of the unit change came from price."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Price was {=price_drop|.0f}% lower during the campaign",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "columns",
+      "title": "Attention is measured; incrementality is not",
+      "columns": [
+        {
+          "icon": "feather:activity",
+          "heading": "Observed attention",
+          "points": [
+            "{=reach|,} reach",
+            "{=clicks|,} clicks",
+            "{=ctr|.1f}% click-through rate"
+          ]
+        },
+        {
+          "icon": "feather:help-circle",
+          "heading": "Unassigned credit",
+          "body": "No control group separates campaign and price effects."
+        }
+      ],
+      "source": "Fixed packet: tests/fixtures/marketing.json, material",
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Attention is measured; incrementality is not",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Keep the uplift. Test the explanation.",
+      "ask": "Use a controlled comparison before claiming incremental sales.",
+      "notes": {
+        "say": "The campaign may have helped. This packet cannot estimate how much."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Keep the uplift. Test the explanation.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    }
+  ]
+}

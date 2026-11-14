@@ -655,9 +655,30 @@ def deck_voice(titles: list[str], list_lengths: list[int]) -> list[str]:
     return msgs
 
 
+def visible_html_text(markup):
+    """Visible text approximation for editorial review, excluding code and hidden templates."""
+    from html.parser import HTMLParser
+    class Text(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.parts, self.hidden = [], 0
+        def handle_starttag(self, tag, attrs):
+            if tag in {'script', 'style', 'template'}:
+                self.hidden += 1
+        def handle_endtag(self, tag):
+            if tag in {'script', 'style', 'template'}:
+                self.hidden = max(0, self.hidden - 1)
+        def handle_data(self, text):
+            if not self.hidden:
+                self.parts.append(text)
+    parser = Text()
+    parser.feed(markup)
+    return ' '.join(parser.parts)
+
+
 _VOICE_SKIP = {"notes", "quote", "code", "path", "image", "photo", "alt", "id", "type", "style", "kind",
                "direction", "frame", "source", "credit", "icon", "state", "status", "number_format",
-               "_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions", "evidence_ids", "data_status", "voice_ok", "role", "question"}
+               "_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions", "evidence_ids", "data_status", "voice_ok", "role", "question", "pptx_note", "layout_review"}
 
 
 def slide_strings(s, skip=_VOICE_SKIP):
@@ -665,10 +686,16 @@ def slide_strings(s, skip=_VOICE_SKIP):
     if s.get("type") in ("references", "code") if isinstance(s, dict) else False:
         return
     if isinstance(s, dict):
+        if s.get('type') == 'custom' and s.get('full_bleed'):
+            yield visible_html_text(s.get('html', ''))
+            return
         for k, v in s.items():
             if k in skip:
                 continue
-            yield from slide_strings(v, skip)
+            if k == 'html' and isinstance(v, str):
+                yield visible_html_text(v)
+            else:
+                yield from slide_strings(v, skip)
     elif isinstance(s, list):
         for v in s:
             yield from slide_strings(v, skip)
@@ -713,12 +740,23 @@ LIGHT_TYPES = ("cover", "divider", "agenda", "closing")
 
 
 def slide_seconds(spec: dict, s: dict):
-    """Time budget per slide from deck `minutes`, shared by both builders: light slides (cover, divider,
-    agenda, closing) get ~8 s, the rest share the slot after a 10% reserve for overrun and changeover."""
+    """Explicit rehearsal timings win; otherwise estimate from role and complexity.
+
+    These are planning estimates, not a measurement of speaking speed. Never change
+    explicit timings to make the slot appear to fit.
+    """
+    if s.get("seconds") is not None:
+        return s["seconds"]
     mins = spec.get("minutes")
     if not mins:
         return None
-    n_body = sum(1 for sl in spec["slides"] if sl.get("type") not in LIGHT_TYPES)
-    n_light = len(spec["slides"]) - n_body
-    budget = mins * 60 * 0.9 - n_light * 8
-    return 8 if s.get("type") in LIGHT_TYPES else max(10, int(round(budget / max(1, n_body) / 5.0) * 5))
+    if s.get("type") in LIGHT_TYPES:
+        return 8
+    weights = {"chart": 2.0, "options": 2.0, "table": 1.6, "process": 1.4,
+               "custom": 1.4, "big_number": 0.6, "statement": 0.6}
+    pending = [sl for sl in spec["slides"] if sl.get("seconds") is None and sl.get("type") not in LIGHT_TYPES]
+    fixed = sum(sl["seconds"] for sl in spec["slides"] if sl.get("seconds") is not None)
+    lights = sum(sl.get("seconds") is None and sl.get("type") in LIGHT_TYPES for sl in spec["slides"])
+    budget = max(0, mins * 60 * 0.9 - fixed - lights * 8)
+    denominator = sum(weights.get(sl.get("type"), 1.0) for sl in pending) or 1
+    return max(10, int(round(budget * weights.get(s.get("type"), 1.0) / denominator / 5) * 5))

@@ -162,7 +162,7 @@ def figures_report(path: str):
     return out
 
 
-def lint(path: str, mode: str = "document"):
+def lint(path: str, mode: str = "document", spec=None):
     prs = Presentation(path)
     sw, sh = prs.slide_width, prs.slide_height
     findings = []
@@ -271,6 +271,13 @@ def lint(path: str, mode: str = "document"):
         if mode == "talk" and title and not guessed and len(title) > 60 and idx != 1 and not is_quote:
             add(idx, "info", "long_talk_title", f"{len(title)} characters: a talk headline reads in one glance "
                 "(aim under 55)")
+        from geometry_checks import review
+        annotations = (spec or {}).get('slides', [])
+        annotation = annotations[idx-1].get('layout_review') if idx <= len(annotations) else None
+        shape_boxes = [(sp.name, sp.left or 0, sp.top or 0, sp.width or 0, sp.height or 0) for sp in slide.shapes]
+        geometry_findings, allowed = review(shape_boxes, annotation, points_per_unit=72/EMU_IN)
+        for code, message in geometry_findings:
+            add(idx, 'warn', code, message)
         for i in range(len(boxes)):
             for j in range(i + 1, len(boxes)):
                 a, b = boxes[i], boxes[j]
@@ -281,7 +288,7 @@ def lint(path: str, mode: str = "document"):
                               a[2] + a[4] >= b[2] + b[4]) or \
                              (b[1] <= a[1] and b[2] <= a[2] and b[1] + b[3] >= a[1] + a[3] and
                               b[2] + b[4] >= a[2] + a[4])
-                    if not inside:
+                    if not inside and frozenset((a[0], b[0])) not in allowed:
                         add(idx, "warn", "text_overlap", f"'{a[0]}' and '{b[0]}' overlap")
         # half-empty: lowest content shape ends above 60% of the slide height (chrome excluded)
         content_bottoms = [(sp.top or 0) + (sp.height or 0) for sp in slide.shapes
@@ -384,6 +391,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pptx")
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--spec", help="optional source spec for named layout annotations")
     ap.add_argument("--mode", choices=["document", "talk"], default="document")
     ap.add_argument("--figures", action="store_true",
                     help="print every figure per slide (tie-out worksheet) and exit")
@@ -394,7 +402,11 @@ def main():
         for idx, line in figures_report(a.pptx):
             print(f"  slide {idx:>2}  {line}")
         sys.exit(0)
-    findings, titles = lint(a.pptx, a.mode)
+    spec = None
+    if a.spec:
+        with open(a.spec, encoding="utf-8") as fh:
+            spec = json.load(fh)
+    findings, titles = lint(a.pptx, a.mode, spec)
     if a.json:
         print(json.dumps({"findings": findings, "titles": titles}, indent=2, ensure_ascii=False))
     else:

@@ -48,7 +48,9 @@ there, and report which application rendered what you inspected.
 | offslide_shape | warn | shape past the slide edge (rotation-aware) |
 | text_overflow | warn | text needs more height than its box (font-metric estimate) |
 | body_below_floor | warn | body < 12pt, small print < 9pt |
-| text_overlap | warn | two text boxes overlap |
+| text_overlap | warn | two text boxes overlap; pair-specific inspected layering may be annotated via --spec |
+| alignment | warn | named group differs beyond its declared tolerance |
+| layout_annotation | warn | malformed or unmatched layout annotation; no exception granted |
 | low_contrast | warn | text vs what is behind it below 4.5:1 (3:1 for ≥ 18pt, or ≥ 14pt bold) |
 | duplicate_titles | warn | two slides share a title |
 | too_many_bullets | warn | > 7 paragraphs in a box |
@@ -128,7 +130,7 @@ Document: the answer is first; every non-exempt title passes both assertion test
 form; evaluative words are backed on the same slide; later slides add rather than restate; the
 summary claims nothing the body contradicts; the last body slide asks for a decision or action.
 
-Talk: no slide over one headline + 3-4 lines; no two figures or two emphases on a slide; questions lead to a useful explanation, task or explicit investigation; revisiting a question
+Talk: aim for a clear focal point and a digestible amount of content; use multiple figures when their comparison is the point; questions lead to a useful explanation, task or explicit investigation; revisiting a question
 adds understanding rather than merely repeating it;
 an agenda only if it orients, and the reveal (answer first or progressive) chosen on purpose;
 headline forms fit their roles; retain repetition when it supports comparison or learning;

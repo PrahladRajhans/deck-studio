@@ -655,9 +655,30 @@ def deck_voice(titles: list[str], list_lengths: list[int]) -> list[str]:
     return msgs
 
 
+def visible_html_text(markup):
+    """Visible text approximation for editorial review, excluding code and hidden templates."""
+    from html.parser import HTMLParser
+    class Text(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.parts, self.hidden = [], 0
+        def handle_starttag(self, tag, attrs):
+            if tag in {'script', 'style', 'template'}:
+                self.hidden += 1
+        def handle_endtag(self, tag):
+            if tag in {'script', 'style', 'template'}:
+                self.hidden = max(0, self.hidden - 1)
+        def handle_data(self, text):
+            if not self.hidden:
+                self.parts.append(text)
+    parser = Text()
+    parser.feed(markup)
+    return ' '.join(parser.parts)
+
+
 _VOICE_SKIP = {"notes", "quote", "code", "path", "image", "photo", "alt", "id", "type", "style", "kind",
                "direction", "frame", "source", "credit", "icon", "state", "status", "number_format",
-               "_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions", "evidence_ids", "data_status", "voice_ok", "role", "question"}
+               "_raw", "_raw_text", "claims", "non_factual_reason", "number_exceptions", "evidence_ids", "data_status", "voice_ok", "role", "question", "pptx_note", "layout_review"}
 
 
 def slide_strings(s, skip=_VOICE_SKIP):
@@ -665,10 +686,16 @@ def slide_strings(s, skip=_VOICE_SKIP):
     if s.get("type") in ("references", "code") if isinstance(s, dict) else False:
         return
     if isinstance(s, dict):
+        if s.get('type') == 'custom' and s.get('full_bleed'):
+            yield visible_html_text(s.get('html', ''))
+            return
         for k, v in s.items():
             if k in skip:
                 continue
-            yield from slide_strings(v, skip)
+            if k == 'html' and isinstance(v, str):
+                yield visible_html_text(v)
+            else:
+                yield from slide_strings(v, skip)
     elif isinstance(s, list):
         for v in s:
             yield from slide_strings(v, skip)

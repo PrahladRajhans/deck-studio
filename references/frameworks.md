@@ -91,4 +91,3 @@ legitimate), or say the material is not ready and offer a one-page issue summary
 | Machine-sounding text | human-voice.md rules; `style` prompts; `style_review` / `style_rhythm` | builders, lint, read-aloud |
 | Expensive rework | final format built only after the draft is approved | Gate 5 |
 | Draft promises what the final can't do | draft uses the final direction and fonts; final QA on the real file | routes.md §E, Stage 6 |
-

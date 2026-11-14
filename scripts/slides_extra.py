@@ -97,8 +97,8 @@ class ExtraMixin:
     def badge(self, slide, x, y, d, text, fill, color="FFFFFF", size=None, font=None):
         self.rect(slide, x, y, d, d, fill=fill, shape=MSO_SHAPE.OVAL)
         if str(text).startswith('feather:'):
-            from icons import png
-            image = slide.shapes.add_picture(png(text, color), Inches(x + d * .2), Inches(y + d * .2),
+            from icons import png, foreground
+            image = slide.shapes.add_picture(png(text, foreground(fill)), Inches(x + d * .2), Inches(y + d * .2),
                                              width=Inches(d * .6), height=Inches(d * .6))
             image.name = 'Icon ' + text
             image._element.nvPicPr.cNvPr.set('descr', text.split(':', 1)[1].replace('-', ' '))

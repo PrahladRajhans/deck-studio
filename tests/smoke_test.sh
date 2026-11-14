@@ -25,7 +25,7 @@ for f in "$HERE"/assets/examples/*.json; do
 done
 # Creative concept demonstrations use custom HTML compositions. Native PPTX needs
 # deliberate reconstruction after approval, so do not count placeholder builds as success.
-for f in "$HERE"/assets/creative-examples/*.json; do
+for f in "$HERE"/assets/creative-examples/*.json "$HERE"/assets/forward-tests/*.json; do
   [ -f "$f" ] || continue
   b="creative-$(basename "$f" .json)"
   python3 "$S/build_html.py" "$f" --strict -o "$OUT/$b.html" > "$OUT/$b.html.log" \

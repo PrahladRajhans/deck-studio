@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from _common import SpecError
 from visual_elements import table_cell, process_body
 from geometry_checks import review
-from icons import svg
+from icons import svg, foreground
 from spec_io import load_spec
 from build_html import HtmlDeck
 
@@ -36,6 +36,8 @@ class VisualRevision(unittest.TestCase):
         self.assertEqual(len(list((ROOT/'assets/icons/feather').glob('*.svg'))),12)
         self.assertIn('MIT', (ROOT/'assets/icons/feather/LICENSE').read_text())
         self.assertIn('#123ABC',svg('feather:clock','123ABC'))
+        self.assertEqual(foreground('FFFFFF'),'000000')
+        self.assertEqual(foreground('000000'),'FFFFFF')
         for name in ('feather:../../secret','clock','feather:missing'):
             with self.assertRaises(SpecError): svg(name)
         with self.assertRaises(SpecError): svg('feather:clock','red;opacity:0')
@@ -78,6 +80,15 @@ class VisualRevision(unittest.TestCase):
         self.assertIn('(base)',doc)
         self.assertIn('Volume: 100 items',doc)
         self.assertNotIn("'kind': 'status'",doc)
+
+    def test_full_stage_copy_review_ignores_planning_and_html_code(self):
+        from _common import slide_strings
+        slide = {'type':'custom','full_bleed':True,'title':'Planning title hidden',
+                 'html':'<h1 style="font-size:100px">Visible claim</h1><style>.thing {color:red}</style><template>Hidden notes</template>',
+                 'pptx_note':'Rebuild these editable objects with exact coordinates',
+                 'layout_review':{'alignment_groups':[{'shapes':['Metadata A','Metadata B'],'edge':'top'}]}}
+        text=' '.join(slide_strings(slide))
+        self.assertEqual(text.strip(),'Visible claim')
 
     def test_native_components_remain_editable(self):
         try:

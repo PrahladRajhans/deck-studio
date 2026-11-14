@@ -7,7 +7,7 @@ Its working rule: **settle content, visuals and the slide skeleton in a fast HTM
 the PowerPoint (or Slides, Gamma, Canva) only after the user approves.**
 
 ```
-Plan → Decide → Select → Draft (HTML) → Review and iterate → [user approves] → Finalise
+Intake → Storyline → Creative direction → Draft (HTML) → Review and iterate → [user approves] → Finalise
 ```
 
 `SKILL.md` is the entry point Claude reads. Everything else is loaded when needed.
@@ -21,11 +21,14 @@ use the whole stage, with explicit final-format reconstruction limits.
 
 | Path | What it is |
 |---|---|
-| `SKILL.md` | The method: truth rules, the draft-first rule, six stages with gates, commands, anti-patterns |
+| `SKILL.md` | Concise stage router, selective reference loading and approval gates |
+| `references/visual-components.md` | Visual grammar, icons, richer tables/processes, scenario charts and named alignment annotations |
+| `references/evidence-policy.md` | Risk-based assurance, inherited provenance and unused research history |
+| `references/workflow.md` | Commands, timings, fallback controls and destination limits |
 | `references/creative-direction.md` | Concept development, creative moves, sequence, voice and distinctiveness review |
 | `references/domain-packs.md` | What consulting, finance, marketing, energy, science/health, technology, policy and teaching decks must prove |
 | `references/decision-trees.md` | T0-T11: job type, final format, mode, use case, structure, length, slide type, chart form, direction, frame, imagery, when to ask |
-| `references/frameworks.md` | Brief canvas, decision structures, selection, skeleton and anatomy, checks and balances, review rounds |
+| `references/frameworks.md` | Brief canvas, decision structures, checks and balances |
 | `references/deck-skeletons.md` | 40+ deck skeletons by situation |
 | `references/slide-library.md` | The 44 slide types: use, avoid, limits |
 | `references/visual-language.md` | 22 art directions, frames, covers, colour, type, grid, imagery, charts, anti-slop |
@@ -45,13 +48,16 @@ use the whole stage, with explicit final-format reconstruction limits.
 | `scripts/render.py` | PPTX → PNGs and a contact sheet (LibreOffice) |
 | `scripts/lint_deck.py` | Lints any .pptx, including Gamma and Canva exports |
 | `scripts/preview_directions.py` | The same slides in several art directions, side by side |
-| `scripts/chart_images.py` | Mekko, slope, dumbbell, heatmap and bullet charts as images |
+| `scripts/chart_images.py` | Mekko, slope, dumbbell, heatmap, bullet, tornado and sensitivity charts as images |
 | `assets/examples/*.json` | Worked example specs (all fictional or illustrative data) |
 | `assets/examples/drafts/` | HTML drafts built from those specs, with contact sheets |
 | `assets/creative-examples/queue-review.json` | A fictional concept-led HTML example with an exact counted display and a proposed test |
 | `assets/html-stage/stage-template.html` | Hand-built HTML stage for layouts beyond the 44 types |
 | `tests/smoke_test.sh` | Builds every example (draft and strict PPTX), renders both, lints, runs unit tests; run by GitHub Actions on each push |
 | `tests/test_core.py` | Unit tests: arithmetic edge cases, validation, style exemptions, builder independence |
+| `tests/fixtures/` | Fixed evidence packets for reproducible evaluation |
+| `assets/benchmarks/` | Authored benchmark regression decks, including a draft-only missing-evidence case |
+| `assets/forward-tests/` | Independently generated Codex drafts, not proof of Claude execution |
 | `tests/benchmark-briefs.md` | Ten contrasting briefs and a scoring rubric for judging the skill's output |
 
 ## Try it

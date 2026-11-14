@@ -1,0 +1,109 @@
+{
+  "title": "After Hours \u00b7 space after the show",
+  "direction": "editorial-warm",
+  "mode": "talk",
+  "footer": "Illustrative sponsor concept",
+  "illustrative_authorized": true,
+  "facts": {
+    "ask": 500000
+  },
+  "fact_meta": {
+    "ask": {
+      "kind": "illustrative"
+    }
+  },
+  "brief": {
+    "destination": "HTML review draft, later native editable PowerPoint after approval",
+    "voice": "Student club proposer, direct and inviting",
+    "creative_brief": {
+      "tension": "The festival ends on stage, but the supplied idea is to keep creativity going in a making space.",
+      "concept": "A night-time printshop poster: oversized AFTER HOURS typography opens into a proposed stay-and-make experience, with acid-yellow light on a dark stage.",
+      "candidates": [
+        "Photographic night diary: rejected because no rights-cleared photos exist",
+        "Sponsor logo wall: rejected because no partners or rights are supplied",
+        "Printshop poster and experience threshold: selected; all visuals can be native text and shapes"
+      ],
+      "grammar": "Black, warm paper and acid yellow; Arial; large left-set type; thin rules; one outline circle as conceptual spotlight, never documentary evidence.",
+      "substantive_test": "The same visual grammar explains the making space, opt-in workshop and support ask without invented attendance or ROI.",
+      "fidelity": "Native text/rules/circles feasible; no automatic custom HTML to PPTX conversion."
+    }
+  },
+  "slides": [
+    {
+      "type": "custom",
+      "full_bleed": true,
+      "title": "Give people a reason to stay.",
+      "html": "<div style=\"position:relative;width:1920px;height:1080px;padding:105px 120px;box-sizing:border-box;font-family:Arial,sans-serif;background:#151515;color:#F4F0E6\"><p style=\"font-size:28px;letter-spacing:5px;margin:0\">A STUDENT ARTS FESTIVAL \u00b7 SPONSOR PROPOSAL</p><div style=\"position:absolute;right:125px;top:240px;width:490px;height:490px;border:2px solid #E3FF55;border-radius:50%\"></div><h1 style=\"position:relative;font-size:180px;line-height:.86;letter-spacing:-10px;margin:90px 0 45px;color:#E3FF55\">AFTER<br>HOURS</h1><p style=\"font-size:48px;line-height:1.15;margin:0;max-width:1350px\">Give people a reason to stay.</p></div>",
+      "source": "Fixed packet: tests/fixtures/brand.json, material. All festival proposals and the support amount are illustrative.",
+      "notes": {
+        "say": "The idea is a making space that stays part of the festival after the last performance. This is a proposed sponsorship concept, not a claim about attendance or an existing programme."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Give people a reason to stay.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ],
+      "pptx_note": "Rebuild with native editable text, rules and circles in the same order. Use Arial. No photo reconstruction needed. Preserve visible caveats and source. Retain the HTML as design reference."
+    },
+    {
+      "type": "custom",
+      "full_bleed": true,
+      "title": "Let the night keep making.",
+      "html": "<div style=\"position:relative;width:1920px;height:1080px;padding:105px 120px;box-sizing:border-box;font-family:Arial,sans-serif;background:#E3FF55;color:#151515\"><p style=\"font-size:28px;letter-spacing:4px;margin:0\">THE SPACE WE WANT TO MAKE</p><h1 style=\"font-size:100px;line-height:1;margin:60px 0 90px\">Let the night keep making.</h1><div style=\"display:grid;grid-template-columns:1fr 1.35fr;gap:70px;border-top:4px solid #151515;padding-top:55px\"><div><p style=\"font-size:28px;letter-spacing:3px\">AFTER THE LAST PERFORMANCE</p><div style=\"font-size:105px;font-weight:bold;line-height:1.05;margin-top:45px\">STAY.</div></div><div style=\"border-left:4px solid #151515;padding-left:70px\"><p style=\"font-size:28px;letter-spacing:3px\">A PROPOSED NEXT CHAPTER</p><div style=\"font-size:105px;font-weight:bold;line-height:1.05;margin-top:45px\">MAKE<br>SOMETHING.</div></div></div><p style=\"font-size:33px;position:absolute;bottom:145px\">A sponsor-supported late-night making space.</p></div>",
+      "source": "Fixed packet: tests/fixtures/brand.json, material. All festival proposals and the support amount are illustrative.",
+      "notes": {
+        "say": "The relationship is the point of this composition: after the performance, there can be a place to make something. The exact venue and programme still need agreement. The arrow-free layout proposes an experience sequence, not a measured audience journey."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Let the night keep making.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ],
+      "pptx_note": "Rebuild with native editable text, rules and circles in the same order. Use Arial. No photo reconstruction needed. Preserve visible caveats and source. Retain the HTML as design reference."
+    },
+    {
+      "type": "custom",
+      "full_bleed": true,
+      "title": "Put student artists at the centre.",
+      "html": "<div style=\"position:relative;width:1920px;height:1080px;padding:105px 120px;box-sizing:border-box;font-family:Arial,sans-serif;background:#F4F0E6;color:#151515\"><p style=\"font-size:28px;letter-spacing:4px;margin:0\">THE WORKSHOP</p><h1 style=\"font-size:100px;line-height:1;margin:60px 0 80px;max-width:1500px\">Put student artists<br>at the centre.</h1><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:90px\"><div style=\"border-top:5px solid #151515;padding-top:30px\"><h2 style=\"font-size:52px;margin:0 0 22px\">Artists lead.</h2><p style=\"font-size:38px;line-height:1.3;margin:0\">An opt-in workshop with student artists.</p></div><div style=\"border-top:5px solid #151515;padding-top:30px\"><h2 style=\"font-size:52px;margin:0 0 22px\">People choose.</h2><p style=\"font-size:38px;line-height:1.3;margin:0\">Participation stays voluntary.</p></div></div><p style=\"font-size:29px;position:absolute;bottom:145px;max-width:1530px\">Agree the workshop, venue permissions and materials before promising the programme.</p></div>",
+      "source": "Fixed packet: tests/fixtures/brand.json, material. All festival proposals and the support amount are illustrative.",
+      "notes": {
+        "say": "The supplied offer is an opt-in workshop with student artists. We have not named artists or claimed that anyone has agreed to participate. The programme and feasible materials would be designed with them."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Put student artists at the centre.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ],
+      "pptx_note": "Rebuild with native editable text, rules and circles in the same order. Use Arial. No photo reconstruction needed. Preserve visible caveats and source. Retain the HTML as design reference."
+    },
+    {
+      "type": "custom",
+      "full_bleed": true,
+      "title": "Back the space after the show.",
+      "html": "<div style=\"position:relative;width:1920px;height:1080px;padding:105px 120px;box-sizing:border-box;font-family:Arial,sans-serif;background:#151515;color:#F4F0E6\"><p style=\"font-size:28px;letter-spacing:4px;margin:0;color:#E3FF55\">A PROPOSED SPONSORSHIP ASK</p><h1 style=\"font-size:100px;line-height:1;margin:60px 0\">Back the space<br>after the show.</h1><div style=\"font-size:160px;font-weight:bold;color:#E3FF55;margin:65px 0 25px\">INR {=ask|,}</div><p style=\"font-size:38px;margin:0\">For the proposed making space and artist workshop.</p><div style=\"border-top:2px solid #777;margin-top:65px;padding-top:25px\"><p style=\"font-size:29px;margin:0;max-width:1500px\">Next: agree scope and budget. Audience size and sponsor returns are not established.</p></div></div>",
+      "source": "Fixed packet: tests/fixtures/brand.json, material. All festival proposals and the support amount are illustrative.",
+      "notes": {
+        "say": "We are asking for the supplied proposed amount. The packet does not contain a cost breakdown, audience figures or an ROI estimate, so this is an invitation to scope the sponsorship, not a quantified return promise."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Back the space after the show.",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ],
+      "pptx_note": "Rebuild with native editable text, rules and circles in the same order. Use Arial. No photo reconstruction needed. Preserve visible caveats and source. Retain the HTML as design reference."
+    }
+  ]
+}

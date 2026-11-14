@@ -1,0 +1,173 @@
+{
+  "footer": "Illustrative benchmark \u00b7 supplied fictional packet",
+  "illustrative_authorized": true,
+  "mode": "talk",
+  "title": "The five-year ticket",
+  "direction": "consulting-navy",
+  "assurance": "high",
+  "minutes": 10,
+  "brief": {
+    "final_destination": "HTML draft for review; editable PPTX reconstruction if approved",
+    "voice": "Direct, measured CFO adviser",
+    "creative_brief": {
+      "central_tension": "The stated horizon merely covers upfront capital before discounting.",
+      "concept": "Use a five-year repayment ticket: annual net savings accumulate toward the capital price while the unresolved conditions stay visible.",
+      "alternatives": [
+        "Vendor-quote markup, useful but too little evidence for a full deck",
+        "Gate map, useful for the ask but weaker at explaining economics"
+      ],
+      "choice": "Repayment ticket, with economics as the substantive organising device."
+    }
+  },
+  "facts": {
+    "capex": 50,
+    "labour": 12,
+    "maintenance": 2,
+    "horizon": 5,
+    "net": "=labour-maintenance",
+    "undiscounted": "=net*horizon",
+    "payback": "=capex/net"
+  },
+  "fact_meta": {
+    "capex": {
+      "kind": "illustrative"
+    },
+    "labour": {
+      "kind": "illustrative"
+    },
+    "maintenance": {
+      "kind": "illustrative"
+    },
+    "horizon": {
+      "kind": "illustrative"
+    },
+    "net": {
+      "kind": "calculated"
+    },
+    "undiscounted": {
+      "kind": "calculated"
+    },
+    "payback": {
+      "kind": "calculated"
+    }
+  },
+  "checks": [
+    "net == 10",
+    "undiscounted == capex",
+    "payback == horizon"
+  ],
+  "slides": [
+    {
+      "type": "cover",
+      "eyebrow": "Warehouse automation \u00b7 decision today",
+      "title": "Validate the site before we buy the system",
+      "subtitle": "The savings case has no room for an easy mistake.",
+      "notes": {
+        "say": "I would not approve the capital today. The quote is budgetary, the site has not been assessed, and the stated savings just repay the ticket over the stated horizon."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Validate the site before we buy the system",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Maintenance takes the annual saving to INR {=net} crore",
+      "columns": [
+        "Annual cash input",
+        "INR crore"
+      ],
+      "rows": [
+        [
+          "Labour saving",
+          "{=labour}"
+        ],
+        [
+          "Maintenance cost",
+          "\u2212{=maintenance}"
+        ],
+        [
+          "Net annual saving",
+          "{=net}"
+        ]
+      ],
+      "total_row": true,
+      "source": "Fixed packet: tests/fixtures/executive.json, material",
+      "notes": {
+        "say": "This is the recurring cash view supplied in the packet. It excludes effects we do not have."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Maintenance takes the annual saving to INR {=net} crore",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "custom",
+      "full_bleed": true,
+      "title": "Five years only cover the ticket",
+      "html": "<div style=\"padding:110px;height:100%;background:#0B172A;color:#fff\"><p style=\"font:26px Arial;letter-spacing:3px\">THE TICKET</p><h1 style=\"font:64px Arial;margin:35px 0\">Five years only cover the ticket</h1><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:70px;margin-top:90px\"><div><div style=\"font:110px Arial\">{=capex}</div><p style=\"font:32px Arial\">Upfront \u00b7 INR crore</p></div><div><div style=\"font:110px Arial\">{=undiscounted}</div><p style=\"font:32px Arial\">{=horizon}-year net savings \u00b7 INR crore</p></div></div><p style=\"font:30px Arial;margin-top:80px\">Before discounting, tax and demand effects.</p></div>",
+      "source": "Fixed packet: tests/fixtures/executive.json, material",
+      "pptx_note": "Rebuild as native large text plus two comparison columns; preserve the limitation and no geometric area encoding.",
+      "notes": {
+        "say": "This is the important relationship. At the stated net saving and horizon, we only recover the upfront cost on an undiscounted basis. We have not shown value creation."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Five years only cover the ticket",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "columns",
+      "title": "The quote is a starting point, not an investment case",
+      "columns": [
+        {
+          "icon": "feather:alert-triangle",
+          "heading": "Site feasibility",
+          "body": "Assessment not performed."
+        },
+        {
+          "icon": "feather:help-circle",
+          "heading": "Economic inputs",
+          "body": "Discount rate, demand and tax effects not supplied."
+        }
+      ],
+      "source": "Fixed packet: tests/fixtures/executive.json, material",
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "The quote is a starting point, not an investment case",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    },
+    {
+      "type": "closing",
+      "title": "Ask for validation, not capital approval",
+      "ask": "Return with a site-assessed scope and a discounted downside case.",
+      "notes": {
+        "say": "I would commission the validation work. I cannot name its budget because none was supplied."
+      },
+      "data_status": "illustrative",
+      "claims": [
+        {
+          "text": "Ask for validation, not capital approval",
+          "kind": "illustrative",
+          "status": "reviewed"
+        }
+      ]
+    }
+  ]
+}

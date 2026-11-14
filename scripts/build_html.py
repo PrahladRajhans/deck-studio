@@ -561,8 +561,8 @@ class HtmlDeck:
         for i, c in enumerate(s.get("columns", [])):
             g = GLYPHS.get(c.get("icon", ""), c.get("icon") or str(i + 1))
             if str(g).startswith('feather:'):
-                from icons import svg
-                badge = svg(g, 'FFFFFF')
+                from icons import svg, foreground
+                badge = svg(g, foreground(self.t["accent"] if i == hl else self.t["primary"]))
             else:
                 badge = esc(g)
             cols.append(f'<div class="colx{" hl" if i == hl else ""}"><div class="badge">{badge}</div><h3>{md(c.get("heading", ""))}</h3>'
@@ -765,7 +765,7 @@ class HtmlDeck:
                 if words > 50:
                     self.warn(f"{words} words on a talk slide (aim under 40): move detail to the notes")
             run = (run + [typ])[-3:]
-            if len(run) == 3 and len(set(run)) == 1 and typ not in ("divider",):
+            if len(run) == 3 and len(set(run)) == 1 and typ not in ("divider", "custom"):
                 self.warn(f"'{typ}' three times running: fine for like-for-like comparisons; change it if the "
                           "communication task changed")
             rendered = fn(s)

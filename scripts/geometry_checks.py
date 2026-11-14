@@ -4,7 +4,7 @@ from collections import Counter
 
 
 def review(boxes, annotations=None, points_per_unit=1):
-    annotations = annotations or {}
+    annotations = {} if annotations is None else annotations
     counts = Counter(b[0] for b in boxes)
     unique = {b[0]: b[1:] for b in boxes if counts[b[0]] == 1}
     findings, allowed = [], set()

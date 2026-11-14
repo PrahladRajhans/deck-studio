@@ -1508,7 +1508,7 @@ class Builder(ExtraMixin):
         typ = s.get("type")
         # Review repeated types in context; useful comparison may intentionally repeat.
         self.type_run.append(typ)
-        if len(self.type_run) >= 3 and len(set(self.type_run[-3:])) == 1 and typ not in ("divider",):
+        if len(self.type_run) >= 3 and len(set(self.type_run[-3:])) == 1 and typ not in ("divider", "custom"):
             self.warn(f"third '{typ}' slide in a row: fine for like-for-like comparisons; change it if the "
                       "communication task changed (or merge the slides)")
         if self.talk and typ == "agenda":

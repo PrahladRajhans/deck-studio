@@ -16,6 +16,8 @@ from the internal wiring audit, while preserving creative exploration and existi
 | Linkage checks were manual-only | Standard-library internal-reference/section and local-import-cycle checker, wired into CI | Current bundle passes; deliberate broken references and cyclic modules fail |
 
 Independent source review found the initial nested-session flaw; it was repaired before publication.
+Reused preview directories also discard old comparison inputs before a new run, so a failed or
+shortened preview cannot present the previous comparison as current.
 The environment checker initially tried to measure fonts with absent Pillow; it now reports that
 feature unavailable without crashing or blocking standard-library HTML authoring.
 
@@ -30,7 +32,7 @@ pause/diagnostic outcomes. Do not label an unchecked final ready merely because 
 
 ## Validation record
 
-Local suite: 87 tests, 79 passed and eight renderer-dependency skips. Link checker: 237 pointers,
+Local suite: 88 tests, 80 passed and eight renderer-dependency skips. Link checker: 237 pointers,
 18 modules, no unresolved references or circular local imports. Full CI installs rendering features
 and the optional PyMuPDF fallback, checks readiness, runs every retained example and the two actual
 preview routes, then verifies the upload package. Final CI/source-readback outcomes are recorded on

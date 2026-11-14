@@ -18,6 +18,7 @@ import subprocess
 import sys
 
 from execution import Deadline, ExecutionTimeout, positive_seconds, run_bounded
+from _common import DIRECTIONS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -35,11 +36,20 @@ def main(argv=None):
     deadline = Deadline(a.budget)
     def run(command, **kwargs):
         return run_bounded(command, timeout=deadline.remaining(a.timeout), **kwargs)
+    selected = [value.strip() for value in a.directions.split(',') if value.strip()]
+    if not selected or any(value not in DIRECTIONS for value in selected):
+        ap.error('directions must be nonempty registered direction names')
     os.makedirs(a.out, exist_ok=True)
+    compare = os.path.join(a.out,'compare.png')
+    if os.path.isfile(compare):
+        os.remove(compare)
     rows = []
-    for d in a.directions.split(","):
-        d = d.strip()
+    for d in selected:
         rd = os.path.join(a.out, f"{d}_render")
+        if os.path.isdir(rd):
+            for old in os.listdir(rd):
+                if (old.startswith('slide-') and old.endswith('.png')) or old == 'contact-sheet.png':
+                    os.remove(os.path.join(rd,old))
         if a.pptx:
             pptx = os.path.join(a.out, f"{d}.pptx")
             r = run([sys.executable, os.path.join(HERE, "build_deck.py"), a.spec, "-o", pptx,

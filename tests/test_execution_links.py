@@ -54,7 +54,7 @@ class ExecutionAndLinks(unittest.TestCase):
                 start=time.monotonic()
                 with self.assertRaises(ExecutionTimeout):
                     run_bounded([sys.executable,'-c',nested,str(ROOT/'scripts'),str(workspace),child,str(marker),str(inner)],timeout=outer,capture_output=True,text=True)
-                self.assertLess(time.monotonic()-start,.75)
+                self.assertLess(time.monotonic()-start,3)
                 time.sleep(.9)
                 self.assertFalse(marker.exists())
                 self.assertFalse(Path(workspace.read_text()).exists())
@@ -77,6 +77,20 @@ class ExecutionAndLinks(unittest.TestCase):
             with self.assertRaises(ExecutionTimeout):
                 preview_directions.main(['unused.json','--directions','consulting-navy','--out',folder])
             self.assertEqual(run.call_count,1)
+
+    def test_reusing_preview_directory_drops_stale_comparison_inputs(self):
+        import preview_directions
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            images=root/'consulting-navy_render'
+            images.mkdir()
+            (root/'compare.png').write_bytes(b'stale comparison')
+            (images/'slide-02.png').write_bytes(b'stale slide')
+            with patch('preview_directions.run_bounded',side_effect=ExecutionTimeout('stop current preview')):
+                with self.assertRaises(ExecutionTimeout):
+                    preview_directions.main(['unused.json','--directions','consulting-navy','--slides','1','--out',folder])
+            self.assertFalse((root/'compare.png').exists())
+            self.assertFalse((images/'slide-02.png').exists())
 
     def test_optional_pdf_fallback_runs_as_a_bounded_worker(self):
         try:

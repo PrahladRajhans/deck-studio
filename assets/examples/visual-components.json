@@ -20,7 +20,11 @@
           "body": "Name the intended outcome."
         }
       ],
-      "data_status": "illustrative"
+      "data_status": "illustrative",
+      "source": "Illustrative component data, authored for this regression fixture.",
+      "notes": {
+        "say": "This slide demonstrates a component, not evidence about an actual organisation."
+      }
     },
     {
       "type": "table",
@@ -55,7 +59,11 @@
           }
         ]
       ],
-      "data_status": "illustrative"
+      "data_status": "illustrative",
+      "source": "Illustrative component data, authored for this regression fixture.",
+      "notes": {
+        "say": "This slide demonstrates a component, not evidence about an actual organisation."
+      }
     },
     {
       "type": "table",
@@ -91,7 +99,11 @@
         2
       ],
       "note": "Illustrative outcome; rows vary volume and columns vary price.",
-      "data_status": "illustrative"
+      "data_status": "illustrative",
+      "source": "Illustrative component data, authored for this regression fixture.",
+      "notes": {
+        "say": "This slide demonstrates a component, not evidence about an actual organisation."
+      }
     },
     {
       "type": "process",
@@ -113,7 +125,11 @@
           "conversion": "75% of inspected items"
         }
       ],
-      "data_status": "illustrative"
+      "data_status": "illustrative",
+      "source": "Illustrative component data, authored for this regression fixture.",
+      "notes": {
+        "say": "This slide demonstrates a component, not evidence about an actual organisation."
+      }
     }
   ]
 }

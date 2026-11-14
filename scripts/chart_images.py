@@ -182,7 +182,11 @@ def tornado(ax, t, sp):
     ax.axvline(base, color=_c(t['ink']), linewidth=1)
     ax.set_yticks(ys, [item['label'] for item in items])
     ax.invert_yaxis()
-    ax.margins(x=.2)
+    low = min(item["low"] for item in items)
+    high = max(item["high"] for item in items)
+    span = high-low or max(abs(base), 1)
+    ax.set_xlim(low-span*.18, high+span*.18)
+    ax.tick_params(axis="y", pad=12)
     ax.set_xlabel(sp.get('unit', 'Outcome') + f' · Base {base:g} · one input varied at a time')
 
 

@@ -1,8 +1,8 @@
 """Shared, deterministic table and process semantics for both output formats."""
 from _common import SpecError
 
-STATUS = {'green': ('pos', 'On track'), 'amber': ('accent', 'At risk'),
-          'red': ('neg', 'Off track'), 'unknown': ('muted', 'Unknown')}
+STATUS = {'green': ('rag_green', 'On track'), 'amber': ('rag_amber', 'At risk'),
+          'red': ('rag_red', 'Off track'), 'unknown': ('rag_unknown', 'Unknown')}
 BALLS = ('○', '◔', '◑', '◕', '●')
 
 
@@ -33,3 +33,21 @@ def process_body(step):
         if key in step:
             parts.append(f'{label}: {step[key]}')
     return '\n'.join(parts)
+
+
+def status_color(token, theme, background=None):
+    """Semantic RAG hues, with readable foregrounds on the actual table surface."""
+    palette = {'rag_green': ('157347','75D8A3'), 'rag_amber': ('8A5700','FFD166'),
+               'rag_red': ('B42318','FF9999'), 'rag_unknown': ('52606D','BCC8D3')}
+    bg = background or theme['bg']
+    def lum(h):
+        c = [int(h[i:i+2],16)/255 for i in (0,2,4)]
+        c = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in c]
+        return sum(v*w for v,w in zip(c,(.2126,.7152,.0722)))
+    def ratio(fg):
+        a,b = sorted((lum(fg),lum(bg)))
+        return (b+.05)/(a+.05)
+    for color in palette[token]:
+        if ratio(color) >= 4.5:
+            return color
+    return max(('000000','FFFFFF'), key=ratio)

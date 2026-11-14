@@ -374,7 +374,7 @@ class HtmlDeck:
         return self.chrome(s, self.with_side(s, f'<div class="chart-col">{self.exhibit(s)}<div class="chart">{svg}</div></div>'))
 
     def table_html(self, columns, rows, highlight_row=None, total_row=False, widths=None, base_cell=None):
-        from visual_elements import table_cell
+        from visual_elements import table_cell, status_color
         num = re.compile(r"^[\s(+−-]*[₹$€£]?\s?[\d.,]+\s?(%|x|×|cr|bn|mn|m|k|pp|bps)?\)?\s*$", re.I)
         cols = ""
         if widths:
@@ -393,7 +393,8 @@ class HtmlDeck:
             for j, c in enumerate(r):
                 text, token = table_cell(c)
                 base = base_cell == [i, j]
-                style = f' style="color:#{self.t[token]}"' if token else ''
+                color = status_color(token, self.t, self.t['panel'] if i == highlight_row else self.t['bg']) if token else None
+                style = f' style="color:#{color}"' if color else ''
                 content = md(text) + (' <small>(base)</small>' if base else '')
                 cells.append(f'<td class="{"num" if j and num.match(text) else ""}"{style}>{content}</td>')
             cells = ''.join(cells)
@@ -1104,6 +1105,7 @@ ul{padding-left:1.1em} li{margin:.25em 0} li::marker{color:var(--accent)}
 .chip.primary{background:color-mix(in srgb,var(--primary) 14%,var(--bg))}
 .badge{width:62px;height:62px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;margin-bottom:18px}
 .hl .badge{background:var(--accent)}
+.badge svg{width:38px;height:38px;flex:none}
 /* dark slides */
 .slide.dark{background:var(--dark);color:var(--on-dark);padding:0 130px;justify-content:center}
 .dark .bar,.t-divider .bar{display:block;width:130px;height:9px;background:var(--accent);margin:0 0 40px}

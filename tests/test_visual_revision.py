@@ -10,7 +10,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from _common import SpecError
-from visual_elements import table_cell, process_body
+from visual_elements import table_cell, process_body, status_color
 from geometry_checks import review
 from icons import svg, foreground
 from spec_io import load_spec
@@ -19,7 +19,8 @@ from build_html import HtmlDeck
 
 class VisualRevision(unittest.TestCase):
     def test_status_is_not_colour_only(self):
-        self.assertEqual(table_cell({'kind':'status','status':'amber'}), ('● At risk','accent'))
+        self.assertEqual(table_cell({'kind':'status','status':'amber'}), ('● At risk','rag_amber'))
+        self.assertEqual(status_color('rag_amber',{'bg':'FFFFFF','accent':'0000FF'}),'8A5700')
         self.assertIn('Supplier', table_cell({'kind':'status','status':'red','label':'Supplier late'})[0])
         with self.assertRaises(SpecError): table_cell({'kind':'status','status':'purple'})
 

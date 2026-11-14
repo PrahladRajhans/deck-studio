@@ -925,7 +925,7 @@ class Builder(ExtraMixin):
 
     def _table(self, slide, x, y, w, h, columns, rows, widths=None, highlight_row=None,
                first_col_bold=True, size=13, total_row=False, base_cell=None):
-        from visual_elements import table_cell
+        from visual_elements import table_cell, status_color
         raw_rows = rows
         rows = [[table_cell(v)[0] for v in row] for row in rows]
         t = self.t
@@ -1016,7 +1016,7 @@ class Builder(ExtraMixin):
                     color = t["accent"] if (is_hl and c == 0) else t["ink"]
                     token = table_cell(raw_rows[r - 1][c])[1]
                     if token:
-                        color = t[token]
+                        color = status_color(token, t, t["panel"] if is_hl else t["bg"])
                     self._add_runs(p, txt, size_used, color, self.bf, bold=bold)
         return gt
 
@@ -1035,7 +1035,7 @@ class Builder(ExtraMixin):
                     s.get("total_row", False), s.get("base_cell"))
         if s.get("note"):
             self.text(slide, MARGIN, y + h + 0.08, tw, 0.3, s["note"], 10.5, self.t["muted"], self.bf,
-                      min_size=9.5, max_lines=1)
+                      min_size=9.5, max_lines=1, name="Caption")
         if side:
             self._side_panel(slide, side, SLIDE_W - MARGIN - side_w, top, side_w, bottom - top)
         return slide

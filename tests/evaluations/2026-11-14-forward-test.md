@@ -19,3 +19,13 @@ For executive, marketing and brand: `spec_io.py --strict`, `spec_io.py --outline
 ## Judgement
 
 The shorter workflow is usable: open questions and destination limits stayed visible, financial uncertainty did not force fake verified sources, and the model developed distinct concepts for the three briefs. Creative guidance transferred beyond palette changes, especially in the executive economic relationship and the brand experience sequence. Actual visual output quality cannot be scored honestly until rendering. Passing strict validation does not independently establish completeness of semantic review.
+
+## Subsequent owner verification
+
+The pending rendering statements above describe the original executor's environment. The owner
+subsequently rendered all retained specs through Chromium in CI and inspected their contact sheets
+and representative individual slides. Final runtime commit 1f79cc422c09d23ff66a5a8c50019ec6ae294bbc
+passed run 43586650290: 67 unit tests without skips and the complete smoke workflow. Typography,
+icon foregrounds and custom-copy review were repaired and rechecked. See the revision ledger for
+exact render counts, qualitative observations and remaining target-Claude/native-custom limits.
+The original independent source report is retained rather than rewritten as a passed Claude run.

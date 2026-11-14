@@ -81,7 +81,9 @@ speaker notes, G shows all slides as a grid, P prints a PDF.
 
 Changes and migration notes: [CHANGELOG.md](CHANGELOG.md).
 
-Creative planning checks and their limits: [evaluation notes](tests/evaluations/2026-11-12-creative-plans.md).
+Latest validation and limitations: [revision ledger](tests/evaluations/2026-11-14-revision-plan.md) and
+[independent execution notes](tests/evaluations/2026-11-14-forward-test.md). Earlier
+[creative planning checks](tests/evaluations/2026-11-12-creative-plans.md) remain historical evidence.
 
 ## For reviewers
 

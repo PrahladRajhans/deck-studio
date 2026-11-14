@@ -4,7 +4,7 @@ Record user-visible changes newest first. Each entry states the reason, behavior
 impact and validation. Add changes to the current unreleased entry until they are merged; do not
 rewrite older entries to imply that later fixes already existed.
 
-## Unreleased
+## 2026-11-14
 
 ### Coherent workflow and visual grammar (2026-11-14)
 
@@ -22,6 +22,9 @@ rewrite older entries to imply that later fixes already existed.
   optional metrics. Add tornado and sensitivity image-chart helpers and unit-economics guidance.
 - Add named alignment groups and pair-specific intentional-overlap annotations. No slide-wide warning
   suppression. Add explicit rehearsal timing overrides and complexity-weighted estimates.
+- Respect custom composition typography without leaking theme heading fonts. Count visible custom
+  copy instead of HTML attributes or reconstruction metadata; avoid treating all custom compositions
+  as the same layout.
 - Add sandbox-safe notes/grid controls and variable card-count support to the manual HTML fallback.
   Keep human voice guidance positive; avoid individual-word compliance records and use sentence case
   and range punctuation as contextual defaults.
@@ -34,7 +37,9 @@ New PPTX Feather icons require CairoSVG, added to requirements. Image-chart exte
 exhibits, not editable charts; native decision tables and process text remain editable.
 
 
-### Creative direction and presenter voice (2026-11-12)
+## 2026-11-12
+
+### Creative direction and presenter voice
 
 - Develop a subject-specific concept before selecting palette and typography. Add concise creative
   briefs, genuinely different concept candidates, relationship-based composition prompts and a

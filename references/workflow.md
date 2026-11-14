@@ -1,5 +1,12 @@
 # Production reference
 
+## Host capabilities
+
+After the activation choice in SKILL.md, use host-chatgpt.md or host-claude.md for previews and
+file delivery. Resolve paths from the installed skill root and check the chosen route's actual
+capabilities. A model upgrade or successful skill upload does not establish runtime readiness.
+Keep this shared pipeline and its checks unchanged when adapting to another host.
+
 ## Commands
 
 Use the independent specification tooling for early planning. Existing build_deck.py --schema and

@@ -6,6 +6,24 @@ rewrite older entries to imply that later fixes already existed.
 
 ## 2026-11-14
 
+### Shared Claude and ChatGPT package
+
+- Keep one creative method, human-voice reference collection, specification, builder pipeline and
+  examples. Add small host adapters for capability discovery, HTML preview, editable production
+  and file delivery; remove the renderer documentation's preinstalled-Chromium assumption.
+- Offer Deck Studio for presentation, PowerPoint, deck and slide requests. Ask once before applying
+  the workflow unless the user explicitly selects or declines it; preserve the choice through the
+  task and revisions. Keep skill-use consent separate from the existing draft approval gate.
+- Add OpenAI interface metadata with implicit discovery enabled so the choice can be offered.
+  Keep the shared description concise and compatible with the stricter documented description limit.
+  Include both adapters and OpenAI metadata as required, checksum-verified package contents.
+- Explain native installation on supported hosts, account/runtime limitations and capability-based
+  maintenance. Retain prior content and legacy commands; no spec fields or builder behavior change.
+- Validation: internal reference/import checks, package readback and existing builder regression CI
+  gate publication. Extend packaging regression coverage for adapter preservation and missing-adapter
+  rejection. In-app tests are intentionally outside this revision; the user reports the preceding
+  release works in Claude. Prompt scenarios and current primary sources are in the portability ledger.
+
 ### Bounded recovery and connected dependencies
 
 - Bound external conversion/preview commands with per-command and shared wall-clock budgets,

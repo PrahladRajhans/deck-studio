@@ -1,6 +1,6 @@
 # Deck Studio
 
-A Claude skill for making presentations: consulting readouts, case competitions, board asks,
+A shared Claude and ChatGPT skill for making presentations: consulting readouts, case competitions, board asks,
 pitches, interviews, classes, research readouts, marketing plans and events.
 
 Its working rule: **settle content, visuals and the slide skeleton in a fast HTML draft, and build
@@ -10,21 +10,54 @@ the PowerPoint (or Slides, Gamma, Canva) only after the user approves.**
 Intake → Storyline → Creative direction → Draft (HTML) → Review and iterate → [user approves] → Finalise
 ```
 
-`SKILL.md` is the entry point Claude reads. Everything else is loaded when needed.
+Deck Studio first offers a choice when a presentation request does not already specify whether
+to use it. Selecting the skill explicitly counts as consent. The choice carries through the current
+deck and revisions; it is separate from approving the HTML draft before final production.
+
+`SKILL.md` is the shared entry point. Everything else is loaded when needed.
 
 For distinctive decks, develop the concept before selecting a theme. The creative-direction
-reference helps Claude make relationships visible, explore different compositions, pace the story
+reference helps the model make relationships visible, explore different compositions, pace the story
 and write in the presenter's voice. Standard types are a toolbox; custom HTML compositions can
 use the whole stage, with explicit final-format reconstruction limits.
 
-## Download for Claude
+## Download for Claude and ChatGPT
 
 [Download the latest verified upload ZIP](https://github.com/PrahladRajhans/deck-studio/releases/latest/download/deck-studio.zip).
 The package contains one `deck-studio/` folder matching the skill name, with the complete references,
 scripts, examples, source packets, context and changelog. It is published only after main passes the
 smoke workflow. GitHub's generic Code ZIP uses a different folder name, so use the release package
-for direct upload. Upload and enable it using Claude's Skills interface; account permissions and
-code-execution availability still apply. Actual Claude execution is not certified by packaging.
+for direct upload. Use the same release ZIP for both supported skill importers:
+
+| Host | Installation |
+|---|---|
+| Claude | Customize → Skills → create/upload a skill, then enable it |
+| ChatGPT with native Skills available | Plugins → Skills → Create → Upload from your computer |
+| ChatGPT without native Skills access | A dedicated GPT/Project can use adapted instructions and references, but attaching this ZIP does not install a native skill |
+
+Product availability, account permissions, upload scanning and code-execution access still apply.
+Current OpenAI guidance lists eligible Business, Enterprise, Healthcare and Edu users, subject to
+workspace settings and product availability. Check the current documentation if the UI differs:
+[ChatGPT Skills](https://help.openai.com/en/articles/20001066-skills-in-chatgpt) and
+[Claude Skills](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+Native skill installation is separate on each host; do not assume cross-product synchronisation.
+The user reports successful use of the previous release in Claude. This cross-host revision has
+automated source/package and builder checks, not an in-application certification for either host.
+
+Try “prepare a PowerPoint”, “prepare a deck” or “make slides”: Deck Studio should offer the
+choice before applying its method. Say “use Deck Studio” to proceed directly, or “without Deck
+Studio” to use the usual workflow. Matching and consent are model instructions, not a guaranteed
+platform popup. Metadata can be read for discovery before consent. An installed but disabled skill
+cannot be expected to offer itself. The additional OpenAI metadata keeps implicit discovery enabled.
+
+The shared core preserves the creative method, human-language guidance, chart and visual rules,
+examples and builders. The [ChatGPT adapter](references/host-chatgpt.md) and
+[Claude adapter](references/host-claude.md) handle available tools, previews and file delivery.
+Installation does not supply missing rendering dependencies or access to external services.
+
+For future releases, detect capabilities rather than model names, keep host changes in these thin
+adapters, retain versioned source-verified releases, and recheck activation and output quality after
+material host/model updates. No package can guarantee compatibility with every future product.
 
 To reproduce locally: `python3 scripts/package_skill.py --out out/deck-studio.zip`.
 The generated bundle manifest records source-file checksums; verification compares every packaged
@@ -35,6 +68,8 @@ file with its source. Checksums detect byte changes, not factual accuracy or pub
 | Path | What it is |
 |---|---|
 | `SKILL.md` | Concise stage router, selective reference loading and approval gates |
+| `agents/openai.yaml` | OpenAI interface metadata and implicit-discovery policy; consent remains in the shared entry point |
+| `references/host-chatgpt.md`, `references/host-claude.md` | Host-specific execution, preview and delivery guidance |
 | `references/visual-components.md` | Visual grammar, icons, richer tables/processes, scenario charts and named alignment annotations |
 | `references/evidence-policy.md` | Risk-based assurance, inherited provenance and unused research history |
 | `references/workflow.md` | Commands, timings, fallback controls and destination limits |

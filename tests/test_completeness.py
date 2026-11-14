@@ -72,6 +72,8 @@ class Completeness(unittest.TestCase):
             self.assertEqual(verify(ROOT,dest,expected_revision='test-source')['revision'],'test-source')
             with self.assertRaises(ValueError):verify(ROOT,dest,expected_revision='different-source')
             self.assertIn('references/human-voice.md',manifest['files'])
+            for path in ('agents/openai.yaml', 'references/host-chatgpt.md', 'references/host-claude.md'):
+                self.assertIn(path,manifest['files'])
             self.assertIn('assets/icons/feather/LICENSE',manifest['files'])
             self.assertIn('tests/fixtures/marketing.json',manifest['files'])
             self.assertIn('tests/evaluations/2026-11-14-feedback-coverage.md',manifest['files'])
@@ -91,6 +93,16 @@ class Completeness(unittest.TestCase):
                 for path,content in data.items():z.writestr(path,content)
             with self.assertRaises(ValueError):verify(ROOT,bad)
             from package_skill import inputs
+            # A missing adapter must fail packaging rather than silently omit host support.
+            requiredroot=Path(folder)/'missing-adapter'
+            requiredroot.mkdir()
+            for name in ('SKILL.md','requirements.txt','scripts/spec_io.py','scripts/build_html.py',
+                         'scripts/build_deck.py','references/creative-direction.md',
+                         'agents/openai.yaml','references/host-claude.md'):
+                source=requiredroot/name
+                source.parent.mkdir(parents=True,exist_ok=True)
+                source.write_bytes((ROOT/name).read_bytes())
+            with self.assertRaisesRegex(ValueError,'host-chatgpt'):inputs(requiredroot)
             linkroot=Path(folder)/'source'
             linkroot.mkdir()
             (linkroot/'assets').symlink_to(ROOT/'assets',target_is_directory=True)

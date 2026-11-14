@@ -996,7 +996,11 @@ class Builder(ExtraMixin):
                     _set_border(cell, side, None, 0)
                 if r != 0 and not is_total:
                     _set_border(cell, "T", None, 0)
-                if is_hl:
+                on_axis = bool(base_cell) and r > 0 and (r - 1 == base_cell[0] or c == base_cell[1])
+                if r > 0 and base_cell == [r - 1, c]:
+                    for side in ('L', 'R', 'T', 'B'):
+                        _set_border(cell, side, t['primary'], 1.25)
+                if is_hl or on_axis:
                     cell.fill.solid()
                     cell.fill.fore_color.rgb = rgb(t["panel"])
                 else:
@@ -1016,7 +1020,7 @@ class Builder(ExtraMixin):
                     color = t["accent"] if (is_hl and c == 0) else t["ink"]
                     token = table_cell(raw_rows[r - 1][c])[1]
                     if token:
-                        color = status_color(token, t, t["panel"] if is_hl else t["bg"])
+                        color = status_color(token, t, t["panel"] if (is_hl or on_axis) else t["bg"])
                     self._add_runs(p, txt, size_used, color, self.bf, bold=bold)
         return gt
 

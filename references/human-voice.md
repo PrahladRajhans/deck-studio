@@ -130,6 +130,13 @@ Customer journey, user journey and buyer journey are real terms and are not flag
   slide. Let the content set the count; two and five are normal. (Checked deck-wide.)
 - **Every title has the same shape without a reason**: review the pattern rather than varying
   it automatically. Parallel comparisons and technical teaching may benefit from repeated forms.
+- **Repeated Noun: Clause titles.** A sequence such as "Margin: …", "Risk: …", "Growth: …"
+  often adds a generic label before the actual thought. Put the subject into the sentence and use
+  the kicker for navigation. Keep a colon when it helps, and retain intentional parallel labels.
+- **Strawman options.** A scorecard with rejected options all red and the preferred option all green
+  can manufacture an easy answer. Give each genuinely viable contender its real strengths and
+  disadvantages; do not invent a token advantage. Explain a truly dominated option rather than
+  forcing symmetry. See domain-packs.md for fair criteria and uncertainty.
 - **Gerund bullets**: "Driving growth / Enhancing efficiency / Ensuring quality". Write what
   happens: "Two new campuses by June".
 - **Bold-label bullets that restate themselves**: "**Speed:** we are fast". Use the fact, or make it
@@ -140,8 +147,8 @@ Customer journey, user journey and buyer journey are real terms and are not flag
 - **Generic sections**: "Challenges and opportunities", "Looking ahead", "Key takeaways",
   "Conclusion" slides that merely repeat earlier wording. A useful synthesis or teaching takeaway
   is welcome. Close on the consequence appropriate to the audience.
-- **Emoji icons and decorative symbols** standing in for meaning. Use glyph badges only where they
-  carry a status (✓ done, ▲ up).
+- **Emoji icons and decorative symbols** standing in for meaning. Use consistent bundled icons for useful navigation or concepts, and labelled
+  glyphs for status (✓ done, ▲ up); see visual-components.md. Avoid decoration without a purpose.
 - **Em dashes.** None on slides; use a comma, a colon or a full stop. (User preference too.)
 - **Too-precise invented numbers** ("83.7% of users love it") with no source. Truth rule 1.
 - **Chatbot residue**: "Certainly", "Here's", "I hope this helps", "[Insert name]".

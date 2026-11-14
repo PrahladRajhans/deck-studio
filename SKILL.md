@@ -52,8 +52,8 @@ and retrieve more only for a concrete need. Small revisions need not repeat new-
 | Intake and brief | frameworks.md §1; decision-trees.md T0–T2 | One relevant domain pack; routes.md destination capabilities |
 | Storyline | Relevant decision-trees.md T3–T5 | A storyline.md section or matching deck skeleton |
 | Creative direction | creative-direction.md | T8 theme table; visual-language.md; visual-components.md for specific needs |
-| Writing and specification | spec.md essentials; human-voice.md voice brief | evidence-policy.md for assurance or provenance questions |
-| Layout production | Selected slide-library.md types; relevant spec fields | visual-components.md; workflow.md commands; supplied-template route |
+| Writing and specification | spec.md essentials; writing.md relevant section; human-voice.md voice brief | evidence-policy.md for assurance or provenance questions |
+| Layout production | decision-trees.md T6–T7; selected slide-library.md types; relevant spec fields | visual-components.md; workflow.md commands; supplied-template route |
 | Review | qa.md relevant checks | Benchmark rubric; targeted geometry annotations |
 | Final production | Only the chosen routes.md adapter | workflow.md command reference and capability limitations |
 
@@ -109,13 +109,15 @@ route. Show alternatives when useful; avoid another compulsory preference gate.
 
 1. Write the spoken explanation and pivotal claims, then compose the slide for its job. Use
    assertion/evidence anatomy for analytical exhibits where useful, not as compulsory furniture.
-2. Select visuals by the audience's question and relationship. Tables suit exact lookup; repeated
+2. Render one representative dense slide before building a section of similar slides. Use actual
+   content to test wrapping, labels and the visual idea; fix the pattern before scaling it.
+3. Select visuals by the audience's question and relationship. Tables suit exact lookup; repeated
    layouts suit comparison. Never manufacture a diagram or vary layouts to meet a quota.
-3. Use the shared specification, facts, sources and voice. Link observed facts once and reuse their
+4. Use the shared specification, facts, sources and voice. Link observed facts once and reuse their
    provenance. Standard/high assurance record reviewed interpretive claims; brief assurance may
    use supplied evidence linked at slide level for straightforward low-risk content.
-4. Label authorised fictional examples. Keep material limitations and uncertainty visible.
-5. Build and render: `build_html.py spec.json -o out/deck.html`, then `render_html.py`.
+5. Label authorised fictional examples. Keep material limitations and uncertainty visible.
+6. Build and render: `build_html.py spec.json -o out/deck.html`, then `render_html.py`.
    Drafts report release blockers without requiring fake verification records to continue.
 
 **Gate 4:** the draft is coherent, readable and specific to its subject. Claims match exhibits,

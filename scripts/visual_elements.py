@@ -29,7 +29,8 @@ def table_cell(value):
 def process_body(step):
     """Optional explicit metrics; no inferred throughput, costs or conversions."""
     parts = [str(step.get('body', ''))] if step.get('body') else []
-    for key, label in (('volume', 'Volume'), ('duration', 'Time'), ('cost', 'Cost'), ('conversion', 'Conversion')):
+    for key, label in (('volume', 'Volume'), ('duration', 'Time'), ('cost', 'Cost'), ('conversion', 'Conversion'),
+                       ('defect_rate', 'Defect rate'), ('drop_off', 'Drop-off')):
         if key in step:
             parts.append(f'{label}: {step[key]}')
     return '\n'.join(parts)

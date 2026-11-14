@@ -1,0 +1,175 @@
+{
+  "title": "Define the contribution before quoting the return",
+  "direction": "modern-teal",
+  "mode": "talk",
+  "footer": "Illustrative worked example \u00b7 hypothetical inputs",
+  "illustrative_authorized": true,
+  "facts": {
+    "revenue": 100,
+    "cogs": 40,
+    "fulfilment": 15,
+    "fees": 5,
+    "acquisition": 20,
+    "gross": "=revenue-cogs",
+    "cm1": "=gross-fulfilment",
+    "cm2": "=cm1-fees",
+    "cm3": "=cm2-acquisition",
+    "margin": "=cm3/revenue*100"
+  },
+  "fact_meta": {
+    "revenue": {
+      "kind": "illustrative"
+    },
+    "cogs": {
+      "kind": "illustrative"
+    },
+    "fulfilment": {
+      "kind": "illustrative"
+    },
+    "fees": {
+      "kind": "illustrative"
+    },
+    "acquisition": {
+      "kind": "illustrative"
+    },
+    "gross": {
+      "kind": "calculated"
+    },
+    "cm1": {
+      "kind": "calculated"
+    },
+    "cm2": {
+      "kind": "calculated"
+    },
+    "cm3": {
+      "kind": "calculated"
+    },
+    "margin": {
+      "kind": "calculated"
+    }
+  },
+  "brief": {
+    "purpose": "Define the contribution before quoting the return",
+    "destination": "HTML draft, then editable PowerPoint after approval",
+    "voice": "Explain the actual tradeoff in plain language. Preserve uncertainty.",
+    "sample_context": "All inputs and assessments are hypothetical, not evidence of a real outcome."
+  },
+  "slides": [
+    {
+      "type": "cover",
+      "title": "Revenue is only the start of the per-order story",
+      "subtitle": "A hypothetical order, in INR per order",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "chart",
+      "title": "Variable costs leave INR {=cm3} per order",
+      "exhibit": "Illustrative contribution bridge \u00b7 INR per order",
+      "chart": {
+        "kind": "waterfall",
+        "categories": [
+          "Revenue",
+          "Goods",
+          "Fulfilment",
+          "Fees",
+          "Acquisition",
+          "Contribution"
+        ],
+        "values": [
+          "=revenue",
+          "=-cogs",
+          "=-fulfilment",
+          "=-fees",
+          "=-acquisition",
+          "=cm3"
+        ],
+        "totals": [
+          5
+        ],
+        "number_format": "0",
+        "alt": "Revenue less goods, fulfilment, fees and allocated acquisition cost leaves contribution before fixed costs."
+      },
+      "notes": {
+        "say": "All values use the same order and currency basis. The final contribution excludes fixed overhead and taxes. Acquisition is allocated to this hypothetical order, not evidence of a lifetime return."
+      },
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec."
+    },
+    {
+      "type": "table",
+      "title": "Name what each contribution layer excludes",
+      "size": 18,
+      "columns": [
+        "Layer defined for this example",
+        "INR/order"
+      ],
+      "rows": [
+        [
+          "Revenue less goods",
+          "{=gross}"
+        ],
+        [
+          "CM1: also less fulfilment",
+          "{=cm1}"
+        ],
+        [
+          "CM2: also less fees",
+          "{=cm2}"
+        ],
+        [
+          "CM3: also less allocated acquisition",
+          "{=cm3}"
+        ]
+      ],
+      "total_row": true,
+      "note": "CM labels vary by organisation. These definitions apply only to this example.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "columns",
+      "title": "An order margin does not establish lifetime value",
+      "columns": [
+        {
+          "icon": "feather:check-circle",
+          "heading": "Known here",
+          "points": [
+            "Contribution before fixed costs: {=margin|.0f}%",
+            "Costs use the same order basis."
+          ]
+        },
+        {
+          "icon": "feather:help-circle",
+          "heading": "Needed for LTV",
+          "points": [
+            "Retention and repeat-order behaviour.",
+            "Contribution over a defined horizon.",
+            "A consistent customer acquisition denominator."
+          ]
+        }
+      ],
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "closing",
+      "title": "Reconcile the basis before using the ratio",
+      "ask": "Use defined contribution today. Gather cohort and acquisition evidence before quoting LTV/CAC.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    }
+  ]
+}

@@ -61,8 +61,8 @@ Will someone present it live?
 ├─ Yes, and it will ALSO be circulated afterwards                          → DOCUMENT first,
 │                                                   then cut a TALK version (storyline.md §7)
 └─ Yes, presented only
-   ├─ Audience must decide something in the room (board, IC, client SteerCo)  → DOCUMENT density,
-   │                                                                          talk-size type (≥16pt)
+   ├─ Audience must decide something in the room (board, IC, client SteerCo)  → TALK delivery,
+   │                                             answer first; evidence detail in notes/appendix
    └─ Audience must learn / feel / be persuaded (keynote, class, pitch, interview) → TALK
 If the brief does not settle it and the user is present, ask once.
 ```
@@ -76,6 +76,17 @@ If the brief does not settle it and the user is present, ask once.
 | Body text | ≥ 12pt | ≥ 18pt (22pt+ teaching, 24pt+ big rooms) |
 | Notes | sources, assumptions, Q&A | the script, word for word |
 | Close | decision + next action | call to action |
+
+### Live executive decisions
+
+For a projected board/IC/SteerCo deck, use the existing `mode:"talk"` with answer-first structure.
+Do not combine document density with a larger font floor and hope it fits. Aim for one decision or
+comparison per slide, a short headline and roughly 40 visible words; choose few meaningful columns
+for a live table (four is a useful starting point). Keep actual units and caveats visible. Aim for
+18pt+ projected body text and test the room; data labels need their own readability review. Put
+lookup detail, calculations and longer reasoning in notes/appendix or a separate document version.
+If the full material must be read unattended, build that document variant deliberately. Never solve
+fit by lowering the projection floor or deleting a material premise. No new unsupported mode token.
 
 ## T3 · Which use case → which archetype? (full table: use-cases.md)
 
@@ -144,9 +155,9 @@ Use a table when exact lookup is the job, and a sentence when a visual adds noth
 | 11 | Market structure by segment and size? | market map, share by region | chart image `mekko` |
 | 12 | Before vs after a change? | used to, now, redesign | `before_after` / chart image `slope` |
 | 13 | Gap to target per item? | target, gap, progress | chart image `dumbbell` / `bullet` |
-| 14 | Options against weighted criteria? | options, criteria, scorecard | `options` |
+| 14 | Options against weighted criteria? | options, criteria, scorecard | `options`; `table` with labelled RAG/Harvey cells for ordinal judgements |
 | 15 | 2-3 alternatives side by side? | option A/B, pros/cons, us vs them | `compare` |
-| 16 | Steps in order? | step, phase, then, process | `process` |
+| 16 | Steps in order? | step, phase, then, process | `process`, with volume/time/cost/conversion/defect metrics when available |
 | 17 | A loop that reinforces itself? | flywheel, cycle, virtuous | `cycle` |
 | 18 | Stages that narrow? | funnel, conversion, drop-off | `funnel` |
 | 19 | A hierarchy or foundation? | levels, base, pyramid, needs | `pyramid` |
@@ -173,6 +184,8 @@ Use a table when exact lookup is the job, and a sentence when a visual adds noth
 | 40 | Proof by picture? | photo, product, before/after shots | `image` / `image_full` / `gallery` |
 | 41 | Code, prompt, command? | code, prompt, config | `code` |
 | 42 | A tailored composition explains or expresses the idea better | spatial explanation, documentary detail, typographic idea | `custom` (full-stage if useful), with native reconstruction plan |
+| 43 | Which assumptions change the decision? | scenario, downside, one-at-a-time | image `tornado`; `table` / image `sensitivity`, labelled base case |
+| 44 | What remains after each per-unit cost? | contribution, CAC, CM1/CM2 | native waterfall plus `table`; state each margin definition |
 | 43 | Parallel text is the clearest answer | short parallel statements | `bullets` (≤ 6); no need to manufacture a diagram |
 
 Overrides:
@@ -189,8 +202,8 @@ Overrides:
 | Comparison (Zelazny) | Question | Best form | Avoid |
 |---|---|---|---|
 | Component | what share of the whole? | 100% stacked bar; doughnut only ≤ 4 parts | pie with 6+ slices, 3D |
-| Item | how do items rank? | horizontal bar, sorted, one highlighted | rainbow colours |
-| Time series | how does it change? | column (few periods) or line (many) | dual axes |
+| Item | how do items rank? | horizontal bar, sorted, one highlighted | bullet list of comparable numbers; rainbow colours |
+| Time series | how does it change? | column (few periods) or line (many) | a dense yearly lookup table when the trend is the point; dual axes |
 | Frequency distribution | how many fall in each range? | histogram (column, no gaps) | smoothed curves without data |
 | Correlation | do two variables move together? | scatter; paired bars if few items | line between unrelated points |
 | Bridge | what explains the change? | waterfall | stacked columns |
@@ -202,6 +215,8 @@ Overrides:
 | Dependencies | what must happen before what? | dependency or network diagram (`custom`); `timeline` only if order is all that matters | a Gantt that hides the links |
 | Location | does geography explain it? | map (image), only when place carries the argument | a map as decoration |
 | Mechanism | how does it work? | annotated schematic (image or `custom`), labelled as technical evidence | decorative illustration |
+| Sensitivity | how does an outcome vary with assumptions? | tornado for one input at a time; two-way sensitivity table with base marker | presenting scenarios as probability intervals or causal contributions |
+| Option judgement | which tradeoffs matter? | weighted `options` or labelled RAG/Harvey `table`, explicit rubric | strawman alternatives; adding ordinal colours as measured quantities |
 | Exact lookup | what is the value for X? | `table`, numbers right-aligned | a chart nobody can read values from |
 
 Hygiene for every chart: headline says what it means; units in the exhibit label or axis; axis at

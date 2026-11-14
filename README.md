@@ -85,6 +85,19 @@ Latest validation and limitations: [revision ledger](tests/evaluations/2026-11-1
 [independent execution notes](tests/evaluations/2026-11-14-forward-test.md). Earlier
 [creative planning checks](tests/evaluations/2026-11-12-creative-plans.md) remain historical evidence.
 
+Feedback coverage and preservation audit: [what was adopted, retained or declined](tests/evaluations/2026-11-14-feedback-coverage.md).
+Additional samples cover fair option judgements, per-order contribution and cash-flow teaching.
+For the expressive brand's native editable reconstruction:
+
+```bash
+python3 assets/forward-tests/rebuild_brand.py -o out/brand-native.pptx
+python3 scripts/render.py out/brand-native.pptx out/render-brand-native
+python3 scripts/lint_deck.py out/brand-native.pptx
+```
+
+The recipe targets that specific concept and shares its resolved copy, sources and notes. It is not
+a general HTML converter. Build a corresponding native recipe for other custom designs.
+
 ## For reviewers
 
 Useful questions to review against:

@@ -6,6 +6,27 @@ rewrite older entries to imply that later fixes already existed.
 
 ## 2026-11-14
 
+### Feedback completeness and content preservation
+
+- Audit both the earlier Gemini/Claude discussion and detailed actual-file feedback against code,
+  references and examples. Add a recommendation-by-recommendation coverage ledger, including
+  intentional rejections and remaining limits, in tests/evaluations/2026-11-14-feedback-coverage.md.
+- Restore showcase-first rendering and content-first production advice lost during slimming; directly
+  route writing.md and T6/T7 at the stage where needed. Preserve the concise entry point and detailed
+  references, creative latitude, presenter register, evidence safeguards and HTML approval.
+- Correct live-executive routing: use the tested talk renderer with answer-first structure and a
+  document/appendix path for lookup detail, instead of promising document density at projection size.
+- Surface sensitivity, quantified-process and contribution patterns in the main chooser. Strengthen
+  topic-colon and fair-option guidance. Preserve legitimate repetition and technical language.
+- Add decision-tradeoffs, unit-economics and cash-flow-teaching samples, semantic sensitivity-table
+  crosshairs, optional defect/drop-off process metrics and an explicit native editable reconstruction
+  recipe for the expressive brand example. Reconcile recipe copy/sources/notes and reject changed
+  structures requiring layout review. General HTML-to-PPTX conversion is not claimed.
+- Research primary Anthropic, W3C, Microsoft and ONS/Analysis Function guidance. Add practical
+  reading-order, colour and uncertainty interpretation advice with exact sources in credits.md.
+
+
+
 ### Coherent workflow and visual grammar (2026-11-14)
 
 - Reduce SKILL.md to a 163-line stage router. Consolidate theme selection and move production,

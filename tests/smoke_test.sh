@@ -33,6 +33,15 @@ for f in "$HERE"/assets/creative-examples/*.json "$HERE"/assets/forward-tests/*.
   python3 "$S/render_html.py" "$OUT/$b.html" "$OUT/render-$b" \
     || { echo "FAIL creative fit $b"; fail=1; }
 done
+# Demonstrate deliberate native reconstruction of one approved-concept fixture.
+python3 "$HERE/assets/forward-tests/rebuild_brand.py" -o "$OUT/creative-brand-native.pptx" > "$OUT/creative-brand-native.log" \
+  || { cat "$OUT/creative-brand-native.log"; fail=1; }
+if [ -f "$OUT/creative-brand-native.pptx" ]; then
+  python3 "$S/lint_deck.py" "$OUT/creative-brand-native.pptx" > "$OUT/creative-brand-native.lint.txt" || fail=1
+  if [ $have_soffice -eq 1 ]; then
+    python3 "$S/render.py" "$OUT/creative-brand-native.pptx" "$OUT/render-pptx-creative-brand-native" > /dev/null 2>&1 || fail=1
+  fi
+fi
 for c in "$HERE"/assets/examples/chart-*.json; do
   python3 "$S/chart_images.py" "$c" -o "$OUT/$(basename "$c" .json).png" > /dev/null || { echo "FAIL chart $c"; fail=1; }
 done

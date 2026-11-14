@@ -1,0 +1,181 @@
+{
+  "title": "A profit number and a cash balance answer different questions",
+  "direction": "forest-sage",
+  "mode": "talk",
+  "footer": "Illustrative worked example \u00b7 hypothetical inputs",
+  "illustrative_authorized": true,
+  "facts": {
+    "profit": 30,
+    "depreciation": 10,
+    "receivables": 20,
+    "operating": "=profit+depreciation-receivables",
+    "opening": 5,
+    "capex": 25,
+    "financing": 15,
+    "closing": "=opening+operating-capex+financing"
+  },
+  "fact_meta": {
+    "profit": {
+      "kind": "illustrative"
+    },
+    "depreciation": {
+      "kind": "illustrative"
+    },
+    "receivables": {
+      "kind": "illustrative"
+    },
+    "operating": {
+      "kind": "calculated"
+    },
+    "opening": {
+      "kind": "illustrative"
+    },
+    "capex": {
+      "kind": "illustrative"
+    },
+    "financing": {
+      "kind": "illustrative"
+    },
+    "closing": {
+      "kind": "calculated"
+    }
+  },
+  "brief": {
+    "purpose": "A profit number and a cash balance answer different questions",
+    "destination": "HTML draft, then editable PowerPoint after approval",
+    "voice": "Explain the actual tradeoff in plain language. Preserve uncertainty.",
+    "sample_context": "All inputs and assessments are hypothetical, not evidence of a real outcome."
+  },
+  "slides": [
+    {
+      "type": "question",
+      "title": "Can profit rise while cash stays tight?",
+      "options": [
+        "Yes",
+        "No",
+        "It depends on cash timing"
+      ],
+      "prompt": "Before the example, explain what each number measures.",
+      "notes": {
+        "say": "Ask for a reason, not just a vote. Profit records performance under accrual accounting. Cash records actual movements. We will reconcile them with a simplified example."
+      },
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec."
+    },
+    {
+      "type": "chart",
+      "title": "Receivables absorb part of the reported profit",
+      "exhibit": "Simplified operating cash reconciliation \u00b7 INR lakh",
+      "chart": {
+        "kind": "waterfall",
+        "categories": [
+          "Profit",
+          "Add depreciation",
+          "Less receivables increase",
+          "Operating cash"
+        ],
+        "values": [
+          "=profit",
+          "=depreciation",
+          "=-receivables",
+          "=operating"
+        ],
+        "totals": [
+          3
+        ],
+        "number_format": "0",
+        "alt": "Profit plus depreciation less the increase in receivables gives operating cash in this simplified example."
+      },
+      "notes": {
+        "say": "Assume no other noncash adjustments, working-capital movements or operating cash items. Depreciation reduced accounting profit but was not a cash payment this period. The receivables increase represents sales not collected in cash."
+      },
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec."
+    },
+    {
+      "type": "table",
+      "title": "Cash also moves through investment and financing",
+      "size": 18,
+      "columns": [
+        "Cash bridge",
+        "INR lakh"
+      ],
+      "rows": [
+        [
+          "Opening cash",
+          "{=opening}"
+        ],
+        [
+          "Operating cash",
+          "{=operating}"
+        ],
+        [
+          "Capital expenditure",
+          "\u2212{=capex}"
+        ],
+        [
+          "New financing received",
+          "{=financing}"
+        ],
+        [
+          "Closing cash",
+          "{=closing}"
+        ]
+      ],
+      "total_row": true,
+      "note": "Simplified inputs; no other cash movements. Positive financing is cash received.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "process",
+      "title": "Keep the three questions separate",
+      "steps": [
+        {
+          "heading": "Performance",
+          "body": "What profit was recognised?"
+        },
+        {
+          "heading": "Operations",
+          "body": "What cash came from operating activity?"
+        },
+        {
+          "heading": "Liquidity",
+          "body": "What cash remains after all movements?"
+        }
+      ],
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    },
+    {
+      "type": "question",
+      "title": "What happens if customers pay sooner?",
+      "options": [
+        "Operating cash increases, all else equal",
+        "Profit must increase by the same amount"
+      ],
+      "prompt": "Explain the timing effect before checking the answer in notes.",
+      "notes": {
+        "say": "With the same recognised sales and all other inputs unchanged, faster collection reduces the receivables increase and raises operating cash. It need not change recognised profit. Keep this explanation available in a circulated handout."
+      },
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec."
+    },
+    {
+      "type": "closing",
+      "title": "Reconcile profit to cash before diagnosing liquidity",
+      "ask": "Identify noncash adjustments, working capital, investment and financing. State what the simplified example leaves out.",
+      "data_status": "illustrative",
+      "source": "Illustrative inputs and judgements supplied in this worked-example spec.",
+      "notes": {
+        "say": "This is a hypothetical worked example. Explain the relationship and assumptions before applying it to a real decision."
+      }
+    }
+  ]
+}

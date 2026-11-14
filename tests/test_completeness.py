@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
@@ -61,6 +62,25 @@ class Completeness(unittest.TestCase):
             path.write_text(json.dumps(original))
             result=load_spec(str(path))
             self.assertTrue(any('base_cell' in b for b in result['_blockers']))
+
+    def test_upload_zip_preserves_source_and_rejects_tampering(self):
+        from package_skill import build, verify
+        with tempfile.TemporaryDirectory() as folder:
+            dest=Path(folder)/'deck-studio.zip'
+            manifest=build(ROOT,dest,revision='test-source')
+            self.assertEqual(manifest['skill'],'deck-studio')
+            self.assertIn('references/human-voice.md',manifest['files'])
+            self.assertIn('assets/icons/feather/LICENSE',manifest['files'])
+            self.assertIn('tests/fixtures/marketing.json',manifest['files'])
+            self.assertIn('tests/evaluations/2026-11-14-feedback-coverage.md',manifest['files'])
+            with zipfile.ZipFile(dest) as z:
+                self.assertTrue(all(p.startswith('deck-studio/') for p in z.namelist()))
+                data={p:z.read(p) for p in z.namelist()}
+            bad=Path(folder)/'tampered.zip'
+            data['deck-studio/SKILL.md']+=b'Altered after verification'
+            with zipfile.ZipFile(bad,'w') as z:
+                for path,content in data.items():z.writestr(path,content)
+            with self.assertRaises(ValueError):verify(ROOT,bad)
 
     def test_native_brand_recipe_preserves_copy_and_notes(self):
         try:

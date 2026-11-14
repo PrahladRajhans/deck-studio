@@ -3,6 +3,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   smoke:
     runs-on: ubuntu-latest
@@ -19,9 +21,43 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y libcairo2 fonts-crosextra-carlito fonts-crosextra-caladea fonts-liberation fonts-texgyre libreoffice-impress poppler-utils
       - name: Run smoke tests (drafts, strict PPTX builds, renders, lint, unit tests)
         run: bash tests/smoke_test.sh out/smoke
+      - name: Verify the upload ZIP structure and source bytes
+        run: python3 scripts/package_skill.py --out out/smoke/deck-studio.zip --revision "$GITHUB_SHA"
       - name: Upload drafts and renders
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: smoke-output
           path: out/smoke
+  release:
+    needs: smoke
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build and verify the Claude upload package from this exact commit
+        run: python3 scripts/package_skill.py --out out/deck-studio.zip --revision "$GITHUB_SHA"
+      - name: Publish the verified package as a versioned release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          current_main="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [ "$current_main" != "$GITHUB_SHA" ]; then
+            echo "Skip publication for a superseded main commit"
+            exit 0
+          fi
+          skill_tag="skill-${GITHUB_SHA}"
+          if gh release view "$skill_tag" > /dev/null 2>&1; then
+            gh release view "$skill_tag" --json assets --jq '.assets[].name' | grep -qx 'deck-studio.zip'
+          else
+            gh release create "$skill_tag" out/deck-studio.zip --target "$GITHUB_SHA" --latest --title "Deck Studio ${GITHUB_SHA:0:8}" --notes "Verified Claude upload package for $GITHUB_SHA. See CHANGELOG.md and tests/evaluations/2026-11-14-feedback-coverage.md for changes, checks and limits. Actual execution inside Claude remains untested."
+          fi
+          gh release download "$skill_tag" --pattern deck-studio.zip --dir "$RUNNER_TEMP/skill-package-readback"
+          python3 scripts/package_skill.py --out "$RUNNER_TEMP/skill-package-readback/deck-studio.zip" --verify-only

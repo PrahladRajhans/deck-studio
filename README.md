@@ -17,6 +17,19 @@ reference helps Claude make relationships visible, explore different composition
 and write in the presenter's voice. Standard types are a toolbox; custom HTML compositions can
 use the whole stage, with explicit final-format reconstruction limits.
 
+## Download for Claude
+
+[Download the latest verified upload ZIP](https://github.com/PrahladRajhans/deck-studio/releases/latest/download/deck-studio.zip).
+The package contains one `deck-studio/` folder matching the skill name, with the complete references,
+scripts, examples, source packets, context and changelog. It is published only after main passes the
+smoke workflow. GitHub's generic Code ZIP uses a different folder name, so use the release package
+for direct upload. Upload and enable it using Claude's Skills interface; account permissions and
+code-execution availability still apply. Actual Claude execution is not certified by packaging.
+
+To reproduce locally: `python3 scripts/package_skill.py --out out/deck-studio.zip`.
+The generated bundle manifest records source-file checksums; verification compares every packaged
+file with its source. Checksums detect byte changes, not factual accuracy or publisher identity.
+
 ## What's in the repo
 
 | Path | What it is |

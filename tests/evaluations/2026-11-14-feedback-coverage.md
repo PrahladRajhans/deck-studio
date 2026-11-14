@@ -107,6 +107,16 @@ a cover textbox too short at the intended 90pt size; its geometry was enlarged w
 
 Validation outcomes and publication are recorded below after checks, renders and source readback.
 
+## Upload-package follow-through
+
+Anthropic's current custom-skill instructions require the ZIP root folder to match the skill name.
+GitHub's generic main archive uses deck-studio-main, so it is not the preferred direct-upload link.
+package_skill.py produces deck-studio.zip with a deck-studio/ root, preserves all references,
+scripts, examples, fixed packets, tests, evaluation context and changelog, and verifies every source
+byte against a manifest. A regression rejects tampering. Successful main CI publishes the ZIP as a
+versioned GitHub release, with a stable latest-download URL. It does not mark actual Claude execution
+as passed. Workflow publication is restricted to main push after successful smoke checks.
+
 ## Remaining limits
 
 Actual execution inside Claude is still untested. Codex executions and Chromium/LibreOffice renders

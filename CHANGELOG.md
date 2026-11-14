@@ -8,6 +8,11 @@ rewrite older entries to imply that later fixes already existed.
 
 ### Feedback completeness and content preservation
 
+- Add a deterministic, source-verified Claude upload ZIP rooted at deck-studio/, matching the skill
+  name. Publish a versioned download after successful main CI. Preserve the full source/context and
+  add tamper/structure regression coverage; do not claim that packaging tests are Claude execution.
+
+
 - Audit both the earlier Gemini/Claude discussion and detailed actual-file feedback against code,
   references and examples. Add a recommendation-by-recommendation coverage ledger, including
   intentional rejections and remaining limits, in tests/evaluations/2026-11-14-feedback-coverage.md.

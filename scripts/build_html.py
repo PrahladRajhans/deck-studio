@@ -1106,6 +1106,7 @@ ul{padding-left:1.1em} li{margin:.25em 0} li::marker{color:var(--accent)}
 .badge{width:62px;height:62px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700;margin-bottom:18px}
 .hl .badge{background:var(--accent)}
 .badge svg{width:38px;height:38px;flex:none}
+.custom-full .custom-stage :is(h1,h2,h3,p,li,blockquote){font-family:inherit}
 /* dark slides */
 .slide.dark{background:var(--dark);color:var(--on-dark);padding:0 130px;justify-content:center}
 .dark .bar,.t-divider .bar{display:block;width:130px;height:9px;background:var(--accent);margin:0 0 40px}

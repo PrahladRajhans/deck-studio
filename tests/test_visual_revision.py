@@ -122,12 +122,29 @@ class VisualRevision(unittest.TestCase):
             with self.assertRaises(SpecError): render({'kind':'tornado','base':10,'items':[{'label':'x','low':11,'high':20}]},str(path))
             with self.assertRaises(SpecError): render({'kind':'sensitivity','rows':['a'],'cols':['b'],'values':[[1]],'base_cell':[2,0]},str(path))
 
+    def test_full_stage_headings_respect_custom_font_family(self):
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            self.skipTest('playwright not installed')
+        spec={'slides':[{'type':'custom','full_bleed':True,
+                        'html':'<div style="font-family:Arial,sans-serif"><h1>Custom title</h1></div>'}]}
+        doc=HtmlDeck(spec,str(ROOT)).build()
+        with sync_playwright() as p:
+            browser=p.chromium.launch()
+            page=browser.new_page()
+            page.set_content(doc,wait_until='domcontentloaded')
+            font=page.locator('.custom-stage h1').evaluate('(el)=>getComputedStyle(el).fontFamily')
+            self.assertIn('Arial',font)
+            browser.close()
+
     def test_fallback_controls_work_in_sandbox(self):
         try:
             from playwright.sync_api import sync_playwright
         except ImportError:
             self.skipTest('playwright not installed')
         doc=(ROOT/'assets/html-stage/stage-template.html').read_text()
+        doc=doc.replace('<div class="card"><div class="n">03</div><h3>Third move</h3><p>One line of proof</p></div>','')
         with sync_playwright() as p:
             browser=p.chromium.launch()
             page=browser.new_page()
@@ -135,6 +152,8 @@ class VisualRevision(unittest.TestCase):
             page.on('pageerror',lambda e:errors.append(str(e)))
             page.set_content('<iframe sandbox="allow-scripts" srcdoc="'+html.escape(doc,quote=True)+'"></iframe>')
             frame=page.frames[1]
+            columns=frame.locator('#stage .cards').evaluate('(el)=>getComputedStyle(el).gridTemplateColumns.split(" ").length')
+            self.assertEqual(columns,2)
             for key in ('ArrowRight','n','g'):
                 frame.evaluate('(key)=>window.dispatchEvent(new KeyboardEvent("keydown",{key}))',key)
             self.assertEqual(frame.locator('#notes').evaluate('(el)=>el.style.display'),'block')

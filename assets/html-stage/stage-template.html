@@ -140,6 +140,7 @@ p,li{font:400 34px/1.4 var(--body)}
 <script>
 /* === RUNTIME: scale, navigate, print === */
 const stage=document.getElementById('stage'), slides=[...document.querySelectorAll('.slide')];
+document.querySelectorAll('.cards').forEach(el=>{if(!el.style.getPropertyValue('--columns'))el.style.setProperty('--columns',Math.max(1,el.children.length));});
 /* sandboxed previews (claude.ai, about:srcdoc) forbid touching the URL: remembering the slide is optional */
 function readHash(){try{return parseInt(location.hash.slice(1))||1}catch(e){return 1}}
 function writeHash(n){try{if(location.protocol!=='about:')history.replaceState(null,'','#'+n)}catch(e){}}
